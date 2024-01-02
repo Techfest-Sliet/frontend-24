@@ -29,7 +29,7 @@ function Globe({ position, location }) {
   return (
     <mesh ref={meshRef} position={position}>
       <sphereGeometry args={[1.5, 32, 32]} />
-      <meshStandardMaterial color="#00308F" map={globeTexture} object={sprite}/>
+      <meshStandardMaterial color="#25c6e5" map={globeTexture} object={sprite}/>
       <primitive object={sprite} />
     </mesh>
   );

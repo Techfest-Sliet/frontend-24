@@ -4,6 +4,7 @@
     border: 2px solid red;
     display: grid;
     grid-template-columns: 50vw 50vw;
+    background-color: black;
   }
   
   .header{
@@ -22,16 +23,6 @@
       place-items: center;
     }
   }
-  
-  .main1 {
-    border: 2px solid red;
-    color: white;
-  }
-  
-  .main2 {
-    border: 2px solid red;
-  }
-  
   
   .tagline {
     display: flex;
