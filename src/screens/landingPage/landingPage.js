@@ -15,6 +15,7 @@ import F from "../../images/F.png";
 
 //css file
 import "./landingPage.css";
+import Universe from "../../components/universe";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#000000",
@@ -43,6 +44,7 @@ function LandingPage() {
         className="landingPage"
         style={{ background: "black", width: "100vw", height: "100vh" }}
       >
+        <Universe />
         <nav className="header">
           <img
             src={techfest24}
@@ -143,12 +145,12 @@ function LandingPage() {
             </Grid>
             <Grid item xs={4}>
               <Item>
-                <div className="main2" style={{ width: "45vw", height: "100vh" }}>
-                  <Canvas
-                    style={{
-                      background: "black",
-                    }}
-                  >
+                <div
+                  className="main2"
+                  style={{ width: "45vw", height: "100vh" }}
+                >
+                  <Universe />
+                  <Canvas>
                     <ambientLight intensity={0.5} />
                     <pointLight position={[10, 10, 10]} />
                     {/* <ScrollControls pages={3} damping={0.25} /> */}
