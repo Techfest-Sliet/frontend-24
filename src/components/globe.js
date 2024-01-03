@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from "react";
 import { useLoader, useFrame, useThree } from "@react-three/fiber";
-import { TextureLoader, SpriteMaterial, Sprite } from "three";
+import { TextureLoader, SpriteMaterial, Sprite, Group } from "three";
 
 function Globe({ position, location }) {
   const latLongToVector3 = (lat, lon, radius) => {
@@ -15,8 +15,13 @@ function Globe({ position, location }) {
   const meshRef = useRef();
   const globeTexture = useLoader(TextureLoader, "/atlas.jpeg");
   const locationTexture = useLoader(TextureLoader, "/location.png");
+  const logoTexture = useLoader(TextureLoader, "/logo.png");
+
   const { radius } = useThree().camera;
-  const locationPosition = useMemo(() => latLongToVector3(location.lat, location.lon, ), [location, radius]);
+  const locationPosition = useMemo(
+    () => latLongToVector3(location.lat, location.lon),
+    [location, radius]
+  );
 
   const spriteMaterial = new SpriteMaterial({ map: locationTexture });
   const sprite = new Sprite(spriteMaterial);
@@ -27,11 +32,21 @@ function Globe({ position, location }) {
     meshRef.current.rotation.y += 0.01;
   });
   return (
-    <mesh ref={meshRef} position={position}>
-      <sphereGeometry args={[1.5, 32, 32]} />
-      <meshStandardMaterial color="#25c6e5" map={globeTexture} object={sprite}/>
-      <primitive object={sprite} />
-    </mesh>
+    <group>
+      <mesh ref={meshRef} position={position}>
+        <sphereGeometry args={[2, 32, 32]} />
+        <meshStandardMaterial
+          color="#25c6e5"
+          map={globeTexture}
+          object={sprite}
+        />
+        <primitive object={sprite} />
+      </mesh>
+      <mesh>
+        <planeGeometry attach="geometry" args={[1,1]}/>
+        <meshStandardMaterial attach="material" map={logoTexture}/>
+      </mesh>
+    </group>
   );
 }
 
