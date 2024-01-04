@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useState } from "react";
 import { useLoader, useFrame, useThree } from "@react-three/fiber";
 import { TextureLoader, SpriteMaterial, Sprite, Group } from "three";
 
@@ -34,7 +34,7 @@ function Globe({ position, location }) {
   return (
     <group>
       <mesh ref={meshRef} position={position}>
-        <sphereGeometry args={[2, 32, 32]} />
+        <sphereGeometry args={[1.6, 32, 32]} />
         <meshStandardMaterial
           color="#25c6e5"
           map={globeTexture}
