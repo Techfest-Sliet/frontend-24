@@ -1,7 +1,10 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { ScrollControls } from "@react-three/drei";
+import { CameraControls, ScrollControls } from "@react-three/drei";
 import Globe from "../../components/globe";
+import { OrbitControls } from "@react-three/drei";
+import Universe from "../../components/universe";
+import Satellite from "../../components/satellite";
 
 //mui
 import { styled } from "@mui/material/styles";
@@ -15,7 +18,6 @@ import F from "../../images/F.png";
 
 //css file
 import "./landingPage.css";
-import Universe from "../../components/universe";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#000000",
@@ -155,6 +157,8 @@ function LandingPage() {
                     <pointLight position={[10, 10, 10]} />
                     {/* <ScrollControls pages={3} damping={0.25} /> */}
                     <Globe position={[0, 0.4, 1]} location={location} />
+                    <Satellite/>
+                    <CameraControls/>
                   </Canvas>
                 </div>
               </Item>
