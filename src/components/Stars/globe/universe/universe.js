@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import Star from './star.js';
+import Star from '../../stars';
 
 const Universe = () => {
   const starCount = 500; // Adjust the number of stars
