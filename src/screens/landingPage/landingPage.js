@@ -1,10 +1,10 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { CameraControls, ScrollControls } from "@react-three/drei";
-import Globe from "../../components/globe";
+import Globe from "../../components/Stars/globe/globe";
 import { OrbitControls } from "@react-three/drei";
-import Universe from "../../components/universe";
-import Satellite from "../../components/satellite";
+import Universe from "../../components/Stars/globe/universe/universe";
+import Satellite from "../../components/Stars/globe/universe/Satellite/satellite";
 
 //mui
 import { styled } from "@mui/material/styles";
