@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, useState } from "react";
 import { useLoader, useFrame, useThree } from "@react-three/fiber";
-import { TextureLoader, SpriteMaterial, Sprite, Group } from "three";
+import { TextureLoader, SpriteMaterial, Sprite } from "three";
 
 function Globe({ position, location }) {
   //location 

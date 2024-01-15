@@ -2,8 +2,8 @@ import React from 'react'
 
 const Workshops = () => {
   return (
-    <div>Workshops</div>
+    <div style={{color:"white"}}>No Workshops !!!</div>
   )
 }
 
-export default Workshops
+export default Workshops;
