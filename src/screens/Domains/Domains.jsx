@@ -60,7 +60,7 @@ const Domains = () => {
         >
           <Carousel>
             {domains.map((domain, i) => {
-            return <DomainCard key={i} domain={domain} style={{ margin:"10%"}}/>
+            return <DomainCard key={i} domain={domain}/>
             })}
           </Carousel>
         </div>
