@@ -44,11 +44,11 @@ function LandingPage() {
   const navigate = useNavigate();
   function navigateToDomains() {
     console.log("satellite clicked");
-    navigate('/domains');
-  } 
+    navigate("/domains");
+  }
   function navigateToWorkshops() {
     console.log("satellite clicked");
-    navigate('/workshops');
+    navigate("/workshops");
   }
 
   return (
@@ -161,7 +161,6 @@ function LandingPage() {
                   className="main2"
                   style={{ width: "45vw", height: "100vh" }}
                 >
-                
                   <Canvas>
                     <ambientLight intensity={0.5} />
                     <pointLight position={[10, 10, 10]} />

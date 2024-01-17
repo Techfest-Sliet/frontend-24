@@ -4,7 +4,7 @@ import Star from '../../stars';
 
 
 const Universe = () => {
-  const starCount = 500; // Adjust the number of stars
+  const starCount = 10000; // Adjust the number of stars
 
   return (
     <Canvas style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh' }}>

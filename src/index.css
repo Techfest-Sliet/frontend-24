@@ -16,3 +16,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* @import url('./assets/Armata-Regular.ttf'); */
+
+/* @font-face {
+  font-family: "Armata";
+  src: url("./../public/Armata-Regular.ttf") format("truetype");
+} */
