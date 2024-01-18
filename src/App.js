@@ -7,6 +7,7 @@ import Workshops from "./screens/Workshops/Workshops";
 import UserDashboard from "./screens/UserDashboard/UserDashboard";
 import { useLoader } from "./components/Loader/hook";
 import Loader from "./components/Loader/loader";
+import UpdateUser from "./components/User/UpdateUser/UpdateUser";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/domains" element={<Domains />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/user" element={<UserDashboard />} />
+          <Route path="/updateuser" element={<UpdateUser />} />
         </Routes>
       </div>
     </>

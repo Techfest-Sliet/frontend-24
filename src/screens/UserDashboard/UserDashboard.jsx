@@ -1,13 +1,12 @@
-import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Center, OrbitControls, useGLTF } from "@react-three/drei";
-import { TypeAnimation } from "react-type-animation";
+import React from "react";
 import TeamTable from "../../components/User/Team/TeamTable";
 import { CiMail } from "react-icons/ci";
 import { CiPhone } from "react-icons/ci";
 import { BiSolidInstitution } from "react-icons/bi";
+import { Button, Tooltip } from "@mui/material";
+import update from "../../images/update.png";
+import { useNavigate } from "react-router-dom";
+
 // import "./UserDashboard.css";
 
 // const Bg = () => {
@@ -23,6 +22,13 @@ import { BiSolidInstitution } from "react-icons/bi";
 // };
 
 const UserDashboard = () => {
+
+const navigate = useNavigate();
+
+const updateUser = () => {
+  navigate('/updateuser');
+}
+
   return (
     <>
       <header
@@ -94,7 +100,7 @@ const UserDashboard = () => {
             }}
           >
             <div className="email">
-              <CiMail /> tashu.kulshresth@gmail.com |&nbsp;
+              <CiMail /> 2140101@sliet.ac.in |&nbsp;
             </div>
             <div className="whatsappNo">
               {" "}
@@ -104,6 +110,17 @@ const UserDashboard = () => {
               <BiSolidInstitution /> SLIET |&nbsp;
             </div>
             <div className="Branch"> GCS </div>
+            <div className="updateUserIcon">
+              <Button varient="" onClick={updateUser}>
+                <Tooltip title="Update Profile" placement="bottom-end">
+                  <img
+                    src={update}
+                    alt=""
+                    style={{ width: "2rem", height: "2rem" }}
+                  />
+                </Tooltip>
+              </Button>
+            </div>
           </div>
           <TeamTable />
         </div>

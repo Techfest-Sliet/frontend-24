@@ -6,85 +6,48 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
+import { Button, Tooltip } from "@mui/material";
+
+import TeamNameChange from "./modal/TeamNameChange";
+import DeleteModal from "./modal/Delete";
+
+//icons
 import { FaEdit } from "react-icons/fa";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import { Button, FormControl, FormHelperText, Input, Typography } from "@mui/material";
+import { MdDelete } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
+import { IoMdAddCircle } from "react-icons/io";
+import AddTeamMember from "../addTeam/AddTeamMember";
 
-function createData(teamName, leader, emailStatus, event, action) {
-  return { teamName, leader, emailStatus, event, action };
-}
-
-// team name change modal
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "#adadc9",
-  border: "2px solid #000",
-  boxShadow: 24,
-  borderRadius: "10px",
-  p: 4,
-};
-
-function TeamNameChange({handleClose}) {
-
-
-  return (
-    <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        closeAfterTransition
-        open={true}
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={true}>
-          <Box sx={style}>
-            <Typography>Enter the New Team Name.</Typography>
-            <FormControl variant="standard" sx={{ m: 1, mt: 3, width: "25ch" }}>
-              <Input
-                id="standard-adornment-weight"
-                aria-describedby="standard-weight-helper-text"
-                inputProps={{
-                  "aria-label": "weight",
-                }}
-              />
-              <FormHelperText id="standard-weight-helper-text">
-                New Team Name
-              </FormHelperText>
-            </FormControl>
-            <Button variant="contained" onClick={handleClose} style={{marginLeft:"auto"}}>
-                OK
-            </Button>
-          </Box>
-        </Fade>
-      </Modal>
-    </div>
-  );
+function createData(teamName, leader, memberName, action, event) {
+  return { teamName, leader, memberName, action, event };
 }
 
 function TeamTable() {
-  const [isEdit, setIsEdit] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openAddMemeberModal, setOpenAddMemberModal] = useState(false);
+  const [teamMembers, setTeamMembers] = useState([]); 
+  const [isVerified, setIsVerified] = useState(false);
 
-  const handleClose = () => {
-    setIsEdit(false);
-  }
-  const rows = [createData("fighter", "naman", "notAccepted", "LFR", "no")];
+  const rows = [createData("fighter", "naman", "gaurav", "No", "LFR")];
 
-  const editName = () => {
-    console.log("Button Clicked");
-    setIsEdit(true);
+  //modal rendering
+  const handleEditClose = () => {
+    setOpenEditModal(false);
   };
+  const confirmDelete = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const handleAddMemberClose = () => {
+    setOpenAddMemberModal(false);
+  }
+
+  //add team members
+  const handleAddMembers = (memberName) => {
+    setTeamMembers((prevMember) => [...prevMember, memberName]);
+  }
 
   return (
     <>
@@ -97,7 +60,7 @@ function TeamTable() {
       >
         <Table
           sx={{
-            width: 600,
+            width: 1000,
             backgroundColor: "grey",
             margin: "10%",
             borderRadius: "5px",
@@ -113,13 +76,16 @@ function TeamTable() {
                 <b>Leader</b>
               </TableCell>
               <TableCell align="right" sx={{ color: "whitesmoke" }}>
-                <b>Member Email- Status</b>
+                <b>Memeber Name</b>
+              </TableCell>
+              <TableCell align="right" sx={{ color: "whitesmoke" }}>
+                <b>Action</b>
               </TableCell>
               <TableCell align="right" sx={{ color: "whitesmoke" }}>
                 <b>Event</b>
               </TableCell>
               <TableCell align="right" sx={{ color: "whitesmoke" }}>
-                <b>Action</b>
+                <b>Member Email- Status</b>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -134,21 +100,69 @@ function TeamTable() {
                   scope="row"
                   sx={{ color: "whitesmoke", display: "flex" }}
                 >
-                  <p>fighter</p>
-                  <Button onClick={editName} variant="">
+                  <p>{row.teamName}</p>
+                  <Button
+                    onClick={() => {
+                      setOpenEditModal(true);
+                    }}
+                    variant=""
+                  >
                     <FaEdit />
                   </Button>
-                  {isEdit && <TeamNameChange handleClose={handleClose} />}
+                  {openEditModal && (
+                    <TeamNameChange handleClose={handleEditClose} />
+                  )}
                 </TableCell>
 
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
+                <TableCell align="right" sx={{ color: "white" }}>
+                  <p>{row.leader}</p>
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{ color: "white", display: "flex" }}
+                >
+                  <p>{row.memberName}</p>
+                  <Tooltip title="Add Member" placement="bottom-end">
+                    <Button
+                      variant=""
+                      onClick={() => {
+                        setOpenAddMemberModal(true);
+                      }}
+                    >
+                      <IoMdAddCircle/>
+                    </Button>
+                  </Tooltip>
+                  {openAddMemeberModal && <AddTeamMember handleClose={handleAddMemberClose}/>}
+                </TableCell>
+                <TableCell align="right" sx={{ color: "white" }}>
+                  {row.action}
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{ color: "whitesmoke", display: "flex" }}
+                >
+                  <p>{row.event}</p>
+                  <Button
+                    variant=""
+                    onClick={() => {
+                      setOpenDeleteModal(true);
+                    }}
+                  >
+                    <MdDelete />
+                  </Button>
+                  {openDeleteModal && (
+                    <DeleteModal handleClose={confirmDelete} />
+                  )}
+                </TableCell>
+                <TableCell align="right">
+                  {isVerified && <FaCheck color="green" />}
+                  {!isVerified && <ImCross color="red" />}
+                </TableCell>
+                
               </TableRow>
             ))}
           </TableBody>
-        </Table>  
+        </Table>
       </TableContainer>
     </>
   );
