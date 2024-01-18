@@ -64,7 +64,8 @@ function LandingPage() {
             style={{ width: "250px", margin: 5, padding: 5 }}
             className="header logo"
           />
-          <button className="header login">Login</button>
+          {/* <button className="header login">Login</button>  */}
+
         </nav>
 
         <div className="mainBody">
