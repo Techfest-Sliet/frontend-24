@@ -16,7 +16,7 @@ function App() {
   return (
     <>
    <Loader when={loading}/>
-    <Universe/>
+    {/* <Universe/> */}
       <div className="app">
         <Routes>
           <Route path="/" element={<LandingPage />} />

@@ -5,26 +5,86 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
-import TeamNameChange from "../../modal/modal";
-import { useEffect } from "react";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import { Button, FormControl, FormHelperText, Input, Typography } from "@mui/material";
 
 function createData(teamName, leader, emailStatus, event, action) {
   return { teamName, leader, emailStatus, event, action };
 }
 
+// team name change modal
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "#adadc9",
+  border: "2px solid #000",
+  boxShadow: 24,
+  borderRadius: "10px",
+  p: 4,
+};
+
+function TeamNameChange({handleClose}) {
+
+
+  return (
+    <div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        closeAfterTransition
+        open={true}
+        slots={{ backdrop: Backdrop }}
+        slotProps={{
+          backdrop: {
+            timeout: 500,
+          },
+        }}
+      >
+        <Fade in={true}>
+          <Box sx={style}>
+            <Typography>Enter the New Team Name.</Typography>
+            <FormControl variant="standard" sx={{ m: 1, mt: 3, width: "25ch" }}>
+              <Input
+                id="standard-adornment-weight"
+                aria-describedby="standard-weight-helper-text"
+                inputProps={{
+                  "aria-label": "weight",
+                }}
+              />
+              <FormHelperText id="standard-weight-helper-text">
+                New Team Name
+              </FormHelperText>
+            </FormControl>
+            <Button variant="contained" onClick={handleClose} style={{marginLeft:"auto"}}>
+                OK
+            </Button>
+          </Box>
+        </Fade>
+      </Modal>
+    </div>
+  );
+}
+
 function TeamTable() {
   const [isEdit, setIsEdit] = useState(false);
 
-  const rows = [
-    createData('fighter', 'naman', 'notAccepted', 'LFR', 'no')
-  ];
+  const handleClose = () => {
+    setIsEdit(false);
+  }
+  const rows = [createData("fighter", "naman", "notAccepted", "LFR", "no")];
 
-  const editName =  () =>{
+  const editName = () => {
     console.log("Button Clicked");
- }
+    setIsEdit(true);
+  };
 
   return (
     <>
@@ -75,25 +135,10 @@ function TeamTable() {
                   sx={{ color: "whitesmoke", display: "flex" }}
                 >
                   <p>fighter</p>
-                  {/* <div
-                    className="editIcon"
-                    style={{
-                      width: "15px",
-                      height: "15px",
-                      color: "silver",
-                      border: "2px solid grey",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems:"center",
-                      borderRadius:"5px",
-                      margin:"5px"
-                    }}
-                    onClick={editTeamName}
-                  >
+                  <Button onClick={editName} variant="">
                     <FaEdit />
-                  </div> */}
-                  <button onClick={editName}><FaEdit/></button>
-                  {isEdit && <TeamNameChange />}
+                  </Button>
+                  {isEdit && <TeamNameChange handleClose={handleClose} />}
                 </TableCell>
 
                 <TableCell align="right"></TableCell>
@@ -103,7 +148,7 @@ function TeamTable() {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+        </Table>  
       </TableContainer>
     </>
   );
