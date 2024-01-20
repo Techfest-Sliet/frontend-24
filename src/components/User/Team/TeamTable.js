@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { Button, Tooltip } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import TeamNameChange from "./modal/TeamNameChange";
 import DeleteModal from "./modal/Delete";
@@ -19,6 +20,9 @@ import { ImCross } from "react-icons/im";
 import { IoMdAddCircle } from "react-icons/io";
 import AddTeamMember from "../addTeam/AddTeamMember";
 
+//whatsapp icon
+import { FaWhatsapp } from "react-icons/fa";
+
 function createData(teamName, leader, memberName, action, event) {
   return { teamName, leader, memberName, action, event };
 }
@@ -27,7 +31,7 @@ function TeamTable() {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openAddMemeberModal, setOpenAddMemberModal] = useState(false);
-  const [teamMembers, setTeamMembers] = useState([]); 
+  const [teamMembers, setTeamMembers] = useState([]);
   const [isVerified, setIsVerified] = useState(false);
 
   const rows = [createData("fighter", "naman", "gaurav", "No", "LFR")];
@@ -36,18 +40,21 @@ function TeamTable() {
   const handleEditClose = () => {
     setOpenEditModal(false);
   };
-  const confirmDelete = () => {
+  const deleteEvent = () => {
     setOpenDeleteModal(false);
   };
 
   const handleAddMemberClose = () => {
     setOpenAddMemberModal(false);
-  }
+  };
 
   //add team members
   const handleAddMembers = (memberName) => {
     setTeamMembers((prevMember) => [...prevMember, memberName]);
-  }
+  };
+
+  //whatsapp hyperlink
+  const whatsappHyperlink = () => {};
 
   return (
     <>
@@ -76,7 +83,7 @@ function TeamTable() {
                 <b>Leader</b>
               </TableCell>
               <TableCell align="right" sx={{ color: "whitesmoke" }}>
-                <b>Memeber Name</b>
+                <b>Member Name</b>
               </TableCell>
               <TableCell align="right" sx={{ color: "whitesmoke" }}>
                 <b>Action</b>
@@ -86,6 +93,9 @@ function TeamTable() {
               </TableCell>
               <TableCell align="right" sx={{ color: "whitesmoke" }}>
                 <b>Member Email- Status</b>
+              </TableCell>
+              <TableCell align="right" sx={{ color: "whitesmoke" }}>
+                <b>Whatsapp Link</b>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -121,7 +131,16 @@ function TeamTable() {
                   align="right"
                   sx={{ color: "white", display: "flex" }}
                 >
-                  <p>{row.memberName}</p>
+                  <p>
+                    {teamMembers.map((member, index) => (
+                      <TableCell
+                        key={index}
+                        style={{ color: "white", display: "block" }}
+                      >
+                        {member}
+                      </TableCell>
+                    ))}
+                  </p>
                   <Tooltip title="Add Member" placement="bottom-end">
                     <Button
                       variant=""
@@ -129,10 +148,15 @@ function TeamTable() {
                         setOpenAddMemberModal(true);
                       }}
                     >
-                      <IoMdAddCircle/>
+                      <IoMdAddCircle />
                     </Button>
                   </Tooltip>
-                  {openAddMemeberModal && <AddTeamMember handleClose={handleAddMemberClose}/>}
+                  {openAddMemeberModal && (
+                    <AddTeamMember
+                      handleAddMembers={handleAddMembers}
+                      handleClose={handleAddMemberClose}
+                    />
+                  )}
                 </TableCell>
                 <TableCell align="right" sx={{ color: "white" }}>
                   {row.action}
@@ -151,14 +175,25 @@ function TeamTable() {
                     <MdDelete />
                   </Button>
                   {openDeleteModal && (
-                    <DeleteModal handleClose={confirmDelete} />
+                    <DeleteModal handleClose={deleteEvent} />
                   )}
                 </TableCell>
                 <TableCell align="right">
                   {isVerified && <FaCheck color="green" />}
                   {!isVerified && <ImCross color="red" />}
                 </TableCell>
-                
+                <TableCell align="right">
+                  <Tooltip title="Whatsapp Group Link" placement="bottom-end">
+                    <Button varient="" onClick={whatsappHyperlink}>
+                      <a href="#">
+                        <FaWhatsapp
+                          color="green"
+                          style={{ width: "2rem", height: "1.5rem" }}
+                        />
+                      </a>
+                    </Button> 
+                  </Tooltip>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

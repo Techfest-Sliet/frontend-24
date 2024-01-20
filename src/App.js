@@ -8,6 +8,7 @@ import UserDashboard from "./screens/UserDashboard/UserDashboard";
 import { useLoader } from "./components/Loader/hook";
 import Loader from "./components/Loader/loader";
 import UpdateUser from "./components/User/UpdateUser/UpdateUser";
+import Error from "./components/Error/Error";
 
 
 function App() {
@@ -20,7 +21,9 @@ function App() {
     {/* <Universe/> */}
       <div className="app">
         <Routes>
+          
           <Route path="/" element={<LandingPage />} />
+          <Route path="/error" element={<Error />} />
           <Route path="/domains" element={<Domains />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/user" element={<UserDashboard />} />
