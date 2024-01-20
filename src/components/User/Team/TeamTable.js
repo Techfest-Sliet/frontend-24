@@ -41,6 +41,7 @@ function TeamTable() {
     setOpenEditModal(false);
   };
   const deleteEvent = () => {
+    
     setOpenDeleteModal(false);
   };
 
