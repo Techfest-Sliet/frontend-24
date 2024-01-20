@@ -92,14 +92,14 @@
     cursor: pointer;
     border: none;
   }
-  #registerBtn span {
+  #registerBtn>a>span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
   }
   
-  #registerBtn span:after {
+  #registerBtn>a>span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;

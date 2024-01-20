@@ -1,0 +1,57 @@
+form{
+    /* border: 1px solid red; */
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+form>div{
+    width: 100%;
+    margin: .5rem;
+    padding: .4rem;
+    display: flex;
+    flex-direction: column;
+    color: #90E0EF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    
+}
+
+
+form>div>label{
+text-align: left;
+
+
+}
+form>div>label:hover{
+    cursor: pointer;
+}
+
+form>div>input{
+    border-radius: .2rem;
+    border:none;
+    outline: 1px solid #00B4D8;
+    width: 55%;
+    padding: .6rem;
+
+}
+form>div>input{
+    cursor: pointer;
+}
+
+
+.spanBox{
+    display: flex;
+    justify-content: space-between;
+}
+.spanBox>h1:hover{
+    cursor: default;
+
+}
