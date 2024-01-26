@@ -45,17 +45,17 @@ const Particle = () => {
               quantity: 8,
             },
             repulse: {
-              distance: 200,
-              duration: 0.4,
+              distance: 100,
+              duration: 0.2,
             },
           },
         },
         particles: {
           color: {
-            value: "#ffffff",
+            value: "#90e0ef",
           },
           links: {
-            color: "#ffffff",
+            color: "#90e0ef",
             distance: 150,
             enable: true,
             opacity: 1,
@@ -76,7 +76,7 @@ const Particle = () => {
               enable: true,
               area: 800,
             },
-            value: 80,
+            value: 100,
           },
           opacity: {
             value: 1,
