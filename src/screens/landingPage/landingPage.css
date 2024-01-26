@@ -21,7 +21,16 @@
       left: 30%;
       color: rgb(35, 23, 23);
       place-items: center;
+      transition: 2s;
     }
+  }
+
+  .login :hover{
+    box-shadow: 0.1rem 0rem 1rem 0.5rem #25c6e5;
+    a{
+      color: #ffffff;
+    }
+
   }
   
   .tagline {
