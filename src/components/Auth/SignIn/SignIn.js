@@ -7,6 +7,7 @@ import { TextField, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Particle from "./Particle";
+import { Link } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#90e0ef" : "#90e0ef",
@@ -18,6 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const style = {
   position: "absolute",
+  borderRadius:"12px",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -26,7 +28,7 @@ const style = {
   //bgcolor: "background.paper",
   border: "2px solid #90e0ef",
   // boxShadow: "#90e0ef 5px 5px 5px 5px, #90e0ef -7px -7px 5px 5px, #03045e 15px 5px 10px 5px",
-  boxShadow: " 0.1px 0.1px 2rem #00b4d8, -0.1px -0.1px 1rem #03045e",
+  boxShadow: " 0.1px 0.1px 1rem #00b4d8, -0.1px -0.1px 1rem #03045e",
   pt: 2,
   px: 4,
   pb: 3,
@@ -151,23 +153,41 @@ const SignIn = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Stack direction={{ xs: "column", sm: "row" }} spacing={4} mt={2}>
-              <p style={{ marginTop: "0.5rem" }}>Forgot Password?</p>
+              {/* <p style={{ marginTop: "0.5rem" }}>Forgot Password?</p> */}
+              <Link
+                to="/forget-password"
+                style={{ marginTop: "0.5rem", color: "#00B4D8" ,marginRight:"1.7rem"}}
+              >
+                Forget Password
+              </Link>
+              {/* <Link to="/forget-password" style={{marginTop:"0.5rem"}}>ForgetPassword</Link> */}
               <Item
                 sx={{
                   ":hover": {
                     cursor: "pointer",
                   },
-                  fontWeight:"550",
-                  color:"black",
+                  fontWeight: "550",
+                  color: "#030014",
                 }}
                 onClick={handleSignIn}
               >
                 Sign In
               </Item>
             </Stack>
-            <p mt={2}>Don't have a account? <a href="/sign-up" style={{
-              textDecoration:"none", color:"#90e0ef"
-            }}>Sign Up</a></p>
+            <p mt={2}>
+              Don't have a account?{" "}
+              <Link
+                to="/sign-up"
+                style={{
+                  textDecoration: "none",
+                  color: "#00B4D8",
+                  fontWeight:"700"
+
+                }}
+              >
+                Sign Up
+              </Link>
+            </p>
           </Box>
         </Modal>
       </div>

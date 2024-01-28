@@ -31,7 +31,7 @@ const Particle = () => {
         interactivity: {
           events: {
             onClick: {
-              enable: true,
+              enable: false,
               mode: "push",
             },
             onHover: {
@@ -52,7 +52,7 @@ const Particle = () => {
         },
         particles: {
           color: {
-            value: "#90e0ef",
+            value: "#FFFFFF",
           },
           links: {
             color: "#90e0ef",
@@ -68,13 +68,13 @@ const Particle = () => {
               default: "bounce",
             },
             random: false,
-            speed: 4,
+            speed: 2,
             straight: true,
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 900,
             },
             value: 100,
           },
