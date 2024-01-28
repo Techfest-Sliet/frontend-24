@@ -6,9 +6,10 @@ import Box from "@mui/material/Box";
 import { TextField, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import Particle from "./Particle";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#90e0ef" : "#90e0ef",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
@@ -21,10 +22,11 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   background: "transparent",
-  color: "white",
+  color: "#90e0ef",
   //bgcolor: "background.paper",
-  //border: "2px solid #000",
-  //boxShadow: 24,
+  border: "2px solid #90e0ef",
+  // boxShadow: "#90e0ef 5px 5px 5px 5px, #90e0ef -7px -7px 5px 5px, #03045e 15px 5px 10px 5px",
+  boxShadow: " 0.1px 0.1px 2rem #00b4d8, -0.1px -0.1px 1rem #03045e",
   pt: 2,
   px: 4,
   pb: 3,
@@ -43,8 +45,8 @@ const SignIn = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res?.data?.isError)
-        if(res?.data?.isError) alert(res?.data?.message)
+        console.log(res?.data?.isError);
+        if (res?.data?.isError) alert(res?.data?.message);
       })
       .catch((err) => {
         console.log(err);
@@ -52,75 +54,124 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signInContainer">
-      <Modal
-        open={true}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
-        sx={{
-          border: "2px solid white",
-          letterSpacing: "2px",
-        }}
-      >
-        <Box sx={{ ...style, width: "auto", background: "rgba(0,0,0,0.3)" }}>
-          <h2 id="child-modal-title" style={{ whiteSpace: "nowrap" }}>
-            WELCOME BACK
-          </h2>
-          <p>EMAIL</p>
-          <TextField
-            id="outlined-basic"
-            label="EMAIL"
-            variant="outlined"
-            size="small"
-            InputProps={{
-              sx: {
-                color: "#ffffff",
-                border: "1px solid #ffffff",
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "white",
-              },
-            }}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-          <p>PASSWORD</p>
-          <TextField
-            id="outlined-basic"
-            label="PASSWORD"
-            variant="outlined"
-            size="small"
-            InputProps={{
-              sx: {
-                color: "#ffffff",
-                border: "1px solid #ffffff",
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "white",
-              },
-            }}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={4} mt={2}>
-            <p>Forgot Password?</p>
-            <Item
+    <>
+      <Particle />
+      <div className="signInContainer">
+        <Modal
+          open={true}
+          aria-labelledby="child-modal-title"
+          aria-describedby="child-modal-description"
+          style={{
+            border: "2px solid #90e0ef",
+            letterSpacing: "2px",
+          }}
+        >
+          <Box sx={{ ...style, width: "auto", background: "rgba(0,0,0,0.3)" }}>
+            <h2 id="child-modal-title" style={{ whiteSpace: "nowrap" }}>
+              WELCOME BACK
+            </h2>
+            <p>EMAIL</p>
+            <TextField
+              id="outlined-basic"
+              // label="EMAIL"
+              variant="outlined"
+              fullWidth
+              size="small"
               sx={{
-                ":hover": {
-                  cursor: "pointer",
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
+                  "&.Mui-focused hover": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
+                  "& fieldset": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
                 },
               }}
-              onClick={handleSignIn}
-            >
-              Sign In
-            </Item>
-          </Stack>
-          <p mt={2}>Don't have a account? Sign Up</p>
-        </Box>
-      </Modal>
-    </div>
+              InputProps={{
+                sx: {
+                  color: "#90e0ef",
+                  border: "1px solid #90e0ef",
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: "#90e0ef",
+                },
+              }}
+              onChange={(e) => setUserEmail(e.target.value)}
+            />
+            <p>PASSWORD</p>
+            <TextField
+              id="outlined-basic"
+              // label="PASSWORD"
+              variant="outlined"
+              fullWidth
+              size="small"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
+                  "&.Mui-focused hover": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
+                  "& fieldset": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#90e0ef",
+                    color: "#90e0ef",
+                  },
+                },
+              }}
+              InputProps={{
+                sx: {
+                  color: "#90e0ef",
+                  border: "1px solid #90e0ef",
+                },
+              }}
+              InputLabelProps={{
+                sx: {
+                  color: "#90e0ef",
+                },
+              }}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={4} mt={2}>
+              <p style={{ marginTop: "0.5rem" }}>Forgot Password?</p>
+              <Item
+                sx={{
+                  ":hover": {
+                    cursor: "pointer",
+                  },
+                  fontWeight:"550",
+                  color:"black",
+                }}
+                onClick={handleSignIn}
+              >
+                Sign In
+              </Item>
+            </Stack>
+            <p mt={2}>Don't have a account? <a href="/sign-up" style={{
+              textDecoration:"none", color:"#90e0ef"
+            }}>Sign Up</a></p>
+          </Box>
+        </Modal>
+      </div>
+    </>
   );
 };
 

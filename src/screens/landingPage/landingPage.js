@@ -64,7 +64,7 @@ function LandingPage() {
             style={{ width: "250px", margin: 5, padding: 5 }}
             className="header logo"
           />
-          <button className="header login">Login</button>
+          <button className="header login"><a href="/sign-in" style={{textDecoration:"none", color:"#000000"}}>Login</a></button>
         </nav>
 
         <div className="mainBody">
