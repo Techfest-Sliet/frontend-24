@@ -8,6 +8,7 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Particle from "./Particle";
 import { Link } from "react-router-dom";
+import logo from '../../../images/festLogo.png';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#90e0ef" : "#90e0ef",
@@ -20,18 +21,18 @@ const Item = styled(Paper)(({ theme }) => ({
 const style = {
   position: "absolute",
   borderRadius:"12px",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  top: "25%",
+  left: "70%",
+  transform: "translate(-50%)",
   background: "transparent",
   color: "#90e0ef",
   //bgcolor: "background.paper",
   border: "2px solid #90e0ef",
   // boxShadow: "#90e0ef 5px 5px 5px 5px, #90e0ef -7px -7px 5px 5px, #03045e 15px 5px 10px 5px",
   boxShadow: " 0.1px 0.1px 1rem #00b4d8, -0.1px -0.1px 1rem #03045e",
-  pt: 2,
+  pt: 5,
   px: 4,
-  pb: 3,
+  pb: 7,
 };
 
 const SignIn = () => {
@@ -58,8 +59,12 @@ const SignIn = () => {
   return (
     <>
       <Particle />
+      <Stack direction="row" spacing={5} justifyContent={"space-between"}>
+        <Item><img src={logo} alt="Techfest'24 logo" className="techFestLogo" /></Item>
+        <Item>
       <div className="signInContainer">
-        <Modal
+        
+        {/* <Modal
           open={true}
           aria-labelledby="child-modal-title"
           aria-describedby="child-modal-description"
@@ -67,11 +72,11 @@ const SignIn = () => {
             border: "2px solid #90e0ef",
             letterSpacing: "2px",
           }}
-        >
-          <Box sx={{ ...style, width: "auto", background: "rgba(0,0,0,0.3)" }}>
-            <h2 id="child-modal-title" style={{ whiteSpace: "nowrap" }}>
+        > */}
+          <Box sx={{ ...style, width: "25rem", height:"25rem",  background: "rgba(0,0,0,0.3)" }}>
+            <h1 id="child-modal-title" style={{ whiteSpace: "nowrap", marginBottom:"2rem" }} >
               WELCOME BACK
-            </h2>
+            </h1>
             <p>EMAIL</p>
             <TextField
               id="outlined-basic"
@@ -80,6 +85,7 @@ const SignIn = () => {
               fullWidth
               size="small"
               sx={{
+                marginBottom:"1rem",
                 "& .MuiOutlinedInput-root": {
                   "&.Mui-focused fieldset": {
                     borderColor: "#90e0ef",
@@ -152,13 +158,13 @@ const SignIn = () => {
               }}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={4} mt={2}>
+            <Stack direction={{ xs: "column", sm: "row" }} justifyContent={"space-between"} spacing={4} mt={2}>
               {/* <p style={{ marginTop: "0.5rem" }}>Forgot Password?</p> */}
               <Link
                 to="/forget-password"
                 style={{ marginTop: "0.5rem", color: "#00B4D8" ,marginRight:"1.7rem"}}
               >
-                Forget Password
+                Forget Password ?
               </Link>
               {/* <Link to="/forget-password" style={{marginTop:"0.5rem"}}>ForgetPassword</Link> */}
               <Item
@@ -174,7 +180,7 @@ const SignIn = () => {
                 Sign In
               </Item>
             </Stack>
-            <p mt={2}>
+            <p style={{ margin:"1rem 0"}}>
               Don't have a account?{" "}
               <Link
                 to="/sign-up"
@@ -189,8 +195,10 @@ const SignIn = () => {
               </Link>
             </p>
           </Box>
-        </Modal>
+        {/* </Modal> */}
       </div>
+      </Item>
+      </Stack>
     </>
   );
 };
