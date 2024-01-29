@@ -32,7 +32,6 @@ const NavBar = () => {
           alignItems: "center",
           justifyContent: "space-between",
           gap: "2rem",
-          
         }}
         // sx={{
         //   width:"100%",
@@ -43,12 +42,23 @@ const NavBar = () => {
         //   ga
         // }}
       >
-        <Box style={{ height: "100%", display: "flex", alignItems: "center" }}>
+        <Box
+          style={{
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            width: "15%",
+          }}
+        >
           {/* <img src="/festLogo.png" alt="festLogo" height="90%" style={{filter:"none",}} /> */}
           <Link
             to={"/"}
-            style={{ height: "100%", display: "flex", alignItems: "center",
-          width:"100%" }}
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+            }}
           >
             <img
               src="techfest24logo1.png"
@@ -69,97 +79,87 @@ const NavBar = () => {
           //   gap: ".3rem",
           //   color: "white",
           // }}
-          
+
           sx={{
             height: "100%",
-            display:{lg:"flex"},
-            justifyContent:"end",
-            fontSiz:{sm:".5rem"},
-            alignItems:"center",
-            gap:{lg:"1.6rem", md:"1.2rem",sm:"1.2rem"},
-            color:"white"
+            display: { lg: "flex" },
+            justifyContent: "end",
+            fontSiz: { sm: ".5rem" },
+            alignItems: "center",
+            gap: { lg: "1.6rem", md: "1.2rem", sm: "1.2rem" },
+            color: "white",
           }}
-
         >
-          <Button>
-            <Link
+          <Link to="/workshops">
+            <Button
               style={{
-                
                 color: "white",
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
-              to="/workshops"
             >
               WorkShops
-            </Link>
-          </Button>
-          <Button>
-            <Link
+            </Button>
+          </Link>
+
+          <Link to="/domain">
+            <Button
               style={{
                 color: "white",
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
-              to="/domain"
             >
               Domains
-            </Link>
-          </Button>
+            </Button>
+          </Link>
 
-          <Button>
-            <Link
+          <Link to="/sponsor">
+            <Button
               style={{
                 color: "white",
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
-              to="/sponsor"
             >
               Sponsor
-            </Link>
-          </Button>
-          <Button>
-            <Link
+            </Button>
+          </Link>
+          <Link to="/gallery">
+            <Button
               style={{
                 color: "white",
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
-              to="/gallery"
             >
               Gallery
-            </Link>
-          </Button>
-          <Button>
-            <Link
+            </Button>
+          </Link>
+          <Link to="contact-us">
+            <Button
               style={{
                 color: "white",
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
-              to="contact-us"
             >
               Contact Us
-            </Link>
-          </Button>
-          <Button>
-            <Link
+            </Button>
+          </Link>
+          <Link to="sign-in">
+            <Button
               style={{
                 color: "white",
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
-              to="sign-in"
             >
               SignIN
-            </Link>
-          </Button>
-          
+            </Button>
+          </Link>
         </Box>
       </Box>
-
-     
     </nav>
   );
 };
