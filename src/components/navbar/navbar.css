@@ -1,0 +1,41 @@
+.navbar {
+  width: 100%;
+  height: 4rem;
+  position: fixed;
+  top: 0;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  background-color: #03001417;
+  z-index: 50;
+  padding: 0 2.5rem;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.link {
+  height: auto;
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.title {
+  font-weight: 700;
+  margin-left: 10px;
+  display: block;
+  color: rgb(209, 213, 219);
+}
+
+
