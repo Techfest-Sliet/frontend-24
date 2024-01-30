@@ -23,6 +23,7 @@ import AboutUs from "./screens/AboutUs/AboutUs"
 import UpdateUser from "./components/User/UpdateUser/UpdateUser";
 import RegisterEvent from "./components/User/RegisterEvent/RegisterEvent"
 import UserDashBoard from "./screens/UserDashboard/UserDashboard";
+import NavBar from "./components/navbar/Navbar";
 
 
 
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <>
+    <NavBar/>
     
    <Loader when={loading}/>
     {/* <Universe/> */}
