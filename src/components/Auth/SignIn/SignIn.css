@@ -20,11 +20,11 @@
         top:22%;
         left:10%;
         opacity:0.8;
-        animation: blinker 2s ease-in-out infinite;
+        animation: blinker 5s ease-in-out infinite;
 }
 @keyframes blinker {
-    0% { opacity: 0.7; }
+    0% { opacity: 0.9; }
  50% { opacity: 0.3; }
- 100% { opacity: 0.7; }
+ 100% { opacity: 0.9; }
 
   }

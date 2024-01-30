@@ -25,14 +25,14 @@ const style = {
   left: "70%",
   transform: "translate(-50%)",
   background: "transparent",
-  color: "#90e0ef",
+  color: "#ffffff",
   //bgcolor: "background.paper",
   border: "2px solid #90e0ef",
   // boxShadow: "#90e0ef 5px 5px 5px 5px, #90e0ef -7px -7px 5px 5px, #03045e 15px 5px 10px 5px",
   boxShadow: " 0.1px 0.1px 1rem #00b4d8, -0.1px -0.1px 1rem #03045e",
   pt: 5,
   px: 4,
-  pb: 7,
+  pb: 5,
 };
 
 const SignIn = () => {
@@ -73,11 +73,11 @@ const SignIn = () => {
             letterSpacing: "2px",
           }}
         > */}
-          <Box sx={{ ...style, width: "25rem", height:"25rem",  background: "rgba(0,0,0,0.3)" }}>
+          <Box sx={{ ...style, width: "25rem", height:"auto",  background: "rgba(0,0,0,0.3)" }}>
             <h1 id="child-modal-title" style={{ whiteSpace: "nowrap", marginBottom:"2rem" }} >
               WELCOME BACK
             </h1>
-            <p>EMAIL</p>
+            <p style={{fontSize:"1rem", marginBottom:"0.5rem"}}>EMAIL</p>
             <TextField
               id="outlined-basic"
               // label="EMAIL"
@@ -88,37 +88,37 @@ const SignIn = () => {
                 marginBottom:"1rem",
                 "& .MuiOutlinedInput-root": {
                   "&.Mui-focused fieldset": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                   "&.Mui-focused hover": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                   "& fieldset": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                   "&:hover fieldset": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                 },
               }}
               InputProps={{
                 sx: {
-                  color: "#90e0ef",
-                  border: "1px solid #90e0ef",
+                  color: "#ffffff",
+                  border: "1px solid #ffffff",
                 },
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#90e0ef",
+                  color: "#ffffff",
                 },
               }}
               onChange={(e) => setUserEmail(e.target.value)}
             />
-            <p>PASSWORD</p>
+            <p style={{fontSize:"1rem",marginTop:"0.5rem"}}>PASSWORD</p>
             <TextField
               id="outlined-basic"
               // label="PASSWORD"
@@ -126,34 +126,35 @@ const SignIn = () => {
               fullWidth
               size="small"
               sx={{
+                marginTop:"0.5rem",
                 "& .MuiOutlinedInput-root": {
                   "&.Mui-focused fieldset": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                   "&.Mui-focused hover": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                   "& fieldset": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                   "&:hover fieldset": {
-                    borderColor: "#90e0ef",
-                    color: "#90e0ef",
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
                   },
                 },
               }}
               InputProps={{
                 sx: {
-                  color: "#90e0ef",
-                  border: "1px solid #90e0ef",
+                  color: "#ffffff",
+                  border: "1px solid #ffffff",
                 },
               }}
               InputLabelProps={{
                 sx: {
-                  color: "#90e0ef",
+                  color: "#ffffff",
                 },
               }}
               onChange={(e) => setPassword(e.target.value)}
@@ -162,7 +163,7 @@ const SignIn = () => {
               {/* <p style={{ marginTop: "0.5rem" }}>Forgot Password?</p> */}
               <Link
                 to="/forget-password"
-                style={{ marginTop: "0.5rem", color: "#00B4D8" ,marginRight:"1.7rem"}}
+                style={{ marginTop: "0.5rem", color: "#ffffff" ,marginRight:"1.7rem"}}
               >
                 Forget Password ?
               </Link>
@@ -171,9 +172,12 @@ const SignIn = () => {
                 sx={{
                   ":hover": {
                     cursor: "pointer",
+                    backgroundColor:"03045e",
                   },
                   fontWeight: "550",
-                  color: "#030014",
+                  color: "black",
+                  backgroundColor:"#ffffff",
+                  fontSize:"1rem",
                 }}
                 onClick={handleSignIn}
               >
@@ -186,7 +190,7 @@ const SignIn = () => {
                 to="/sign-up"
                 style={{
                   textDecoration: "none",
-                  color: "#00B4D8",
+                  color: "#ffffff",
                   fontWeight:"700"
 
                 }}
