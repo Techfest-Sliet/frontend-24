@@ -73,28 +73,28 @@ const validate = (values) => {
 };
 
 const branchArr = [
-  " Aeronautical Engineering",
+  "Aeronautical Engineering",
   "Aerospace Engineering",
   "Automobile Engineering",
   "Biomedical Engineering",
   "Biotechnology Engineering",
   "Ceramic Engineering",
-  " Chemical Engineering",
+  "Chemical Engineering",
   "Civil Engineering",
-  " Communications Engineering",
-  " Computer Science Engineering",
+  "Communications Engineering",
+  "Computer Science Engineering",
   "Construction Engineering",
-  " Electrical Engineering",
-  " Electronics & Communication Engineering",
+  "Electrical Engineering",
+  "Electronics & Communication Engineering",
   "Electronics Engineering",
-  "  Environmental Engineering",
+  "Environmental Engineering",
   "Food Engineering and Technology",
-  " Industrial Engineering",
+  "Industrial Engineering",
   "Instrumentation and Control Engineering",
   "Marine Engineering",
   "Mechanical Engineering",
   "Mechatronics Engineering",
-  " Metallurgical Engineering",
+  "Metallurgical Engineering",
   "Mining Engineering",
   "Petroleum Engineering",
   "Power Engineering",
@@ -104,7 +104,7 @@ const branchArr = [
   "Telecommunication Engineering",
   "Textile Engineering",
   "Tool Engineering",
-  " Transportation Engineering",
+  "Transportation Engineering",
 ];
 
 const SignUp = () => {
@@ -170,9 +170,13 @@ const SignUp = () => {
                 // border: "1px solid black",
               }}
             >
-              <h1>Hi</h1>
+              <h1>
+                Hi!{" "}
+                <span>
+                  <b>{formik.values.name.toUpperCase()}</b>
+                </span>
+              </h1>
               {/* corection needed */}
-              <span>{formik.values.name}</span>
             </Box>
             <form onSubmit={formik.handleSubmit}>
               {page === 1 ? (
@@ -261,7 +265,7 @@ const SignUp = () => {
                   <Box>
                     <label htmlFor="number">Contact number</label>
                     <input
-                      type="text"
+                      type="number"
                       id="number"
                       name="number"
                       autoComplete="off"
@@ -305,6 +309,7 @@ const SignUp = () => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                     />
+                    <select name="" id=""></select>
                   </Box>
                   <Box
                     style={{
