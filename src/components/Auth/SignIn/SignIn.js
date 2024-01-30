@@ -162,7 +162,7 @@ const SignIn = () => {
             <Stack direction={{ xs: "column", sm: "row" }} justifyContent={"space-between"} spacing={4} mt={2}>
               {/* <p style={{ marginTop: "0.5rem" }}>Forgot Password?</p> */}
               <Link
-                to="/forget-password"
+                to="/reset-password"
                 style={{ marginTop: "0.5rem", color: "#ffffff" ,marginRight:"1.7rem"}}
               >
                 Forget Password ?
