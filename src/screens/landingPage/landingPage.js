@@ -9,14 +9,12 @@ import Hero from "./Hero";
 import { FaAngleDoubleUp } from "react-icons/fa";
 import { useState } from "react";
 
-
 import ModalComp from "./ModalComp";
 
 function App() {
   const [closet, setCloset] = useState(false);
   const handleOpen = () => {
-    
-      setCloset(true);
+    setCloset(true);
   };
   const handleClose = () => {
     setCloset(false);
@@ -37,6 +35,7 @@ function App() {
           alignItems: "center",
           justifyContent: "end",
           position: "relative",
+          overflow:"hidden"
         }}
       >
         <CardMedia
@@ -62,16 +61,17 @@ function App() {
         
         
       </Box> */}
-      {/* <Hero /> */}
+        {/* <Hero /> */}
 
-        <Box
+        {/* <Box
           style={{
             width: "100%",
             height: "75%",
             zIndex: "20",
             marginBottom: ".5rem",
           }}
-        ></Box>
+        ></Box> */}
+        <Hero/>
         <Box
           style={{
             display: "flex",
@@ -96,7 +96,12 @@ function App() {
           </Button>
         </Box>
       </Box>
-      <ModalComp closet={closet} handleClose={handleClose} handleOpen= {handleOpen} />
+      <ModalComp
+        
+        closet={closet}
+        handleClose={handleClose}
+        handleOpen={handleOpen}
+      />
     </>
   );
 }

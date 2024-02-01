@@ -15,17 +15,18 @@ const Hero = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        paddingTop: "10rem",
       }}
     >
       <Stack
         height="90%"
-        width="95%"
+        width="100%"
         direction="row"
         justifyContent="space-around"
         alignItems="center"
         sx={
           {
-            //   border: "1px solid red",
+              // border: "1px solid red",
           }
         }
       >
@@ -42,8 +43,9 @@ const Hero = () => {
           <img
             src="/festLogo.png"
             alt="fest logo"
-            height={300}
+            height={350}
             style={{
+              marginLeft:"-3.5rem",
               opacity: "0.7",
               filter: "drop-shadow(8px 8px 15px #4444dd)",
             }}
@@ -58,13 +60,37 @@ const Hero = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ display: "flex", border: "1px solid red" }}>
+          <div style={{ display: "flex" }}>
             <img src="/F.png" alt="flogo" height={250} />
-            <div>
-              <p>uture</p>
-              <div>
-                <p></p>
-                <p>rge</p>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "3rem" }}
+            >
+              <p style={{ width: "100%", fontSize: "6rem", height: "35%" }}>
+                uture
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  position: "relative",
+                  alignItems: "center",
+                }}
+              >
+                
+                <p
+                  style={{
+                    left: "-6rem",
+                    bottom: "1.3rem",
+                    border: "9px solid ",
+                    width: "11rem",
+                    height: "5.6rem",
+                    borderRadius:"2rem",
+
+                    position: "absolute",
+                    // borderColor:"transparent",
+                    borderColor:"transparent transparent transparent linear-gradient(to right, #ffffff, #b7b4b2, #ccd0d4, #4d4c47)"
+                  }}
+                ></p>
+                <p style={{ fontSize: "6rem",paddingLeft:"5rem" }}>rge</p>
               </div>
             </div>
           </div>
