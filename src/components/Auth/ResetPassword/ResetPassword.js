@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { Modal, Box, TextField, Button } from "@mui/material";
+
+import React, { useEffect, useState } from "react";
+import { Modal, Box, TextField, Button, Snackbar, Alert } from "@mui/material";
 import Particle from "../SignIn/Particle";
 import logo from "../../../images/forget-password.png";
 import axios from "axios";
+import Toast from "../../Toast";
 
 const style = {
   position: "absolute",
-  top: "52%",
+  top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "80%",
-  height: "75vh",
+  height: "80vh",
+
   //bgcolor: 'background.paper',
   background: "transparent",
   color: "#ffffff",
@@ -25,19 +28,41 @@ const style = {
 
 const ResetPassword = () => {
   const [email, setEmail] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [message, setMessage] = useState("");
+  const [open, setOpen] = useState(false);
+  
+
+  const openToast = ()=>{
+    setOpen(true)
+    setTimeout(()=>{setOpen(false)},3000)
+  }
 
   const handleReset = async () => {
-    console.log(email);
-    if (!email.trim().includes("@")) {
-      alert("Invalid Email!");
+    if (!email) {
+      setSuccess(false);
+      setMessage("Enter email");
+      openToast();
     } else {
+      if (!email.trim().includes("@")) {
+        setSuccess(false);
+        setMessage("Enter correct email");
+        openToast();
+        return;
+      }
+
       const user = {
         email: email,
       };
       await axios
         .post("http://localhost:4030/auth/forgot-password", user)
         .then((res) => {
-          console.log(res?.data);
+          const obj = JSON.parse(res?.data);
+          if (obj?.title == "Success") setSuccess(true);
+          else setSuccess(false);
+          setMessage(obj?.message);
+          openToast();
+
         })
         .catch((err) => {
           console.log(err);
@@ -48,41 +73,56 @@ const ResetPassword = () => {
     <div>
       <Particle />
 
-      {/* <Modal
+      <Toast open={open} success={success} message={message} />
+      <Modal
         open={true}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      > */}
-      <Box sx={style}>
-        <img
-          src={logo}
-          alt="forget-image"
-          style={{
-            height: "100%",
-          }}
-        />
-        <div style={{ width: "40%", marginTop: "6rem" }}>
-          <h1>Forgot Your Password ?</h1>
-          <p
+      >
+        <Box sx={style}>
+          <img
+            src={logo}
+            alt="forget-image"
             style={{
-              margin: "2rem 0 0.5rem 0",
-              fontSize: "1.3rem",
-              fontWeight: "600",
+              height: "100%",
             }}
-          >
-            Enter Email Address
-          </p>
-          <TextField
-            id="outlined-basic"
-            // label="PASSWORD"
-            variant="outlined"
-            fullWidth
-            sx={{
-              margin: "0.5rem 0 2rem",
-              "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": {
-                  borderColor: "#ffffff",
-                  color: "#ffffff",
+          />
+          <div style={{ width: "40%", marginTop: "6rem" }}>
+            <h1>Forgot Your Password ?</h1>
+            <p
+              style={{
+                margin: "2rem 0 0.5rem 0",
+                fontSize: "1.3rem",
+                fontWeight: "600",
+              }}
+            >
+              Enter Email Address
+            </p>
+            <TextField
+              id="outlined-basic"
+              // label="PASSWORD"
+              variant="outlined"
+              fullWidth
+              sx={{
+                margin: "0.5rem 0 2rem",
+                "& .MuiOutlinedInput-root": {
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
+                  },
+                  "&.Mui-focused hover": {
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
+                  },
+                  "& fieldset": {
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#ffffff",
+                    color: "#ffffff",
+                  },
+
                 },
                 "&.Mui-focused hover": {
                   borderColor: "#ffffff",
@@ -92,51 +132,36 @@ const ResetPassword = () => {
                   borderColor: "#ffffff",
                   color: "#ffffff",
                 },
-                "&:hover fieldset": {
-                  borderColor: "#ffffff",
-                  color: "#ffffff",
+              }}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Button
+              variant="outlined"
+              size=""
+              fullWidth
+              sx={{
+                backgroundColor: "transparent",
+                color: "#ffffff",
+                backgroundColor: "#00b4d8",
+                border: "2px solid #00b4d8",
+                borderRadius: "0.5rem",
+                fontSize: "1.2rem",
+                fontWeight: "600",
+                padding: "0.2rem 0",
+                ":hover": {
+                  borderColor: "#00b4d8",
+                  color: "#00b4d8",
+                  background: "transparent",
                 },
-              },
-            }}
-            InputProps={{
-              sx: {
-                color: "#ffffff",
-                border: "1px solid #ffffff",
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "#ffffff",
-              },
-            }}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Button
-            variant="outlined"
-            size=""
-            fullWidth
-            sx={{
-              backgroundColor: "transparent",
-              color: "#ffffff",
-              backgroundColor: "#00b4d8",
-              border: "2px solid #00b4d8",
-              borderRadius: "0.5rem",
-              fontSize: "1.2rem",
-              fontWeight: "600",
-              padding: "0.2rem 0",
-              ":hover": {
-                borderColor: "#00b4d8",
-                color: "#00b4d8",
-                background: "transparent",
-              },
-            }}
-            onClick={handleReset}
-          >
-            Reset Password
-          </Button>
-        </div>
-      </Box>
-      {/* </Modal> */}
+              }}
+              onClick={handleReset}
+            >
+              Reset Password
+            </Button>
+          </div>
+        </Box>
+      </Modal>
+
     </div>
   );
 };
