@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Modal, Box, TextField, Button, Snackbar, Alert } from "@mui/material";
 import Particle from "../SignIn/Particle";
@@ -12,6 +13,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   height: "80vh",
+
   //bgcolor: 'background.paper',
   background: "transparent",
   color: "#ffffff",
@@ -60,6 +62,7 @@ const ResetPassword = () => {
           else setSuccess(false);
           setMessage(obj?.message);
           openToast();
+
         })
         .catch((err) => {
           console.log(err);
@@ -119,16 +122,14 @@ const ResetPassword = () => {
                     borderColor: "#ffffff",
                     color: "#ffffff",
                   },
+
                 },
-              }}
-              InputProps={{
-                sx: {
+                "&.Mui-focused hover": {
+                  borderColor: "#ffffff",
                   color: "#ffffff",
-                  border: "1px solid #ffffff",
                 },
-              }}
-              InputLabelProps={{
-                sx: {
+                "& fieldset": {
+                  borderColor: "#ffffff",
                   color: "#ffffff",
                 },
               }}
@@ -160,6 +161,7 @@ const ResetPassword = () => {
           </div>
         </Box>
       </Modal>
+
     </div>
   );
 };
