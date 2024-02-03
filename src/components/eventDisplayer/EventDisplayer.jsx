@@ -2,7 +2,7 @@ import { Stack, Box, Typography, Button } from "@mui/material";
 import React, { useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 
-const EventDisplayer = ({ Img, heading, details, }) => {
+const EventDisplayer = ({ Img, heading, details }) => {
   const [variable, setVariable] = useState(1);
   const handleVariableSeting = () => {
     setVariable(2);
@@ -128,7 +128,20 @@ const EventDisplayer = ({ Img, heading, details, }) => {
                           textAlign: "justify",
                         }}
                       >
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem aliquid nostrum vitae a assumenda ipsa in deleniti eius numquam sunt, perferendis omnis ab possimus ipsum libero, accusantium nisi obcaecati. Maxime, consequuntur repellat ab labore, perferendis explicabo dolores ea quasi hic pariatur perspiciatis! Dolorem tempora ipsa ipsam quod quisquam deserunt dolore autem voluptas vitae nostrum iure ratione, veritatis velit! Sit odit deserunt, adipisci quasi explicabo, accusamus libero architecto culpa eligendi voluptas aspernatur fugiat placeat fugit! Labore nemo maiores laborum saepe et, illo laudantium quibusdam aspernatur reiciendis minima cum vero suscipit ex sunt sit beatae! Autem iusto fugit, animi adipisci quis similique?
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Rem aliquid nostrum vitae a assumenda ipsa in
+                        deleniti eius numquam sunt, perferendis omnis ab
+                        possimus ipsum libero, accusantium nisi obcaecati.
+                        Maxime, consequuntur repellat ab labore, perferendis
+                        explicabo dolores ea quasi hic pariatur perspiciatis!
+                        Dolorem tempora ipsa ipsam quod quisquam deserunt dolore
+                        autem voluptas vitae nostrum iure ratione, veritatis
+                        velit! Sit odit deserunt, adipisci quasi explicabo,
+                        accusamus libero architecto culpa eligendi voluptas
+                        aspernatur fugiat placeat fugit! Labore nemo maiores
+                        laborum saepe et, illo laudantium quibusdam aspernatur
+                        reiciendis minima cum vero suscipit ex sunt sit beatae!
+                        Autem iusto fugit, animi adipisci quis similique?
                         {/* {details} */}
                       </Typography>
                     </Box>
@@ -242,7 +255,6 @@ const EventDisplayer = ({ Img, heading, details, }) => {
                     gap: "2rem",
                   }}
                 >
-                  
                   <Box
                     height={"85%"}
                     width={"100%"}
@@ -304,9 +316,9 @@ const EventDisplayer = ({ Img, heading, details, }) => {
             </div>
           </div>
         </Box>
-      ) : null} 
+      ) : null}
 
-{/* <Box
+      {/* <Box
           style={{
             width: "100%",
             height: "100vh",

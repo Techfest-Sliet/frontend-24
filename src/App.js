@@ -24,7 +24,9 @@ import UpdateUser from "./components/User/UpdateUser/UpdateUser";
 import RegisterEvent from "./components/User/RegisterEvent/RegisterEvent"
 import UserDashBoard from "./screens/UserDashboard/UserDashboard";
 import NavBar from "./components/navbar/Navbar";
-
+import Domains from "./screens/Domains/Domains";
+import EventDisplayer from "./components/eventDisplayer/EventDisplayer";
+import Sponsors from "./components/sponsor/Sponsor";
 
 
 
@@ -53,11 +55,6 @@ function App() {
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/verify" element={<EmailVerify />} />
 
-        {/* <Route path="/domain" element={<Domains/>} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events/:id" element={<EventsDetailed />} />
-        <Route path="/event" element={<Event/>}/> */}
-
         {!authContext.isUserLoggedIn && (
           <Route path="/user-dashboard" element={<UserDashBoard />} />
         )}
@@ -72,8 +69,11 @@ function App() {
         {!authContext.isUserLoggedIn && (
           <Route path="/update-user" element={<UpdateUser />} />
         )}
+        <Route path="/sponsor" element={<Sponsors/>}/>
         <Route path="/about-us" element={<AboutUs />} />
-        <Route path="workshops" element={<WorkShops />} />
+        <Route path="/workshops" element={<WorkShops />} />
+        <Route path={`/events`} element={<EventDisplayer />} />
+        <Route path="/domains" element={<Domains />} />
         <Route path="/faq" element={<FAQ />} />
         </Routes>
       </div>

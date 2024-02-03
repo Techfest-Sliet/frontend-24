@@ -1,13 +1,14 @@
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #fff;
     background: linear-gradient(120deg, #000, #050010);
   }
+
   body::-webkit-scrollbar {
     display: none;
   }
   
-  .domains {
+  .workshops{
     position: relative;
     margin-top: 4.5rem;
     min-width: 100vw;
@@ -18,14 +19,14 @@ body {
   }
   
   .wrapper {
-    min-width: 855px;
+    min-width:855px;
     margin: 0 auto;
     padding: 15px;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     grid-gap: 20px;
-  
+    
     .card {
       cursor: pointer;
       position: relative;
@@ -37,7 +38,7 @@ body {
       border-radius: 10px;
       padding: 10px;
       transition: all 0.3s ease;
-  
+      
       img {
         display: flex;
         border-radius: 50%;
@@ -47,17 +48,17 @@ body {
         pointer-events: none;
         user-select: none;
       }
-  
+      
       h2 {
         margin: 0 0 10px;
       }
-  
+      
       span {
         color: #dfb8f0;
         font-weight: 300;
         margin: 0 0 20px;
       }
-  
+      
       p {
         color: #f4e7fa;
         font-weight: 300;
@@ -79,21 +80,15 @@ body {
         visibility: hidden;
         transition: all 0.3s ease;
       }
-  
+      
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         left: 50%;
         top: 50%;
         width: 100%;
         height: calc(100% + 300px);
-        background: linear-gradient(
-          90deg,
-          black calc(30%),
-          #dfb8f0 calc(40%),
-          #dfb8f0 calc(60%),
-          black calc(70%)
-        );
+        background: linear-gradient(90deg, black calc(30%), #dfb8f0 calc(40%), #dfb8f0 calc(60%), black calc(70%));
         z-index: -2;
         animation: rotate 6s linear infinite;
         opacity: 0;
@@ -101,7 +96,7 @@ body {
         transition: all 0.3s ease;
       }
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         left: 2px;
         top: 2px;
@@ -130,11 +125,6 @@ body {
   }
   
   @keyframes rotate {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
+    0% {transform: translate(-50%, -50%) rotate(0deg)}
+    100% {transform: translate(-50%, -50%) rotate(360deg)}
   }
-  
