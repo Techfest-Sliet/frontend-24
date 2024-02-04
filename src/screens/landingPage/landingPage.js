@@ -29,13 +29,13 @@ function App() {
           width: "100%",
           height: "100vh",
           backgroundColor: "transparent",
-
+ 
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "end",
           position: "relative",
-          overflow:"hidden"
+          overflow:"hidden",
         }}
       >
         <CardMedia
@@ -46,7 +46,7 @@ function App() {
           className="videoheader"
           src="/blackhole.webm"
         />
-        <NavBar />
+        {/* <NavBar /> */}
         {/* <Box
           style={{
             overflowX: "hidden",
