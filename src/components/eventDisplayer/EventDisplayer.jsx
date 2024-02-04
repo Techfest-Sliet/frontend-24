@@ -2,6 +2,7 @@ import { Stack, Box, Typography, Button } from "@mui/material";
 import React, { useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const EventDisplayer = ({ Img, heading, details }) => {
   const [variable, setVariable] = useState(1);
@@ -13,6 +14,9 @@ const EventDisplayer = ({ Img, heading, details }) => {
   };
 
   const navigate = useNavigate();
+
+  const {id} = useParams();
+
   return (
     <>
       <StarCanvas />
@@ -32,7 +36,6 @@ const EventDisplayer = ({ Img, heading, details }) => {
             className="container-div"
             style={{
               color: "white",
-
               height: "75%",
               width: "86%",
               display: "flex",
@@ -72,7 +75,6 @@ const EventDisplayer = ({ Img, heading, details }) => {
                 <Stack
                   direction={"row"}
                   style={{
-                    // border: "1px solid red",
                     width: "100%",
                     height: "90%",
                     gap: "2rem",
