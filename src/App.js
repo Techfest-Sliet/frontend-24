@@ -73,7 +73,7 @@ function App() {
         <Route path="/workshops" element={<WorkShops />} />
         <Route path={`/events`} element={<EventDisplayer />} />
         <Route path="/domains" element={<Domains />} />
-        <Route path="/faq" element={<FAQ />} />
+        {/* <Route path="/faq" element={<FAQ />} /> */}
         </Routes>
       </div>
     </>
