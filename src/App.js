@@ -71,7 +71,7 @@ function App() {
         <Route path="/sponsor" element={<Sponsors/>}/>
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/workshops" element={<WorkShops />} />
-        <Route path={`/events`} element={<EventDisplayer />} />
+        <Route path="/events/:id" element={<EventDisplayer />} />
         <Route path="/domains" element={<Domains />} />
         {/* <Route path="/faq" element={<FAQ />} /> */}
         </Routes>
