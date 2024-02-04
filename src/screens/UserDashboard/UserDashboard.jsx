@@ -36,24 +36,8 @@ const UserDashboard = () => {
           alignItems: "center",
           position: "relative",
           zindex:"10",
-          width:"150%",
         }}
       >
-        {/* <header
-          className="animated-title"
-          style={{
-            width: "100%",
-            height: "10%",
-            // display: "flex",
-            color: "white",
-            // justifyContent: "center",
-            // alignItems: "center",
-            fontSize: "2.5rem",
-            fontWeight: 700,
-          }}
-        >
-          User Dashboard
-        </header> */}
         <div
           className="userDashboard"
           style={{

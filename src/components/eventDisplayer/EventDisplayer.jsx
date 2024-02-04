@@ -1,6 +1,7 @@
 import { Stack, Box, Typography, Button } from "@mui/material";
 import React, { useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
+import { useNavigate } from "react-router-dom";
 
 const EventDisplayer = ({ Img, heading, details }) => {
   const [variable, setVariable] = useState(1);
@@ -10,6 +11,8 @@ const EventDisplayer = ({ Img, heading, details }) => {
   const handleResetVariable = () => {
     setVariable(1);
   };
+
+  const navigate = useNavigate();
   return (
     <>
       <StarCanvas />
@@ -23,7 +26,6 @@ const EventDisplayer = ({ Img, heading, details }) => {
             alignItems: "center",
             zIndex: "25",
             position: "relative",
-            // border: "1px solid red",
           }}
         >
           <div
@@ -164,14 +166,7 @@ const EventDisplayer = ({ Img, heading, details }) => {
                         Problem Statement
                       </Button>
                       <Box display={"flex"} gap={1}>
-                        <Button
-                          variant="contained"
-                          onClick={() =>
-                            console.log(
-                              "clicked add conditions to check if loged in then only register else redirect to login page "
-                            )
-                          }
-                        >
+                        <Button variant="contained" onClick={() => navigate('/user-dashboard')}>
                           Register
                         </Button>
                         <Button

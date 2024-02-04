@@ -4,6 +4,7 @@ import StarCanvas from "../landingPage/StarbackGround";
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import dummyImage from "../../images/Naruto.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Domains = () => {
   const [activeCards, setActiveCards] = useState({});
@@ -14,6 +15,8 @@ const Domains = () => {
       [index]: !prev[index],
     }));
   };
+
+  const navigate = useNavigate();
 
   const domains = [
     "PLEXUS",
@@ -60,10 +63,13 @@ const Domains = () => {
                         backgroundColor: "#9867c5",
                       },
                     }}
+                    onClick={() => {
+                      navigate(`/events`);
+                    }}  
                   >
                     Explore
                   </Button>
-                  <p>welcome to workshop.</p>
+                  <p>welcome to domain.</p>
                 </div>
               );
             })}
