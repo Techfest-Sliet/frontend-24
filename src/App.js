@@ -2,7 +2,6 @@ import React from "react";
 import LandingPage from "./screens/landingPage/landingPage";
 import { Routes, Route } from "react-router-dom";
 
-import Universe from "./components/Stars/globe/universe/universe";
 import WorkShops from "./screens/Workshops/Workshops";
 // import UserDashboard from "./screens/UserDashboard/UserDashboard";
 import { useLoader } from "./components/Loader/hook";
