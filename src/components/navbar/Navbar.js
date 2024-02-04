@@ -89,6 +89,7 @@ const NavBar = () => {
             gap: { lg: "1.6rem", md: "1.2rem", sm: "1.2rem" },
             color: "white",
           }}
+          className="navbar"
         >
           <Link to="/workshops">
             <Button
@@ -97,18 +98,20 @@ const NavBar = () => {
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
+              className="nav-link nav-link-ltr"
             >
               WorkShops
             </Button>
           </Link>
 
-          <Link to="/domain">
+          <Link to="/domains">
             <Button
               style={{
                 color: "white",
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
+              className="nav-link nav-link-ltr"
             >
               Domains
             </Button>
@@ -121,6 +124,7 @@ const NavBar = () => {
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
+              className="nav-link nav-link-ltr"
             >
               Sponsor
             </Button>
@@ -132,6 +136,7 @@ const NavBar = () => {
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
+              className="nav-link nav-link-ltr"
             >
               Gallery
             </Button>
@@ -143,6 +148,7 @@ const NavBar = () => {
                 fontWeight: "normal",
                 fontFamily: "Droid Sans",
               }}
+              className="nav-link nav-link-ltr"
             >
               Contact Us
             </Button>
