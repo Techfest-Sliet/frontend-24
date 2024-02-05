@@ -2,7 +2,6 @@ import React from "react";
 import LandingPage from "./screens/landingPage/landingPage";
 import { Routes, Route } from "react-router-dom";
 
-import Universe from "./components/Stars/globe/universe/universe";
 import WorkShops from "./screens/Workshops/Workshops";
 // import UserDashboard from "./screens/UserDashboard/UserDashboard";
 import { useLoader } from "./components/Loader/hook";
@@ -25,7 +24,15 @@ import UpdateUser from "./components/User/UpdateUser/UpdateUser";
 import RegisterEvent from "./components/User/RegisterEvent/RegisterEvent";
 import UserDashBoard from "./screens/UserDashboard/UserDashboard";
 import NavBar from "./components/navbar/Navbar";
+
 import Footer from "./components/Footer/Footer";
+
+import Domains from "./screens/Domains/Domains";
+import EventDisplayer from "./components/eventDisplayer/EventDisplayer";
+import Sponsors from "./components/sponsor/Sponsor";
+
+
+
 
 function App() {
   const { loading } = useLoader();
@@ -51,6 +58,7 @@ function App() {
           
           <Route path="/verify" element={<EmailVerify />} />
 
+
           {/* <Route path="/domain" element={<Domains/>} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventsDetailed />} />
@@ -67,12 +75,18 @@ function App() {
           {/* <Route path="/add-team" element={<AddTeam />} />
         <Route path="/team" element={<Team />} /> */}
 
-          {!authContext.isUserLoggedIn && (
-            <Route path="/update-user" element={<UpdateUser />} />
-          )}
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="workshops" element={<WorkShops />} />
-          <Route path="/faq" element={<FAQ />} />
+
+        
+        {!authContext.isUserLoggedIn && (
+          <Route path="/update-user" element={<UpdateUser />} />
+        )}
+        <Route path="/sponsor" element={<Sponsors/>}/>
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/workshops" element={<WorkShops />} />
+        <Route path="/events/:id" element={<EventDisplayer />} />
+        <Route path="/domains" element={<Domains />} />
+        <Route path="/faq" element={<FAQ />} /> 
+
         </Routes>
         <Footer />
       </div>
