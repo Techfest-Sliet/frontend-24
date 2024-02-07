@@ -5,6 +5,7 @@ import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import dummyImage from "../../images/Naruto.jpg";
 import { Link, useNavigate } from "react-router-dom";
+import ComingSoon from "../../components/comingSoon/ComingSoon";
 
 const Workshops = () => {
   const [activeCards, setActiveCards] = useState({});
@@ -32,7 +33,7 @@ const Workshops = () => {
   return (
     <>
       <StarCanvas />
-      <Box style={{position:"relative",zIndex:"25"}}>
+      {/* <Box style={{position:"relative",zIndex:"25"}}>
         <div className="workshops">
           <div class="wrapper">
             {workshops.map((workshop, index) => {
@@ -71,7 +72,10 @@ const Workshops = () => {
             })}
           </div>
         </div>
-      </Box>
+      </Box> */}
+      <div style={{position:"relative", zIndex:"10"}}> 
+        <ComingSoon/>
+      </div>
     </>
   );
 };
