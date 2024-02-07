@@ -14,14 +14,16 @@ const NavBar = () => {
   }
   //menu drawer
   const drawer = (
-  <Box onClick={handleDrawerToggle} className="mobile-view" sx={{p:2}} >
+  <Box onClick={handleDrawerToggle}  sx={{p:2}} >
 
-          
+        <div> 
         <Link to={"/"}>
-          <img src="techfest24logo1.png" alt="" width="100%" />
+          <img src="techfest24logo1.png" alt="" width="60%" />
         </Link>
         <Divider flexItem />
+        </div> 
    
+   <div className="mobile-view">
           <Link to="/workshops">
             <Button
               style={{
@@ -95,7 +97,7 @@ const NavBar = () => {
               SignIN
             </Button>
           </Link>
-       
+          </div>
  
   </Box>
   )
@@ -266,10 +268,13 @@ const NavBar = () => {
       </Box>
       <Box>
           <Drawer variant="temporary" open={mobileOpen} onClose={handleDrawerToggle}
-           sx={{display:{xs:"block",sm:"block",lg:"none" },"& .MuiDrawer-paper":{boxSizing:"border-box",width:"240px"}}}
+           sx={{display:{xs:"block",sm:"block",lg:"none" },"& .MuiDrawer-paper":{boxSizing:"border-box",width:"100%"}}}
             PaperProps={{
                     sx: {
-                    backgroundColor: "rebeccapurple",
+                      boxShadow:
+                        "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb( 24 109 196/ 0.5) ",
+                        backgroundColor: "#03001417",
+                    backdropFilter: "blur(15px)"
                   }}}>
            {drawer}
           </Drawer>
