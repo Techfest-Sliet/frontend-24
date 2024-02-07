@@ -1,11 +1,104 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./navbar.css";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Drawer, IconButton,Divider } from "@mui/material";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const NavBar = () => {
+  const [mobileOpen,setMobileOpen]=useState(false);
+  //handle menu click
+  const handleDrawerToggle = ()=>{
+    setMobileOpen(!mobileOpen);
+  }
+  //menu drawer
+  const drawer = (
+  <Box onClick={handleDrawerToggle} className="mobile-view" sx={{p:2}} >
+
+          
+        <Link to={"/"}>
+          <img src="techfest24logo1.png" alt="" width="100%" />
+        </Link>
+        <Divider flexItem />
+   
+          <Link to="/workshops">
+            <Button
+              style={{
+                color: "white",
+                fontWeight: "normal",
+                fontFamily: "Droid Sans",
+              }}
+              className="nav-link nav-link-ltr"
+            >
+              WorkShops
+            </Button>
+          </Link>
+
+          <Link to="/domains">
+            <Button
+              style={{
+                color: "white",
+                fontWeight: "normal",
+                fontFamily: "Droid Sans",
+              }}
+              className="nav-link nav-link-ltr"
+            >
+              Domains
+            </Button>
+          </Link>
+
+          <Link to="/sponsor">
+            <Button
+              style={{
+                color: "white",
+                fontWeight: "normal",
+                fontFamily: "Droid Sans",
+              }}
+              className="nav-link nav-link-ltr"
+            >
+              Sponsor
+            </Button>
+          </Link>
+          <Link to="/gallery">
+            <Button
+              style={{
+                color: "white",
+                fontWeight: "normal",
+                fontFamily: "Droid Sans",
+              }}
+              className="nav-link nav-link-ltr"
+            >
+              Gallery
+            </Button>
+          </Link>
+          <Link to="contact-us">
+            <Button
+              style={{
+                color: "white",
+                fontWeight: "normal",
+                fontFamily: "Droid Sans",
+              }}
+              className="nav-link nav-link-ltr"
+            >
+              Contact Us
+            </Button>
+          </Link>
+          <Link to="sign-in">
+            <Button
+              style={{
+                color: "white",
+                fontWeight: "normal",
+                fontFamily: "Droid Sans",
+              }}
+            >
+              SignIN
+            </Button>
+          </Link>
+       
+ 
+  </Box>
+  )
   return (
     <nav
       style={{
@@ -70,7 +163,11 @@ const NavBar = () => {
           <div>{/* <Button>WorkShop</Button> */}</div>
         </Box>
 
-        <Box
+        <IconButton color="inherit" aria-label="open drawer" edge="start" sx={{margin:"2",display:{md:"none"}}} onClick={handleDrawerToggle}>
+          <MenuIcon/>
+        </IconButton>
+
+       <Box
           // style={{
           //   height: "100%",
           //   display: "flex",
@@ -82,7 +179,7 @@ const NavBar = () => {
 
           sx={{
             height: "100%",
-            display: { lg: "flex" },
+            display: { lg: "flex",xs:"none" },
             justifyContent: "end",
             fontSiz: { sm: ".5rem" },
             alignItems: "center",
@@ -90,6 +187,7 @@ const NavBar = () => {
             color: "white",
           }}
           className="navbar"
+          
         >
           <Link to="/workshops">
             <Button
@@ -166,6 +264,16 @@ const NavBar = () => {
           </Link>
         </Box>
       </Box>
+      <Box>
+          <Drawer variant="temporary" open={mobileOpen} onClose={handleDrawerToggle}
+           sx={{display:{xs:"block",sm:"block",lg:"none" },"& .MuiDrawer-paper":{boxSizing:"border-box",width:"240px"}}}
+            PaperProps={{
+                    sx: {
+                    backgroundColor: "rebeccapurple",
+                  }}}>
+           {drawer}
+          </Drawer>
+        </Box>
     </nav>
   );
 };

@@ -45,7 +45,7 @@ const Workshops = () => {
                 >
                   <img src={dummyImage} style={{margin:"5%"}} />
                   <h2>{workshop}</h2>
-                  <Button
+                  <Button 
                     variant="contained"
                     sx={{
                       backgroundColor: "#9867c5",

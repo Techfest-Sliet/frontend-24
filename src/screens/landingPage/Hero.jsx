@@ -1,10 +1,13 @@
 import { Box, Stack } from "@mui/system";
 
-import { motion } from "framer-motion";
+import {  motion } from "framer-motion";
 import { slideInFromLeft, slideInFromRight } from "../../constants";
+import "./Hero.css";
 
 const Hero = () => {
+  
   return (
+
     <div
       style={{
         color: "white",
@@ -21,7 +24,7 @@ const Hero = () => {
       <Stack
         height="90%"
         width="100%"
-        direction="row"
+        direction={{xs:"column",lg:"row"}}
         justifyContent="space-around"
         alignItems="center"
         sx={
@@ -29,6 +32,7 @@ const Hero = () => {
               // border: "1px solid red",
           }
         }
+        
       >
         <motion.div
           variants={slideInFromLeft(0.5)}
@@ -41,13 +45,14 @@ const Hero = () => {
           }}
         >
           <img
+            className="festlogo"
             src="/festLogo.png"
             alt="fest logo"
             height={350}
             style={{
-              marginLeft:"-3.5rem",
               opacity: "0.7",
               filter: "drop-shadow(8px 8px 15px #4444dd)",
+              
             }}
           />
         </motion.div>
@@ -61,11 +66,11 @@ const Hero = () => {
           }}
         >
           <div style={{ display: "flex" }}>
-            <img src="/F.png" alt="flogo" height={250} />
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "3rem" }}
+            <img src="/F.png" alt="flogo" height={250} className="future-logo" />
+            <div className="text-container"
+              style={{ display: "flex", flexDirection: "column" }}
             >
-              <p style={{ width: "100%", fontSize: "6rem", height: "35%" }}>
+              <p style={{ width: "100%"}} className="uture" >
                 uture
               </p>
               <div
@@ -77,20 +82,20 @@ const Hero = () => {
               >
                 
                 <p
+                 className="o-shape"
                   style={{
-                    left: "-6rem",
-                    bottom: "1.3rem",
+                    
                     border: "9px solid ",
-                    width: "11rem",
-                    height: "5.6rem",
+                    
                     borderRadius:"2rem",
 
                     position: "absolute",
                     // borderColor:"transparent",
                     borderColor:"transparent transparent transparent linear-gradient(to right, #ffffff, #b7b4b2, #ccd0d4, #4d4c47)"
+                  
                   }}
                 ></p>
-                <p style={{ fontSize: "6rem",paddingLeft:"5rem" }}>rge</p>
+                <p className="rge">rge</p>
               </div>
             </div>
           </div>

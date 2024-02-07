@@ -137,3 +137,14 @@ body::-webkit-scrollbar {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+@media (max-width:420px){
+  .wrapper {
+    min-width: 400px;
+    padding: 20px 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+}

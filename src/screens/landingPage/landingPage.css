@@ -161,3 +161,31 @@
     object-fit: cover;
     
     }
+
+  
+
+    @media (max-width:349px) {
+      .videoheader{
+        top: -17rem;
+      }
+    }
+
+    @media (min-width:350px) and (max-width:389px) {
+      .videoheader{
+        top: -25rem;
+      }
+    }
+
+    @media (min-width:390px) and (max-width:431px) {
+      .videoheader{
+        top: -25rem;
+      }
+    }
+   
+    @media (min-width:432px) and (max-width:900px) {
+      .videoheader{
+        top: -33rem;
+      }
+    }
+
+    
