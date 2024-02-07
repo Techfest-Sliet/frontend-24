@@ -1,89 +1,85 @@
 import React from "react";
-import DomainCard from "../../components/Domain/DomainCard";
 import "./Domains.css";
-import Carousel from "react-material-ui-carousel";
+import StarCanvas from "../landingPage/StarbackGround";
+import { Box, Button } from "@mui/material";
+import { useState } from "react";
+import dummyImage from "../../images/Naruto.jpg";
+import { useNavigate } from "react-router-dom";
+import ComingSoon from "../../components/comingSoon/ComingSoon";
 
 const Domains = () => {
+  const [activeCards, setActiveCards] = useState({});
+
+  const toggleActive = (index) => {
+    setActiveCards((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
+  const navigate = useNavigate();
+
   const domains = [
-    {
-      name: "Plexus",
-      description: "",
-    },
-    {
-      name: "Electrica",
-      description: "",
-    },
-    {
-      name: "Chemica",
-      description: "",
-    },
-    {
-      name: "Robozar",
-      description: "",
-    },
-    {
-      name: "Mechanica",
-      description: "",
-    },
-    {
-      name: "Food-O-Crats",
-      description: "",
-    },
-    {
-      name: "Karyarachana",
-      description: "",
-    },
-    {
-      name: "Genesis",
-      description: "",
-    },
-    {
-      name: "Atomhiemer",
-      description: "",
-    },
-    {
-      name: "Kermis",
-      description: "",
-    },
-    {
-      name: "Aarambh",
-      description: "",
-    },
+    "PLEXUS",
+    "ELECTRICA",
+    "FOOD-O-CRATS",
+    "MECHANICA",
+    "CHEMICA",
+    "ELECTRONICS",
+    "GENESIS",
+    "KERMIS",
+    "ROBOZAR",
+    "ATOMHEIMER",
+    "KARAYARACHNA",
+    "VENTUREVAULT",
   ];
+
   return (
     <>
-      <div className="domainPage" style={{ width: "auto", height: "100vh" }}>
-        <div
-          className="carousel"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "80%",
-            border: "2px solid red",
-          }}
-        >
-          <Carousel>
-            {domains.map((domain, i) => {
-              return <DomainCard key={i} domain={domain} />;
+      <StarCanvas />
+      {/* <Box style={{position:"relative",zIndex:"25"}}>
+        <div className="domains">
+          <div class="wrapper">
+            {domains.map((domain, index) => {
+              return (
+                <div
+                  class="card"
+                  key={index}
+                  className={`card ${activeCards[index] ? "active" : ""}`}
+                  onClick={() => toggleActive(index)}
+                >
+                  <img src={dummyImage} style={{margin:"5%"}} />
+                  <h2>{domain}</h2>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "#9867c5",
+                      "&:hover": {
+                        backgroundColor: "#9867c5",
+                      },
+                      "&:focus": {
+                        backgroundColor: "#9867c5",
+                      },
+                      "&:active": {
+                        backgroundColor: "#9867c5",
+                      },
+                    }}
+                    onClick={() => {
+                      navigate(`/events/${index}`);
+                    }} 
+                  >
+                    Explore
+                  </Button>
+                  <p>welcome to domain.</p>
+                </div>
+              );
             })}
-          </Carousel>
+          </div>
         </div>
-        <div
-          className="polarEffect"
-          style={{
-            height: "20%",
-            border: "2px solid red",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center  ",
-          }}
-        >
-          <div
-            className="polarImage"
-            style={{ width: "20%", height: "80%" }}
-          ></div>
-        </div>
+      </Box> */}
+
+      <div style={{position:"relative", zIndex:"10"}}>
+        <ComingSoon/>
       </div>
     </>
   );
