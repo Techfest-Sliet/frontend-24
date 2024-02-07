@@ -64,8 +64,8 @@ const Domains = () => {
                       },
                     }}
                     onClick={() => {
-                      navigate(`/events`);
-                    }}  
+                      navigate(`/events/${index}`);
+                    }} 
                   >
                     Explore
                   </Button>

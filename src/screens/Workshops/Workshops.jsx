@@ -57,11 +57,11 @@ const Workshops = () => {
                       },
                       "&:active": {
                         backgroundColor: "#9867c5",
-                      },
+                      },  
                       zIndex:"24"
                     }}
                   >
-                    <Link to={`/events`}>
+                    <Link to={`/wdetail`}>
                     Explore
                     </Link>
                   </Button>
