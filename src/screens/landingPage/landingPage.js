@@ -72,7 +72,7 @@ function App() {
           }}
         ></Box> */}
         <Hero/>
-        <Box
+        {/* <Box
           style={{
             display: "flex",
             justifyContent: "center",
@@ -94,7 +94,7 @@ function App() {
           >
             <FaAngleDoubleUp color="white" />
           </Button>
-        </Box>
+        </Box> */}
       </Box>
       <ModalComp
         

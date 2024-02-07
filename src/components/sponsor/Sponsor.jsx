@@ -1,11 +1,12 @@
 import React from 'react'
 import EventDisplayer from '../eventDisplayer/EventDisplayer'
+import ComingSoon from '../comingSoon/ComingSoon'
 
 const Sponsor = () => {
   return (
-    <div style={{border:"1px solid red"}}>
-        <EventDisplayer/>
-    </div>
+   <>
+      <ComingSoon/>
+   </>
   )
 }
 
