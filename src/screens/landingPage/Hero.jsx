@@ -35,13 +35,14 @@ const Hero = () => {
         
       >
         <motion.div
+        className="festlogo-container"
           variants={slideInFromLeft(0.5)}
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             width: "100%",
-            paddingTop: "1.2rem",
+            
           }}
         >
           <img

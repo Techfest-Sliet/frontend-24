@@ -58,3 +58,26 @@
       );
     }
   }
+
+  .bg-polygon{
+
+    height: 80vh;
+  }
+
+  .polygon-container{
+    padding-top: 8rem;
+  }
+
+  @media (max-width:440px) {
+    .content h3{
+      font-size: 2.5em;
+    }
+
+    .bg-polygon{
+      height: 50vh;
+    }
+
+    .polygon-container{
+      padding-top: 2rem;
+    }
+  }

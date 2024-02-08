@@ -10,11 +10,12 @@ const ComingSoon = () => {
 
       <Box
         // className="coming-soon-body"
+          className="bg-polygon"
         sx={{
           position: "relative",
           minWidth: "100%",
           // border: "1px solid red",
-          height: "80vh",
+          // height: "80vh",
           zIndex: "26",
           display: "flex",
           justifyContent: "center",
@@ -25,13 +26,14 @@ const ComingSoon = () => {
         }}
       >
         <Box
+           className="polygon-container"
           sx={{
             marginTop: "2rem",
             // border: "1px solid red",
             width: "90%",
             height: "75%",
             backgroundColor: "#90e0ef34",
-            paddingTop: "8rem",
+            // paddingTop: "8rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

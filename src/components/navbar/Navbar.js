@@ -62,7 +62,7 @@ const NavBar = () => {
               Sponsor
             </Button>
           </Link>
-          <Link to="/gallery">
+          {/* <Link to="/gallery">
             <Button
               style={{
                 color: "white",
@@ -85,7 +85,7 @@ const NavBar = () => {
             >
               Contact Us
             </Button>
-          </Link>
+          </Link> */}
           <Link to="sign-in">
             <Button
               style={{

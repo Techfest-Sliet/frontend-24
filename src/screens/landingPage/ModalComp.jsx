@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { Modal, Button } from "@mui/material";
@@ -25,6 +25,17 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
       linked: "FaLinkedin",
     },
   ];
+
+  //for mobile view
+  const [fontSize,setFontSize]=useState(4.5);
+  useEffect( function footerIcon(){
+    const screenWidth = window.innerWidth;
+    if(screenWidth<440){
+    setFontSize(3)
+    }
+  },[]);
+  
+
   return (
     <motion.div
       hidden={"hidden"}
@@ -182,21 +193,25 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       // border: "1px solid red",
                     }}
                   >
+                  
+                  
                     <a href="#">
-                      <FaInstagram color="white" fontSize={"4.5rem"} />
+                      <FaInstagram color="white" fontSize={fontSize+"rem"} />
                     </a>
                     <a href="#">
-                      <FaLinkedin color="white" fontSize={"4.5rem"} />
+                      <FaLinkedin color="white" fontSize={fontSize+"rem"} />
                     </a>
                     <a href="#">
-                      <FaXTwitter color="white" fontSize={"4.5rem"} />
+                      <FaXTwitter color="white" fontSize={fontSize+"rem"} />
                     </a>
                     <a href="#">
-                      <FaYoutube color="white" fontSize={"4.5rem"} />
+                      <FaYoutube color="white" fontSize={fontSize+"rem"} />
                     </a>
                     <a href="#">
-                      <FaMeta color="white" fontSize={"4.5rem"} />
+                      <FaMeta color="white" fontSize={fontSize+"rem"} />
                     </a>
+
+
                     {/* {social.map((item, index) => (
                     <a href="#" key={index}>
                       <item />
