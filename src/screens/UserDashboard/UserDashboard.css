@@ -1,7 +1,4 @@
 .userDashboard{
     width: auto;
-    height: 100vh;
-    background-image: url(./../../images/greg-rakozy-oMpAz-DN-9I-unsplash.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    margin-top: 4.5rem;
 }
