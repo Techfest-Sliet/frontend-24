@@ -1,0 +1,37 @@
+.event_container{
+    margin-top: 10rem;
+    text-align: center;
+}
+.eventCard{
+    clip-path: polygon(12% 0, 35% 0,40% 15%, 90% 15%, 100% 35%, 100% 80%, 90% 100%, 10% 100%, 5% 85%, 5% 20%);
+    /* border: 1px solid blue; */
+    width:75vw;
+    height: 50vh;
+    padding: 3rem 5rem;
+    margin: 5rem 50%;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #90e0ef34;
+}
+
+.event__button {
+    font-size: 1.3em;
+    width: 7rem;
+    padding: 0.5rem 1rem;
+    margin-right: 12px;
+    border-radius: 7px;
+    background: linear-gradient(to right, #00b4d8, transparent);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.2s;
+  }
+  
+  .event__button:active {
+    transform: scale(0.9);
+  }

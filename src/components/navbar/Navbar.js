@@ -165,7 +165,7 @@ const NavBar = () => {
           <div>{/* <Button>WorkShop</Button> */}</div>
         </Box>
 
-        <IconButton color="inherit" aria-label="open drawer" edge="start" sx={{margin:"2",display:{md:"none"}}} onClick={handleDrawerToggle}>
+        <IconButton color="inherit" aria-label="open drawer" edge="start" sx={{margin:"2",display:{lg:"none"}}} onClick={handleDrawerToggle}>
           <MenuIcon/>
         </IconButton>
 

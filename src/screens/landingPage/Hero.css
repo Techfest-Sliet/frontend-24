@@ -27,9 +27,9 @@
  padding-top: 1.2rem;
 }
 
-   @media (max-width:430px) {
+   @media (max-width:450px) {
      .festlogo{
-       height: 250px;
+       height: 230px;
        margin-left: 0;
      }
 
@@ -38,26 +38,110 @@
      }
 
      .uture{
-        font-size: 4rem;
+        font-size: 4.2rem;
      }
 
      .o-shape{
-        left: -3rem;
-        width: 8rem;
-        height: 4.3rem;
-        bottom: 0.5rem;
+        left: -4rem;
+        width: 7rem;
+        height: 3.8rem;
+        bottom: 0;
      }
 
      .rge{
-        font-size: 4rem;
+        font-size: 4.2rem;
+        padding-left: 3.2rem;
      }
 
      .text-container{
-        gap: 1rem;
+        gap: 1.9rem;
      }
 
      .festlogo-container{
       padding-top: 5rem;
      }
 
+     .future-forge-container{
+      padding-top: 30px;
+      padding-bottom: 30px;
+     }
+
    }
+
+   @media (min-width:700px) and (max-width:900px) {
+      .festlogo{
+        height: 450px;
+        margin-left: 0;
+      }
+ 
+      .future-logo{
+         height: 300px;
+      }
+ 
+      .uture{
+         font-size: 8rem;
+      }
+ 
+      .o-shape{
+         left: -8rem;
+         width: 13rem;
+         height: 6rem;
+         bottom: 1rem;
+      }
+ 
+      .rge{
+         font-size: 8rem;
+      }
+ 
+      .text-container{
+         gap: 4rem;
+      }
+ 
+      .festlogo-container{
+       padding-top: 5rem;
+      }
+ 
+      .future-forge-container{
+       padding-top: 30px;
+      }
+ 
+    }
+
+    @media (min-width:900px) and (max-width:1200px) {
+      .festlogo{
+        height: 550px;
+        margin-left: 0;
+      }
+ 
+      .future-logo{
+         height: 380px;
+      }
+ 
+      .uture{
+         font-size: 8rem;
+      }
+ 
+      .o-shape{
+         left: -8rem;
+         width: 13rem;
+         height: 6rem;
+         bottom: 1rem;
+      }
+ 
+      .rge{
+         font-size: 8rem;
+      }
+ 
+      .text-container{
+         gap: 8rem;
+      }
+ 
+      .festlogo-container{
+       padding-top: 10rem;
+      }
+ 
+      .future-forge-container{
+       padding-top: 0;
+      }
+ 
+    }

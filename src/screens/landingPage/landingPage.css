@@ -164,27 +164,45 @@
 
   
 
-    @media (max-width:349px) {
+    @media (max-width:350px) {
       .videoheader{
         top: -17rem;
       }
     }
 
-    @media (min-width:350px) and (max-width:389px) {
+    @media (min-width:350px) and (max-width:380px) {
       .videoheader{
-        top: -25rem;
+        top: -19rem;
       }
     }
 
-    @media (min-width:390px) and (max-width:431px) {
+    @media (min-width:380px) and (max-width:400px) {
       .videoheader{
-        top: -25rem;
+        top: -20rem;
+      }
+    }
+
+    @media (min-width:400px) and (max-width:420px) {
+      .videoheader{
+        top: -22rem;
       }
     }
    
-    @media (min-width:432px) and (max-width:900px) {
+    @media (min-width:700px) and (max-width:790px) {
+      .videoheader{
+        top: -26rem;
+      }
+    }
+
+    @media (min-width:790px) and (max-width:900px) {
       .videoheader{
         top: -33rem;
+      }
+    }
+
+    @media (min-width:900px) and (max-width:1200px) {
+      .videoheader{
+        top: -60rem;
       }
     }
 

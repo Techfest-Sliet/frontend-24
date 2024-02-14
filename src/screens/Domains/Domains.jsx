@@ -3,11 +3,9 @@ import "./Domains.css";
 import StarCanvas from "../landingPage/StarbackGround";
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
-import dummyImage from "../../images/Naruto.jpg";
 import { useNavigate } from "react-router-dom";
-import ComingSoon from "../../components/comingSoon/ComingSoon";
 
-const Domains = () => {
+const Domains = ({ domains }) => {
   const [activeCards, setActiveCards] = useState({});
 
   const toggleActive = (index) => {
@@ -19,68 +17,58 @@ const Domains = () => {
 
   const navigate = useNavigate();
 
-  const domains = [
-    "PLEXUS",
-    "ELECTRICA",
-    "FOOD-O-CRATS",
-    "MECHANICA",
-    "CHEMICA",
-    "ELECTRONICS",
-    "GENESIS",
-    "KERMIS",
-    "ROBOZAR",
-    "ATOMHEIMER",
-    "KARAYARACHNA",
-    "VENTUREVAULT",
-  ];
-
   return (
     <>
       <StarCanvas />
-      {/* <Box style={{position:"relative",zIndex:"25"}}>
+      <Box style={{ position: "relative", zIndex: "25" }}>
         <div className="domains">
           <div class="wrapper">
             {domains.map((domain, index) => {
               return (
                 <div
                   class="card"
-                  key={index}
+                  key={domain.id}
                   className={`card ${activeCards[index] ? "active" : ""}`}
                   onClick={() => toggleActive(index)}
                 >
-                  <img src={dummyImage} style={{margin:"5%"}} />
-                  <h2>{domain}</h2>
+                  <img
+                    src={domain.imagePath}
+                    alt={domain.name}
+                    style={{ margin: "5%" }}
+                  />
+                  <h2>{domain.name.toUpperCase()}</h2>
                   <Button
-                    variant="contained"
+                  
                     sx={{
-                      backgroundColor: "#9867c5",
+                      color:"black",
+                      background: '#00b4d8',
                       "&:hover": {
-                        backgroundColor: "#9867c5",
+                        backgroundColor: "#00b4d8",
                       },
                       "&:focus": {
-                        backgroundColor: "#9867c5",
+                        backgroundColor: "#00b4d8",
                       },
                       "&:active": {
-                        backgroundColor: "#9867c5",
+                        backgroundColor: "#00b4d8",
                       },
                     }}
                     onClick={() => {
-                      navigate(`/events/${index}`);
-                    }} 
+                      navigate(`/domains/${domain.id}`);
+                    }}
                   >
                     Explore
                   </Button>
-                  <p>welcome to domain.</p>
+                  <p>{domain.description}</p>
                 </div>
               );
             })}
           </div>
         </div>
-      </Box> */}
+      </Box>
 
-      <div style={{position:"relative", zIndex:"10"}}>
+      {/* <div style={{position:"relative", zIndex:"10"}}>
         <ComingSoon/>
-      </div>
+      </div> */}
     </>
   );
 };

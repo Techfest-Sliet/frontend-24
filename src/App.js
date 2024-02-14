@@ -13,7 +13,6 @@ import Login from "./components/Auth/Login/Login";
 
 import ResetPassword from "./components/Auth/ResetPassword/ResetPassword";
 
-
 import EmailVerify from "./components/Auth/EmailVerify/EmailVerify";
 import authContext from "./components/Auth/Auth";
 
@@ -30,9 +29,11 @@ import Footer from "./components/Footer/Footer";
 import Domains from "./screens/Domains/Domains";
 import EventDisplayer from "./components/eventDisplayer/EventDisplayer";
 import Sponsors from "./components/sponsor/Sponsor";
+import Arambh from "./components/Aarambh/Arambh";
+import Events from "./components/eventDisplayer/Events";
 
-
-
+import domainData from "./utils/domains";
+import eventsData from "./utils/events";
 
 function App() {
   const { loading } = useLoader();
@@ -55,38 +56,30 @@ function App() {
           )}
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          
           <Route path="/verify" element={<EmailVerify />} />
-
-
           {/* <Route path="/domain" element={<Domains/>} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventsDetailed />} />
         <Route path="/event" element={<Event/>}/> */}
-
           {!authContext.isUserLoggedIn && (
             <Route path="/user-dashboard" element={<UserDashBoard />} />
           )}
-
           {!authContext.isUserLoggedIn && (
             <Route path="/register" element={<RegisterEvent />} />
           )}
-
           {/* <Route path="/add-team" element={<AddTeam />} />
         <Route path="/team" element={<Team />} /> */}
-
-
-        
-        {!authContext.isUserLoggedIn && (
-          <Route path="/update-user" element={<UpdateUser />} />
-        )}
-        <Route path="/sponsor" element={<Sponsors/>}/>
-        {/* <Route path="/about-us" element={<AboutUs />} /> */}
-        <Route path="/workshops" element={<WorkShops />} />
-        <Route path="/events/:id" element={<EventDisplayer />} />
-        <Route path="/domains" element={<Domains />} />
-        <Route path="/faq" element={<FAQ />} /> 
-
+          {!authContext.isUserLoggedIn && (
+            <Route path="/update-user" element={<UpdateUser />} />
+          )}
+          <Route path="/sponsor" element={<Sponsors />} />
+          {/* <Route path="/about-us" element={<AboutUs />} /> */}
+          <Route path="/workshops" element={<WorkShops />} />
+          <Route path="/domains" element={<Domains domains={domainData} />}/>
+          <Route path="/domains/:domainId" element={<Events domains={domainData} />}/>
+          <Route path="/domains/:domainId/events/:eventId" element={<EventDisplayer events={eventsData} />}/>
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/aarambh" element={<Arambh />} />
         </Routes>
         <Footer />
       </div>

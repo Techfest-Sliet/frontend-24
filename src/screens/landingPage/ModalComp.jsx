@@ -8,6 +8,8 @@ import { FaXTwitter, FaMeta } from "react-icons/fa6";
 import { GrClose } from "react-icons/gr";
 import { motion } from "framer-motion";
 import { slideInFromBottom } from "../../constants";
+import {saveAs} from 'file-saver';
+
 const ModalComp = ({ closet, handleClose, handleOpen }) => {
   // const [open,setOpen] = useState(false);
   // const handleClose=()=>setOpen((value)=>!value)
@@ -34,6 +36,11 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
     setFontSize(3)
     }
   },[]);
+
+  const downloadPdf = ()=>{
+    const pdfPath = `techFEST'24 PPT _ ADT.pdf`;
+    saveAs(pdfPath,`techFEST'24 Brochure.pdf`);
+  }
   
 
   return (
@@ -101,7 +108,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Home
                     </Button>
                   </Link>
-                  <Link to="/shows">
+                  <Link to="#">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans" }}
                     >
@@ -115,35 +122,35 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Workshops
                     </Button>
                   </Link>
-                  <Link to="/domain">
+                  <Link to="/domains">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans" }}
                     >
                       Domains
                     </Button>
                   </Link>
-                  <Link to="/tech-expo">
+                  <Link to="#">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans" }}
                     >
                       TechExpo
                     </Button>
                   </Link>
-                  <Link to="/sponsors">
+                  <Link to="#">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans" }}
                     >
                       Sponsors
                     </Button>
                   </Link>
-                  <Link to="/gallery">
+                  <Link to="#">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans" }}
                     >
                       Gallery
                     </Button>
                   </Link>
-                  <Link to="/about-us">
+                  <Link to="#">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans" }}
                     >
@@ -218,6 +225,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     </a>
                   ))} */}
                   </Box>
+        
                   <Button
                     variant="outlined"
                     style={{
@@ -227,8 +235,9 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       borderRadius: "15rem",
                       padding: "0.4rem 1.6rem",
                     }}
+                    onClick={downloadPdf}
                   >
-                    Broucher
+                    Brouchure
                   </Button>
                 </Stack>
               </Box>
@@ -257,7 +266,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     gap: "1.3rem",
                   }}
                 >
-                  <Link to="/enquiry">
+                  <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -268,7 +277,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Enquiry
                     </Button>
                   </Link>
-                  <Link to="/contact-us">
+                  <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -279,7 +288,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Contact Us
                     </Button>
                   </Link>
-                  <Link to="/hospitality">
+                  <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -290,7 +299,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Hospitality
                     </Button>
                   </Link>
-                  <Link to="/exibition">
+                  <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -301,7 +310,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Exibition
                     </Button>
                   </Link>
-                  <Link to="/mechandise">
+                  <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -312,7 +321,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Merchandise
                     </Button>
                   </Link>
-                  <Link to="/special-initiative">
+                  <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -323,7 +332,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Special Initiative
                     </Button>
                   </Link>
-                  <Link to="/ca-portal">
+                  <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -331,7 +340,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                         fontWeight: "800",
                       }}
                     >
-                      CA Portal
+                      Campus Ambassador Portal
                     </Button>
                   </Link>
                 </Box>

@@ -10,6 +10,7 @@ import Particle from "./Particle";
 import { Link } from "react-router-dom";
 import logo from "../../../images/festLogo.png";
 import Toast from "../../Toast";
+import zIndex from "@mui/material/styles/zIndex";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#90e0ef" : "#90e0ef",
@@ -22,8 +23,6 @@ const Item = styled(Paper)(({ theme }) => ({
 const style = {
   position: "absolute",
   borderRadius: "12px",
-  top: "25%",
-  left: "70%",
   transform: "translate(-50%)",
   background: "transparent",
   color: "#ffffff",
@@ -107,9 +106,10 @@ const SignIn = () => {
           }}
         > */}
             <Box
+            className="signin-box"
               sx={{
                 ...style,
-                width: "25rem",
+                // width: "20rem",
                 height: "auto",
                 background: "rgba(0,0,0,0.3)",
               }}

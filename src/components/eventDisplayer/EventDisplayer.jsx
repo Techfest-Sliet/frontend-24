@@ -4,7 +4,7 @@ import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const EventDisplayer = ({ Img, heading, details }) => {
+const EventDisplayer = ({ Img, events }) => {
   const [variable, setVariable] = useState(1);
   const handleVariableSeting = () => {
     setVariable(2);
@@ -15,7 +15,8 @@ const EventDisplayer = ({ Img, heading, details }) => {
 
   const navigate = useNavigate();
 
-  const {id} = useParams();
+  const { eventId } = useParams();
+  const selectedEvent = events.find(event => event.id === parseInt(eventId));
 
   return (
     <>
@@ -113,7 +114,7 @@ const EventDisplayer = ({ Img, heading, details }) => {
                       variant={"h3"}
                       // paddingRight={"2.5rem"}
                     >
-                      {heading}
+                      {selectedEvent.name}
                     </Typography>
                     <Box
                       sx={{

@@ -86,4 +86,10 @@
   margin: 1rem 0;
 }
 
+@media (min-width:900px) and (max-width:1200px) {
+  .mobile-view Button{
+    font-size: 4rem;
+  }
+}
+
 

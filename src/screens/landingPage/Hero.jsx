@@ -66,7 +66,7 @@ const Hero = () => {
             alignItems: "center",
           }}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex" }} className="future-forge-container">
             <img src="/F.png" alt="flogo" height={250} className="future-logo" />
             <div className="text-container"
               style={{ display: "flex", flexDirection: "column" }}
