@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { FaRegLightbulb } from "react-icons/fa";
 import {
@@ -11,11 +11,15 @@ import {
   Tooltip,
   TextField,
 } from "@mui/material";
-// import update from "../../images/update.png";
-import StarCanvas from "../landingPage/StarbackGround";
-import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import { MdDelete } from "react-icons/md";
+import axios from "axios";
+
+//user imports
+import AuthContext from "../../components/Auth/Auth";
+import { baseUrl } from "../../API/Api";
+//loader
+//error model
 
 const style = {
   position: "absolute",
@@ -33,11 +37,19 @@ const style = {
 };
 
 const UserDashboard = () => {
-  const events = ["LFR", "sliet hackathon"];
-  const workshops = ["chatgpt", "solidworks"];
+  // const events = ["LFR", "sliet hackathon"];
+  // const workshops = ["chatgpt", "solidworks"];
 
+  const authContext = useContext(AuthContext);
+  const [errorMade, setErrorMade] = useState();
+  const [workshops, setWorkshops] = useState("");
+  const [events, setEvents] = useState("");
+  const [teamMembers, setTeamMembers] = useState("");
   const [openEditPersonal, setOpenEditPersonal] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [user, setUser] = useState(null);
 
   const handleClosePersonal = () => {
     setOpenEditPersonal(false);
@@ -56,6 +68,67 @@ const UserDashboard = () => {
     console.log("inside edit Contact info");
     setOpenEditContact(true);
   }
+
+  const deleteEvent = (id) => {
+    setIsLoading(true);
+    axios
+      .post(
+        `${baseUrl}/user/pullevent`,
+        { id: id },
+        {
+          headers: {
+            Authorization: "Bearer " + authContext.token,
+          },
+        }
+      )
+      .then((result) => {
+        setErrorMade({ title: "Success", message: result.data.message });
+        setIsLoading(false);
+        if (result.data.isError) {
+          setErrorMade({ title: "Error", message: result.data.message });
+          return;
+        } else {
+          const updatedEvents = events.filter((event) => event._id !== id);
+          setEvents(updatedEvents);
+        }
+      });
+  };
+
+  //get user id
+  useEffect(() => {
+    setIsLoading(true);
+    console.log(authContext);
+    axios
+      .get(`${baseUrl}/user/getUserById`, {
+        headers: {
+          Authorization: "Bearer " + authContext.token,
+        },
+      })
+      .then((result) => {
+        setIsLoading(false);
+        if (
+          result.status !== 200 ||
+          (result.status !== 201 && result.data.isError)
+        ) {
+          console.log(result);
+          authContext.logout();
+          return result.status(208).json({
+            title: "Auth Error",
+            message: "Wrong user auth!",
+          });
+        }
+        setUser(result.data.user);
+        setWorkshops(result.data.user.workshops);
+        setTeamMembers(result.data.user.teamMembers);
+        setEvents(result.data.user.events);
+      })
+      .catch((err) => {
+        // return err.status(208).json({
+        //   title: "Auth Error",
+        //   message: "Wrong user auth!",
+        // });
+      });
+  }, [authContext, authContext.login]);
 
   return (
     <>
@@ -86,7 +159,9 @@ const UserDashboard = () => {
           >
             {" "}
             Welcome to the Universe&nbsp;{" "}
-            <span style={{ color: "#25c6e5", fontWeight: 750 }}>Naman</span>
+            <span style={{ color: "#25c6e5", fontWeight: 750 }}>
+              {user && user.name}
+            </span>
             👋
           </div>
 
@@ -200,21 +275,29 @@ const UserDashboard = () => {
                     </Modal>
                   )}
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>Student</Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>SLIET</Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>
-                      B.E. (Chemical Engineering)
+                      {user && user.profession}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>2</Typography>
+                    <Typography sx={{ fontSize: 25 }}>
+                      {user && user.collegeName}
+                    </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>DD/MM/YYYY</Typography>
+                    <Typography sx={{ fontSize: 25 }}>
+                      {user && user.course}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>
+                      {user && user.yearOfStudy}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>
+                      {user && user.branch}
+                    </Typography>
                   </Box>
                 </Grid>
               </Grid>
@@ -240,7 +323,7 @@ const UserDashboard = () => {
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
-                      whatsapp Number
+                      Whatsapp Number
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
@@ -304,11 +387,13 @@ const UserDashboard = () => {
                   )}
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>
-                      tashu.kulshresth@gmail.com
+                      {user && user.email}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
+                    <Typography sx={{ fontSize: 25 }}>
+                      {user && user.phone}
+                    </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
@@ -333,7 +418,6 @@ const UserDashboard = () => {
               right: "2%",
               marginLeft: "3.5%",
             }}
-
           >
             <Card
               sx={{
@@ -342,7 +426,6 @@ const UserDashboard = () => {
                 minHeight: 300,
                 border: "2px solid white",
                 marginRight: "2%",
-
               }}
             >
               <Box
@@ -369,28 +452,48 @@ const UserDashboard = () => {
                 <Box>
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
-                      {events.map((event, i) => {
-                        return (
-                          <Box sx={{ margin: "10%" }}>
-                            <Typography
-                              sx={{
-                                fontSize: 20,
-                                fontWeight: 500,
-                                color: "white",
-                              }}
-                              key={i}
-                            >
-                              {event}
-                            </Typography>
-                            <Divider
-                              sx={{ border: "0.2px solid grey", width: 400 }}
-                            />
-                          </Box>
-                        );
-                      })}
+                      {events &&
+                        events.length === 0 &&
+                        "Not Registered to any event 🙄."}
+                      {events &&
+                        events.length > 0 &&
+                        events.map((event) => {
+                          return (
+                            <Box sx={{ margin: "10%" }}>
+                              <Typography
+                                sx={{
+                                  fontSize: 20,
+                                  fontWeight: 500,
+                                  color: "white",
+                                }}
+                                key={event._id}
+                              >
+                                {event.eventName}
+                              </Typography>
+                              <Divider
+                                sx={{ border: "0.2px solid grey", width: 400 }}
+                              />
+                            </Box>
+                          );
+                        })}
                     </Grid>
                     <Grid item xs={6} sx={{ textAlign: "right" }}>
-                      <Box sx={{ margin: "10%" }}>
+                      {events &&
+                        events.length > 0 &&
+                        events.map((event) => {
+                          return (
+                            <Box sx={{ margin: "10%" }}>
+                              <Typography
+                                sx={{ fontSize: 20, fontWeight: 500 }}
+                              >
+                                {event.eventDate}
+                              </Typography>
+                              <MdDelete />
+                            </Box>
+                          );
+                        })}
+
+                      {/* <Box sx={{ margin: "10%" }}>
                         <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
                           Today
                         </Typography>
@@ -404,7 +507,7 @@ const UserDashboard = () => {
                         <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
                           20/04
                         </Typography>
-                      </Box>
+                      </Box> */}
                     </Grid>
                   </Grid>
                 </Box>
@@ -444,28 +547,47 @@ const UserDashboard = () => {
                 <Box>
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
-                      {workshops.map((workshop, i) => {
-                        return (
-                          <Box sx={{ margin: "10%" }}>
-                            <Typography
-                              sx={{
-                                fontSize: 20,
-                                fontWeight: 500,
-                                color: "white",
-                              }}
-                              key={i}
-                            >
-                              {workshop}
-                            </Typography>
-                            <Divider
-                              sx={{ border: "0.2px solid grey", width: 400 }}
-                            />
-                          </Box>
-                        );
-                      })}
+                      {workshops &&
+                        workshops.length === 0 &&
+                        "Not registered to any workshop 🙄."}
+                      {workshops &&
+                        workshops.length > 0 &&
+                        workshops.map((workshop) => {
+                          return (
+                            <Box sx={{ margin: "10%" }}>
+                              <Typography
+                                sx={{
+                                  fontSize: 20,
+                                  fontWeight: 500,
+                                  color: "white",
+                                }}
+                                key={workshop._id}
+                              >
+                                {workshop.workshopName}
+                              </Typography>
+                              <Divider
+                                sx={{ border: "0.2px solid grey", width: 400 }}
+                              />
+                            </Box>
+                          );
+                        })}
                     </Grid>
                     <Grid item xs={6} sx={{ textAlign: "right" }}>
-                      <Box sx={{ margin: "10%" }}>
+                      {workshops &&
+                        workshops.length > 0 &&
+                        workshops.map((workshop) => {
+                          return (
+                            <Box sx={{ margin: "10%" }}>
+                              <Typography
+                                sx={{ fontSize: 20, fontWeight: 500 }}
+                              >
+                                {workshop.workshopDate}
+                              </Typography>
+                            </Box>
+                          );
+                        })}
+
+                      {/* <Box sx={{ margin: "10%" }}>
                         <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
                           Today
                         </Typography>
@@ -479,7 +601,7 @@ const UserDashboard = () => {
                         <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
                           20/04
                         </Typography>
-                      </Box>
+                      </Box> */}
                     </Grid>
                   </Grid>
                 </Box>
