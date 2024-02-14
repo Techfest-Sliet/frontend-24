@@ -1,69 +1,76 @@
-import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Center, OrbitControls, useGLTF } from "@react-three/drei";
-import { TypeAnimation } from "react-type-animation";
-import TeamTable from "../../components/User/Team/TeamTable";
-import { CiMail } from "react-icons/ci";
-import { CiPhone } from "react-icons/ci";
-import { BiSolidInstitution } from "react-icons/bi";
-// import "./UserDashboard.css";
+import React from "react";
+import { BiEdit } from "react-icons/bi";
+import { FaRegLightbulb } from "react-icons/fa";
+import {
+  Box,
+  Button,
+  Card,
+  Divider,
+  Grid,
+  Typography,
+  Tooltip,
+  TextField,
+} from "@mui/material";
+// import update from "../../images/update.png";
+import StarCanvas from "../landingPage/StarbackGround";
+import { useState } from "react";
+import Modal from "@mui/material/Modal";
+import { MdDelete } from "react-icons/md";
 
-// const Bg = () => {
-//   const glb = useGLTF("/space_boi.glb");
-
-//   return (
-//     <>
-//       <mesh>
-//         <primitive object={glb.scene} position={[0, -0.5, 3.5]} scale={0.2} />;
-//       </mesh>
-//     </>
-//   );
-// };
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "grey",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+  borderRadius: 5,
+};
 
 const UserDashboard = () => {
+  const events = ["LFR", "sliet hackathon"];
+  const workshops = ["chatgpt", "solidworks"];
+
+  const [openEditPersonal, setOpenEditPersonal] = useState(false);
+  const [openEditContact, setOpenEditContact] = useState(false);
+
+  const handleClosePersonal = () => {
+    setOpenEditPersonal(false);
+  };
+
+  const handleCloseContact = () => {
+    setOpenEditContact(false);
+  };
+
+  function editPersonalInfo() {
+    console.log("inside edit Personal info");
+    setOpenEditPersonal(true);
+  }
+
+  function editContactInfo() {
+    console.log("inside edit Contact info");
+    setOpenEditContact(true);
+  }
+
   return (
     <>
-      <header
-        className="animated-title"
-        style={{
-          width: "100%",
-          height: "10%",
-          display: "flex",
-          color: "white",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "2.5rem",
-          fontWeight: 700,
-        }}
-      >
-        User Dashboard
-      </header>
+      {/* <StarCanvas /> */}
       <div
         className="userDashboard"
         style={{
+          marginTop: "4.5rem",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          // position: "relative",
+          // zindex: "10",
         }}
       >
-        {/* <div className="canvas" style={{ width: "50%", height: "100vh" }}>
-          <Canvas>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-            <Suspense>
-              <OrbitControls
-                minDistance={0}
-                maxDistance={5}
-                enableRotate={false}
-                enablePan={false}
-                enableZoom={false}
-              />
-            </Suspense>
-            <Bg />
-          </Canvas>
-        </div> */}
         <div className="userinfo">
           <div
             className="greeting"
@@ -78,34 +85,407 @@ const UserDashboard = () => {
             }}
           >
             {" "}
-            Hi!&nbsp;{" "}
-            <span style={{ color: "#25c6e5", fontWeight: 700 }}>
-              Naman Kulshresth
-            </span>
+            Welcome to the Universe&nbsp;{" "}
+            <span style={{ color: "#25c6e5", fontWeight: 750 }}>Naman</span>
             👋
           </div>
-          <div
-            className="userInfo"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+
+          {/* personal info */}
+          <Card
+            sx={{
+              minWidth: 1000,
+              minHeight: 200,
+              border: "2px solid white",
+              bgcolor: "transparent",
+              borderRadius: "5px",
               color: "white",
             }}
           >
-            <div className="email">
-              <CiMail /> tashu.kulshresth@gmail.com |&nbsp;
-            </div>
-            <div className="whatsappNo">
-              {" "}
-              <CiPhone /> 9881192604 |&nbsp;
-            </div>
-            <div className="college">
-              <BiSolidInstitution /> SLIET |&nbsp;
-            </div>
-            <div className="Branch"> GCS </div>
-          </div>
-          <TeamTable />
+            <Box sx={{ margin: "7%" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 30, fontWeight: 700 }}>
+                      Profile Information
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      Profession
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      Organisation/College Name
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      Course Enrolled
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      Year of Study
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      Date of Birth
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sx={{ textAlign: "right" }}>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Tooltip
+                      title="Edit Personal Detail"
+                      placement="bottom-end"
+                    >
+                      <Button variant="" onClick={editPersonalInfo}>
+                        <BiEdit style={{ height: "50px", width: "35px" }} />
+                      </Button>
+                    </Tooltip>
+                  </Box>
+                  {openEditPersonal && (
+                    <Modal
+                      open={true}
+                      onClose={handleClosePersonal}
+                      aria-labelledby="child-modal-title"
+                      aria-describedby="child-modal-description"
+                    >
+                      <Box sx={style}>
+                        <TextField
+                          id="standard-basic"
+                          label="Profession"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+
+                        <TextField
+                          id="standard-basic"
+                          label="Organisation/College"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+
+                        <TextField
+                          id="standard-basic"
+                          label="Course Enrolled"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+                        <TextField
+                          id="standard-basic"
+                          label="Year of Study"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+                        <TextField
+                          id="standard-basic"
+                          label="Date of Birth"
+                          variant="standard"
+                          sx={{
+                            marginBottom: 2,
+                          }}
+                        />
+
+                        <Button
+                          variant="contained"
+                          style={{ display: "flex", marginLeft: "auto" }}
+                          onClick={handleClosePersonal}
+                        >
+                          OK
+                        </Button>
+                      </Box>
+                    </Modal>
+                  )}
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>Student</Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>SLIET</Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>
+                      B.E. (Chemical Engineering)
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>2</Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>DD/MM/YYYY</Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+              <Box sx={{}}>
+                <Divider sx={{ border: "1px solid white", margin: 5 }} />
+              </Box>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 30, fontWeight: 700 }}>
+                      Contact Details
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      E-mail Address
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      Phone Number
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      whatsapp Number
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                      Telegram Number
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sx={{ textAlign: "right" }}>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Tooltip title="Edit Contact Detail" placement="bottom-end">
+                      <Button variant="" onClick={editContactInfo}>
+                        <BiEdit style={{ height: "50px", width: "35px" }} />
+                      </Button>
+                    </Tooltip>
+                  </Box>
+                  {openEditContact && (
+                    <Modal
+                      open={true}
+                      onClose={handleCloseContact}
+                      aria-labelledby="child-modal-title"
+                      aria-describedby="child-modal-description"
+                    >
+                      <Box sx={style}>
+                        <TextField
+                          id="standard-basic"
+                          label="E-mail Address"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+
+                        <TextField
+                          id="standard-basic"
+                          label="Phone Number"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+
+                        <TextField
+                          id="standard-basic"
+                          label=" Whatsapp Number"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+                        <TextField
+                          id="standard-basic"
+                          label="Telegram"
+                          variant="standard"
+                          sx={{ marginBottom: 2 }}
+                        />
+
+                        <Button
+                          variant="contained"
+                          style={{ display: "flex", marginLeft: "auto" }}
+                          onClick={handleCloseContact}
+                        >
+                          OK
+                        </Button>
+                      </Box>
+                    </Modal>
+                  )}
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>
+                      tashu.kulshresth@gmail.com
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Card>
+
+          {/* Events and workshop registered */}
+
+          <Box
+            sx={{
+              display: "flex",
+              marginTop: "2%",
+              justifyContent: "center",
+              alignItems: "center",
+              position: "relative",
+              right: "2%",
+              marginLeft: "3.5%",
+            }}
+
+          >
+            <Card
+              sx={{
+                bgcolor: "transparent",
+                minWidth: 500,
+                minHeight: 300,
+                border: "2px solid white",
+                marginRight: "2%",
+
+              }}
+            >
+              <Box
+                sx={{
+                  margin: "7%",
+                  color: "white",
+                  minWidth: 300,
+                  height: 300,
+                }}
+              >
+                <Box sx={{ display: "flex" }}>
+                  <FaRegLightbulb
+                    style={{
+                      height: "50px",
+                      marginLeft: "5%",
+                      marginRight: "5%",
+                      marginBottom: "1%",
+                    }}
+                  />
+                  <Typography sx={{ fontSize: 30 }}>
+                    Events Registered
+                  </Typography>
+                </Box>
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      {events.map((event, i) => {
+                        return (
+                          <Box sx={{ margin: "10%" }}>
+                            <Typography
+                              sx={{
+                                fontSize: 20,
+                                fontWeight: 500,
+                                color: "white",
+                              }}
+                              key={i}
+                            >
+                              {event}
+                            </Typography>
+                            <Divider
+                              sx={{ border: "0.2px solid grey", width: 400 }}
+                            />
+                          </Box>
+                        );
+                      })}
+                    </Grid>
+                    <Grid item xs={6} sx={{ textAlign: "right" }}>
+                      <Box sx={{ margin: "10%" }}>
+                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+                          Today
+                        </Typography>
+                      </Box>
+                      <Box sx={{ margin: "10%" }}>
+                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+                          13/04
+                        </Typography>
+                      </Box>
+                      <Box sx={{ margin: "10%" }}>
+                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+                          20/04
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Card>
+            <Divider sx={{ border: "1px solid white", height: 300 }} />
+            <Card
+              sx={{
+                bgcolor: "transparent",
+                minWidth: 500,
+                minHeight: 300,
+                border: "2px solid white",
+                marginLeft: "2%",
+              }}
+            >
+              <Box
+                sx={{
+                  margin: "7%",
+                  color: "white",
+                  minWidth: 300,
+                  height: 300,
+                }}
+              >
+                <Box sx={{ display: "flex" }}>
+                  <FaRegLightbulb
+                    style={{
+                      height: "50px",
+                      marginLeft: "5%",
+                      marginRight: "5%",
+                      marginBottom: "1%",
+                    }}
+                  />
+                  <Typography sx={{ fontSize: 30 }}>
+                    Workshops Registered
+                  </Typography>
+                </Box>
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                      {workshops.map((workshop, i) => {
+                        return (
+                          <Box sx={{ margin: "10%" }}>
+                            <Typography
+                              sx={{
+                                fontSize: 20,
+                                fontWeight: 500,
+                                color: "white",
+                              }}
+                              key={i}
+                            >
+                              {workshop}
+                            </Typography>
+                            <Divider
+                              sx={{ border: "0.2px solid grey", width: 400 }}
+                            />
+                          </Box>
+                        );
+                      })}
+                    </Grid>
+                    <Grid item xs={6} sx={{ textAlign: "right" }}>
+                      <Box sx={{ margin: "10%" }}>
+                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+                          Today
+                        </Typography>
+                      </Box>
+                      <Box sx={{ margin: "10%" }}>
+                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+                          13/04
+                        </Typography>
+                      </Box>
+                      <Box sx={{ margin: "10%" }}>
+                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
+                          20/04
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Card>
+          </Box>
         </div>
       </div>
     </>
