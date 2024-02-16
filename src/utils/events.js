@@ -6,30 +6,30 @@ const eventsData = [
         name: "Code-O-Soccer",
         description:
           "An event where participants can demonstrate their skills and knowledge in the realm of competitive programing.",
-        route: `./events/1`,
+        // route: `./events/1`,
       },
       {
         name: "Data Dives",
         description:
           "An environment where users can compete and demonstrate knowledge in machine learning and data handling.",
-        route: `./event/2`,
+        // route: `./event/2`,
       },
       {
         name: "Pixel Wizard",
         description:
           "To unleash coding and designing skills in techFEST's Website Development Competition.",
-        route: `./event/3`,
+        // route: `./event/3`,
       },
       {
         name: "AI Chit Chat",
         description:
           "Event based competition for development of AI and possible integration in techFEST website.",
-        route: `./event/4`,
+        // route: `./event/4`,
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions..",
-        route: `./event/5`,
+        // route: `./event/5`,
       },
     ],
   },
@@ -40,36 +40,31 @@ const eventsData = [
         name: "Touch Vision",
         description:
           "An event to design and fabricate a blind stick that beeps when it senses any object in front of it.",
-        route: `./event/1`,
+        // route: `./event/1`,
       },
       {
         name: "Sun Sync Quest",
         description:
           "A competition based event to design and implement a real-time tracking system for solar panels.",
-        route: `./event/2`,
-
+        // route: `./event/2`,
       },
       {
         name: "DroneX",
         description:
           "A competitive event to design and fabricate a drone and then to conduct a race.",
-        route: `./event/3`,
-
+        // route: `./event/3`,
       },
       {
         name: "Circuitmania",
         description:
           "An event to design and fabricate a blind stick that beeps when it senses any object in front of it.",
-        route: `./event/4`,
-
+        // route: `./event/4`,
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
-        route: `./event/5`,
-
+        // route: `./event/5`,
       },
-      
     ],
   },
   {
@@ -79,49 +74,42 @@ const eventsData = [
         name: "Zero-Waste Product Formulation Challenge",
         description:
           "An event tasked with creating dishes using a zero-waste approach, minimizing food waste by utilizing all parts of ingredients.",
-        route: `./event/1`,
-
+        // route: `./event/1`,
       },
       {
         name: "Sustainable Food Trivia",
         description:
           "A quiz-style event that aims to raise awareness about environmentally friendly food choices in a lively and engaging way.",
-        route: `./event/2`,
-
+        // route: `./event/2`,
       },
       {
         name: "Innovative Product Development",
         description:
           "An event amied to give an opportunity to use your food tech knowledge and develop a business mindset.",
-        route: `./event/3`,
-
+        // route: `./event/3`,
       },
       {
         name: "Techno-Mind",
         description:
           "An event where participants will get a chance to show their arts & imagination in the form of working models.",
-        route: `./event/4`,
-
+        // route: `./event/4`,
       },
       {
         name: "FO-JET",
         description:
           "An event to develop your ideas and utilization of agricultural waste for making any useful product using things around us.",
-        route: `./event/5`,
-
+        // route: `./event/5`,
       },
       {
         name: "Instant Food Product & Marketing Challenge",
         description:
           "Create a lively market atmosphere where students can sell their unique dishes and compete to be the top revenue earner.",
-        route: `./event/6`,
-
+        // route: `./event/6`,
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
-        route: `./event/7`,
-
+        // route: `./event/7`,
       },
     ],
   },
@@ -132,42 +120,36 @@ const eventsData = [
         name: "Designare",
         description:
           "Designare seeks to establish a platform where students demonstrate their modeling abilities.",
-        route: `./event/1`,
-
+        // route: `./event/1`,
       },
       {
         name: "Trussload",
         description:
           "A competitive event to design and fabricate truss to withhold maximum load possible.",
-        route: `./event/2`,
-
+        // route: `./event/2`,
       },
       {
         name: "Fabriqure",
         description:
           "A competitive event to showcase skills in stamping, welding, cutting, bending, and assembling processes.",
-        route: `./event/3`,
-
+        // route: `./event/3`,
       },
       {
         name: "Earthquake Structural Test",
         description:
           "It’s a competition to assess the seismic, resilience of budlings and infrastructure through designing and fabrication.",
-        route: `./event/4`,
-
+        // route: `./event/4`,
       },
       {
         name: "Hydraload",
         description:
           "A competition to check efficient lifting capabilities, precise control of hydraulics functions and overall reliability.",
-        route: `./event/5`,
-
+        // route: `./event/5`,
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
-        route: `./event/6`,
-
+        // route: `./event/6`,
       },
     ],
   },
@@ -178,42 +160,36 @@ const eventsData = [
         name: "Application of Lithium Battery",
         description:
           "An event to devolop a working project with the application of lithium battery.",
-        route: `./event/1`,
-
+        // route: `./event/1`,
       },
       {
         name: "Chemi-Storm",
         description:
           "Presentation of working and semi-working models under the umbrella of chemical engineering.",
-        route: `./event/2`,
-
+        // route: `./event/2`,
       },
       {
         name: "Soap and Perfume Fragrance Making",
         description:
           "An event to produce a sample of soap and perfume, to deal with quality control process and elaluate the fragrance",
-        route: `./event/3`,
-
+        // route: `./event/3`,
       },
       {
         name: "Jam Session",
         description:
           "An interesting game like competition to encourage student to showcase their oral communication ability.",
-        route: `./event/4`,
-
+        // route: `./event/4`,
       },
       {
         name: "Chemi-Mystery",
         description:
           "A three round quiz event, to inhance knowledge and involvement in chemical deartment.",
-        route: `./event/5`,
-
+        // route: `./event/5`,
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
-        route: `./event/6`,
-
+        // route: `./event/6`,
       },
     ],
   },
@@ -224,7 +200,6 @@ const eventsData = [
         name: "Eco Power",
         description:
           "It’s a competition to attain sustainability and promote the use of renewable energy resources.",
-          
       },
       {
         name: "IoT Challenge",
@@ -322,8 +297,7 @@ const eventsData = [
     ],
   },
   {
-    id:10,
-    
+    id: 10,
   },
   {
     id: 11,

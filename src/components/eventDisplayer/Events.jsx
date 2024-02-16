@@ -30,6 +30,7 @@ function Events({ domains }) {
       <StarCanvas />
       <Box style={{ position: "relative", zIndex: "25" }}>
         <div className="event_container">
+          <span style={{color:"red",lineHeight:"4.5"}}>Registeration for the events will start soon...</span>
           <h1 style={{ fontSize: "4rem", color: "#90E0EF" }}>{selectedDomain.name}</h1>
           <p style={{ padding: "5px 10rem", fontSize: "1.5rem" }}>
             {selectedDomain.description}
