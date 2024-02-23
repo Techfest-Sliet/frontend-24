@@ -59,8 +59,8 @@ const UserDashboard = () => {
     year: "numeric",
   };
 
-  const dateObj = new Date(user.dob);
-  const formattedDate = dateObj.toLocaleDateString('en-GB', options);  
+  // const dateObj = new Date(user.dob);
+  // const formattedDate = dateObj.toLocaleDateString('en-GB', options);  
 
   const handleClosePersonal = () => {
     setOpenEditPersonal(false);
@@ -305,7 +305,7 @@ const UserDashboard = () => {
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>
-                      {user && formattedDate}
+                      {/* {user && formattedDate} */}
                     </Typography>
                   </Box>
                 </Grid>

@@ -16,7 +16,7 @@ const NavBar = () => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ p: 2 }}>
       <div>
-        <Link to={"/"}>
+        <Link to="/">
           <img src="techfest24logo1.png" alt="" width="60%" />
         </Link>
         <Divider flexItem />

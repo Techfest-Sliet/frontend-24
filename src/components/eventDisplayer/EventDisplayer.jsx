@@ -18,6 +18,11 @@ const EventDisplayer = ({ Img, events }) => {
   const { eventId } = useParams();
   const selectedEvent = events.find(event => event.id === parseInt(eventId));
 
+  const registerEvent = () => {
+    console.log('in');
+    navigate('/user-dashboard');
+  }
+
   return (
     <>
       <StarCanvas />
@@ -169,7 +174,7 @@ const EventDisplayer = ({ Img, events }) => {
                         Problem Statement
                       </Button>
                       <Box display={"flex"} gap={1}>
-                        <Button variant="contained" onClick={() => navigate('/user-dashboard')}>
+                        <Button variant="contained" onClick={registerEvent}>
                           Register
                         </Button>
                         <Button
