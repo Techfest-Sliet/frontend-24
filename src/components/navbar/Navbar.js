@@ -1,68 +1,67 @@
 import React, { useState } from "react";
 
 import "./navbar.css";
-import { Box, Button, Drawer, IconButton,Divider } from "@mui/material";
-import { FaBars } from "react-icons/fa";
+import { Box, Button, Drawer, IconButton, Divider } from "@mui/material";
+// import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 
 const NavBar = () => {
-  const [mobileOpen,setMobileOpen]=useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   //handle menu click
-  const handleDrawerToggle = ()=>{
+  const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  }
+  };
   //menu drawer
   const drawer = (
-  <Box onClick={handleDrawerToggle}  sx={{p:2}} >
-
-        <div> 
+    <Box onClick={handleDrawerToggle} sx={{ p: 2 }}>
+      <div>
         <Link to={"/"}>
           <img src="techfest24logo1.png" alt="" width="60%" />
         </Link>
         <Divider flexItem />
-        </div> 
-   
-   <div className="mobile-view">
-          <Link to="/workshops">
-            <Button
-              style={{
-                color: "white",
-                fontWeight: "normal",
-                fontFamily: "Droid Sans",
-              }}
-              className="nav-link nav-link-ltr"
-            >
-              WorkShops
-            </Button>
-          </Link>
+      </div>
 
-          <Link to="/domains">
-            <Button
-              style={{
-                color: "white",
-                fontWeight: "normal",
-                fontFamily: "Droid Sans",
-              }}
-              className="nav-link nav-link-ltr"
-            >
-              Domains
-            </Button>
-          </Link>
+      <div className="mobile-view">
+        <Link to="/workshops">
+          <Button
+            style={{
+              color: "white",
+              fontWeight: "normal",
+              fontFamily: "Droid Sans",
+            }}
+            className="nav-link nav-link-ltr"
+          >
+            WorkShops
+          </Button>
+        </Link>
 
-          <Link to="/sponsor">
-            <Button
-              style={{
-                color: "white",
-                fontWeight: "normal",
-                fontFamily: "Droid Sans",
-              }}
-              className="nav-link nav-link-ltr"
-            >
-              Sponsor
-            </Button>
-          </Link>
-          {/* <Link to="/gallery">
+        <Link to="/domains">
+          <Button
+            style={{
+              color: "white",
+              fontWeight: "normal",
+              fontFamily: "Droid Sans",
+            }}
+            className="nav-link nav-link-ltr"
+          >
+            Domains
+          </Button>
+        </Link>
+
+        <Link to="/sponsor">
+          <Button
+            style={{
+              color: "white",
+              fontWeight: "normal",
+              fontFamily: "Droid Sans",
+            }}
+            className="nav-link nav-link-ltr"
+          >
+            Sponsor
+          </Button>
+        </Link>
+        {/* <Link to="/gallery">
             <Button
               style={{
                 color: "white",
@@ -86,21 +85,20 @@ const NavBar = () => {
               Contact Us
             </Button>
           </Link> */}
-          <Link to="sign-in">
-            <Button
-              style={{
-                color: "white",
-                fontWeight: "normal",
-                fontFamily: "Droid Sans",
-              }}
-            >
-              SignIN
-            </Button>
-          </Link>
-          </div>
- 
-  </Box>
-  )
+        <Link to="sign-in">
+          <Button
+            style={{
+              color: "white",
+              fontWeight: "normal",
+              fontFamily: "Droid Sans",
+            }}
+          >
+            SignIN
+          </Button>
+        </Link>
+      </div>
+    </Box>
+  );
   return (
     <nav
       style={{
@@ -165,11 +163,17 @@ const NavBar = () => {
           <div>{/* <Button>WorkShop</Button> */}</div>
         </Box>
 
-        <IconButton color="inherit" aria-label="open drawer" edge="start" sx={{margin:"2",display:{lg:"none"}}} onClick={handleDrawerToggle}>
-          <MenuIcon/>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          sx={{ margin: "2", display: { lg: "none" } }}
+          onClick={handleDrawerToggle}
+        >
+          <MenuIcon />
         </IconButton>
 
-       <Box
+        <Box
           // style={{
           //   height: "100%",
           //   display: "flex",
@@ -181,7 +185,7 @@ const NavBar = () => {
 
           sx={{
             height: "100%",
-            display: { lg: "flex",xs:"none" },
+            display: { lg: "flex", xs: "none" },
             justifyContent: "end",
             fontSiz: { sm: ".5rem" },
             alignItems: "center",
@@ -189,7 +193,6 @@ const NavBar = () => {
             color: "white",
           }}
           className="navbar"
-          
         >
           <Link to="/workshops">
             <Button
@@ -267,18 +270,26 @@ const NavBar = () => {
         </Box>
       </Box>
       <Box>
-          <Drawer variant="temporary" open={mobileOpen} onClose={handleDrawerToggle}
-           sx={{display:{xs:"block",sm:"block",lg:"none" },"& .MuiDrawer-paper":{boxSizing:"border-box",width:"100%"}}}
-            PaperProps={{
-                    sx: {
-                      boxShadow:
-                        "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb( 24 109 196/ 0.5) ",
-                        backgroundColor: "#03001417",
-                    backdropFilter: "blur(15px)"
-                  }}}>
-           {drawer}
-          </Drawer>
-        </Box>
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          sx={{
+            display: { xs: "block", sm: "block", lg: "none" },
+            "& .MuiDrawer-paper": { boxSizing: "border-box", width: "100%" },
+          }}
+          PaperProps={{
+            sx: {
+              boxShadow:
+                "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb( 24 109 196/ 0.5) ",
+              backgroundColor: "#03001417",
+              backdropFilter: "blur(15px)",
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Box>
     </nav>
   );
 };

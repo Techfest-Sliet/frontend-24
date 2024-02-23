@@ -14,6 +14,7 @@ import {
 import Modal from "@mui/material/Modal";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 //user imports
 import AuthContext from "../../components/Auth/Auth";
@@ -42,6 +43,7 @@ const UserDashboard = () => {
 
   const authContext = useContext(AuthContext);
   const [errorMade, setErrorMade] = useState();
+  const [userId, setUserId] = useState();
   const [workshops, setWorkshops] = useState("");
   const [events, setEvents] = useState("");
   const [teamMembers, setTeamMembers] = useState("");
@@ -50,6 +52,15 @@ const UserDashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [user, setUser] = useState(null);
+
+  const options = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  };
+
+  const dateObj = new Date(user.dob);
+  const formattedDate = dateObj.toLocaleDateString('en-GB', options);  
 
   const handleClosePersonal = () => {
     setOpenEditPersonal(false);
@@ -94,17 +105,18 @@ const UserDashboard = () => {
       });
   };
 
-  //get user id
+  //get user id from the context api
+
   useEffect(() => {
     setIsLoading(true);
-    console.log(authContext);
+    console.log("Authcontext==>", authContext);
+    setUserId(authContext.userId);
+    const userId = authContext.userId;
+    console.log("userId ==> ", authContext.userId);
     axios
-      .get(`${baseUrl}/user/getUserById`, {
-        headers: {
-          Authorization: "Bearer " + authContext.token,
-        },
-      })
+      .get(`${baseUrl}/user/getUserById/${userId}`)
       .then((result) => {
+        console.log("result: ", result);
         setIsLoading(false);
         if (
           result.status !== 200 ||
@@ -121,6 +133,7 @@ const UserDashboard = () => {
         setWorkshops(result.data.user.workshops);
         setTeamMembers(result.data.user.teamMembers);
         setEvents(result.data.user.events);
+        console.log(user);
       })
       .catch((err) => {
         // return err.status(208).json({
@@ -160,7 +173,7 @@ const UserDashboard = () => {
             {" "}
             Welcome to the Universe&nbsp;{" "}
             <span style={{ color: "#25c6e5", fontWeight: 750 }}>
-              {user && user.name}
+              {user && user.name.toUpperCase()}
             </span>
             👋
           </div>
@@ -275,9 +288,7 @@ const UserDashboard = () => {
                     </Modal>
                   )}
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
-                      {user && user.profession}
-                    </Typography>
+                    <Typography sx={{ fontSize: 25 }}>Student</Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>
@@ -286,17 +297,15 @@ const UserDashboard = () => {
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>
-                      {user && user.course}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
-                      {user && user.yearOfStudy}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
                       {user && user.branch}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>3rd</Typography>
+                  </Box>
+                  <Box sx={{ marginBottom: "5%" }}>
+                    <Typography sx={{ fontSize: 25 }}>
+                      {user && formattedDate}
                     </Typography>
                   </Box>
                 </Grid>
@@ -324,11 +333,6 @@ const UserDashboard = () => {
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
                       Whatsapp Number
-                    </Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
-                      Telegram Number
                     </Typography>
                   </Box>
                 </Grid>
@@ -394,9 +398,6 @@ const UserDashboard = () => {
                     <Typography sx={{ fontSize: 25 }}>
                       {user && user.phone}
                     </Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
@@ -492,22 +493,28 @@ const UserDashboard = () => {
                             </Box>
                           );
                         })}
-
-                      {/* <Box sx={{ margin: "10%" }}>
-                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
-                          Today
-                        </Typography>
-                      </Box>
-                      <Box sx={{ margin: "10%" }}>
-                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
-                          13/04
-                        </Typography>
-                      </Box>
-                      <Box sx={{ margin: "10%" }}>
-                        <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
-                          20/04
-                        </Typography>
-                      </Box> */}
+                    </Grid>
+                    <Grid item xs={6} sx={{ textAlign: "right" }}>
+                      {events &&
+                        events.length > 0 &&
+                        events.map((event) => {
+                          return (
+                            <Box sx={{ margin: "10%" }}>
+                              <Button
+                                sx={{
+                                  fontSize: 20,
+                                  fontWeight: 500,
+                                  color: "white",
+                                }}
+                                key={event._id}
+                              >
+                                <a href={`${event.whatsappLink}`}>
+                                  <IoLogoWhatsapp />
+                                </a>
+                              </Button>
+                            </Box>
+                          );
+                        })}
                     </Grid>
                   </Grid>
                 </Box>

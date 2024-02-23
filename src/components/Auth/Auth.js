@@ -8,6 +8,7 @@ const AuthContext =createContext({
     isUserLoggedIn:false,
     userRole:"",
 })
+
 let resetLogoutTimer;
 
 export const AuthContextProvider = (props) => {
@@ -38,9 +39,9 @@ export const AuthContextProvider = (props) => {
     }
 
     const loginHandler=(user)=>{
-        localStorage.setItem("jwtToken",user.token);
-        localStorage.setItem("userId",user.userId);
-        localStorage.setItem("userRole",user.userRole);
+        localStorage.setItem("jwtToken",user?.token);
+        localStorage.setItem("userId",user?.userId);
+        localStorage.setItem("userRole",user?.userRole);
 
         const remainingMSeconds = 5*24*60*60*1000;
         const expiryDate = new Date(new Date().getTime()+ remainingMSeconds);

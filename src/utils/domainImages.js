@@ -8,6 +8,7 @@ import Karyarachna from "./DOMAIN_LOGOS/Karyarachna.png";
 import Kermis from "./DOMAIN_LOGOS/Kermis.png";
 import Mechanica from "./DOMAIN_LOGOS/Mechanica.png";
 import Robozar from "./DOMAIN_LOGOS/Robozar.png";
+import Atomheimer from "./DOMAIN_LOGOS/Atomheimer.png";
 
 export const domainImages = {
     Plexus,
@@ -19,5 +20,6 @@ export const domainImages = {
     Karyarachna,
     Kermis,
     Mechanica,
-    Robozar
+    Robozar,
+    Atomheimer
 };
