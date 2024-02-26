@@ -1,36 +1,17 @@
 import React from "react";
+import guy from "./Images/guy.png";
+import height from "./Images/heights.png"
+import group from "./Images/grp.png"
+import urn from "./Images/urn.png"
+import image47 from "./Images/image 47.png"
+import image43 from "./Images/image 43.png"
+import image45 from "./Images/image 45.png"
+import image41 from "./Images/image 41.png"
+import saly12 from "./Images/Saly-12.png"
 
 function CA() {
   return (
     <>
-      <nav class="bg-black text-white py-4">
-        <div class="flex justify-between px-4">
-          <div class="flex space-x-2 rounded-lg">
-            <h3>techFEST `23</h3>
-            <span class="">
-              <input
-                type="text"
-                placeholder="search...."
-                class="rounded-full  pl-2"
-              />
-            </span>
-            <span class="w-6">
-              <img src="Images/search bar.jpg" alt="" />
-            </span>
-          </div>
-          <ul class="flex space-x-4">
-            <li>About US</li>
-            <li>Workshops</li>
-            <li>Domain</li>
-            <li>CA Program</li>
-            <li>
-              <button class="font-medium border-r-3 rounded-lg px-2 p-1 tracking-wider bg-blue-600 hover:bg-blue-900">
-                SignIn
-              </button>
-            </li>
-          </ul>
-        </div>
-      </nav>
 
       <main>
         <div class="flex justify-end">
@@ -51,7 +32,7 @@ function CA() {
 
           <div class="flex justify-end px-36 pt-32 w-1/2">
             <div class=" h-72 align-top">
-              <img src="Images/guy.png" alt="" />
+              <img src={guy} alt="" />
             </div>
           </div>
         </div>
@@ -59,7 +40,7 @@ function CA() {
       <div class="flex space-x-24 justify-center text-white font-semibold pt-36 items-center">
         <div>
           <div class="w-20 h-12 ">
-            <img src="Images/heights.png" alt="" />
+            <img src={height} alt="" />
           </div>
 
           <h5 class="text-5xl px-3 pt-7">30+</h5>
@@ -72,7 +53,7 @@ function CA() {
         <div class="border-l-4 h-24"></div>
         <div>
           <div class="w-20 h-12  ">
-            <img src="Images/grp.png" alt="" />
+            <img src={group} alt="" />
           </div>
 
           <h5 class="text-5xl px30 pt-7">10k+</h5>
@@ -85,7 +66,7 @@ function CA() {
         <div>
           <div class="w-20 h-12">
             {" "}
-            <img src="Images/urn.png" alt="" />
+            <img src={urn} alt="" />
           </div>
 
           <h5 class="text-5xl px-3 pt-7">5L+</h5>
@@ -107,7 +88,7 @@ function CA() {
       <div class="flex px-52 space-x-52 text-white">
         <div class="w-36 h-12">
           <span>
-            <img src="Images/image 47.png" alt="" />
+            <img src={image47} alt="" />
           </span>
           <p class="italic font-bold">Improve your soft skills</p>
           <p>
@@ -117,7 +98,7 @@ function CA() {
         </div>
         <div class="w-36 pt-28">
           <span>
-            <img src="Images/image 43.png" alt="" />
+            <img src={image43} alt="" />
           </span>
           <p class="italic font-bold">Become a leader</p>
           <p>
@@ -127,7 +108,7 @@ function CA() {
         </div>
         <div class="w-36">
           <span>
-            <img src="Images/image 45.png" alt="" />
+            <img src={image45} alt="" />
           </span>
           <p class="italic font-bold">Letter of recommendation</p>
           <p>
@@ -142,7 +123,7 @@ function CA() {
       <div class="flex px-52 space-x-52 text-white">
         <div class="w-36 h-12  pt-28">
           <span>
-            <img src="Images/Saly-12.png" alt="" />
+            <img src={saly12}alt="" />
           </span>
           <p class="italic font-bold">Improve your soft skills</p>
           <p>
@@ -152,7 +133,7 @@ function CA() {
         </div>
         <div class="w-36">
           <span>
-            <img src="Images/image 41.png" alt="" />
+            <img src={image41} alt="" />
           </span>
           <p class="italic font-bold">Get recognised</p>
           <p>
@@ -162,7 +143,7 @@ function CA() {
         </div>
         <div class="w-36  pt-28">
           <span>
-            <img src="Images/image 43.png" alt="" />
+            <img src={image43} alt="" />
           </span>
           <p class="italic font-bold">Goodies and rewards</p>
           <p>
@@ -176,13 +157,6 @@ function CA() {
       <br />
       <br />
       <br />
-      <br />
-      <br />
-      <hr class="bg-green-500 h-2  px-28" />
-      <br />
-      <footer class="text-center text-white p-2">
-        <p> techFEST /</p>
-      </footer>
     </>
   );
 }
