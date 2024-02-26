@@ -7,7 +7,7 @@ const eventsData = [
         description:
           "An event where participants can demonstrate their skills and knowledge in the realm of competitive programming.",
         whatsappLink: "",
-        route: `./events/1`,
+        route: `./events/11`,
       },
       {
         name: "Data Dives",

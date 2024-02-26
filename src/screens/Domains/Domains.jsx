@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Domains = ({ domains }) => {
+  console.log("domains ===>",domains);
   const [activeCards, setActiveCards] = useState({});
 
   const toggleActive = (index) => {

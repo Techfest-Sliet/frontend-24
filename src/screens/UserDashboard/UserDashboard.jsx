@@ -50,8 +50,17 @@ const UserDashboard = () => {
   const [openEditPersonal, setOpenEditPersonal] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [collegeName, setCollegeName] = useState("");
+  const [branch, setBranch] = useState("");
+  const [phone, setPhone] = useState("");
+  const [wphone, setWphone] = useState("");
+  const [fieldErr, setFieldErr] = useState(null);
+  const [branchErr, setBranchErr] = useState(null);
+  const [updatePersonalInfo, setUpdatePersonalInfo] = useState(false);
+  const [updateContactInfo, setUpdateContactInfo] = useState(false);
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
 
   const options = {
     day: "2-digit",
@@ -59,8 +68,8 @@ const UserDashboard = () => {
     year: "numeric",
   };
 
-  // const dateObj = new Date(user.dob);
-  // const formattedDate = dateObj.toLocaleDateString('en-GB', options);  
+  const dateObj = new Date(user.dob);
+  const formattedDate = dateObj.toLocaleDateString("en-GB", options);
 
   const handleClosePersonal = () => {
     setOpenEditPersonal(false);
@@ -71,7 +80,6 @@ const UserDashboard = () => {
   };
 
   function editPersonalInfo() {
-    console.log("inside edit Personal info");
     setOpenEditPersonal(true);
   }
 
@@ -106,6 +114,50 @@ const UserDashboard = () => {
   };
 
   //get user id from the context api
+  const updatePersonalinfo = async (e) => {
+    setOpenEditPersonal(false);
+    e.preventDefault();
+    if (
+      name.trim().length === 0 ||
+      phone.trim().length === 0 ||
+      collegeName.trim().length === 0 ||
+      wphone.trim().length === 0
+    ) {
+      setFieldErr("Field should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+    if (branch === "0") {
+      setBranchErr("Please choose your branch");
+      setTimeout(() => {
+        setBranchErr(null);
+      }, 3000);
+      return;
+    }
+    setUpdatePersonalInfo(true);
+    const update_user = {
+      name: name,
+      email: user.email,
+      phone: Number(phone),
+      whatsappPhoneNumber: wphone,
+      branch: branch,
+      collegeName: collegeName,
+      // dob: dob,
+    };
+    setIsLoading(true);
+    await axios
+      .post(`${baseUrl}/user/updateuser`, update_user)
+      .then((result) => {
+        const res = result;
+      })
+      .catch((err) => {
+        // setIsLoading(false);
+        console.log(err.response.data);
+        return;
+      });
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -157,7 +209,13 @@ const UserDashboard = () => {
           // zindex: "10",
         }}
       >
-        <div className="userinfo">
+        <div
+          className="userinfo"
+          style={{
+            backgroundImage: "url('../../images/festLogo.png')",
+
+          }}
+        >
           <div
             className="greeting"
             style={{
@@ -244,9 +302,10 @@ const UserDashboard = () => {
                       <Box sx={style}>
                         <TextField
                           id="standard-basic"
-                          label="Profession"
+                          label="Name"
                           variant="standard"
                           sx={{ marginBottom: 2 }}
+                          onChange={(e) => setName(e.target.value)}
                         />
 
                         <TextField
@@ -254,6 +313,7 @@ const UserDashboard = () => {
                           label="Organisation/College"
                           variant="standard"
                           sx={{ marginBottom: 2 }}
+                          onChange={(e) => setCollegeName(e.target.value)}
                         />
 
                         <TextField
@@ -261,26 +321,13 @@ const UserDashboard = () => {
                           label="Course Enrolled"
                           variant="standard"
                           sx={{ marginBottom: 2 }}
-                        />
-                        <TextField
-                          id="standard-basic"
-                          label="Year of Study"
-                          variant="standard"
-                          sx={{ marginBottom: 2 }}
-                        />
-                        <TextField
-                          id="standard-basic"
-                          label="Date of Birth"
-                          variant="standard"
-                          sx={{
-                            marginBottom: 2,
-                          }}
+                          onChange={(e) => setBranch(e.target.value)}
                         />
 
                         <Button
                           variant="contained"
                           style={{ display: "flex", marginLeft: "auto" }}
-                          onClick={handleClosePersonal}
+                          onClick={updatePersonalinfo}
                         >
                           OK
                         </Button>
@@ -305,7 +352,7 @@ const UserDashboard = () => {
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: 25 }}>
-                      {/* {user && formattedDate} */}
+                      {user && formattedDate}
                     </Typography>
                   </Box>
                 </Grid>
@@ -354,16 +401,10 @@ const UserDashboard = () => {
                       <Box sx={style}>
                         <TextField
                           id="standard-basic"
-                          label="E-mail Address"
-                          variant="standard"
-                          sx={{ marginBottom: 2 }}
-                        />
-
-                        <TextField
-                          id="standard-basic"
                           label="Phone Number"
                           variant="standard"
                           sx={{ marginBottom: 2 }}
+                          onChange={(e) => setPhone(e.target.value)}
                         />
 
                         <TextField
@@ -371,12 +412,7 @@ const UserDashboard = () => {
                           label=" Whatsapp Number"
                           variant="standard"
                           sx={{ marginBottom: 2 }}
-                        />
-                        <TextField
-                          id="standard-basic"
-                          label="Telegram"
-                          variant="standard"
-                          sx={{ marginBottom: 2 }}
+                          onChange={(e) => setWphone(e.target.value)}
                         />
 
                         <Button

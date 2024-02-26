@@ -3,6 +3,11 @@ import React, { useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { baseUrl } from "../../API/Api";
+import axios from "axios";
+import { type } from "@testing-library/user-event/dist/type";
+import domainData from "../../utils/domains";
+import eventsData from "../../utils/events";
 
 const EventDisplayer = ({ Img, events }) => {
   const [variable, setVariable] = useState(1);
@@ -16,11 +21,27 @@ const EventDisplayer = ({ Img, events }) => {
   const navigate = useNavigate();
 
   const { eventId } = useParams();
-  const selectedEvent = events.find(event => event.id === parseInt(eventId));
+  const domainId = useParams();
+  const token = localStorage.getItem("jwtToken");
+  const selectedEvent = events.find((event) => event.id === parseInt(eventId));
+  console.log("eventId:", eventId);
+  console.log("domainId:", domainId);
 
-  const registerEvent = () => {
-    console.log('in');
-    navigate('/user-dashboard');
+  async function registerEvent() {
+    await axios
+      .post(
+        `${baseUrl}/user/addevent/${eventId}`,
+        // { eventId : parseInt(eventId) },
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`, // Add your token here
+        //   },
+        // }
+      )
+      .then((result) => {
+        console.log("Result Data===>", result.data);
+        navigate(`/user-dashboard`);
+      });
   }
 
   return (

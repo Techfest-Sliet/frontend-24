@@ -2,7 +2,7 @@ import React from "react";
 import Naruto from "../../images/Naruto.jpg";
 import "./MemberCard.css";
 
-const MemberCard = () => {
+const MemberCard = ({name, post}) => {
   return (
     <div class="container">
       <div class="card">
@@ -10,8 +10,8 @@ const MemberCard = () => {
           <img src={Naruto} />
         </div>
         <div class="content">
-          <h2>Name</h2>
-          <p>Developer</p>
+          <p>{name}</p>
+          <p>{post}</p>
           <a href="#">
             <img
               className="icon"
