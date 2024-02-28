@@ -35,7 +35,6 @@ import Events from "./components/eventDisplayer/Events";
 import domainData from "./utils/domains";
 import eventsData from "./utils/events";
 import OurTeam from "./components/OurTeam/OurTeam";
-import CA from "./components/campusAmbassdor/ca";
 
 function App() {
   const { loading } = useLoader();
@@ -82,7 +81,7 @@ function App() {
           <Route path="/domains/:domainId" element={<Events domains={domainData} />}/>
           <Route path="/domains/:domainId/events/:eventId" element={<EventDisplayer events={eventsData} />}/>
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/ca" element={<CA />} />
+          {/* <Route path="/ca" element={<CA />} /> */}
           <Route path="/aarambh" element={<Arambh />} />
         </Routes>
         <Footer />

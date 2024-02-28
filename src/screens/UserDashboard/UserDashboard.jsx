@@ -15,6 +15,8 @@ import Modal from "@mui/material/Modal";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import { IoLogoWhatsapp } from "react-icons/io";
+import bg from "../../images/userDashboardBg.jpg";
+import "./UserDashboard.css";
 
 //user imports
 import AuthContext from "../../components/Auth/Auth";
@@ -205,15 +207,16 @@ const UserDashboard = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          // position: "relative",
-          // zindex: "10",
+          position: "relative",
+          height: "100%",
         }}
       >
+        <div class="blur-background"></div>
         <div
           className="userinfo"
           style={{
-            backgroundImage: "url('../../images/festLogo.png')",
-
+            position: "relative",
+            zIndex: "1",
           }}
         >
           <div
@@ -508,7 +511,10 @@ const UserDashboard = () => {
                                 {event.eventName}
                               </Typography>
                               <Divider
-                                sx={{ border: "0.2px solid grey", width: 400 }}
+                                sx={{
+                                  border: "0.2px solid grey",
+                                  width: 400,
+                                }}
                               />
                             </Box>
                           );
@@ -609,7 +615,10 @@ const UserDashboard = () => {
                                 {workshop.workshopName}
                               </Typography>
                               <Divider
-                                sx={{ border: "0.2px solid grey", width: 400 }}
+                                sx={{
+                                  border: "0.2px solid grey",
+                                  width: 400,
+                                }}
                               />
                             </Box>
                           );
@@ -632,17 +641,17 @@ const UserDashboard = () => {
 
                       {/* <Box sx={{ margin: "10%" }}>
                         <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
-                          Today
+                        Today
                         </Typography>
-                      </Box>
-                      <Box sx={{ margin: "10%" }}>
+                        </Box>
+                        <Box sx={{ margin: "10%" }}>
                         <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
-                          13/04
+                        13/04
                         </Typography>
-                      </Box>
-                      <Box sx={{ margin: "10%" }}>
+                        </Box>
+                        <Box sx={{ margin: "10%" }}>
                         <Typography sx={{ fontSize: 20, fontWeight: 500 }}>
-                          20/04
+                        20/04
                         </Typography>
                       </Box> */}
                     </Grid>
