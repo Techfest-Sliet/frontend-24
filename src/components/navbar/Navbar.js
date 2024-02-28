@@ -85,7 +85,7 @@ const NavBar = () => {
               Contact Us
             </Button>
           </Link> */}
-        <Link to="sign-in">
+        {/* <Link to="sign-in">
           <Button
             style={{
               color: "white",
@@ -95,7 +95,7 @@ const NavBar = () => {
           >
             SignIN
           </Button>
-        </Link>
+        </Link> */}
       </div>
     </Box>
   );
@@ -256,7 +256,7 @@ const NavBar = () => {
               Contact Us
             </Button>
           </Link> */}
-          <Link to="sign-in">
+          {/* <Link to="sign-in">
             <Button
               style={{
                 color: "white",
@@ -266,7 +266,7 @@ const NavBar = () => {
             >
               SignIN
             </Button>
-          </Link>
+          </Link> */}
         </Box>
       </Box>
       <Box>
