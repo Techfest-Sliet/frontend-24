@@ -69,11 +69,12 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
             }}
           >
             <Stack
-              width="85%"
-              height="90%"
+              width={{xs:"100%", lg:"90%"}}
+              height={{xs:"80%",lg:"100%"}}
               direction="row"
-              spacing={2}
+              spacing={{xs: 0, sm: 0, lg: 2 }}
               justifyContent="space-around"
+              // justifyContent={{xs:"space-between", lg:"space-around" }}
               // border="1px solid red"
             >
               <Box
@@ -160,10 +161,11 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                 </Box>
               </Box>
               <Box
-                style={{
+              width={{ xs:"20%", lg:"80%"}}
+              height={{xs:"110%", lg:"100%"}}
+                sx={{
                   // border: "1px solid red",
-                  height: "100%",
-                  width: "80%",
+                  // height: "100%",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -189,6 +191,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     </Button>
                   </Link>
                   <Box
+                  marginTop={{xs:"20%"}}
                     style={{
                       height: "90%",
                       width: "100%",
@@ -347,6 +350,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
               </Box>
             </Stack>
             <Box
+            paddingTop={{xs:"5rem"}}
               style={{
                 width: "100%",
                 display: "flex",

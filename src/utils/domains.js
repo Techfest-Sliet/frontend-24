@@ -77,7 +77,7 @@ const domainData = [
     "id":12,
     "name": "Venture Vault",
     "description": "Domain of Business.",
-    "imagePath":domainImages.Karyarachna,
+    "imagePath":domainImages.VentureVault,
   }
 ]
 

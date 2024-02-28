@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Modal, Box, TextField, Button, Snackbar, Alert } from "@mui/material";
+import { Modal, Box, TextField, Button, Snackbar, Alert, useMediaQuery } from "@mui/material";
 import Particle from "../SignIn/Particle";
 import logo from "../../../images/forget-password.png";
 import axios from "axios";
@@ -69,26 +69,26 @@ const ResetPassword = () => {
         });
     }
   };
+
+  const isMobile = useMediaQuery('(max-width:450px)');
+
   return (
     <div>
       <Particle />
 
       <Toast open={open} success={success} message={message} />
-      <Modal
-        open={true}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
+      
+        <Box sx={{...style, p:isMobile ? 2 : 4, top: isMobile? "55%" : "50%", height: isMobile ? "7git 0vh" : "80vh"}} >
           <img
             src={logo}
             alt="forget-image"
             style={{
               height: "100%",
+              display: isMobile ? "none" : "block",
             }}
           />
-          <div style={{ width: "40%", marginTop: "6rem" }}>
-            <h1>Forgot Your Password ?</h1>
+          <div style={{ width: isMobile ?"100%":"40%", marginTop: "6rem" }}>
+            <h1 style={{ fontSize: isMobile ? "1.5rem" : "2.5rem"}}>Forgot Your Password ?</h1>
             <p
               style={{
                 margin: "2rem 0 0.5rem 0",
@@ -160,7 +160,6 @@ const ResetPassword = () => {
             </Button>
           </div>
         </Box>
-      </Modal>
 
     </div>
   );

@@ -25,11 +25,11 @@ function App() {
     <>
       <StarCanvas />
       <Box
+      className="landingPage"
         style={{
           width: "100%",
           height: "100vh",
           backgroundColor: "transparent",
- 
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

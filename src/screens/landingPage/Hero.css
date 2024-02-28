@@ -1,60 +1,105 @@
 .festlogo{
-    margin-left: -3.5rem;
-   }
+   margin-left: -3.5rem;
+  }
 
 .uture{
-    font-size: 6rem;
-    height: 35%;
+   font-size: 6rem;
+   height: 35%;
 }
 
 .o-shape{
-    left: -6rem;
-    bottom: 1.3rem;
-    width: 11rem;
-    height: 5.6rem;
+   left: -6rem;
+   bottom: 1.3rem;
+   width: 11rem;
+   height: 5.6rem;
 }
 
 .rge{
-    font-size: 6rem;
-    padding-left: 5rem;
+   font-size: 6rem;
+   padding-left: 5rem;
 }
 
 .text-container{
-    gap: 3rem;
+   gap: 3rem;
 }
 
 .festlogo-container{
- padding-top: 1.2rem;
+padding-top: 1.2rem;
 }
 
-   @media (max-width:450px) {
+  @media (max-width:450px) {
+    .festlogo{
+      height: 230px;
+      margin-left: 0;
+    }
+
+    .future-logo{
+       height: 150px;
+    }
+
+    .uture{
+       font-size: 4.2rem;
+    }
+
+    
+
+    .o-shape{
+       left: -4rem;
+       width: 7rem;
+       height: 3.5rem;
+       top: 0.6rem;
+    }
+
+    .rge{
+       font-size: 4rem;
+       padding-left: 3.2rem;
+       margin-bottom: -2rem;
+       justify-content: center;
+       
+    }
+
+    .text-container{
+       gap: 1.9rem;
+    }
+
+    .festlogo-container{
+     padding-top: 5rem;
+    }
+
+    .future-forge-container{
+     padding-top: 30px;
+     padding-bottom: 30px;
+    }
+
+  }
+
+  @media (min-width:700px) and (max-width:900px) {
      .festlogo{
-       height: 230px;
+       height: 450px;
        margin-left: 0;
      }
 
      .future-logo{
-        height: 150px;
+        height: 300px;
      }
 
      .uture{
-        font-size: 4.2rem;
+        font-size: 8rem;
      }
 
      .o-shape{
-        left: -4rem;
-        width: 7rem;
-        height: 3.8rem;
-        bottom: 0;
+        left: -8rem;
+        width: 13rem;
+        height: 6rem;
+        bottom: 1rem;
      }
 
      .rge{
-        font-size: 4.2rem;
-        padding-left: 3.2rem;
+        font-size: 8rem;
      }
 
      .text-container{
-        gap: 1.9rem;
+        gap: 4rem;
      }
 
      .festlogo-container{
@@ -63,85 +108,45 @@
 
      .future-forge-container{
       padding-top: 30px;
-      padding-bottom: 30px;
      }
 
    }
 
-   @media (min-width:700px) and (max-width:900px) {
-      .festlogo{
-        height: 450px;
-        margin-left: 0;
-      }
- 
-      .future-logo{
-         height: 300px;
-      }
- 
-      .uture{
-         font-size: 8rem;
-      }
- 
-      .o-shape{
-         left: -8rem;
-         width: 13rem;
-         height: 6rem;
-         bottom: 1rem;
-      }
- 
-      .rge{
-         font-size: 8rem;
-      }
- 
-      .text-container{
-         gap: 4rem;
-      }
- 
-      .festlogo-container{
-       padding-top: 5rem;
-      }
- 
-      .future-forge-container{
-       padding-top: 30px;
-      }
- 
-    }
+   @media (min-width:900px) and (max-width:1200px) {
+     .festlogo{
+       height: 550px;
+       margin-left: 0;
+     }
 
-    @media (min-width:900px) and (max-width:1200px) {
-      .festlogo{
-        height: 550px;
-        margin-left: 0;
-      }
- 
-      .future-logo{
-         height: 380px;
-      }
- 
-      .uture{
-         font-size: 8rem;
-      }
- 
-      .o-shape{
-         left: -8rem;
-         width: 13rem;
-         height: 6rem;
-         bottom: 1rem;
-      }
- 
-      .rge{
-         font-size: 8rem;
-      }
- 
-      .text-container{
-         gap: 8rem;
-      }
- 
-      .festlogo-container{
-       padding-top: 10rem;
-      }
- 
-      .future-forge-container{
-       padding-top: 0;
-      }
- 
-    }
+     .future-logo{
+        height: 380px;
+     }
+
+     .uture{
+        font-size: 8rem;
+     }
+
+     .o-shape{
+        left: -8rem;
+        width: 13rem;
+        height: 6rem;
+        bottom: 1rem;
+     }
+
+     .rge{
+        font-size: 8rem;
+     }
+
+     .text-container{
+        gap: 8rem;
+     }
+
+     .festlogo-container{
+      padding-top: 10rem;
+     }
+
+     .future-forge-container{
+      padding-top: 0;
+     }
+
+   }

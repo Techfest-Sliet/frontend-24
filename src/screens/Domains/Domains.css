@@ -33,7 +33,7 @@ body::-webkit-scrollbar {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    border: solid 1px #200030;
+    border: solid 1px #120030;
     border-radius: 10px;
     padding: 10px;
     transition: all 0.3s ease;
@@ -90,8 +90,8 @@ body::-webkit-scrollbar {
       background: linear-gradient(
         90deg,
         black calc(30%),
-        #dfb8f0 calc(40%),
-        #dfb8f0 calc(60%),
+        #73adef calc(40%),
+        #69a0e7 calc(60%),
         black calc(70%)
       );
       z-index: -2;
@@ -115,7 +115,7 @@ body::-webkit-scrollbar {
     &.active,
     &:hover {
       border-color: #dcb8f050;
-      box-shadow: 0 0 30px #c9a8e090, 0 0 2px #f9c8f0 inset;
+      box-shadow: 0 0 30px #659be890, 0 0 2px #3d8bea inset;
     }
     &.active::before,
     &:hover::before {

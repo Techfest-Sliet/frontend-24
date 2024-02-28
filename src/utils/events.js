@@ -7,14 +7,14 @@ const eventsData = [
         description:
           "An event where participants can demonstrate their skills and knowledge in the realm of competitive programming.",
         whatsappLink: "",
-        route: `./events/11`,
+        // route: `./events/11`,
       },
       {
         name: "Data Dives",
         description:
           "An environment where users can compete and demonstrate knowledge in machine learning and data handling.",
         whatsappLink: "",
-        route: `./event/2`,
+        // route: `./event/2`,
       },
       {
         name: "Pixel Wizard",

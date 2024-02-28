@@ -79,6 +79,7 @@ const Hero = () => {
                   display: "flex",
                   position: "relative",
                   alignItems: "center",
+                  marginTop:"1rem",
                 }}
               >
                 

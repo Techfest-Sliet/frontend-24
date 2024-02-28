@@ -19,6 +19,11 @@
     background-color: #90e0ef34;
 }
 
+.domain_description{
+  padding: 5px 10rem;
+  font-size: 1.5rem;
+}
+
 .event__button {
     font-size: 1.3em;
     width: 7rem;
@@ -34,4 +39,27 @@
   
   .event__button:active {
     transform: scale(0.9);
+  }
+
+  @media screen and (max-width : 450px) {
+
+    .eventCard{
+      height: 20rem;
+      width: 16rem;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      padding: 0 1rem;
+      font-size: 0.9rem;
+      border-radius: 1rem;
+    }
+
+    .eventCard>h1{
+      padding: 0;
+    }
+
+    .domain_description{
+      padding: 5px 0rem;
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+    
   }
