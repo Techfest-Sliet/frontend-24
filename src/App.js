@@ -33,8 +33,6 @@ import Arambh from "./components/Aarambh/Arambh";
 import Events from "./components/eventDisplayer/Events";
 
 import domainData from "./utils/domains";
-import eventsData from "./utils/events";
-import OurTeam from "./components/OurTeam/OurTeam";
 
 function App() {
   const { loading } = useLoader();
@@ -49,40 +47,40 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<Error />} />
-          {!authContext.isUserLoggedIn && (
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/sign-in" element={<SignIn />} />
           )}
           {!authContext.isUserLoggedIn && (
             <Route path="/sign-up" element={<SignUp />} />
-          )}
+          )} */}
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/verify" element={<EmailVerify />} />
+          {/* <Route path="/verify" element={<EmailVerify />} /> */}
           {/* <Route path="/domain" element={<Domains/>} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventsDetailed />} />
         <Route path="/event" element={<Event/>}/> */}
-          {!authContext.isUserLoggedIn && (
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/user-dashboard" element={<UserDashBoard />} />
-          )}
-          {!authContext.isUserLoggedIn && (
+          )} */}
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/register" element={<RegisterEvent />} />
-          )}
+          )} */}
           {/* <Route path="/add-team" element={<AddTeam />} />
         <Route path="/team" element={<Team />} /> */}
-          {!authContext.isUserLoggedIn && (
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/update-user" element={<UpdateUser />} />
-          )}
+          )} */}
           <Route path="/sponsor" element={<Sponsors />} />
-          <Route path="/ourteam" element={<OurTeam />} />
+          {/* <Route path="/ourteam" element={<OurTeam />} /> */}
           {/* <Route path="/about-us" element={<AboutUs />} /> */}
           <Route path="/workshops" element={<WorkShops />} />
           <Route path="/domains" element={<Domains domains={domainData} />}/>
           <Route path="/domains/:domainId" element={<Events domains={domainData} />}/>
-          <Route path="/domains/:domainId/events/:eventId" element={<EventDisplayer events={eventsData} />}/>
-          <Route path="/faq" element={<FAQ />} />
+          {/* <Route path="/domains/:domainId/events/:eventId" element={<EventDisplayer events={eventsData} />}/> */}
+          {/* <Route path="/faq" element={<FAQ />} /> */}
           {/* <Route path="/ca" element={<CA />} /> */}
-          <Route path="/aarambh" element={<Arambh />} />
+          {/* <Route path="/aarambh" element={<Arambh />} /> */}
         </Routes>
         <Footer />
       </div>

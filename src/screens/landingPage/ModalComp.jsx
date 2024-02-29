@@ -8,7 +8,7 @@ import { FaXTwitter, FaMeta } from "react-icons/fa6";
 import { GrClose } from "react-icons/gr";
 import { motion } from "framer-motion";
 import { slideInFromBottom } from "../../constants";
-import {saveAs} from 'file-saver';
+import { saveAs } from "file-saver";
 
 const ModalComp = ({ closet, handleClose, handleOpen }) => {
   // const [open,setOpen] = useState(false);
@@ -29,19 +29,18 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
   ];
 
   //for mobile view
-  const [fontSize,setFontSize]=useState(4.5);
-  useEffect( function footerIcon(){
+  const [fontSize, setFontSize] = useState(4.5);
+  useEffect(function footerIcon() {
     const screenWidth = window.innerWidth;
-    if(screenWidth<440){
-    setFontSize(3)
+    if (screenWidth < 440) {
+      setFontSize(3);
     }
-  },[]);
+  }, []);
 
-  const downloadPdf = ()=>{
+  const downloadPdf = () => {
     const pdfPath = `techFEST'24 PPT _ ADT.pdf`;
-    saveAs(pdfPath,`techFEST'24 Brochure.pdf`);
-  }
-  
+    saveAs(pdfPath, `techFEST'24 Brochure.pdf`);
+  };
 
   return (
     <motion.div
@@ -69,10 +68,10 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
             }}
           >
             <Stack
-              width={{xs:"100%", lg:"90%"}}
-              height={{xs:"80%",lg:"100%"}}
+              width={{ xs: "100%", lg: "90%" }}
+              height={{ xs: "80%", lg: "100%" }}
               direction="row"
-              spacing={{xs: 0, sm: 0, lg: 2 }}
+              spacing={{ xs: 0, sm: 0, lg: 2 }}
               justifyContent="space-around"
               // justifyContent={{xs:"space-between", lg:"space-around" }}
               // border="1px solid red"
@@ -104,56 +103,56 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                 >
                   <Link to="/">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       Home
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       Shows
                     </Button>
                   </Link>
                   <Link to="/workshops">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       Workshops
                     </Button>
                   </Link>
                   <Link to="/domains">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       Domains
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       TechExpo
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       Sponsors
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       Gallery
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans" }}
+                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
                       About Us
                     </Button>
@@ -161,8 +160,8 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                 </Box>
               </Box>
               <Box
-              width={{ xs:"20%", lg:"80%"}}
-              height={{xs:"110%", lg:"100%"}}
+                width={{ xs: "20%", lg: "80%" }}
+                height={{ xs: "110%", lg: "100%" }}
                 sx={{
                   // border: "1px solid red",
                   // height: "100%",
@@ -179,19 +178,20 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     alignItems: "center",
                   }}
                 >
-                  <Link to="/sign-in">
+                  {/* <Link to="/sign-in">
                     <Button
                       style={{
                         color: "white",
                         fontFamily: "Droid sans",
                         fontSize: "20px",
+                        fontWeight: "800",
                       }}
                     >
                       Sign In
                     </Button>
-                  </Link>
+                  </Link> */}
                   <Box
-                  marginTop={{xs:"20%"}}
+                    marginTop={{ xs: "20%" }}
                     style={{
                       height: "90%",
                       width: "100%",
@@ -203,24 +203,21 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       // border: "1px solid red",
                     }}
                   >
-                  
-                  
-                    <a href="#">
-                      <FaInstagram color="white" fontSize={fontSize+"rem"} />
+                    <a href="https://www.instagram.com/techfestsliet_/" target="main">
+                      <FaInstagram color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="#">
-                      <FaLinkedin color="white" fontSize={fontSize+"rem"} />
+                    <a href="https://www.linkedin.com/company/techfest-sliet/" target="main">
+                      <FaLinkedin color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="#">
-                      <FaXTwitter color="white" fontSize={fontSize+"rem"} />
+                    <a href="#" target="main">
+                      <FaXTwitter color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="#">
-                      <FaYoutube color="white" fontSize={fontSize+"rem"} />
+                    <a href="https://www.youtube.com/@techfestslietofficial" target="main">
+                      <FaYoutube color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="#">
-                      <FaMeta color="white" fontSize={fontSize+"rem"} />
+                    <a href="#" target="main">
+                      <FaMeta color="white" fontSize={fontSize + "rem"} />
                     </a>
-
 
                     {/* {social.map((item, index) => (
                     <a href="#" key={index}>
@@ -228,8 +225,8 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     </a>
                   ))} */}
                   </Box>
-        
-                  <Button
+
+                  {/* <Button
                     variant="outlined"
                     style={{
                       color: "white",
@@ -241,7 +238,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     onClick={downloadPdf}
                   >
                     Brouchure
-                  </Button>
+                  </Button> */}
                 </Stack>
               </Box>
               <Box
@@ -288,7 +285,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                         fontWeight: "800",
                       }}
                     >
-                      Contact Us
+                      Our Team
                     </Button>
                   </Link>
                   <Link to="#">
@@ -310,7 +307,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                         fontWeight: "800",
                       }}
                     >
-                      Exibition
+                      Exhibition
                     </Button>
                   </Link>
                   <Link to="#">
@@ -350,7 +347,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
               </Box>
             </Stack>
             <Box
-            paddingTop={{xs:"5rem"}}
+              paddingTop={{ xs: "5rem" }}
               style={{
                 width: "100%",
                 display: "flex",

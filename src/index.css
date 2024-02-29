@@ -1,16 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
+
 *{
   margin:0;
   padding:0;
   box-sizing: border-box;
+  font-family: "Nova Square", sans-serif;
 
-  
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont,'Droid Sans', 'Segoe UI', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans',  'Helvetica Neue',
-    sans-serif;
+  font-family: "Nova Square", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: #030014; */
@@ -22,8 +24,9 @@ body ::-webkit-scrollbar{
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Nova Square", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 

@@ -5,6 +5,7 @@ import { Box, Button, Drawer, IconButton, Divider } from "@mui/material";
 // import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
+import { ImCross } from "react-icons/im";
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -15,6 +16,16 @@ const NavBar = () => {
   //menu drawer
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ p: 2 }}>
+      <ImCross
+        style={{
+          display: "inline",
+          float: "right",
+          position: "relative",
+          top: "1.5%",
+          color:"white"
+        }}
+        onClick={handleDrawerToggle}
+      />
       <div>
         <Link to="/">
           <img src="techfest24logo1.png" alt="" width="60%" />
@@ -187,7 +198,7 @@ const NavBar = () => {
             height: "100%",
             display: { lg: "flex", xs: "none" },
             justifyContent: "end",
-            fontSiz: { sm: ".5rem" },
+            fontSize: { sm: ".5rem" },
             alignItems: "center",
             gap: { lg: "1.6rem", md: "1.2rem", sm: "1.2rem" },
             color: "white",

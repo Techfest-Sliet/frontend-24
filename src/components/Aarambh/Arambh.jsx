@@ -4,6 +4,9 @@ import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import aarambhEvents from "../../utils/aarambh.js";
+import { useState } from "react";
+import arshGoyal from "../../images/arsh_goyal-removebg-preview.png";
+import { Typography } from "@mui/material";
 
 const Card = ({ heading, detail, route }) => {
   return (
@@ -29,7 +32,7 @@ const Arambh = () => {
       <StarCanvas />
       <Box style={{ position: "relative", zIndex: "25" }}>
         <div className="arambh_container">
-          <h1 style={{ fontSize: "4rem", color: "#90E0EF" }}>AARMABH</h1>
+          <h1 style={{ fontSize: "4rem", color: "#90E0EF" }}>AARAMBH</h1>
           <p style={{ padding: "5px 10rem", fontSize: "1.5rem" }}>
             Great things aren't just there, there's a sweet beginning that will
             finally leads to the grand scheme of events. And so we bring you
@@ -37,7 +40,35 @@ const Arambh = () => {
             that will make get you pull up your socks.
           </p>
         </div>
-        {aarambhEvents.map((item, index) => {
+
+        <div className="specialCard">
+          <Typography
+            style={{
+              positon: "relative",
+              top: "10%",
+              fontSize: 40,
+              color: "red",
+            }}
+          >
+            Lakshya
+          </Typography>
+          <article>
+            <figure>
+              <img src={arshGoyal} alt="" />
+            </figure>
+            <h2>Arsh Goyal</h2>
+            <p>
+              Samsung | LinkedIn Top Voice ‘24 | Ex- ISRO | Gold Medalist - NIT
+            </p>
+            <p>Jalandhar | Educator - Unacademy | CodeChef | 150k+ YouTube &</p>
+            <p> Instagram</p>
+          </article>
+          <button className="arambh__button" value="next" type="button">
+            Register
+          </button>
+        </div>
+
+        {aarambhEvents.map((item) => {
           return (
             <Card
               heading={item.heading}

@@ -35,3 +35,101 @@
   .arambh__button:active {
     transform: scale(0.9);
   }
+
+  .specialCard{
+    display: grid;
+    place-items: center;
+    min-width: none;
+    min-height: 100vh;
+    height: 30%;
+    h2 {
+      font-weight: 400;
+      margin: 2rem 0 0.25rem 0;
+    }
+    
+    h1 {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      opacity: 0.5;
+      margin: 0;
+    }
+    
+    p {
+      margin: 0;
+    }
+    
+    figure {
+      width: 500px;
+      aspect-ratio: 8 / 5;
+      --bg: hsl(200 40% calc(30% - (var(--hover) * 10%)));
+      --accent: hsl(217, 97%, 35%);
+      transition: background 0.2s;
+      background:
+        radial-gradient(circle at top left, var(--accent), transparent 75%),
+        var(--bg);
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.5rem;
+    }
+    
+    figure:after {
+      content: "";
+      position: absolute;
+      width: 20%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      bottom: 0%;
+      left: 10%;
+      background: linear-gradient(-65deg, var(--bg) 50%, var(--accent) 50%);
+      filter: blur(25px);
+      transform:
+        translateX(calc(var(--hover) * 15%))
+        scale(calc(1 + (var(--hover) * 0.2)));
+      transition: transform 0.2s, background 0.2s;
+    }
+    
+    img {
+      position: absolute;
+      left: 15%;
+      top: -27%;
+      width: 80%;
+      transform:
+        translateX(calc(var(--hover) * -15%))
+        scale(calc(1 + (var(--hover) * 0.2)));
+      transition: transform 0.2s;
+    }
+    
+    article {
+      --hover: 0;
+    }
+    
+    article:hover {
+      --hover: 1;
+    }
+  }
+
+
+  @media screen and (max-width : 450px) {
+
+    .arambhCard{
+      height: 20rem;
+      width: 16rem;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      padding: 0 1rem;
+      font-size: 0.9rem;
+      border-radius: 1rem;
+    }
+
+    .arambhCard>h1{
+      padding: 0;
+    }
+
+    .domain_description{
+      padding: 5px 0rem;
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+    
+  }
