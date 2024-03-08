@@ -16,7 +16,7 @@ const domainData = [
   },
   {
     "id":3,
-    "name": "Food-o-Crats",
+    "name": "Food-O-Crats",
     "description": "Domain of Food Technology",
     "imagePath":domainImages.Food,
   },
@@ -73,12 +73,12 @@ const domainData = [
     "description": "Domain of Exhibition.",
     "imagePath":domainImages.Karyarachna,
   },
-  {
-    "id":12,
-    "name": "Venture Vault",
-    "description": "Domain of Business.",
-    "imagePath":domainImages.VentureVault,
-  }
+  // {
+  //   "id":12,
+  //   "name": "Venture Vault",
+  //   "description": "Domain of Business.",
+  //   "imagePath":domainImages.VentureVault,
+  // }
 ]
 
 export default domainData;

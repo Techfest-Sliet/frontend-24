@@ -20,7 +20,6 @@ const Footer = () => {
           position: "fixed",
           bottom: "0",
           backgroundColor: "#03001417",
-          zIndex: "50",
           padding: "0 2.5",
           display: "flex",
           justifyContent: "center",

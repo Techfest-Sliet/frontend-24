@@ -1,38 +1,32 @@
 const aarambhEvents = [
   {
-    heading:"Bakwaass",
-    detail:"Failed to parse source map from 'Crontend-24 ode_modules mediapipe asks-vision ision_bundle_mjs.js.map' file: Error: ENOENT: no such file or directory, open 'C: frontend-24 ode_modules mediapipe tasks-vision vision_bundle_mjs.js.map'",
+    heading:`Vague-"The Ideas Unbound"`,
+    detail:"Idea presentation with extreme of imagination and vague dreams.",
     route:"",
   },
   {
     heading:"Engineering Parliament",
-    detail:"Failed to parse source map from 'Crontend-24 ode_modules mediapipe asks-vision ision_bundle_mjs.js.map' file: Error: ENOENT: no such file or directory, open 'C: frontend-24 ode_modules mediapipe tasks-vision vision_bundle_mjs.js.map'",
+    detail:"A parliamentary debate on engineering innovation and sustainability.",
     route:"",
   },
   {
     heading:"Fake Investor",
-    detail:"Failed to parse source map from 'Crontend-24 ode_modules mediapipe asks-vision ision_bundle_mjs.js.map' file: Error: ENOENT: no such file or directory, open 'C: frontend-24 ode_modules mediapipe tasks-vision vision_bundle_mjs.js.map'",
+    detail:"A competition to get real time feel for investments, bidding and profit maximization. ",
     route:"",
   },
   {
     heading:"Passion Show",
-    detail:"Failed to parse source map from 'Crontend-24 ode_modules mediapipe asks-vision ision_bundle_mjs.js.map' file: Error: ENOENT: no such file or directory, open 'C: frontend-24 ode_modules mediapipe tasks-vision vision_bundle_mjs.js.map'",
-    route:"",
+    detail:"Share the reels of fashion demonstrating the engineering and innovation passion."
   },
   {
     heading:"TechFest Olympiad",
-    detail:"Failed to parse source map from 'Crontend-24 ode_modules mediapipe asks-vision ision_bundle_mjs.js.map' file: Error: ENOENT: no such file or directory, open 'C: frontend-24 ode_modules mediapipe tasks-vision vision_bundle_mjs.js.map'",
+    detail:"Science olympiad for the school students at various levels.",
     route:"",
   },
   {
     heading:"Technical Movie Show",
-    detail:"Failed to parse source map from 'Crontend-24 ode_modules mediapipe asks-vision ision_bundle_mjs.js.map' file: Error: ENOENT: no such file or directory, open 'C: frontend-24 ode_modules mediapipe tasks-vision vision_bundle_mjs.js.map'",
+    detail:"Weekend movie shows for encouragement, motivation and innovation.",
     route:"/Movie_Show",
-  },
-  {
-    heading:"Workshop",
-    detail:"Failed to parse source map from 'Crontend-24 ode_modules mediapipe asks-vision ision_bundle_mjs.js.map' file: Error: ENOENT: no such file or directory, open 'C: frontend-24 ode_modules mediapipe tasks-vision vision_bundle_mjs.js.map'",
-    route:"/workshops",
   },
 ]
 

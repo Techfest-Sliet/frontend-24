@@ -18,15 +18,6 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
       handleClose();
     }
   };
-  const social = [
-    {
-      twitter: "FaXTwitter",
-      meta: "FaMeta",
-      insta: "FaInstagram",
-      youtube: "FaYoutube",
-      linked: "FaLinkedin",
-    },
-  ];
 
   //for mobile view
   const [fontSize, setFontSize] = useState(4.5);
@@ -47,7 +38,8 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
       hidden={"hidden"}
       variants={slideInFromBottom(0.5)}
       style={{ width: "100%", height: "100vh" }}
-    >
+      onClick={handleClose}
+      >
       {/* <button onClick={handleClose}>clickme</button> */}
       <Modal
         open={closet}
@@ -136,7 +128,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       TechExpo
                     </Button>
                   </Link>
-                  <Link to="#">
+                  <Link to="/sponsor">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
@@ -178,7 +170,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     alignItems: "center",
                   }}
                 >
-                  {/* <Link to="/sign-in">
+                  <Link to="/sign-in">
                     <Button
                       style={{
                         color: "white",
@@ -189,7 +181,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     >
                       Sign In
                     </Button>
-                  </Link> */}
+                  </Link>
                   <Box
                     marginTop={{ xs: "20%" }}
                     style={{
@@ -209,7 +201,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     <a href="https://www.linkedin.com/company/techfest-sliet/" target="main">
                       <FaLinkedin color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="#" target="main">
+                    <a href="https://twitter.com/techFEST_SLIET" target="main">
                       <FaXTwitter color="white" fontSize={fontSize + "rem"} />
                     </a>
                     <a href="https://www.youtube.com/@techfestslietofficial" target="main">
@@ -226,7 +218,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                   ))} */}
                   </Box>
 
-                  {/* <Button
+                  <Button
                     variant="outlined"
                     style={{
                       color: "white",
@@ -237,8 +229,8 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     }}
                     onClick={downloadPdf}
                   >
-                    Brouchure
-                  </Button> */}
+                    Brouchure 
+                  </Button>
                 </Stack>
               </Box>
               <Box
@@ -277,7 +269,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Enquiry
                     </Button>
                   </Link>
-                  <Link to="#">
+                  <Link to="/ourteam">
                     <Button
                       style={{
                         color: "white",

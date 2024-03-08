@@ -19,6 +19,7 @@ const Signup = () => {
   const [phone, setPhone] = useState("");
   const [collegeName, setCollegeName] = useState("");
   const [dob, setDob] = useState();
+  const [profession, setProfession] = useState();
   const [branch, setBranch] = useState("0");
   const [confirm_err, setConfirmErr] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -235,6 +236,22 @@ const Signup = () => {
                 placeholder="Enter your whatsapp number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                required
+                autoComplete="off"
+              />
+              <label htmlFor="profession" className={styles.signup__label}>
+                Profession
+              </label>
+              {fieldErr && (
+                <p style={{ color: "red", fontSize: "1rem" }}>{fieldErr}</p>
+              )}
+              <input
+                type="text"
+                id="profession"
+                name="profession"
+                placeholder="Enter your profession"
+                value={profession}
+                onChange={(e) => setProfession(e.target.value)}
                 required
                 autoComplete="off"
               />

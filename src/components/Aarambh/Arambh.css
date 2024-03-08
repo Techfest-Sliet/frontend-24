@@ -2,6 +2,14 @@
     margin-top: 10rem;
     text-align: center;
 }
+.arambh_container>h1{
+  font-size: 4rem;
+  color: #90E0EF;
+}
+.arambh_container>p{
+  padding: 5px 10rem;
+  font-size: 1.5rem; 
+}
 .arambhCard{
     clip-path: polygon(12% 0, 35% 0,40% 15%, 90% 15%, 100% 35%, 100% 80%, 90% 100%, 10% 100%, 5% 85%, 5% 20%);
     /* border: 1px solid blue; */
@@ -126,10 +134,19 @@
       padding: 0;
     }
 
-    .domain_description{
+    .arambh_container>h1{
+      font-size: 2.5rem;
+    }
+
+    .arambh_container>p{
+      padding: 5px 1rem;
+      font-size: 1.2rem; 
+    }
+
+    /* .domain_description{
       padding: 5px 0rem;
       font-size: 1.1rem;
       white-space: nowrap;
-    }
+    } */
     
   }

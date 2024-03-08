@@ -15,11 +15,12 @@
     align-items: center;
     padding: 70px 10px 10px 10px;
     overflow: hidden;
+    /* z-index: 10; */
     /* border: 1px solid white; */
 }
 
 .container .card {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(183, 226, 243);
     background-size: cover;
     position: relative;
     display: flex;
@@ -103,7 +104,12 @@
 }
 
 @media (max-width: 480px) {
-    .container .card {
+    .container{
+        margin: 0 50%;
+        transform: translate(-50%);
+        width: 1005;
+    }
+    /* .container .card {
         width: 230px;
         border-radius: 15px;
     }
@@ -115,5 +121,5 @@
 
     .container .card .content p {
         font-size: 0.8rem;
-    }
+    } */
 }

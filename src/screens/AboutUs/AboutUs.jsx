@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import StarCanvas from "../landingPage/StarbackGround";
 
 const AboutUs = () => {
   return (
-    <div>AboutUs</div>
-  )
-}
+    <>
+      <StarCanvas/>
+      <div className="aboutUs">
+
+      </div>
+    </>
+  );
+};
 
 export default AboutUs;

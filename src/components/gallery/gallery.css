@@ -1,0 +1,123 @@
+.gallery-container {
+  width: 95%;
+  min-height: 80vh;
+  position: relative;
+  margin: 100px auto 10px auto;
+  overflow: hidden;
+}
+
+.gallery-container h1 {
+  text-align: center;
+
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.gallery-container .media-container {
+  display: flex;
+  gap: 15px;
+  margin: 20px auto;
+  width: calc(350px * 10);
+  animation: scroll linear 10s infinite;
+}
+
+.gallery-container .media-container:hover {
+  animation-play-state: paused;
+}
+
+.gallery-container .media-container-second {
+  animation: left-scroll linear 10s infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 5));
+  }
+}
+
+@keyframes left-scroll {
+  0% {
+    transform: translateX(calc(-250px * 5));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.gallery-container .media-container .media {
+  height: 220px;
+  width: 350px;
+  z-index: 100;
+  border: 5px solid lightblue;
+  box-shadow: 0 5px 15px rgb(0, 0, 0, 0.7);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gallery-container .media-container .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s linear;
+}
+
+.gallery-container .media-container .media img:hover {
+  transform: scale(1.1);
+}
+
+.gallery-container .popup-media {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-container .popup-media img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  border: 3px solid lightblue;
+}
+
+.gallery-container .popup-media span {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size: 50px;
+  font-weight: bolder;
+  cursor: pointer;
+  z-index: 100;
+  color: #fff;
+  user-select: none;
+}
+
+@media (max-width: 450px) {
+  .gallery-container .media-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin: 20px auto;
+    width: 100%;
+    animation: none;
+  }
+
+  .gallery-container .media-container .media {
+    height: 220px;
+    width: 100%;
+  }
+
+  .gallery-container .media-container-second {
+    display: none;
+  }
+}

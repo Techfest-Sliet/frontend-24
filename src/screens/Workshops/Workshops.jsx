@@ -1,11 +1,12 @@
 import React from "react";
-import "./Workshops.css";
+import "./Workshops.module.css";
 import StarCanvas from "../landingPage/StarbackGround";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 import dummyImage from "../../images/Naruto.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import ComingSoon from "../../components/comingSoon/ComingSoon";
+import arshGoyal from "../../images/arsh_goyal-removebg-preview.png";
 
 const Workshops = () => {
   const [activeCards, setActiveCards] = useState({});
@@ -19,22 +20,11 @@ const Workshops = () => {
 
   const navigate = useNavigate();
 
-  const workshops = [
-    "machine learning",
-    "ethical hacking",
-    "chatgpt",
-    "web development",
-    "machine learning",
-    "ethical hacking",
-    "chatgpt",
-    "web development",
-  ];
-
   return (
     <>
       <StarCanvas />
-      {/* <Box style={{position:"relative",zIndex:"25"}}>
-        <div className="workshops">
+      <div className="workshops">
+        {/* <Box style={{position:"relative",zIndex:"25"}}>
           <div class="wrapper">
             {workshops.map((workshop, index) => {
               return (
@@ -71,10 +61,29 @@ const Workshops = () => {
               );
             })}
           </div>
-        </div>
-      </Box> */}
-      <div style={{position:"relative", zIndex:"10"}}> 
+        </Box> */}
+        {/* <div style={{position:"relative", zIndex:"10"}}> 
         <ComingSoon/>
+      </div> */}
+
+{/* 
+        <div class="container">
+          <div class="wrapper">
+            <div class="banner-image"> </div>
+            <h1> Toyota Supra</h1>
+            <p>
+              Lorem ipsum dolor sit amet, <br />
+              consectetur adipiscing elit.
+            </p>
+          </div>
+          <div class="button-wrapper">
+            <button class="btn outline">DETAILS</button>
+            <button class="btn fill">BUY NOW</button>
+          </div>
+        </div> */}
+        <div>
+          <ComingSoon/>
+        </div>
       </div>
     </>
   );

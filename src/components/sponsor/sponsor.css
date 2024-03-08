@@ -1,0 +1,66 @@
+.carousel-container{
+    margin: 11rem;
+    
+}
+
+.carousel-container h1{
+    font-size: 40px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.carousel{
+    z-index: 1000;
+}
+
+
+.react-multi-carousel-dot-list{
+    padding:100px !important;
+}
+
+.sponsor-card{  
+    border: solid 2.5px #200030;
+    position: relative ;
+   z-index: 100;
+}
+
+
+
+
+/* .css-c8tyce-MuiPaper-root-MuiCard-root{
+    z-index: 1000;
+} */
+
+.sponsor-card::before{
+    content: "";
+    position: absolute;
+    left: 100px;
+    top: -100px;
+    height:150%;
+    width: 170px;
+    background: linear-gradient(#00ccff,#d500f9);
+    animation: rotate-border 4s linear infinite;
+    z-index: -20;
+}
+
+.sponsor-card::after{
+    content: "";
+    position: absolute;
+    background: black;
+    inset: 3px;
+    border-radius: 8px;
+    z-index: -10;
+    
+}
+
+@keyframes rotate-border {
+    from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}
+}
+
+@media (max-width:450px) {
+    .carousel-container{
+        margin: 10rem 10px 0 10px;
+    }
+}
+

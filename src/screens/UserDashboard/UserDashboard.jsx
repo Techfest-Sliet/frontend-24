@@ -10,17 +10,18 @@ import {
   Typography,
   Tooltip,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import { IoLogoWhatsapp } from "react-icons/io";
-import bg from "../../images/userDashboardBg.jpg";
 import "./UserDashboard.css";
 
 //user imports
 import AuthContext from "../../components/Auth/Auth";
 import { baseUrl } from "../../API/Api";
+import Loader from "../../components/Loader/loader";
 //loader
 //error model
 
@@ -59,8 +60,7 @@ const UserDashboard = () => {
   const [wphone, setWphone] = useState("");
   const [fieldErr, setFieldErr] = useState(null);
   const [branchErr, setBranchErr] = useState(null);
-  const [updatePersonalInfo, setUpdatePersonalInfo] = useState(false);
-  const [updateContactInfo, setUpdateContactInfo] = useState(false);
+  const [phoneErr, setPhoneErr] = useState(null);
 
   const [user, setUser] = useState("");
 
@@ -95,7 +95,8 @@ const UserDashboard = () => {
     axios
       .post(
         `${baseUrl}/user/pullevent`,
-        { id: id },
+        { id: userId },
+        
         {
           headers: {
             Authorization: "Bearer " + authContext.token,
@@ -115,17 +116,51 @@ const UserDashboard = () => {
       });
   };
 
-  //get user id from the context api
-  const updatePersonalinfo = async (e) => {
-    setOpenEditPersonal(false);
+  const updateContactInfo = async (e) => {
     e.preventDefault();
-    if (
-      name.trim().length === 0 ||
-      phone.trim().length === 0 ||
-      collegeName.trim().length === 0 ||
-      wphone.trim().length === 0
-    ) {
-      setFieldErr("Field should not be empty");
+    if (phone.trim().length === 0) {
+      setFieldErr("Field(s) should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+    setOpenEditContact(false);
+    const update_user = {
+      name: name,
+      email: user.email,
+      phone: Number(phone),
+      whatsappPhoneNumber: wphone,
+    };
+    setIsLoading(true);
+    await axios
+      .post(`${baseUrl}/user/updateuser`, update_user)
+      .then((result) => {
+        const res = result;
+        console.log(res);
+        if (res.status === 400) {
+          setFieldErr(
+            "Incomplete update request! Kindly try again in some time."
+          );
+        } else if (res.status === 201) {
+          setErrorMade({
+            title: "Updated!",
+            message: "User details updated successfully.",
+          });
+        }
+      })
+      .catch((err) => {
+        // setIsLoading(false);
+        console.log(err.response.data);
+        return;
+      });
+  };
+
+  //get user id from the context api
+  const updatePersonalInfo = async (e) => {
+    e.preventDefault();
+    if (collegeName.trim().length === 0) {
+      setFieldErr("Field(s) should not be empty");
       setTimeout(() => {
         setFieldErr(null);
       }, 3000);
@@ -138,21 +173,30 @@ const UserDashboard = () => {
       }, 3000);
       return;
     }
-    setUpdatePersonalInfo(true);
+    setOpenEditPersonal(false);
+
     const update_user = {
       name: name,
       email: user.email,
-      phone: Number(phone),
-      whatsappPhoneNumber: wphone,
       branch: branch,
       collegeName: collegeName,
-      // dob: dob,
     };
     setIsLoading(true);
     await axios
       .post(`${baseUrl}/user/updateuser`, update_user)
       .then((result) => {
         const res = result;
+        console.log(res);
+        if (res.status === 400) {
+          setFieldErr(
+            "Incomplete update request! Kindly try again in some time."
+          );
+        } else if (res.status === 201) {
+          setErrorMade({
+            title: "Updated!",
+            message: "User details updated successfully.",
+          });
+        }
       })
       .catch((err) => {
         // setIsLoading(false);
@@ -166,11 +210,10 @@ const UserDashboard = () => {
     console.log("Authcontext==>", authContext);
     setUserId(authContext.userId);
     const userId = authContext.userId;
-    console.log("userId ==> ", authContext.userId);
+    // console.log("userId ==> ", authContext.userId);
     axios
       .get(`${baseUrl}/user/getUserById/${userId}`)
       .then((result) => {
-        console.log("result: ", result);
         setIsLoading(false);
         if (
           result.status !== 200 ||
@@ -184,6 +227,7 @@ const UserDashboard = () => {
           });
         }
         setUser(result.data.user);
+        setCollegeName(result.data.user.collegeName);
         setWorkshops(result.data.user.workshops);
         setTeamMembers(result.data.user.teamMembers);
         setEvents(result.data.user.events);
@@ -197,9 +241,12 @@ const UserDashboard = () => {
       });
   }, [authContext, authContext.login]);
 
+  const isMobile = useMediaQuery("(max-width:450px)");
+
   return (
     <>
       {/* <StarCanvas /> */}
+      {isLoading && <Loader />}
       <div
         className="userDashboard"
         style={{
@@ -217,23 +264,27 @@ const UserDashboard = () => {
           style={{
             position: "relative",
             zIndex: "1",
+            width: isMobile ? "98%" : "70%",
           }}
         >
           <div
             className="greeting"
             style={{
+              fontSize: isMobile ? "1.2rem" : "2rem",
               color: "white",
-              fontSize: "2rem",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               marginTop: "1rem",
               marginBottom: "2rem",
+              whiteSpace: "nowrap",
             }}
           >
             {" "}
             Welcome to the Universe&nbsp;{" "}
-            <span style={{ color: "#25c6e5", fontWeight: 750 }}>
+            <span
+              style={{ color: "#25c6e5", fontWeight: isMobile ? 600 : 700 }}
+            >
               {user && user.name.toUpperCase()}
             </span>
             👋
@@ -242,8 +293,7 @@ const UserDashboard = () => {
           {/* personal info */}
           <Card
             sx={{
-              minWidth: 1000,
-              minHeight: 200,
+              width: "100%",
               border: "2px solid white",
               bgcolor: "transparent",
               borderRadius: "5px",
@@ -254,32 +304,45 @@ const UserDashboard = () => {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 30, fontWeight: 700 }}>
+                    <Typography
+                      sx={{
+                        fontSize: isMobile ? 25 : 30,
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       Profile Information
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                    >
                       Profession
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
-                      Organisation/College Name
+                    <Typography
+                      sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                    >
+                      {!isMobile ? "Organisation/College Name" : "College Name"}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                    <Typography
+                      sx={{
+                        fontSize: isMobile ? 20 : 25,
+                        fontWeight: 500,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       Course Enrolled
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
-                      Year of Study
-                    </Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                    >
                       Date of Birth
                     </Typography>
                   </Box>
@@ -291,7 +354,12 @@ const UserDashboard = () => {
                       placement="bottom-end"
                     >
                       <Button variant="" onClick={editPersonalInfo}>
-                        <BiEdit style={{ height: "50px", width: "35px" }} />
+                        <BiEdit
+                          style={{
+                            height: isMobile ? "30px" : "50px",
+                            width: "35px",
+                          }}
+                        />
                       </Button>
                     </Tooltip>
                   </Box>
@@ -303,13 +371,7 @@ const UserDashboard = () => {
                       aria-describedby="child-modal-description"
                     >
                       <Box sx={style}>
-                        <TextField
-                          id="standard-basic"
-                          label="Name"
-                          variant="standard"
-                          sx={{ marginBottom: 2 }}
-                          onChange={(e) => setName(e.target.value)}
-                        />
+                        {fieldErr && <p style={{ color: "red" }}>{fieldErr}</p>}
 
                         <TextField
                           id="standard-basic"
@@ -330,7 +392,7 @@ const UserDashboard = () => {
                         <Button
                           variant="contained"
                           style={{ display: "flex", marginLeft: "auto" }}
-                          onClick={updatePersonalinfo}
+                          onClick={updatePersonalInfo}
                         >
                           OK
                         </Button>
@@ -338,23 +400,22 @@ const UserDashboard = () => {
                     </Modal>
                   )}
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>Student</Typography>
+                    <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      Student
+                    </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
+                    <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
                       {user && user.collegeName}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
+                    <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
                       {user && user.branch}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>3rd</Typography>
-                  </Box>
-                  <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
+                    <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
                       {user && formattedDate}
                     </Typography>
                   </Box>
@@ -366,31 +427,48 @@ const UserDashboard = () => {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 30, fontWeight: 700 }}>
+                    <Typography
+                      sx={{
+                        fontSize: isMobile ? 25 : 30,
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       Contact Details
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
-                      E-mail Address
+                    <Typography
+                      sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                    >
+                      {isMobile ? "E-mail" : "E-mail Address"}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
+                    <Typography
+                      sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                    >
                       Phone Number
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25, fontWeight: 500 }}>
-                      Whatsapp Number
+                    <Typography
+                      sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                    >
+                      TechBucks
                     </Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={6} sx={{ textAlign: "right" }}>
-                  <Box sx={{ marginBottom: "5%" }}>
+                  <Box sx={{ marginBottom: isMobile ? "4%" : "5%" }}>
                     <Tooltip title="Edit Contact Detail" placement="bottom-end">
                       <Button variant="" onClick={editContactInfo}>
-                        <BiEdit style={{ height: "50px", width: "35px" }} />
+                        <BiEdit
+                          style={{
+                            height: isMobile ? "30px" : "50px",
+                            width: "35px",
+                          }}
+                        />
                       </Button>
                     </Tooltip>
                   </Box>
@@ -421,7 +499,7 @@ const UserDashboard = () => {
                         <Button
                           variant="contained"
                           style={{ display: "flex", marginLeft: "auto" }}
-                          onClick={handleCloseContact}
+                          onClick={updateContactInfo}
                         >
                           OK
                         </Button>
@@ -429,17 +507,26 @@ const UserDashboard = () => {
                     </Modal>
                   )}
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
+                    <Typography
+                      sx={{
+                        fontSize: isMobile ? 18 : 25,
+                        left: "-5rem",
+                        position: "relative",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {user && user.email}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>
+                    <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
                       {user && user.phone}
                     </Typography>
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
-                    <Typography sx={{ fontSize: 25 }}>2345235636</Typography>
+                    <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      2345235636
+                    </Typography>
                   </Box>
                 </Grid>
               </Grid>
@@ -452,20 +539,20 @@ const UserDashboard = () => {
             sx={{
               display: "flex",
               marginTop: "2%",
+              flexDirection: isMobile ? "column" : "row",
               justifyContent: "center",
               alignItems: "center",
               position: "relative",
-              right: "2%",
-              marginLeft: "3.5%",
+              width: "100%",
+              marginBottom: "1rem",
             }}
           >
             <Card
               sx={{
                 bgcolor: "transparent",
-                minWidth: 500,
-                minHeight: 300,
                 border: "2px solid white",
-                marginRight: "2%",
+                marginRight: !isMobile && "2%",
+                width: "100%",
               }}
             >
               <Box
@@ -479,13 +566,13 @@ const UserDashboard = () => {
                 <Box sx={{ display: "flex" }}>
                   <FaRegLightbulb
                     style={{
-                      height: "50px",
+                      height: isMobile ? "35px" : "50px",
                       marginLeft: "5%",
                       marginRight: "5%",
                       marginBottom: "1%",
                     }}
                   />
-                  <Typography sx={{ fontSize: 30 }}>
+                  <Typography sx={{ fontSize: isMobile ? 25 : 30 }}>
                     Events Registered
                   </Typography>
                 </Box>
@@ -531,29 +618,7 @@ const UserDashboard = () => {
                               >
                                 {event.eventDate}
                               </Typography>
-                              <MdDelete />
-                            </Box>
-                          );
-                        })}
-                    </Grid>
-                    <Grid item xs={6} sx={{ textAlign: "right" }}>
-                      {events &&
-                        events.length > 0 &&
-                        events.map((event) => {
-                          return (
-                            <Box sx={{ margin: "10%" }}>
-                              <Button
-                                sx={{
-                                  fontSize: 20,
-                                  fontWeight: 500,
-                                  color: "white",
-                                }}
-                                key={event._id}
-                              >
-                                <a href={`${event.whatsappLink}`}>
-                                  <IoLogoWhatsapp />
-                                </a>
-                              </Button>
+                              <MdDelete onClick={deleteEvent} />
                             </Box>
                           );
                         })}
@@ -562,14 +627,20 @@ const UserDashboard = () => {
                 </Box>
               </Box>
             </Card>
-            <Divider sx={{ border: "1px solid white", height: 300 }} />
+            <Divider
+              sx={{
+                border: "1px solid white",
+                height: 300,
+                display: isMobile ? "none" : "block",
+              }}
+            />
             <Card
               sx={{
                 bgcolor: "transparent",
-                minWidth: 500,
-                minHeight: 300,
                 border: "2px solid white",
-                marginLeft: "2%",
+                marginLeft: !isMobile && "2%",
+                width: "100%",
+                marginTop: isMobile && "1rem",
               }}
             >
               <Box
@@ -583,13 +654,15 @@ const UserDashboard = () => {
                 <Box sx={{ display: "flex" }}>
                   <FaRegLightbulb
                     style={{
-                      height: "50px",
+                      height: isMobile ? "35px" : "50px",
                       marginLeft: "5%",
                       marginRight: "5%",
                       marginBottom: "1%",
                     }}
                   />
-                  <Typography sx={{ fontSize: 30 }}>
+                  <Typography
+                    sx={{ fontSize: isMobile ? 25 : 30, whiteSpace: "nowrap" }}
+                  >
                     Workshops Registered
                   </Typography>
                 </Box>

@@ -1,13 +1,10 @@
 import { Stack, Box, Typography, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../API/Api";
 import axios from "axios";
-import { type } from "@testing-library/user-event/dist/type";
-import domainData from "../../utils/domains";
-import eventsData from "../../utils/events";
 
 const EventDisplayer = ({ Img, events }) => {
   const [variable, setVariable] = useState(1);
@@ -18,11 +15,14 @@ const EventDisplayer = ({ Img, events }) => {
     setVariable(1);
   };
 
+  useEffect(() => {
+    axios.get(`${baseUrl}/`)
+  }, [])
+
   const navigate = useNavigate();
 
   const { eventId } = useParams();
   const domainId = useParams();
-  const token = localStorage.getItem("jwtToken");
   const selectedEvent = events.find((event) => event.id === parseInt(eventId));
   console.log("eventId:", eventId);
   console.log("domainId:", domainId);
@@ -31,12 +31,12 @@ const EventDisplayer = ({ Img, events }) => {
     await axios
       .post(
         `${baseUrl}/user/addevent/${eventId}`,
-        // { eventId : parseInt(eventId) },
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`, // Add your token here
-        //   },
-        // }
+        { eventId : parseInt(eventId) },
+        {
+          // headers: {
+          //   Authorization: `Bearer ${token}`, // Add your token here
+          // },
+        }
       )
       .then((result) => {
         console.log("Result Data===>", result.data);
@@ -315,11 +315,7 @@ const EventDisplayer = ({ Img, events }) => {
                     <Box display={"flex"} gap={1}>
                       <Button
                         variant="contained"
-                        onClick={() =>
-                          console.log(
-                            "clicked add conditions to check if loged in then only register else redirect to login page "
-                          )
-                        }
+                        onClick={registerEvent}
                       >
                         Register
                       </Button>

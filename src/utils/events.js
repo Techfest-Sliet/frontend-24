@@ -7,7 +7,7 @@ const eventsData = [
         description:
           "An event where participants can demonstrate their skills and knowledge in the realm of competitive programming.",
         whatsappLink: "",
-        // route: `./events/11`,
+        // route: `./events/`,
       },
       {
         name: "Data Dives",
@@ -371,6 +371,46 @@ const eventsData = [
   },
   {
     id: 10,
+    events: [
+      {
+        name: "Exhibition - Working Model, Non-Working Model ",
+        description:
+          "A presentation of working models, non-working models for school students. ",
+        whatsappLink: "",
+      },
+      {
+        name: "Career Guidance , Experimental Demonstration",
+        description:
+          "To help school students gain career demonstration and also to gain experimental demonstration.",
+        whatsappLink: "",
+      },
+      {
+        name: "Workshop in Schools - MS Office, Arduino, Electrical Safety, Cyber Fraud",
+        description:
+          "To help school students gain knowledge about MS office, arduino, etc.",
+        whatsappLink: "",
+      },
+      {
+        name: "Quiz, Math Speed Evaluation, Inter School GD",
+        description: "To help student gain math calculation speed and also to conduct inter school GD to boost communication skills.",
+        whatsappLink: "",
+      },
+      {
+        name: "Movie Screening, Sports Collaboration",
+        description: "To give students a movie screening and sports collaboration for fun activities. ",
+        whatsappLink: "",
+      },
+      {
+        name: "Paper Presentation for Teachers, Student PPT Presentation",
+        description: "An arrangement for teachers to present their papers and gain experience. ",
+        whatsappLink: "",
+      },
+      {
+        name: " Health and Heartfulness  Workshop",
+        description: "To conduct workshop like yoga and health related.",
+        whatsappLink: "",
+      },
+    ],
   },
   {
     id: 11,
@@ -382,7 +422,7 @@ const eventsData = [
         whatsappLink: "",
       },
       {
-        name: "Jugad",
+        name: "Jugaad",
         description:
           "A competitive exhibition, where models are fabricated from wastes and are developed to solve daily life small problems.",
         whatsappLink: "",

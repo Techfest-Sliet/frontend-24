@@ -83,8 +83,8 @@ const NavBar = () => {
             >
               Gallery
             </Button>
-          </Link>
-          <Link to="contact-us">
+          </Link> */}
+          <Link to="/ourteam">
             <Button
               style={{
                 color: "white",
@@ -93,10 +93,10 @@ const NavBar = () => {
               }}
               className="nav-link nav-link-ltr"
             >
-              Contact Us
+              Our Team
             </Button>
-          </Link> */}
-        {/* <Link to="sign-in">
+          </Link>
+        <Link to="sign-in">
           <Button
             style={{
               color: "white",
@@ -106,7 +106,7 @@ const NavBar = () => {
           >
             SignIN
           </Button>
-        </Link> */}
+        </Link>
       </div>
     </Box>
   );
@@ -255,7 +255,7 @@ const NavBar = () => {
               Gallery
             </Button>
           </Link> */}
-          {/* <Link to="contact-us">
+          <Link to="ourteam">
             <Button
               style={{
                 color: "white",
@@ -264,10 +264,10 @@ const NavBar = () => {
               }}
               className="nav-link nav-link-ltr"
             >
-              Contact Us
+              Our Team
             </Button>
-          </Link> */}
-          {/* <Link to="sign-in">
+          </Link>
+          <Link to="sign-in">
             <Button
               style={{
                 color: "white",
@@ -277,7 +277,7 @@ const NavBar = () => {
             >
               SignIN
             </Button>
-          </Link> */}
+          </Link>
         </Box>
       </Box>
       <Box>

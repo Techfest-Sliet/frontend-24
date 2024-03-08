@@ -47,7 +47,7 @@ const ResetPassword = () => {
       if (!email.trim().includes("@")) {
         setSuccess(false);
         setMessage("Enter correct email");
-        openToast();
+        openToast();  
         return;
       }
 

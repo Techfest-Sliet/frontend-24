@@ -4,7 +4,6 @@ import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import aarambhEvents from "../../utils/aarambh.js";
-import { useState } from "react";
 import arshGoyal from "../../images/arsh_goyal-removebg-preview.png";
 import { Typography } from "@mui/material";
 
@@ -47,10 +46,12 @@ const Arambh = () => {
               positon: "relative",
               top: "10%",
               fontSize: 40,
-              color: "red",
+              color: "white",
+              fontWeight: "800",
+              textShadow: "2px 2px red",
             }}
           >
-            Lakshya
+            लक्ष्य
           </Typography>
           <article>
             <figure>
@@ -62,6 +63,16 @@ const Arambh = () => {
             </p>
             <p>Jalandhar | Educator - Unacademy | CodeChef | 150k+ YouTube &</p>
             <p> Instagram</p>
+            <br/>
+            <section className="date" style={{display:"flex"}}>
+              <Typography style={{fontWeight:800}}>Date:</Typography>
+              <Typography>&nbsp;6<sup>th</sup> March 2024</Typography>
+            </section>
+            <br/>
+            <section className="venue" style={{display:"flex"}}>
+              <Typography style={{fontWeight:800}}>Venue:</Typography>
+              <Typography>&nbsp;Main Auditorium</Typography>
+            </section>
           </article>
           <button className="arambh__button" value="next" type="button">
             Register
