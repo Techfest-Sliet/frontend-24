@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./SignIn.css";
-import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { TextField, Stack } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -9,9 +8,6 @@ import Paper from "@mui/material/Paper";
 import Particle from "./Particle";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../images/festLogo.png";
-import Toast from "../../Toast";
-import zIndex from "@mui/material/styles/zIndex";
-import StarCanvas from "../../../screens/landingPage/StarbackGround";
 import AuthContext from "../Auth";
 import Loader from "../../Loader/loader";
 
@@ -121,10 +117,6 @@ const SignIn = () => {
     };
     setIsLoading(true);
     userLoginHandle(user);
-  };
-
-  const clickNavigateHandler = () => {
-    navigate("/");
   };
 
   return (

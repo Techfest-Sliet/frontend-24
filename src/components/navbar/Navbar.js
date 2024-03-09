@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import "./navbar.css";
-import { Box, Button, Drawer, IconButton, Divider } from "@mui/material";
+import {
+  Box,
+  Button,
+  Drawer,
+  IconButton,
+  Divider,
+  Tooltip,
+} from "@mui/material";
 // import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { ImCross } from "react-icons/im";
+import AuthContext from "../Auth/Auth";
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const authContext = useContext(AuthContext);
   //handle menu click
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -22,7 +31,7 @@ const NavBar = () => {
           float: "right",
           position: "relative",
           top: "1.5%",
-          color:"white"
+          color: "white",
         }}
         onClick={handleDrawerToggle}
       />
@@ -84,29 +93,33 @@ const NavBar = () => {
               Gallery
             </Button>
           </Link> */}
-          <Link to="/ourteam">
-            <Button
-              style={{
-                color: "white",
-                fontWeight: "normal",
-                fontFamily: "Droid Sans",
-              }}
-              className="nav-link nav-link-ltr"
-            >
-              Our Team
-            </Button>
-          </Link>
-        <Link to="sign-in">
+        <Link to="/ourteam">
           <Button
             style={{
               color: "white",
               fontWeight: "normal",
               fontFamily: "Droid Sans",
             }}
+            className="nav-link nav-link-ltr"
           >
-            SignIN
+            Our Team
           </Button>
         </Link>
+        <Button
+          style={{
+            color: "white",
+            fontWeight: "normal",
+            fontFamily: "Droid Sans",
+          }}
+        >
+          {authContext.userId === " " ? (
+            <Link to="sign-in">SignIN</Link>
+          ) : (
+            <Link to={"/user-dashboard"}>
+              <p style={{color:"white"}}>Profile</p>
+            </Link>
+          )}
+        </Button>
       </div>
     </Box>
   );
@@ -275,7 +288,17 @@ const NavBar = () => {
                 fontFamily: "Droid Sans",
               }}
             >
-              SignIN
+              {authContext.userId === " " ? (
+                <Link to="sign-in">SignIN</Link>
+              ) : (
+                <Link to={"/user-dashboard"}>
+                  <Tooltip title="Techbuks">
+                    <Button>
+                      <p>🪙</p>
+                    </Button>
+                  </Tooltip>
+                </Link>
+              )}
             </Button>
           </Link>
         </Box>

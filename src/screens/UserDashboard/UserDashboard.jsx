@@ -455,7 +455,7 @@ const UserDashboard = () => {
                     <Typography
                       sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
                     >
-                      TechBucks
+                      TechBucks 🪙
                     </Typography>
                   </Box>
                 </Grid>
@@ -525,7 +525,7 @@ const UserDashboard = () => {
                   </Box>
                   <Box sx={{ marginBottom: "5%" }}>
                     <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
-                      2345235636
+                      {user && user.techbucks}
                     </Typography>
                   </Box>
                 </Grid>

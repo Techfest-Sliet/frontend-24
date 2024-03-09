@@ -1,13 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import styles from "./Signup.module.css";
 import axios from "axios";
-import { baseUrl } from "../../../API/Api.js";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorModel from "../../Error/Error.js";
 import Loader from "../../Loader/loader.js";
 // import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
-import { AiOutlineLeft, AiFillCaretRight } from "react-icons/ai";
-import { textAlign } from "@mui/system";
 import StarCanvas from "../../../screens/landingPage/StarbackGround.jsx";
 
 const Signup = () => {
@@ -172,6 +169,7 @@ const Signup = () => {
             navigate("/sign-in");
           }, 3000);
         } else if (res.status === 400 || res.status === 208) {
+          setIsLoading(true);
           setErrorsMade(res.data.message);
           setTimeout(() => {
             if (res.data.message.includes("email")) {
@@ -186,10 +184,6 @@ const Signup = () => {
         console.log(err.response.data);
         return;
       });
-  };
-
-  const clickNavigateHandler = () => {
-    navigate("/");
   };
 
   return (
