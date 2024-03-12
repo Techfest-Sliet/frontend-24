@@ -8,6 +8,7 @@ import {
   IconButton,
   Divider,
   Tooltip,
+  Avatar,
 } from "@mui/material";
 // import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -93,7 +94,7 @@ const NavBar = () => {
               Gallery
             </Button>
           </Link> */}
-        <Link to="/ourteam">
+        {/* <Link to="/ourteam">
           <Button
             style={{
               color: "white",
@@ -104,8 +105,8 @@ const NavBar = () => {
           >
             Our Team
           </Button>
-        </Link>
-        <Button
+        </Link> */}
+        {/* <Button
           style={{
             color: "white",
             fontWeight: "normal",
@@ -116,10 +117,10 @@ const NavBar = () => {
             <Link to="sign-in">SignIN</Link>
           ) : (
             <Link to={"/user-dashboard"}>
-              <p style={{color:"white"}}>Profile</p>
+              <p style={{ color: "white" }}>Profile</p>
             </Link>
           )}
-        </Button>
+        </Button> */}
       </div>
     </Box>
   );
@@ -169,7 +170,7 @@ const NavBar = () => {
         >
           {/* <img src="/festLogo.png" alt="festLogo" height="90%" style={{filter:"none",}} /> */}
           <Link
-            to={"/"}
+            to="/"
             style={{
               height: "100%",
               display: "flex",
@@ -268,7 +269,7 @@ const NavBar = () => {
               Gallery
             </Button>
           </Link> */}
-          <Link to="ourteam">
+          {/* <Link to="ourteam">
             <Button
               style={{
                 color: "white",
@@ -279,8 +280,8 @@ const NavBar = () => {
             >
               Our Team
             </Button>
-          </Link>
-          <Link to="sign-in">
+          </Link> */}
+          {/* <Link to="sign-in">
             <Button
               style={{
                 color: "white",
@@ -289,18 +290,16 @@ const NavBar = () => {
               }}
             >
               {authContext.userId === " " ? (
-                <Link to="sign-in">SignIN</Link>
+                <Link to="/sign-in">SignIN</Link>
               ) : (
                 <Link to={"/user-dashboard"}>
-                  <Tooltip title="Techbuks">
-                    <Button>
-                      <p>🪙</p>
-                    </Button>
+                  <Tooltip title="user">
+                    <Avatar alt="User" sx={{height:35}}/>
                   </Tooltip>
                 </Link>
               )}
             </Button>
-          </Link>
+          </Link> */}
         </Box>
       </Box>
       <Box>

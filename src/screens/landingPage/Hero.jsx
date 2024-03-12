@@ -47,7 +47,7 @@ const Hero = () => {
         >
           <img
             className="festlogo"
-            src="/festLogo.png"
+            src="/logo.png"
             alt="fest logo"
             height={350}
             style={{

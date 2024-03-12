@@ -12,7 +12,7 @@ const Card = ({ heading, detail, route }) => {
         <h1>{heading}</h1>
         <p>{detail}</p>
         <button className="event__button" value="next" type="button">
-          <Link to={route && `${route}`}>Explore</Link> 
+          <a href={route} target="_main">Explore</a> 
         </button>
       </div>
     </> 

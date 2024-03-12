@@ -7,38 +7,35 @@ const eventsData = [
         description:
           "An event where participants can demonstrate their skills and knowledge in the realm of competitive programming.",
         whatsappLink: "",
-        // route: `./events/`,
+        route: `https://drive.google.com/file/d/13qKNoY_ActgnSG4bakbh3tgh4ImZ2HAz/view?usp=drive_link`,
       },
       {
         name: "Data Dives",
         description:
           "An environment where users can compete and demonstrate knowledge in machine learning and data handling.",
         whatsappLink: "",
-        // route: `./event/2`,
+        route: `https://drive.google.com/file/d/11g4-ygzh3esJspNMoT9lJda74ivn7GIF/view?usp=drive_link`,
       },
       {
         name: "Pixel Wizard",
         description:
           "To unleash coding and designing skills in techFEST's Website Development Competition.",
         whatsappLink: "",
-
-        // route: `./event/3`,
+        route: `https://drive.google.com/file/d/16LIQzX95M3rwArTTrLTarRZZUm83Rdzc/view?usp=drive_link`,
       },
       {
         name: "AI Chit Chat",
         description:
           "Event based competition for development of AI and possible integration in techFEST website.",
         whatsappLink: "",
-
-        // route: `./event/4`,
+        route: `https://drive.google.com/file/d/1y1-UhHCqbnGd9w8tmV4RGWqJTwgsTcFz/view?usp=drive_link`,
       },
-      {
-        name: "Poster and Paper Presentation",
-        description: "Research / Review presentations and discussions..",
-        whatsappLink: "",
-
-        // route: `./event/5`,
-      },
+      // {
+      //   name: "Poster and Paper Presentation",
+      //   description: "Research / Review presentations and discussions..",
+      //   whatsappLink: "",
+      //   route: ``,
+      // },
     ],
   },
   {
@@ -49,8 +46,7 @@ const eventsData = [
         description:
           "An event to design and fabricate a blind stick that beeps when it senses any object in front of it.",
         whatsappLink: "",
-
-        // route: `./event/1`,
+        route: `https://drive.google.com/file/d/15jtt0pbLfWCjIf9jIR4KavcMW0pQRBjG/view?usp=drive_link `,
       },
       {
         name: "Sun Sync Quest",
@@ -58,7 +54,7 @@ const eventsData = [
           "A competition based event to design and implement a real-time tracking system for solar panels.",
         whatsappLink: "",
 
-        // route: `./event/2`,
+        route: `https://drive.google.com/file/d/1xqSZ4UeaQ0wQoSaKPw-0WD3xQ4nZHf0x/view?usp=drive_link`,
       },
       {
         name: "DroneX",
@@ -66,7 +62,7 @@ const eventsData = [
           "A competitive event to design and fabricate a drone and then to conduct a race.",
         whatsappLink: "",
 
-        // route: `./event/3`,
+        route: `https://drive.google.com/file/d/1U1YtVgxEvosPOGr7-jJkilbIUtHtyxfr/view?usp=drive_link`,
       },
       {
         name: "Circuitmania",
@@ -74,14 +70,14 @@ const eventsData = [
           "An event to design and fabricate a blind stick that beeps when it senses any object in front of it.",
         whatsappLink: "",
 
-        // route: `./event/4`,
+        route: `https://drive.google.com/file/d/12l5Romo-FJHsujXUENCj_GxCdZWeN-wQ/view?usp=drive_link`,
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
         whatsappLink: "",
 
-        // route: `./event/5`,
+        route: `https://drive.google.com/file/d/1qmpi3mmpFSw8JFTt0Lty_AjjQlcQ3IIu/view?usp=drive_link`,
       },
     ],
   },
@@ -94,7 +90,7 @@ const eventsData = [
           "An event tasked with creating dishes using a zero-waste approach, minimizing food waste by utilizing all parts of ingredients.",
         whatsappLink: "",
 
-        // route: `./event/1`,
+        route: `https://drive.google.com/file/d/1XnXnFr0Jserjs_Gpjb2JyW856wAC7OLo/view?usp=drive_link`,
       },
       {
         name: "Sustainable Food Trivia",
@@ -102,7 +98,7 @@ const eventsData = [
           "A quiz-style event that aims to raise awareness about environmentally friendly food choices in a lively and engaging way.",
         whatsappLink: "",
 
-        // route: `./event/2`,
+        route: `https://drive.google.com/file/d/1secyXOi5nC3wkAwm_7LVku9Dutj8cAc6/view?usp=drive_link`,
       },
       {
         name: "Innovative Product Development",
@@ -110,7 +106,7 @@ const eventsData = [
           "An event amied to give an opportunity to use your food tech knowledge and develop a business mindset.",
         whatsappLink: "",
 
-        // route: `./event/3`,
+        route: `https://drive.google.com/file/d/1QP-YrJxzlYpUaughQ_rNk63T8A0IRadV/view?usp=drive_link`,
       },
       {
         name: "Techno-Mind",
@@ -118,7 +114,7 @@ const eventsData = [
           "An event where participants will get a chance to show their arts & imagination in the form of working models.",
         whatsappLink: "",
 
-        // route: `./event/4`,
+        route: `./event/4`,
       },
       {
         name: "FO-JET",
@@ -126,7 +122,7 @@ const eventsData = [
           "An event to develop your ideas and utilization of agricultural waste for making any useful product using things around us.",
         whatsappLink: "",
 
-        // route: `./event/5`,
+        route: `./event/5`,
       },
       {
         name: "Instant Food Product & Marketing Challenge",
@@ -134,14 +130,14 @@ const eventsData = [
           "Create a lively market atmosphere where students can sell their unique dishes and compete to be the top revenue earner.",
         whatsappLink: "",
 
-        // route: `./event/6`,
+        route: `./event/6`,
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
         whatsappLink: "",
 
-        // route: `./event/7`,
+        route: `https://drive.google.com/file/d/1jafGjvT1q1gmrOJm0leBgl3CNXUh5tSC/view?usp=drive_link`,
       },
     ],
   },
@@ -154,7 +150,7 @@ const eventsData = [
           "Designare seeks to establish a platform where students demonstrate their modeling abilities.",
         whatsappLink: "",
 
-        // route: `./event/1`,
+        route: `https://drive.google.com/file/d/1C8Miln1Isq7IjHUIgRjdcnL2UjBa24ZK/view?usp=drive_link`,
       },
       {
         name: "Trussload",
@@ -162,7 +158,7 @@ const eventsData = [
           "A competitive event to design and fabricate truss to withhold maximum load possible.",
         whatsappLink: "",
 
-        // route: `./event/2`,
+        route: `https://drive.google.com/file/d/1AuAATIdxTht8IA_X432ovAX46p2yHavb/view?usp=drive_link`,
       },
       {
         name: "Fabriqure",
@@ -170,7 +166,7 @@ const eventsData = [
           "A competitive event to showcase skills in stamping, welding, cutting, bending, and assembling processes.",
         whatsappLink: "",
 
-        // route: `./event/3`,
+        route: `https://drive.google.com/file/d/1AuAATIdxTht8IA_X432ovAX46p2yHavb/view?usp=drive_link`,
       },
       {
         name: "Earthquake Structural Test",
@@ -178,7 +174,7 @@ const eventsData = [
           "It’s a competition to assess the seismic, resilience of budlings and infrastructure through designing and fabrication.",
         whatsappLink: "",
 
-        // route: `./event/4`,
+        route: `https://drive.google.com/file/d/1reC1jAFbYorFB0MjkQDIj9gx49YnyFKx/view?usp=drive_link`,
       },
       {
         name: "Hydraload",
@@ -186,35 +182,35 @@ const eventsData = [
           "A competition to check efficient lifting capabilities, precise control of hydraulics functions and overall reliability.",
         whatsappLink: "",
 
-        // route: `./event/5`,
+        route: `https://drive.google.com/file/d/1Cq76Hm9ZLE2c_CO8i3x2UD6EOI_gdY3O/view?usp=drive_link`,
       },
-      {
-        name: "Poster and Paper Presentation",
-        description: "Research / Review presentations and discussions.",
-        whatsappLink: "",
+      // {
+      //   name: "Poster and Paper Presentation",
+      //   description: "Research / Review presentations and discussions.",
+      //   whatsappLink: "",
 
-        // route: `./event/6`,
-      },
+      //   route: `./event/6`,
+      // },
     ],
   },
   {
     id: 5,
     events: [
-      {
-        name: "Application of Lithium Battery",
-        description:
-          "An event to devolop a working project with the application of lithium battery.",
-        whatsappLink: "",
+      // {
+      //   name: "Application of Lithium Battery",
+      //   description:
+      //     "An event to devolop a working project with the application of lithium battery.",
+      //   whatsappLink: "",
 
-        // route: `./event/1`,
-      },
+      //   route: `./event/1`,
+      // },
       {
         name: "Chemi-Storm",
         description:
           "Presentation of working and semi-working models under the umbrella of chemical engineering.",
         whatsappLink: "",
 
-        // route: `./event/2`,
+        route: `https://drive.google.com/file/d/15HlvGQ7N1bpozf19lYNKv7a3uP4epKx5/view?usp=drive_link`,
       },
       {
         name: "Soap and Perfume Fragrance Making",
@@ -222,7 +218,7 @@ const eventsData = [
           "An event to produce a sample of soap and perfume, to deal with quality control process and elaluate the fragrance",
         whatsappLink: "",
 
-        // route: `./event/3`,
+        route: `https://drive.google.com/file/d/1spO4fjtn8rg9VBjMpM9zKjleLEcSTSNX/view?usp=drive_link`,
       },
       {
         name: "Jam Session",
@@ -230,7 +226,7 @@ const eventsData = [
           "An interesting game like competition to encourage student to showcase their oral communication ability.",
         whatsappLink: "",
 
-        // route: `./event/4`,
+        route: `https://drive.google.com/file/d/1FKnYrhIpCw203QVEwcArQDdmHakEpAYI/view?usp=drive_link`,
       },
       {
         name: "Chemi-Mystery",
@@ -238,15 +234,15 @@ const eventsData = [
           "A three round quiz event, to inhance knowledge and involvement in chemical deartment.",
         whatsappLink: "",
 
-        // route: `./event/5`,
+        route: `https://drive.google.com/file/d/1oqUNVUziQUWKvXkaVoSU7r7soKMjuT2s/view?usp=drive_link`,
       },
-      {
-        name: "Poster and Paper Presentation",
-        description: "Research / Review presentations and discussions.",
-        whatsappLink: "",
+      // {
+      //   name: "Poster and Paper Presentation",
+      //   description: "Research / Review presentations and discussions.",
+      //   whatsappLink: "",
 
-        // route: `./event/6`,
-      },
+      //   route: `./event/6`,
+      // },
     ],
   },
   {
@@ -257,30 +253,35 @@ const eventsData = [
         description:
           "It’s a competition to attain sustainability and promote the use of renewable energy resources.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/16wQY0CcuRkBfdmJ03lk3TKDq_E-JD-_N/view?usp=drive_link`
       },
       {
         name: "IoT Challenge",
         description:
           "A competition aimed to promote collaboration and push the boundaries of IOT technology.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1HZH84MXlIQ3lUoK-5Ijm5KMwfPY7X3XB/view?usp=drive_link`
+
       },
       {
         name: "Electronics Design Challenge",
         description:
           "Electronics Design Challenge, where creativity meets engineering. In this competition, participants will design electronic circuits to solve real-world problems. Join the Electronics Design Challenge to create practical solutions using electronics. Participants will learn about circuit design and apply their skills to solve challenges.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1pivuxWN8dDz-NYcrsKtIzm_3MrS_1E6_/view?usp=drive_link`
       },
       {
         name: "Wireless Communication Hackathon",
         description:
           "The Wireless Communication Hackathon, where innovation drives connectivity! This event explores wireless technologies like Bluetooth and Wi-Fi to create new solutions for IoT and smart devices. Unleash your creativity in the Wireless Communication Hackathon. Participants will develop projects using wireless technologies to solve real-world problems in IoT, smart homes, and wearable devices.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1vXxjU5CPiTAtwb4ievMxkiSTGihNwTSo/view?usp=drive_link`
       },
-      {
-        name: "Poster and Paper Presentation",
-        description: "Research / Review presentations and discussions.",
-        whatsappLink: "",
-      },
+      // {
+      //   name: "Poster and Paper Presentation",
+      //   description: "Research / Review presentations and discussions.",
+      //   whatsappLink: "",
+      // },
     ],
   },
   {
@@ -291,52 +292,66 @@ const eventsData = [
         description:
           "A competitive event to give our students exposure and awareness regarding biding in real life.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1VSQ3CbaFDRf9gaSA81R91FpqIWPWvXru/view?usp=drive_link`
       },
       {
         name: "Shuruat",
         description:
           "An event to present their innovative bussines models pertaining to our them.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1tW7niWd67MrBi5G8CroMUErP7RVUpK38/view?usp=drive_link`
       },
       {
         name: "Adhyayan",
         description:
           "The competitive event in which our participants do case-study, and come up with upheavals.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1_1UD4itUYBxh0BPO4mcfNREk4Vm0fw4U/view?usp=drive_link`
       },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1KhoZQ9VvP4DavV8vQBbSbUNRTlKZPfJ3/view?usp=drive_link`
       },
+      // {
+      //   name: "Udyam",
+      //   description: "Research / Review presentations and discussions.",
+      //   whatsappLink: "",
+      //   route:`https://drive.google.com/file/d/17Vl6uDyLmRx7SZ5IXEuMVuJk0On8gyfY/view?usp=drive_link`
+      // },
+     
     ],
   },
   {
     id: 8,
     events: [
-      {
-        name: "Fun Cricket",
-        description:
-          "A cricket tournament to enjoy a light-hearted and entertaining version of traditional cricket.",
-        whatsappLink: "",
-      },
+      // {
+      //   name: "Fun Cricket",
+      //   description:
+      //     "A cricket tournament to enjoy a light-hearted and entertaining version of traditional cricket.",
+      //   whatsappLink: "",
+      // },
       {
         name: "One Piece",
         description:
           "A 2 day run treasure hunt across the campus and to find codes and compete with other teams.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1tgmR2i7DmRt1v_r8lTwBVe2W0DduM_cH/view?usp=drive_link`
       },
       {
         name: "Battle Royal",
         description:
           "A online game tournament to build soft skills like teamwork, social interaction, strategic thinking and decision-making.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1S4s-zwsL8nYAAW45qPxhiMqc0oI-eQAV/view?usp=drive_link`
       },
       {
         name: "Shatranj",
         description:
           "A traditional chess match to sharpen their thinking capabilities, decision-making and ability to handle pressure.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1W7xF62O5pB-4e9T0-7EHh2i1HR-mLx3B/view?usp=drive_link`
       },
     ],
   },
@@ -348,29 +363,59 @@ const eventsData = [
         description:
           "A competitive event in terms of designing and fabrication of robots that can pin down the opponent robot.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/18sJDXWGSvK5NtMAae9DIvo-0iGjdJNUz/view?usp=drive_link`
       },
       {
         name: "Margdarshak",
         description:
           "A competition to assemble a line following robot which can follow a line drawn on the floor with precision.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1R3l2teg55b02haMjs13UUsudkjgZ4hWJ/view?usp=drive_link`
       },
       {
         name: "Jarvis Cup",
         description:
           "An event to develop a fast robot which can take a lead and score maximum number of goal.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1UO_StOMtDSVvhxwoHYyIyWWpY3sscill/view?usp=drive_link`
       },
       {
         name: "Hovermania",
         description:
           "A competition based event to design and fabricate a amphibious bot, that can work in all the terrains.",
         whatsappLink: "",
+        route:`https://drive.google.com/file/d/1TljEm6CLuX7grTzA7BrwAvBtRrUOue9G/view?usp=drive_link`
       },
     ],
   },
   {
     id: 10,
+    events: [
+      {
+        name: "Kritrim",
+        description:
+          "Working Model: A competition based expo to showcase models that are working and operational. Semi-Working Model: A competition to showcase models that are partially working and are semi-operational.",
+        whatsappLink: "",
+        route:`https://drive.google.com/file/d/1oo5zBE4bANKDMNiJ31UFn2k4G-msXM8F/view?usp=drive_link`
+      },
+      {
+        name: "Jugaad",
+        description:
+          "A competitive exhibition, where models are fabricated from wastes and are developed to solve daily life small problems.",
+        whatsappLink: "",
+        route:`https://drive.google.com/file/d/1Y5OyC9L7ZTvqUGnbced4Z6aLJlEbJw_D/view?usp=drive_link`
+      },
+      {
+        name: "Hackathon",
+        description:
+          "A open platform to solve a real life industry problem and gain a chance to get internship in that industry.",
+        whatsappLink: "",
+        route:`https://drive.google.com/file/d/136AewXu2Fxs2AQk-st8xSiIbyDGZM5jB/view?usp=drive_link`
+      },
+    ],
+  },
+  {
+    id: 11,
     events: [
       {
         name: "Exhibition - Working Model, Non-Working Model ",
@@ -392,45 +437,25 @@ const eventsData = [
       },
       {
         name: "Quiz, Math Speed Evaluation, Inter School GD",
-        description: "To help student gain math calculation speed and also to conduct inter school GD to boost communication skills.",
+        description:
+          "To help student gain math calculation speed and also to conduct inter school GD to boost communication skills.",
         whatsappLink: "",
       },
       {
         name: "Movie Screening, Sports Collaboration",
-        description: "To give students a movie screening and sports collaboration for fun activities. ",
+        description:
+          "To give students a movie screening and sports collaboration for fun activities. ",
         whatsappLink: "",
       },
       {
         name: "Paper Presentation for Teachers, Student PPT Presentation",
-        description: "An arrangement for teachers to present their papers and gain experience. ",
+        description:
+          "An arrangement for teachers to present their papers and gain experience. ",
         whatsappLink: "",
       },
       {
         name: " Health and Heartfulness  Workshop",
         description: "To conduct workshop like yoga and health related.",
-        whatsappLink: "",
-      },
-    ],
-  },
-  {
-    id: 11,
-    events: [
-      {
-        name: "Kritrim",
-        description:
-          "Working Model: A competition based expo to showcase models that are working and operational. Semi-Working Model: A competition to showcase models that are partially working and are semi-operational.",
-        whatsappLink: "",
-      },
-      {
-        name: "Jugaad",
-        description:
-          "A competitive exhibition, where models are fabricated from wastes and are developed to solve daily life small problems.",
-        whatsappLink: "",
-      },
-      {
-        name: "Hackathon",
-        description:
-          "A open platform to solve a real life industry problem and gain a chance to get internship in that industry.",
         whatsappLink: "",
       },
     ],

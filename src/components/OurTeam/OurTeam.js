@@ -185,7 +185,7 @@ const OurTeam = () => {
           />
           <MemberCard
             name={"Ravi Ranjan"}
-            post={"Web Coordinator"}
+            post={"Web Coordinator & Backend Lead"}
             image={photos.Ravi}
             linkedIn={"https://www.linkedin.com/in/ravi2003"}
             mail={"2140131@sliet.ac.in"}

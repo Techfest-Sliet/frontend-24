@@ -25,6 +25,10 @@ import Loader from "../../components/Loader/loader";
 //loader
 //error model
 
+import { MdOutlineGroupAdd } from "react-icons/md";
+import { GrGroup } from "react-icons/gr";
+import TeamTable from "./TeamTable";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -41,9 +45,6 @@ const style = {
 };
 
 const UserDashboard = () => {
-  // const events = ["LFR", "sliet hackathon"];
-  // const workshops = ["chatgpt", "solidworks"];
-
   const authContext = useContext(AuthContext);
   const [errorMade, setErrorMade] = useState();
   const [userId, setUserId] = useState();
@@ -52,6 +53,8 @@ const UserDashboard = () => {
   const [teamMembers, setTeamMembers] = useState("");
   const [openEditPersonal, setOpenEditPersonal] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
+  const [openTeamTable, setOpenTeamTable] = useState(false);
+  const [addMember, setAddMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [collegeName, setCollegeName] = useState("");
@@ -60,9 +63,13 @@ const UserDashboard = () => {
   const [wphone, setWphone] = useState("");
   const [fieldErr, setFieldErr] = useState(null);
   const [branchErr, setBranchErr] = useState(null);
-  const [phoneErr, setPhoneErr] = useState(null);
+  const [teamMemberEmail, setTeamMemberEmail] = useState(false);
+  const [teamMemberPhone, setTeamMemberPhone] = useState(false);
+  const [teamName, setTeamName] = useState(false);
 
   const [user, setUser] = useState("");
+
+  const t = false;
 
   const options = {
     day: "2-digit",
@@ -96,7 +103,7 @@ const UserDashboard = () => {
       .post(
         `${baseUrl}/user/pullevent`,
         { id: userId },
-        
+
         {
           headers: {
             Authorization: "Bearer " + authContext.token,
@@ -137,7 +144,7 @@ const UserDashboard = () => {
       .post(`${baseUrl}/user/updateuser`, update_user)
       .then((result) => {
         const res = result;
-        console.log(res);
+        // console.log(res);
         if (res.status === 400) {
           setFieldErr(
             "Incomplete update request! Kindly try again in some time."
@@ -199,7 +206,44 @@ const UserDashboard = () => {
         }
       })
       .catch((err) => {
-        // setIsLoading(false);
+        setIsLoading(false);
+        console.log(err.response.data);
+        return;
+      });
+  };
+
+  const addTeamMember = async (e) => {
+    e.preventDefault();
+    if (teamMemberEmail.trim().length === 0) {
+      setFieldErr("Field(s) should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+
+    setIsLoading(true);
+    await axios
+      .post(`${baseUrl}/team/create`, {
+        teamName: teamName,
+        members: teamMemberEmail,
+      })
+      .then((result) => {
+        const res = result;
+        console.log(res);
+        if (res.status === 400) {
+          setFieldErr(
+            "Incomplete Team request! Kindly try again in some time."
+          );
+        } else if (res.status === 201) {
+          setErrorMade({
+            title: "Updated!",
+            message: "Team member added successfully.",
+          });
+        }
+      })
+      .catch((err) => {
+        setIsLoading(false);
         console.log(err.response.data);
         return;
       });
@@ -207,7 +251,7 @@ const UserDashboard = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log("Authcontext==>", authContext);
+    // console.log("Authcontext==>", authContext);
     setUserId(authContext.userId);
     const userId = authContext.userId;
     // console.log("userId ==> ", authContext.userId);
@@ -510,7 +554,7 @@ const UserDashboard = () => {
                     <Typography
                       sx={{
                         fontSize: isMobile ? 18 : 25,
-                        left: "-5rem",
+                        left: isMobile ? "-5rem" : "0rem",
                         position: "relative",
                         whiteSpace: "nowrap",
                       }}
@@ -586,24 +630,26 @@ const UserDashboard = () => {
                         events.length > 0 &&
                         events.map((event) => {
                           return (
-                            <Box sx={{ margin: "10%" }}>
-                              <Typography
-                                sx={{
-                                  fontSize: 20,
-                                  fontWeight: 500,
-                                  color: "white",
-                                }}
-                                key={event._id}
-                              >
-                                {event.eventName}
-                              </Typography>
-                              <Divider
-                                sx={{
-                                  border: "0.2px solid grey",
-                                  width: 400,
-                                }}
-                              />
-                            </Box>
+                            <>
+                              <Box sx={{ margin: "10%" }}>
+                                <Typography
+                                  sx={{
+                                    fontSize: 20,
+                                    fontWeight: 500,
+                                    color: "white",
+                                  }}
+                                  key={event._id}
+                                >
+                                  {event.eventName}
+                                </Typography>
+                                <Divider
+                                  sx={{
+                                    border: "0.2px solid grey",
+                                    width: 380,
+                                  }}
+                                />
+                              </Box>
+                            </>
                           );
                         })}
                     </Grid>
@@ -614,14 +660,88 @@ const UserDashboard = () => {
                           return (
                             <Box sx={{ margin: "10%" }}>
                               <Typography
-                                sx={{ fontSize: 20, fontWeight: 500 }}
+                                sx={{
+                                  fontSize: 20,
+                                  fontWeight: 500,
+                                  whiteSpace: "none",
+                                }}
                               >
                                 {event.eventDate}
                               </Typography>
-                              <MdDelete onClick={deleteEvent} />
+                              <Tooltip title="Add Team">
+                                <Button
+                                  variant=" "
+                                  onClick={() => {
+                                    setAddMember(true);
+                                  }}
+                                >
+                                  <MdOutlineGroupAdd />
+                                </Button>
+                              </Tooltip>
+                              <Tooltip title="Team Table">
+                                <Button variant=" ">
+                                  <GrGroup />
+                                </Button>
+                              </Tooltip>
+                              {addMember && (
+                                <Modal
+                                  open={true}
+                                  onClose={() => {
+                                    setAddMember(false);
+                                  }}
+                                  aria-labelledby="child-modal-title"
+                                  aria-describedby="child-modal-description"
+                                >
+                                  <Box sx={style}>
+                                    <Typography>
+                                      Add Team Member's Detail
+                                    </Typography>
+                                    <TextField
+                                      id="standard-basic"
+                                      label="Team Name"
+                                      variant="standard"
+                                      sx={{ marginBottom: 2 }}
+                                      onChange={(e) =>
+                                        setTeamName(e.target.value)
+                                      }
+                                    />
+                                    <TextField
+                                      id="standard-basic"
+                                      label="Email"
+                                      variant="standard"
+                                      sx={{ marginBottom: 2 }}
+                                      onChange={(e) =>
+                                        setTeamMemberEmail(e.target.value)
+                                      }
+                                    />
+                                    <TextField
+                                      id="standard-basic"
+                                      label="Phone Number"
+                                      variant="standard"
+                                      sx={{ marginBottom: 2 }}
+                                      onChange={(e) =>
+                                        setTeamMemberPhone(e.target.value)
+                                      }
+                                    />
+                                    <Button
+                                      variant="contained"
+                                      style={{
+                                        display: "flex",
+                                        marginLeft: "auto",
+                                      }}
+                                      onClick={addTeamMember}
+                                    >
+                                      OK
+                                    </Button>
+                                  </Box>
+                                </Modal>
+                              )}
                             </Box>
                           );
                         })}
+                      {t && (
+                        <TeamTable teamMembers={teamMembers} />
+                      )} 
                     </Grid>
                   </Grid>
                 </Box>

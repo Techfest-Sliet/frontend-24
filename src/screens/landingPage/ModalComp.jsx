@@ -135,7 +135,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Sponsors
                     </Button>
                   </Link>
-                  <Link to="#">
+                  <Link to="/gallery">
                     <Button
                       style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
                     >
