@@ -108,30 +108,37 @@ const eventsData = [
 
         route: `https://drive.google.com/file/d/1QP-YrJxzlYpUaughQ_rNk63T8A0IRadV/view?usp=drive_link`,
       },
-      {
-        name: "Techno-Mind",
-        description:
-          "An event where participants will get a chance to show their arts & imagination in the form of working models.",
-        whatsappLink: "",
+      // {
+      //   name: "Techno-Mind",
+      //   description:
+      //     "An event where participants will get a chance to show their arts & imagination in the form of working models.",
+      //   whatsappLink: "",
 
-        route: `./event/4`,
-      },
-      {
-        name: "FO-JET",
-        description:
-          "An event to develop your ideas and utilization of agricultural waste for making any useful product using things around us.",
-        whatsappLink: "",
+      //   route: `./event/4`,
+      // },
+      // {
+      //   name: "FO-JET",
+      //   description:
+      //     "An event to develop your ideas and utilization of agricultural waste for making any useful product using things around us.",
+      //   whatsappLink: "",
 
-        route: `./event/5`,
-      },
-      {
-        name: "Instant Food Product & Marketing Challenge",
-        description:
-          "Create a lively market atmosphere where students can sell their unique dishes and compete to be the top revenue earner.",
-        whatsappLink: "",
+      //   route: `./event/5`,
+      // },
+      // {
+      //   name: "Instant Food Product & Marketing Challenge",
+      //   description:
+      //     "Create a lively market atmosphere where students can sell their unique dishes and compete to be the top revenue earner.",
+      //   whatsappLink: "",
 
-        route: `./event/6`,
-      },
+      //   route: `./event/6`,
+      // },
+      // {
+      //   name: "Food Production and Market Competency",
+      //   description: "Research / Review presentations and discussions.",
+      //   whatsappLink: "",
+
+      //   // route: `https://drive.google.com/file/d/1jafGjvT1q1gmrOJm0leBgl3CNXUh5tSC/view?usp=drive_link`,
+      // },
       {
         name: "Poster and Paper Presentation",
         description: "Research / Review presentations and discussions.",
@@ -139,6 +146,7 @@ const eventsData = [
 
         route: `https://drive.google.com/file/d/1jafGjvT1q1gmrOJm0leBgl3CNXUh5tSC/view?usp=drive_link`,
       },
+
     ],
   },
   {
