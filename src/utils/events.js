@@ -404,21 +404,21 @@ const eventsData = [
         description:
           "Working Model: A competition based expo to showcase models that are working and operational. Semi-Working Model: A competition to showcase models that are partially working and are semi-operational.",
         whatsappLink: "",
-        route:`https://drive.google.com/file/d/1oo5zBE4bANKDMNiJ31UFn2k4G-msXM8F/view?usp=drive_link`
+        // route:`https://drive.google.com/file/d/1oo5zBE4bANKDMNiJ31UFn2k4G-msXM8F/view?usp=drive_link`
       },
       {
         name: "Jugaad",
         description:
           "A competitive exhibition, where models are fabricated from wastes and are developed to solve daily life small problems.",
         whatsappLink: "",
-        route:`https://drive.google.com/file/d/1Y5OyC9L7ZTvqUGnbced4Z6aLJlEbJw_D/view?usp=drive_link`
+        // route:`https://drive.google.com/file/d/1Y5OyC9L7ZTvqUGnbced4Z6aLJlEbJw_D/view?usp=drive_link`
       },
       {
         name: "Hackathon",
         description:
           "A open platform to solve a real life industry problem and gain a chance to get internship in that industry.",
         whatsappLink: "",
-        route:`https://drive.google.com/file/d/136AewXu2Fxs2AQk-st8xSiIbyDGZM5jB/view?usp=drive_link`
+        // route:`https://drive.google.com/file/d/136AewXu2Fxs2AQk-st8xSiIbyDGZM5jB/view?usp=drive_link`
       },
     ],
   },

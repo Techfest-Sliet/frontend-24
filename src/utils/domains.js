@@ -63,15 +63,15 @@ const domainData = [
   },
   {
     "id":10,
-    "name": "Atomheimer",
-    "description": "Domain of Sciences",
-    "imagePath":domainImages.Atomheimer,
-  },
-  {
-    "id":11,
     "name": "Karyarachna",
     "description": "Domain of Exhibition.",
     "imagePath":domainImages.Karyarachna,
+  },
+  {
+    "id":11,
+    "name": "Atomheimer",
+    "description": "Domain of Sciences",
+    "imagePath":domainImages.Atomheimer,
   },
   // {
   //   "id":12,
