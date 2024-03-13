@@ -233,6 +233,15 @@ const OurTeam = () => {
             linkedIn={"https://www.linkedin.com/in/arpit-singh-b2ba5b279"}
             image={photos.Arpit}
           />
+          <MemberCard
+            name={"Prakhyat Prakhar"}
+            post={"Android App Developer"}
+            mail={"2244218@sliet.ac.in"}
+            linkedIn={
+              "https://www.linkedin.com/in/prakhyat-prakhar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            }
+            image={photos.Prakhyat}
+          />
         </section>
       </div>
     </div>

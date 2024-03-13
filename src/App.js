@@ -65,10 +65,10 @@ function App() {
           <Route path="/verify" element={<EmailVerify />} />
           {!authContext.isUserLoggedIn && (
             <Route path="/user-dashboard" element={<UserDashBoard />} />
-          )}
+          )} */}
           {!authContext.isUserLoggedIn && (
             <Route path="/team" element={<TeamTable />} />
-          )} */}
+          )}
           {/* {!authContext.isUserLoggedIn && (
             <Route path="/register" element={<RegisterEvent />} />
           )} */}

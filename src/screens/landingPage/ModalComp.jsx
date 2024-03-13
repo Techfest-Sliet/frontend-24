@@ -275,7 +275,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     }}
                     onClick={downloadPdf}
                   >
-                    Brouchure
+                    Brochure
                   </Button>
                 </Stack>
               </Box>

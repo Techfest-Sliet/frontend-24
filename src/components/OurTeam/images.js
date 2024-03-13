@@ -11,7 +11,7 @@ import ViceChairmen2 from "./images/PKDasSir.png";
 import Rohit from "./images/Rohit Raj.jpg";
 import Kishan from "./images/Kishan.jpg";
 import Arjun from "./images/Arjun.jpg";
-import Gaurav from "./images/Gaurav.jpg"
+import Gaurav from "./images/Gaurav.jpg";
 import Sakshi from "./images/Sakshi.jpg";
 import Swati from "./images/Swati.png";
 import Shambhavi from "./images/Shambhavi.jpg";
@@ -22,6 +22,7 @@ import Ravi from "./images/Ravi.jpg";
 import Chitresh from "./images/Chitresh.jpg";
 import Shudhanshu from "./images/Shudhanshu.jpg";
 import Arpit from "./images/Arpit .jpg";
+import Prakhyat from "./images/Prakhyat.jpg";
 
 export const photos = {
   Director,
@@ -40,5 +41,6 @@ export const photos = {
   Ravi,
   Chitresh,
   Shudhanshu,
-  Arpit
+  Arpit,
+  Prakhyat,
 };
