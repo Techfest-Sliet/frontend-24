@@ -176,6 +176,7 @@ const NavBar = () => {
               display: "flex",
               alignItems: "center",
               width: "100%",
+              zIndex:"10000"
             }}
           >
             <img

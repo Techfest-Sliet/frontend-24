@@ -29,8 +29,13 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
   }, []);
 
   const downloadPdf = () => {
-    const pdfPath = `techFEST'24 PPT _ ADT.pdf`;
-    saveAs(pdfPath, `techFEST'24 Brochure.pdf`);
+    const pdfUrl = "TF'24Brochure.pdf";
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = "techFEST'24 Brochure.pdf"; // specify the filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -39,7 +44,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
       variants={slideInFromBottom(0.5)}
       style={{ width: "100%", height: "100vh" }}
       onClick={handleClose}
-      >
+    >
       {/* <button onClick={handleClose}>clickme</button> */}
       <Modal
         open={closet}
@@ -95,56 +100,88 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                 >
                   <Link to="/">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       Home
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       Shows
                     </Button>
                   </Link>
                   <Link to="/workshops">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       Workshops
                     </Button>
                   </Link>
                   <Link to="/domains">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       Domains
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       TechExpo
                     </Button>
                   </Link>
                   <Link to="/sponsor">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       Sponsors
                     </Button>
                   </Link>
                   <Link to="/gallery">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       Gallery
                     </Button>
                   </Link>
                   <Link to="#">
                     <Button
-                      style={{ color: "white", fontFamily: "Droid sans", fontWeight:"800" }}
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
                     >
                       About Us
                     </Button>
@@ -195,16 +232,25 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       // border: "1px solid red",
                     }}
                   >
-                    <a href="https://www.instagram.com/techfestsliet_/" target="main">
+                    <a
+                      href="https://www.instagram.com/techfestsliet_/"
+                      target="main"
+                    >
                       <FaInstagram color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="https://www.linkedin.com/company/techfest-sliet/" target="main">
+                    <a
+                      href="https://www.linkedin.com/company/techfest-sliet/"
+                      target="main"
+                    >
                       <FaLinkedin color="white" fontSize={fontSize + "rem"} />
                     </a>
                     <a href="https://twitter.com/techFEST_SLIET" target="main">
                       <FaXTwitter color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="https://www.youtube.com/@techfestslietofficial" target="main">
+                    <a
+                      href="https://www.youtube.com/@techfestslietofficial"
+                      target="main"
+                    >
                       <FaYoutube color="white" fontSize={fontSize + "rem"} />
                     </a>
                     <a href="#" target="main">
@@ -229,7 +275,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     }}
                     onClick={downloadPdf}
                   >
-                    Brouchure 
+                    Brouchure
                   </Button>
                 </Stack>
               </Box>
