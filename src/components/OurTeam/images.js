@@ -11,6 +11,7 @@ import ViceChairmen2 from "./images/PKDasSir.png";
 import Rohit from "./images/Rohit Raj.jpg";
 import Kishan from "./images/Kishan.jpg";
 import Arjun from "./images/Arjun.jpg";
+import Gaurav from "./images/Gaurav.jpg"
 import Sakshi from "./images/Sakshi.jpg";
 import Swati from "./images/Swati.png";
 import Shambhavi from "./images/Shambhavi.jpg";
@@ -30,6 +31,7 @@ export const photos = {
   ViceChairmen2,
   Rohit,
   Kishan,
+  Gaurav,
   Arjun,
   Sakshi,
   Swati,

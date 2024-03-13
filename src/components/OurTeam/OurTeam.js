@@ -71,7 +71,9 @@ const OurTeam = () => {
             image={photos.Chairman}
           />
         </section>
-        <h1 style={{ display: "flex", justifyContent: "center" }}>Vice-Chairman</h1>
+        <h1 style={{ display: "flex", justifyContent: "center" }}>
+          Vice-Chairman
+        </h1>
         <section
           className="Vice-Chairman"
           style={{
@@ -123,13 +125,15 @@ const OurTeam = () => {
             linkedIn={"https://www.linkedin.com/in/arjun-sharma-as23/"}
             mail={"2236036@sliet.ac.in"}
           />
-          {/* <MemberCard
+          <MemberCard
             name={"Gaurav Sharma"}
             post={"Core Coordinator"}
             mail={"2140113@sliet.ac.in"}
-            linkedIn={""}
-            image={""}
-          /> */}
+            linkedIn={
+              "https://www.linkedin.com/in/gaurav-sharma-81a344201?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            }
+            image={photos.Gaurav}
+          />
           <MemberCard
             name={"Kishan Kashyap"}
             post={"Core Coordinator"}
