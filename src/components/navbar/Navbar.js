@@ -94,7 +94,7 @@ const NavBar = () => {
               Gallery
             </Button>
           </Link> */}
-        {/* <Link to="/ourteam">
+        <Link to="/ourteam">
           <Button
             style={{
               color: "white",
@@ -105,7 +105,7 @@ const NavBar = () => {
           >
             Our Team
           </Button>
-        </Link> */}
+        </Link>
         {/* <Button
           style={{
             color: "white",
@@ -269,7 +269,7 @@ const NavBar = () => {
               Gallery
             </Button>
           </Link> */}
-          {/* <Link to="ourteam">
+          <Link to="ourteam">
             <Button
               style={{
                 color: "white",
@@ -280,7 +280,7 @@ const NavBar = () => {
             >
               Our Team
             </Button>
-          </Link> */}
+          </Link>
           {/* <Link to="sign-in">
             <Button
               style={{

@@ -9,7 +9,9 @@ const OurTeam = () => {
   return (
     <div>
       <div className="ourTeam" style={{ marginTop: "5rem", width: "100%" }}>
-        <h1 style={{ display: "flex", justifyContent: "center" }}>Director-SLIET</h1>
+        <h1 style={{ display: "flex", justifyContent: "center" }}>
+          Patron-In-Chief
+        </h1>
         <section
           className="Director"
           style={{
@@ -29,9 +31,7 @@ const OurTeam = () => {
             mail={"director@sliet.ac.in"}
           />
         </section>
-        <h1 style={{ display: "flex", justifyContent: "center" }}>
-          Dean - Student Welfare
-        </h1>
+        <h1 style={{ display: "flex", justifyContent: "center" }}>Patron</h1>
         <section
           className="DeanSW"
           style={{
@@ -51,11 +51,9 @@ const OurTeam = () => {
             mail={"rajesh_krs@sliet.ac.in"}
           />
         </section>
-        <h1 style={{ display: "flex", justifyContent: "center" }}>
-          Chairmen - techFEST'24
-        </h1>
+        <h1 style={{ display: "flex", justifyContent: "center" }}>Chairman</h1>
         <section
-          className="Chairmen"
+          className="Chairman"
           style={{
             display: "flex",
             marginBottom: "4.5rem",
@@ -72,6 +70,17 @@ const OurTeam = () => {
             mail={"gulshanjawa@sliet.ac.in"}
             image={photos.Chairman}
           />
+        </section>
+        <h1 style={{ display: "flex", justifyContent: "center" }}>Vice-Chairman</h1>
+        <section
+          className="Vice-Chairman"
+          style={{
+            display: "flex",
+            marginBottom: "4.5rem",
+            justifyContent: "center",
+            flexDirection: isMobile && "column",
+          }}
+        >
           <MemberCard
             name={"Dr. Sunil Kumar"}
             post={"Vice-Chairman"}
@@ -114,13 +123,13 @@ const OurTeam = () => {
             linkedIn={"https://www.linkedin.com/in/arjun-sharma-as23/"}
             mail={"2236036@sliet.ac.in"}
           />
-          <MemberCard
+          {/* <MemberCard
             name={"Gaurav Sharma"}
             post={"Core Coordinator"}
             mail={"2140113@sliet.ac.in"}
             linkedIn={""}
             image={""}
-          />
+          /> */}
           <MemberCard
             name={"Kishan Kashyap"}
             post={"Core Coordinator"}
@@ -219,7 +228,7 @@ const OurTeam = () => {
             mail={"2343011@sliet.ac.in"}
             linkedIn={"https://www.linkedin.com/in/arpit-singh-b2ba5b279"}
             image={photos.Arpit}
-          /> 
+          />
         </section>
       </div>
     </div>
