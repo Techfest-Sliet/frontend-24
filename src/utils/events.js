@@ -245,14 +245,14 @@ const eventsData = [
       {
         name: "Electronics Design Challenge",
         description:
-          "Electronics Design Challenge, where creativity meets engineering. In this competition, participants will design electronic circuits to solve real-world problems. Join the Electronics Design Challenge to create practical solutions using electronics. Participants will learn about circuit design and apply their skills to solve challenges.",
+          "Participants will design electronic circuits to solve real-world problems. Participants will learn about circuit design and apply their skills to solve challenges.",
         whatsappLink: "",
         route: `https://drive.google.com/file/d/1pivuxWN8dDz-NYcrsKtIzm_3MrS_1E6_/view?usp=drive_link`,
       },
       {
         name: "Wireless Communication Hackathon",
         description:
-          "The Wireless Communication Hackathon, where innovation drives connectivity! This event explores wireless technologies like Bluetooth and Wi-Fi to create new solutions for IoT and smart devices. Unleash your creativity in the Wireless Communication Hackathon. Participants will develop projects using wireless technologies to solve real-world problems in IoT, smart homes, and wearable devices.",
+          "Unleash your creativity in the Wireless Communication Hackathon. Participants will develop projects using wireless technologies to solve real-world problems in IoT, smart homes and wearable devices.",
         whatsappLink: "",
         route: `https://drive.google.com/file/d/1vXxjU5CPiTAtwb4ievMxkiSTGihNwTSo/view?usp=drive_link`,
       },
