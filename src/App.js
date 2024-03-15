@@ -18,9 +18,8 @@ import authContext from "./components/Auth/Auth";
 import FAQ from "./components/FAQ/Faq";
 
 import AboutUs from "./screens/AboutUs/AboutUs";
-import UpdateUser from "./components/User/UpdateUser/UpdateUser";
-import RegisterEvent from "./components/User/RegisterEvent/RegisterEvent";
 import UserDashBoard from "./screens/UserDashboard/UserDashboard";
+import Payment from "./components/Payment/Payment"
 import NavBar from "./components/navbar/Navbar";
 
 import Footer from "./components/Footer/Footer";
@@ -41,6 +40,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useMediaQuery } from "@mui/material";
 
+
 function App() {
 
   const isMobile = useMediaQuery("(min-width:450px)");
@@ -54,7 +54,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={<Error />} />
-          {/* {!authContext.isUserLoggedIn && (
+          {!authContext.isUserLoggedIn && (
             <Route path="/sign-in" element={<SignIn />} />
           )}
           {!authContext.isUserLoggedIn && (
@@ -65,9 +65,12 @@ function App() {
           <Route path="/verify" element={<EmailVerify />} />
           {!authContext.isUserLoggedIn && (
             <Route path="/user-dashboard" element={<UserDashBoard />} />
-          )} */}
+          )}
           {!authContext.isUserLoggedIn && (
             <Route path="/team" element={<TeamTable />} />
+          )}
+          {!authContext.isUserLoggedIn && (
+            <Route path="/payment" element={<Payment />} />
           )}
           {/* {!authContext.isUserLoggedIn && (
             <Route path="/register" element={<RegisterEvent />} />
@@ -85,11 +88,12 @@ function App() {
             path="/domains/:domainId"
             element={<Events domains={domainData} />}
           />
-          <Route
+          {/* <Route
             path="/domains/:domainId/events/:eventId"
             element={<EventDisplayer events={eventsData} />}
-          />
-          {/* <Route path="/faq" element={<FAQ />} /> */}
+          /> */}
+
+          <Route path="/faq" element={<FAQ />} />
           {/* <Route path="/ca" element={<CA />} /> */}
           {/* <Route path="/aarambh" element={<Arambh />} /> */}
         </Routes>

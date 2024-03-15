@@ -13,9 +13,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import Modal from "@mui/material/Modal";
-import { MdDelete } from "react-icons/md";
 import axios from "axios";
-import { IoLogoWhatsapp } from "react-icons/io";
 import "./UserDashboard.css";
 
 //user imports
@@ -27,6 +25,7 @@ import Loader from "../../components/Loader/loader";
 
 import { MdOutlineGroupAdd } from "react-icons/md";
 import { GrGroup } from "react-icons/gr";
+
 import TeamTable from "./TeamTable";
 
 const style = {
@@ -69,7 +68,7 @@ const UserDashboard = () => {
 
   const [user, setUser] = useState("");
 
-  const t = false;
+  const [showTeamTable, setShowTeamTable] = useState(false);
 
   const options = {
     day: "2-digit",
@@ -214,14 +213,14 @@ const UserDashboard = () => {
 
   const addTeamMember = async (e) => {
     e.preventDefault();
-    if (teamMemberEmail.trim().length === 0) {
-      setFieldErr("Field(s) should not be empty");
-      setTimeout(() => {
-        setFieldErr(null);
-      }, 3000);
-      return;
-    }
-
+    // if (teamMemberEmail.trim().length === 0) {
+    //   setFieldErr("Field(s) should not be empty");
+    //   setTimeout(() => {
+    //     setFieldErr(null);
+    //   }, 3000);
+    //   return;
+    // }
+    setAddMember(false);
     setIsLoading(true);
     await axios
       .post(`${baseUrl}/team/create`, {
@@ -247,6 +246,10 @@ const UserDashboard = () => {
         console.log(err.response.data);
         return;
       });
+  };
+
+  const toggleTeamTable = async (e) => {
+    setShowTeamTable(true);
   };
 
   useEffect(() => {
@@ -679,7 +682,7 @@ const UserDashboard = () => {
                                 </Button>
                               </Tooltip>
                               <Tooltip title="Team Table">
-                                <Button variant=" ">
+                                <Button variant=" " onClick={toggleTeamTable}>
                                   <GrGroup />
                                 </Button>
                               </Tooltip>
@@ -739,9 +742,20 @@ const UserDashboard = () => {
                             </Box>
                           );
                         })}
-                      {t && (
-                        <TeamTable teamMembers={teamMembers} />
-                      )} 
+                      {showTeamTable && (
+                        <Box>
+                          <Modal
+                            open={true}
+                            onClose={() => {
+                              setShowTeamTable(false);
+                            }}
+                            aria-labelledby="child-modal-title"
+                            aria-describedby="child-modal-description"
+                          >
+                            <TeamTable teamMembers={teamMembers} />
+                          </Modal>
+                        </Box>
+                      )}
                     </Grid>
                   </Grid>
                 </Box>

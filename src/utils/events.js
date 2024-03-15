@@ -7,7 +7,7 @@ const eventsData = [
         description:
           "An event where participants can demonstrate their skills and knowledge in the realm of competitive programming.",
         whatsappLink: "",
-        route: `https://drive.google.com/file/d/13qKNoY_ActgnSG4bakbh3tgh4ImZ2HAz/view?usp=drive_link`,
+        route: `./events/1`,
       },
       {
         name: "Data Dives",

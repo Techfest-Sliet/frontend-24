@@ -1,13 +1,18 @@
-import { Stack, Box, Typography, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Stack, Box, Typography, Button, Modal } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { baseUrl } from "../../API/Api";
 import axios from "axios";
+import AuthContext from "../Auth/Auth";
+import eventsData from "../../utils/events";
 
-const EventDisplayer = ({ Img, events }) => {
+const EventDisplayer = ({eventDetails}) => {
+  const authContext = useContext(AuthContext);
   const [variable, setVariable] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState(false);
   const handleVariableSeting = () => {
     setVariable(2);
   };
@@ -16,22 +21,48 @@ const EventDisplayer = ({ Img, events }) => {
   };
 
   useEffect(() => {
-    axios.get(`${baseUrl}/`)
-  }, [])
+    setIsLoading(true);
+    // console.log("Authcontext==>", authContext);'
+    const userId = authContext.userId;
+    // console.log("userId ==> ", authContext.userId);
+    axios
+      .get(`${baseUrl}/user/getUserById/${userId}`)
+      .then((result) => {
+        setIsLoading(false);
+        if (
+          result.status !== 200 ||
+          (result.status !== 201 && result.data.isError)
+        ) {
+          console.log(result);
+          authContext.logout();
+          return result.status(208).json({
+            title: "Auth Error",
+            message: "Wrong user auth!",
+          });
+        }
+      })
+      .catch((err) => {
+        return err.status(208).json({
+          title: "Auth Error",
+          message: "Wrong user auth!",
+        });
+      });
+  }, [authContext, authContext.login]);
 
   const navigate = useNavigate();
 
   const { eventId } = useParams();
   const domainId = useParams();
-  const selectedEvent = events.find((event) => event.id === parseInt(eventId));
-  console.log("eventId:", eventId);
-  console.log("domainId:", domainId);
+  // const selectedEvent = events.find((event) => event.id === parseInt(eventId));
+
+  const [showOptions, setShowOptions] = useState(false);
 
   async function registerEvent() {
+    setShowOptions(true);
     await axios
       .post(
         `${baseUrl}/user/addevent/${eventId}`,
-        { eventId : parseInt(eventId) },
+        { eventId: parseInt(eventId) },
         {
           // headers: {
           //   Authorization: `Bearer ${token}`, // Add your token here
@@ -40,7 +71,7 @@ const EventDisplayer = ({ Img, events }) => {
       )
       .then((result) => {
         console.log("Result Data===>", result.data);
-        navigate(`/user-dashboard`);
+        // navigate(`/user-dashboard`);
       });
   }
 
@@ -116,8 +147,8 @@ const EventDisplayer = ({ Img, events }) => {
                     }}
                   >
                     <img
-                      className={Img}
-                      src={Img}
+                      // className={Img}
+                      // src={Img}
                       alt="workshopLogo"
                       // width={200}
                       height={250}
@@ -140,7 +171,6 @@ const EventDisplayer = ({ Img, events }) => {
                       variant={"h3"}
                       // paddingRight={"2.5rem"}
                     >
-                      {selectedEvent.name}
                     </Typography>
                     <Box
                       sx={{
@@ -190,7 +220,9 @@ const EventDisplayer = ({ Img, events }) => {
                       }}
                     >
                       <Button
-                        onClick={() => console.log("open problem statement")}
+                        onClick={() => {
+                          
+                        }}
                       >
                         Problem Statement
                       </Button>
@@ -214,6 +246,20 @@ const EventDisplayer = ({ Img, events }) => {
                 </Stack>
               </div>
             </div>
+          {showOptions && (
+            <Modal
+              open={true}
+              onClose={() => {
+                setShowOptions(false);
+              }}
+              aria-labelledby="child-modal-title"
+              aria-describedby="child-modal-description"
+              style={{ display: "flex" }}
+            >
+              <Button variant="contained">Join As Individual</Button>
+              <Button variant="outlined">Join As Team</Button>
+            </Modal>
+          )}
           </div>
         </Box>
       ) : variable === 2 ? (
@@ -289,9 +335,7 @@ const EventDisplayer = ({ Img, events }) => {
                   >
                     <Typography variant="h4"> Contact Us</Typography>
                     <div style={{}}>
-                      <p>
-                        Gaurav : <span> +91-8920681592</span> /2140113{" "}
-                      </p>
+                      <p></p>
                     </div>
                   </Box>
                   <Box
@@ -313,10 +357,7 @@ const EventDisplayer = ({ Img, events }) => {
                       Problem Statement
                     </Button>
                     <Box display={"flex"} gap={1}>
-                      <Button
-                        variant="contained"
-                        onClick={registerEvent}
-                      >
+                      <Button variant="contained" onClick={registerEvent}>
                         Register
                       </Button>
                       <Button
