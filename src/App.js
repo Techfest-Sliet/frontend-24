@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import LandingPage from "./screens/landingPage/landingPage";
 import { Routes, Route } from "react-router-dom";
 
@@ -42,7 +42,7 @@ import { useMediaQuery } from "@mui/material";
 
 
 function App() {
-
+ 
   const isMobile = useMediaQuery("(min-width:450px)");
 
   
@@ -64,7 +64,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/verify" element={<EmailVerify />} />
           {!authContext.isUserLoggedIn && (
-            <Route path="/user-dashboard" element={<UserDashBoard />} />
+            <Route path="/user" element={<UserDashBoard />} />
           )}
           {!authContext.isUserLoggedIn && (
             <Route path="/team" element={<TeamTable />} />
@@ -85,13 +85,13 @@ function App() {
           <Route path="/workshops" element={<WorkShops />} />
           <Route path="/domains" element={<Domains domains={domainData} />} />
           <Route
-            path="/domains/:domainId"
+            path="/domains/:domainName"
             element={<Events domains={domainData} />}
           />
-          {/* <Route
-            path="/domains/:domainId/events/:eventId"
+          <Route
+            path="/events/:eventId"
             element={<EventDisplayer events={eventsData} />}
-          /> */}
+          />
 
           <Route path="/faq" element={<FAQ />} />
           {/* <Route path="/ca" element={<CA />} /> */}

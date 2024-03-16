@@ -7,12 +7,19 @@ import { baseUrl } from "../../API/Api";
 import axios from "axios";
 import AuthContext from "../Auth/Auth";
 import eventsData from "../../utils/events";
+import { ImCross } from "react-icons/im";
+import { Menu, MenuItem } from "@mui/material";
 
-const EventDisplayer = ({eventDetails}) => {
+const EventDisplayer = ({ onCancel }) => {
   const authContext = useContext(AuthContext);
   const [variable, setVariable] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(false);
+  const [openEventDisplayer, setOpenEventDisplayer] = useState(false);
+  const [eventDetails, setEventDetails] = useState([]);
+
+  const { eventId } = useParams();
+
   const handleVariableSeting = () => {
     setVariable(2);
   };
@@ -25,59 +32,76 @@ const EventDisplayer = ({eventDetails}) => {
     // console.log("Authcontext==>", authContext);'
     const userId = authContext.userId;
     // console.log("userId ==> ", authContext.userId);
-    axios
-      .get(`${baseUrl}/user/getUserById/${userId}`)
-      .then((result) => {
-        setIsLoading(false);
-        if (
-          result.status !== 200 ||
-          (result.status !== 201 && result.data.isError)
-        ) {
-          console.log(result);
-          authContext.logout();
-          return result.status(208).json({
+    const getUserById = () => {
+      axios
+        .get(`${baseUrl}/user/getUserById/${userId}`)
+        .then((result) => {
+          setIsLoading(false);
+          if (
+            result.status !== 200 ||
+            (result.status !== 201 && result.data.isError)
+          ) {
+            console.log(result);
+            authContext.logout();
+            return result.status(208).json({
+              title: "Auth Error",
+              message: "Wrong user auth!",
+            });
+          }
+        })
+        .catch((err) => {
+          return err.status(208).json({
             title: "Auth Error",
             message: "Wrong user auth!",
           });
-        }
-      })
-      .catch((err) => {
-        return err.status(208).json({
-          title: "Auth Error",
-          message: "Wrong user auth!",
         });
+    };
+
+    const getEventById = () => {
+      axios.get(`${baseUrl}/event/event/${eventId}`).then((result) => {
+        console.log(result);
+        setEventDetails(result.data.event);
       });
+    };
+
+    getEventById();
+    getUserById();
   }, [authContext, authContext.login]);
 
   const navigate = useNavigate();
 
-  const { eventId } = useParams();
-  const domainId = useParams();
-  // const selectedEvent = events.find((event) => event.id === parseInt(eventId));
-
   const [showOptions, setShowOptions] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   async function registerEvent() {
-    setShowOptions(true);
-    await axios
-      .post(
-        `${baseUrl}/user/addevent/${eventId}`,
-        { eventId: parseInt(eventId) },
-        {
-          // headers: {
-          //   Authorization: `Bearer ${token}`, // Add your token here
-          // },
-        }
-      )
-      .then((result) => {
-        console.log("Result Data===>", result.data);
-        // navigate(`/user-dashboard`);
-      });
+    if (authContext.userId === " ") {
+      navigate("/sign-in");
+    }
+
+    // await axios
+    //   .post(
+    //     `${baseUrl}/user/addevent/${eventId}`,
+    //     { eventId: parseInt(eventId) },
+    //     {
+    //       // headers: {
+    //       //   Authorization: `Bearer ${token}`, // Add your token here
+    //       // },
+    //     }
+    //   )
+    //   .then((result) => {
+    //     console.log("Result Data===>", result.data);
+    //     // navigate(`/user-dashboard`);
+    //   });
   }
 
   return (
     <>
-      <StarCanvas />
+      {/* <StarCanvas /> */}
+
       {variable === 1 ? (
         <Box
           style={{
@@ -88,6 +112,7 @@ const EventDisplayer = ({eventDetails}) => {
             alignItems: "center",
             zIndex: "25",
             position: "relative",
+            backdropFilter: "blur(10px)",
           }}
         >
           <div
@@ -102,6 +127,16 @@ const EventDisplayer = ({eventDetails}) => {
               padding: "6rem 0 0 0",
             }}
           >
+            <Box
+              sx={{ display: "flex", justifyContent: "flex-end", width: "75%" }}
+            >
+              <Button
+                variant=" "
+                style={{ postion: "relative", top: "4.5rem", zIndex: "10" }}
+              >
+                <ImCross />
+              </Button>
+            </Box>
             <div
               className="div1"
               style={{
@@ -149,12 +184,12 @@ const EventDisplayer = ({eventDetails}) => {
                     <img
                       // className={Img}
                       // src={Img}
-                      alt="workshopLogo"
-                      // width={200}
+                      alt="eventLogo"
+                      width={500}
                       height={250}
                       style={{
                         objectFit: "cover",
-                        boxShadow: "12px 15px 4px  #030014",
+                        boxShadow: "4px 5px 4px  #030014",
                       }}
                     />
                   </Box>
@@ -170,12 +205,11 @@ const EventDisplayer = ({eventDetails}) => {
                       textAlign={"end"}
                       variant={"h3"}
                       // paddingRight={"2.5rem"}
-                    >
-                    </Typography>
+                    ></Typography>
                     <Box
                       sx={{
                         width: "100%",
-                        height: "85%",
+                        height: "125%",
                         // border:"1px solid red",
                         overflowY: "auto",
                       }}
@@ -189,21 +223,7 @@ const EventDisplayer = ({eventDetails}) => {
                           textAlign: "justify",
                         }}
                       >
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Rem aliquid nostrum vitae a assumenda ipsa in
-                        deleniti eius numquam sunt, perferendis omnis ab
-                        possimus ipsum libero, accusantium nisi obcaecati.
-                        Maxime, consequuntur repellat ab labore, perferendis
-                        explicabo dolores ea quasi hic pariatur perspiciatis!
-                        Dolorem tempora ipsa ipsam quod quisquam deserunt dolore
-                        autem voluptas vitae nostrum iure ratione, veritatis
-                        velit! Sit odit deserunt, adipisci quasi explicabo,
-                        accusamus libero architecto culpa eligendi voluptas
-                        aspernatur fugiat placeat fugit! Labore nemo maiores
-                        laborum saepe et, illo laudantium quibusdam aspernatur
-                        reiciendis minima cum vero suscipit ex sunt sit beatae!
-                        Autem iusto fugit, animi adipisci quis similique?
-                        {/* {details} */}
+                        {eventDetails.eventDescription}
                       </Typography>
                     </Box>
                     <Box
@@ -219,17 +239,41 @@ const EventDisplayer = ({eventDetails}) => {
                         // border: "1px solid red",
                       }}
                     >
-                      <Button
-                        onClick={() => {
-                          
-                        }}
-                      >
-                        Problem Statement
-                      </Button>
+                      <a href={eventDetails.driveLink} target="_main">
+                        <Button>Problem Statement</Button>
+                      </a>
                       <Box display={"flex"} gap={1}>
-                        <Button variant="contained" onClick={registerEvent}>
+                        <Button
+                          variant="contained"
+                          onClick={registerEvent}
+                        >
                           Register
                         </Button>
+                        {showOptions && (
+                          <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                              vertical: "top",
+                              horizontal: "right",
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                              vertical: "top",
+                              horizontal: "right",
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                            sx={{ zIndex: "40" }}
+                          >
+                            <MenuItem onClick={handleClose}>
+                              Join as Individual
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                              Join as Team
+                            </MenuItem>
+                          </Menu>
+                        )}
                         <Button
                           onClick={() => {
                             console.log(
@@ -238,7 +282,7 @@ const EventDisplayer = ({eventDetails}) => {
                             handleVariableSeting();
                           }}
                         >
-                          contact Us
+                          Contact Us
                         </Button>
                       </Box>
                     </Box>
@@ -246,20 +290,6 @@ const EventDisplayer = ({eventDetails}) => {
                 </Stack>
               </div>
             </div>
-          {showOptions && (
-            <Modal
-              open={true}
-              onClose={() => {
-                setShowOptions(false);
-              }}
-              aria-labelledby="child-modal-title"
-              aria-describedby="child-modal-description"
-              style={{ display: "flex" }}
-            >
-              <Button variant="contained">Join As Individual</Button>
-              <Button variant="outlined">Join As Team</Button>
-            </Modal>
-          )}
           </div>
         </Box>
       ) : variable === 2 ? (
@@ -279,7 +309,6 @@ const EventDisplayer = ({eventDetails}) => {
             className="container-div"
             style={{
               color: "white",
-
               height: "75%",
               width: "86%",
               display: "flex",
@@ -288,6 +317,21 @@ const EventDisplayer = ({eventDetails}) => {
               padding: "6rem 0 0 0",
             }}
           >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "75%",
+              }}
+            >
+              <Button
+                variant=" "
+                style={{ postion: "relative", top: "4.5rem" }}
+                onClick={onCancel}
+              >
+                <ImCross />
+              </Button>
+            </Box>
             <div
               className="div1"
               style={{
@@ -328,7 +372,7 @@ const EventDisplayer = ({eventDetails}) => {
                   <Box
                     height={"85%"}
                     width={"100%"}
-                    boxShadow={"2px 2px 12px #030014"}
+                    // boxShadow={"2px 2px 12px #030014"}
                     padding={".4rem"}
                     paddingTop={".8rem"}
                     borderRadius={".4rem"}
@@ -351,20 +395,44 @@ const EventDisplayer = ({eventDetails}) => {
                       // border: "1px solid red",
                     }}
                   >
-                    <Button
-                      onClick={() => console.log("open problem statement")}
-                    >
-                      Problem Statement
-                    </Button>
+                    <a href={eventDetails.driveLink}>
+                      <Button>Problem Statement</Button>
+                    </a>
                     <Box display={"flex"} gap={1}>
-                      <Button variant="contained" onClick={registerEvent}>
+                      <Button
+                        variant="contained"
+                        onClick={() => {
+                          setShowOptions(true);
+                        }}
+                      >
                         Register
                       </Button>
+                      {showOptions && (
+                        <Menu
+                          id="menu-appbar"
+                          anchorEl={anchorEl}
+                          anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                          }}
+                          keepMounted
+                          transformOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                          }}
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
+                        >
+                          <MenuItem onClick={handleClose}>
+                            Join as Individual
+                          </MenuItem>
+                          <MenuItem onClick={handleClose}>
+                            Join as Team
+                          </MenuItem>
+                        </Menu>
+                      )}
                       <Button
                         onClick={() => {
-                          console.log(
-                            "display the faculty advisor and domain coordinator"
-                          );
                           handleResetVariable();
                         }}
                       >
