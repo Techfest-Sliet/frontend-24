@@ -98,32 +98,34 @@ const EventDisplayer = ({ onCancel }) => {
       });
   }
   async function registerAsTeam() {
-    if (authContext.token === " ") {
+    handleClose();
+    if (authContext.isUserLoggedIn === false) {
       navigate("/sign-in");
-    }
-    await axios
-      .post(
-        `${baseUrl}/user/addevent`,
-        {
-          eventId: `${eventId}`,
-          type: "team",
-        },
-        {
-          headers: {
-            Authorization:
-              `Bearer ${authContext.token}` 
+    } else {
+      await axios
+        .post(
+          `${baseUrl}/user/addevent`,
+          {
+            eventId: `${eventId}`,
+            type: "team",
           },
-        }
-      )
-      .then((result) => {
-        console.log("Result Data===>", result.data);
-        // navigate(`/user-dashboard`);
-      });
+          {
+            headers: {
+              Authorization: `Bearer ${authContext.token}`,
+            },
+          }
+        )
+        .then((result) => {
+          console.log("Result Data===>", result.data);
+          navigate('/team')
+          // navigate(`/user-dashboard`);
+        });
+    }
   }
 
   return (
     <>
-    {error && <Error/>}
+      {error && <Error />}
 
       <StarCanvas />
       {variable === 1 ? (

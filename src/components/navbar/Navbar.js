@@ -34,8 +34,6 @@ const NavBar = () => {
     setAnchorEl(null);
   };
 
-  console.log("authContext.token ==> ", typeof authContext.token);
-
   //handle menu click
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -333,9 +331,11 @@ const NavBar = () => {
               fontFamily: "Droid Sans",
             }}
           >
-            {authContext.token.length === 0 ? (
+            {authContext.isUserLoggedIn === false ? (
               <Link to="/sign-in">
-                <Typography>SIGNIN</Typography>
+                <Typography sx={{ color: "white", fontFamily: "Droid Sans" }}>
+                  SIGNIN
+                </Typography>
               </Link>
             ) : (
               <Tooltip title="user">

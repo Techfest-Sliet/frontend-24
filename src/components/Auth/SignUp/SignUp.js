@@ -6,6 +6,7 @@ import ErrorModel from "../../Error/Error.js";
 import Loader from "../../Loader/loader.js";
 // import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import StarCanvas from "../../../screens/landingPage/StarbackGround.jsx";
+import { baseUrl } from "../../../API/Api.js";
 
 const Signup = () => {
   // const { executeRecaptcha } = useGoogleReCaptcha();
@@ -153,11 +154,12 @@ const Signup = () => {
       branch: branch,
       collegeName: collegeName,
       dob: dob,
+      profession: profession,
       // reCaptchaToken: token,
     };
     setIsLoading(true);
     await axios
-      .post(`http://localhost:4030/auth/sign-up`, user) //needed to be updated
+      .post(`${baseUrl}/auth/sign-up`, user) //needed to be updated
       .then((result) => {
         const res = result;
         setIsLoading(false);
