@@ -1,4 +1,4 @@
-import { Stack, Box, Typography, Button, Modal } from "@mui/material";
+import { Stack, Box, Typography, Button } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
@@ -6,17 +6,16 @@ import { useParams } from "react-router-dom";
 import { baseUrl } from "../../API/Api";
 import axios from "axios";
 import AuthContext from "../Auth/Auth";
-import eventsData from "../../utils/events";
 import { ImCross } from "react-icons/im";
 import { Menu, MenuItem } from "@mui/material";
+import Error from "../Error/Error";
 
 const EventDisplayer = ({ onCancel }) => {
   const authContext = useContext(AuthContext);
   const [variable, setVariable] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState(false);
-  const [openEventDisplayer, setOpenEventDisplayer] = useState(false);
   const [eventDetails, setEventDetails] = useState([]);
+  const [eventCoor, setEventCoor] = useState([]);
+  const [error, setError] = useState(false);
 
   const { eventId } = useParams();
 
@@ -28,20 +27,15 @@ const EventDisplayer = ({ onCancel }) => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    // console.log("Authcontext==>", authContext);'
     const userId = authContext.userId;
-    // console.log("userId ==> ", authContext.userId);
     const getUserById = () => {
       axios
         .get(`${baseUrl}/user/getUserById/${userId}`)
         .then((result) => {
-          setIsLoading(false);
           if (
             result.status !== 200 ||
             (result.status !== 201 && result.data.isError)
           ) {
-            console.log(result);
             authContext.logout();
             return result.status(208).json({
               title: "Auth Error",
@@ -50,6 +44,7 @@ const EventDisplayer = ({ onCancel }) => {
           }
         })
         .catch((err) => {
+          setError(true);
           return err.status(208).json({
             title: "Auth Error",
             message: "Wrong user auth!",
@@ -58,9 +53,9 @@ const EventDisplayer = ({ onCancel }) => {
     };
 
     const getEventById = () => {
-      axios.get(`${baseUrl}/event/event/${eventId}`).then((result) => {
-        console.log(result);
+      axios.get(`${baseUrl}/event/getEventById/${eventId}`).then((result) => {
         setEventDetails(result.data.event);
+        setEventCoor(result.data.event.studentCoordinator);
       });
     };
 
@@ -70,56 +65,85 @@ const EventDisplayer = ({ onCancel }) => {
 
   const navigate = useNavigate();
 
-  const [showOptions, setShowOptions] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleMenu = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
 
-  async function registerEvent() {
-    if (authContext.userId === " ") {
+  async function registerAsIndividual() {
+    setAnchorEl(null);
+    if (authContext.token === " ") {
       navigate("/sign-in");
     }
-
-    // await axios
-    //   .post(
-    //     `${baseUrl}/user/addevent/${eventId}`,
-    //     { eventId: parseInt(eventId) },
-    //     {
-    //       // headers: {
-    //       //   Authorization: `Bearer ${token}`, // Add your token here
-    //       // },
-    //     }
-    //   )
-    //   .then((result) => {
-    //     console.log("Result Data===>", result.data);
-    //     // navigate(`/user-dashboard`);
-    //   });
+    await axios
+      .post(
+        `${baseUrl}/user/addevent`,
+        {
+          eventId: `${eventId}`,
+          type: "Individual",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authContext.token}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("Result Data===>", result.data);
+        // navigate(`/user-dashboard`);
+      });
+  }
+  async function registerAsTeam() {
+    if (authContext.token === " ") {
+      navigate("/sign-in");
+    }
+    await axios
+      .post(
+        `${baseUrl}/user/addevent`,
+        {
+          eventId: `${eventId}`,
+          type: "team",
+        },
+        {
+          headers: {
+            Authorization:
+              `Bearer ${authContext.token}` 
+          },
+        }
+      )
+      .then((result) => {
+        console.log("Result Data===>", result.data);
+        // navigate(`/user-dashboard`);
+      });
   }
 
   return (
     <>
-      {/* <StarCanvas /> */}
+    {error && <Error/>}
 
+      <StarCanvas />
       {variable === 1 ? (
         <Box
           style={{
             width: "100%",
             height: "100vh",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            zIndex: "25",
             position: "relative",
-            backdropFilter: "blur(10px)",
+            zIndex: "25",
           }}
         >
           <div
             className="container-div"
             style={{
               color: "white",
-              height: "75%",
+              height: "90%",
               width: "86%",
               display: "flex",
               alignItems: "center",
@@ -127,12 +151,28 @@ const EventDisplayer = ({ onCancel }) => {
               padding: "6rem 0 0 0",
             }}
           >
+            <Typography
+              sx={{
+                fontSize: "3rem",
+                fontFamily: "Orbitron",
+                fontWeight: "600",
+              }}
+            >
+              {eventDetails.eventName}
+            </Typography>
             <Box
-              sx={{ display: "flex", justifyContent: "flex-end", width: "75%" }}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "75%",
+              }}
             >
               <Button
                 variant=" "
                 style={{ postion: "relative", top: "4.5rem", zIndex: "10" }}
+                onClick={() => {
+                  navigate(-1);
+                }}
               >
                 <ImCross />
               </Button>
@@ -140,7 +180,7 @@ const EventDisplayer = ({ onCancel }) => {
             <div
               className="div1"
               style={{
-                height: "95%",
+                height: "115%",
                 width: "75%",
 
                 backgroundColor: "#90e0ef34",
@@ -209,7 +249,7 @@ const EventDisplayer = ({ onCancel }) => {
                     <Box
                       sx={{
                         width: "100%",
-                        height: "125%",
+                        height: "128%",
                         // border:"1px solid red",
                         overflowY: "auto",
                       }}
@@ -243,42 +283,37 @@ const EventDisplayer = ({ onCancel }) => {
                         <Button>Problem Statement</Button>
                       </a>
                       <Box display={"flex"} gap={1}>
-                        <Button
-                          variant="contained"
-                          onClick={registerEvent}
-                        >
+                        <Button variant="contained" onClick={handleMenu}>
                           Register
                         </Button>
-                        {showOptions && (
-                          <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                              vertical: "top",
-                              horizontal: "right",
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                              vertical: "top",
-                              horizontal: "right",
-                            }}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                            sx={{ zIndex: "40" }}
-                          >
-                            <MenuItem onClick={handleClose}>
-                              Join as Individual
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                              Join as Team
-                            </MenuItem>
-                          </Menu>
-                        )}
+                        <Menu
+                          id="menu-appbar"
+                          anchorEl={anchorEl}
+                          anchorOrigin={{
+                            vertical: "center",
+                            horizontal: "center",
+                          }}
+                          keepMounted
+                          transformOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                          }}
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
+                          sx={{
+                            zIndex: "40",
+                            boxShadow: "5x 5px 5px #030014",
+                          }}
+                        >
+                          <MenuItem onClick={registerAsIndividual}>
+                            Join as Individual
+                          </MenuItem>
+                          <MenuItem onClick={registerAsTeam}>
+                            Join as Team
+                          </MenuItem>
+                        </Menu>
                         <Button
                           onClick={() => {
-                            console.log(
-                              "display the faculty advisor and domain coordinator"
-                            );
                             handleVariableSeting();
                           }}
                         >
@@ -309,7 +344,7 @@ const EventDisplayer = ({ onCancel }) => {
             className="container-div"
             style={{
               color: "white",
-              height: "75%",
+              height: "90%",
               width: "86%",
               display: "flex",
               alignItems: "center",
@@ -317,6 +352,15 @@ const EventDisplayer = ({ onCancel }) => {
               padding: "6rem 0 0 0",
             }}
           >
+            <Typography
+              sx={{
+                fontSize: "3rem",
+                fontFamily: "Orbitron",
+                fontWeight: "600",
+              }}
+            >
+              {eventDetails.eventName}
+            </Typography>
             <Box
               sx={{
                 display: "flex",
@@ -326,12 +370,15 @@ const EventDisplayer = ({ onCancel }) => {
             >
               <Button
                 variant=" "
-                style={{ postion: "relative", top: "4.5rem" }}
-                onClick={onCancel}
+                style={{ postion: "relative", top: "4.5rem", zIndex: "10" }}
+                onClick={() => {
+                  navigate(-1);
+                }}
               >
                 <ImCross />
               </Button>
             </Box>
+
             <div
               className="div1"
               style={{
@@ -377,9 +424,42 @@ const EventDisplayer = ({ onCancel }) => {
                     paddingTop={".8rem"}
                     borderRadius={".4rem"}
                   >
-                    <Typography variant="h4"> Contact Us</Typography>
-                    <div style={{}}>
-                      <p></p>
+                    <Typography variant="h4"> Contact Us </Typography>
+                    &nbsp;
+                    <div style={{ display: "flex" }}>
+                      {eventCoor.map((coordinator, index) => {
+                        return (
+                          <Box key={coordinator._id}>
+                            <Typography
+                              variant="h5"
+                              style={{
+                                color: "white",
+                                fontFamily: "sans-serif",
+                              }}
+                            >
+                              {coordinator.coordinatorName}
+                            </Typography>
+                            <Typography
+                              variant="h6"
+                              style={{
+                                color: "white",
+                                fontFamily: "sans-serif",
+                              }}
+                            >
+                              {coordinator.coordinatorEmail}
+                            </Typography>
+                            <Typography
+                              variant=""
+                              style={{
+                                color: "white",
+                                fontFamily: "sans-serif",
+                              }}
+                            >
+                              {coordinator.coordinatorPhone}
+                            </Typography>
+                          </Box>
+                        );
+                      })}
                     </div>
                   </Box>
                   <Box
@@ -399,38 +479,31 @@ const EventDisplayer = ({ onCancel }) => {
                       <Button>Problem Statement</Button>
                     </a>
                     <Box display={"flex"} gap={1}>
-                      <Button
-                        variant="contained"
-                        onClick={() => {
-                          setShowOptions(true);
-                        }}
-                      >
+                      <Button variant="contained" onClick={handleMenu}>
                         Register
                       </Button>
-                      {showOptions && (
-                        <Menu
-                          id="menu-appbar"
-                          anchorEl={anchorEl}
-                          anchorOrigin={{
-                            vertical: "top",
-                            horizontal: "right",
-                          }}
-                          keepMounted
-                          transformOrigin={{
-                            vertical: "top",
-                            horizontal: "right",
-                          }}
-                          open={Boolean(anchorEl)}
-                          onClose={handleClose}
-                        >
-                          <MenuItem onClick={handleClose}>
-                            Join as Individual
-                          </MenuItem>
-                          <MenuItem onClick={handleClose}>
-                            Join as Team
-                          </MenuItem>
-                        </Menu>
-                      )}
+                      <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                      >
+                        <MenuItem onClick={registerAsIndividual}>
+                          Join as Individual
+                        </MenuItem>
+                        <MenuItem onClick={registerAsTeam}>
+                          Join as Team
+                        </MenuItem>
+                      </Menu>
                       <Button
                         onClick={() => {
                           handleResetVariable();
@@ -446,24 +519,6 @@ const EventDisplayer = ({ onCancel }) => {
           </div>
         </Box>
       ) : null}
-
-      {/* <Box
-          style={{
-            width: "100%",
-            height: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: "25",
-            position: "relative",
-            // border: "1px solid red",
-          }}
-        > */}
-      {/* <EventDisplayer
-      Img ={Img}
-      heading = {"Head"}
-      details = {"fkshd fdsfkjds fdskjfds fdsf"}  /> */}
-      {/* </Box> */}
     </>
   );
 };

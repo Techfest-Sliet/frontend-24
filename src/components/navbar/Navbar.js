@@ -9,9 +9,12 @@ import {
   Divider,
   Tooltip,
   Avatar,
+  MenuItem,
+  Menu,
+  Typography,
 } from "@mui/material";
 // import { FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { ImCross } from "react-icons/im";
 import AuthContext from "../Auth/Auth";
@@ -19,6 +22,20 @@ import AuthContext from "../Auth/Auth";
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  console.log("authContext.token ==> ", typeof authContext.token);
+
   //handle menu click
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -106,21 +123,48 @@ const NavBar = () => {
             Our Team
           </Button>
         </Link>
-        {/* <Button
+        <Button
           style={{
             color: "white",
             fontWeight: "normal",
             fontFamily: "Droid Sans",
           }}
         >
-          {authContext.userId === " " ? (
+          {authContext.token === " " ? (
             <Link to="sign-in">SignIN</Link>
           ) : (
-            <Link to={"/user-dashboard"}>
-              <p style={{ color: "white" }}>Profile</p>
-            </Link>
+            <>
+              <Link to={"/user"}>
+                <p style={{ color: "white" }}>Profile</p>
+              </Link>
+            </>
           )}
-        </Button> */}
+        </Button>
+        {authContext.isUserLoggedIn === true ? (
+          <Button
+            style={{
+              color: "white",
+              fontWeight: "normal",
+              fontFamily: "Droid Sans",
+            }}
+          >
+            <Link to={"/"}>
+              <p
+                style={{ color: "white" }}
+                onClick={() => {
+                  handleClose();
+                  authContext.isUserLoggedIn = false;
+                  localStorage.removeItem(authContext.token);
+                  navigate("/");
+                }}
+              >
+                Logout
+              </p>
+            </Link>
+          </Button>
+        ) : (
+          " "
+        )}
       </div>
     </Box>
   );
@@ -176,7 +220,7 @@ const NavBar = () => {
               display: "flex",
               alignItems: "center",
               width: "100%",
-              zIndex:"10000"
+              zIndex: "10000",
             }}
           >
             <img
@@ -282,25 +326,58 @@ const NavBar = () => {
               Our Team
             </Button>
           </Link>
-          {/* <Link to="sign-in">
-            <Button
-              style={{
-                color: "white",
-                fontWeight: "normal",
-                fontFamily: "Droid Sans",
+          <Button
+            style={{
+              color: "white",
+              fontWeight: "normal",
+              fontFamily: "Droid Sans",
+            }}
+          >
+            {authContext.token.length === 0 ? (
+              <Link to="/sign-in">
+                <Typography>SIGNIN</Typography>
+              </Link>
+            ) : (
+              <Tooltip title="user">
+                <Button onClick={handleMenu}>
+                  <Avatar alt="User" sx={{ height: 35 }} />
+                </Button>
+              </Tooltip>
+            )}
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "center",
+                horizontal: "center",
               }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
             >
-              {authContext.userId === " " ? (
-                <Link to="/sign-in">SignIN</Link>
-              ) : (
-                <Link to={"/user-dashboard"}>
-                  <Tooltip title="user">
-                    <Avatar alt="User" sx={{height:35}}/>
-                  </Tooltip>
-                </Link>
-              )}
-            </Button>
-          </Link> */}
+              <MenuItem
+                onClick={() => {
+                  navigate("/user");
+                }}
+              >
+                User
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  authContext.isUserLoggedIn = false;
+                  localStorage.removeItem(authContext.token);
+                  navigate("/");
+                }}
+              >
+                Logout
+              </MenuItem>
+            </Menu>
+          </Button>
         </Box>
       </Box>
       <Box>

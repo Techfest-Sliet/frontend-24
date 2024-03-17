@@ -93,6 +93,7 @@ const Signup = () => {
 
     // const token = await executeRecaptcha("signUp");
     e.preventDefault();
+
     if (
       email.trim().length === 0 ||
       password.trim().length === 0 ||

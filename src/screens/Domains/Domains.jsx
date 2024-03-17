@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 import VentureVault from "../../utils/DOMAIN_LOGOS/VentureVault.png";
 import axios from "axios";
 import { baseUrl } from "../../API/Api";
+import Error from "../../components/Error/Error"
 
 const Domains = ({ domains }) => {
   const [activeCards, setActiveCards] = useState({});
   const [click, setClick] = useState(false);
+  const [error, setError] = useState(false);
 
   const toggleActive = (index) => {
     setActiveCards((prev) => ({
@@ -26,12 +28,10 @@ const Domains = ({ domains }) => {
       await axios
         .get(`${baseUrl}/domain/getAllDomains`)
         .then((result) => {
-          console.log(result.data);
-          console.log(typeof result.data);
           setDomainDetails(result.data);
-          console.log("Domaindetails===>",domainDetails)
         })
         .catch(err => {
+          setError(true)
           console.log("err===>",err);
         })
     };
@@ -42,6 +42,7 @@ const Domains = ({ domains }) => {
 
   return (
     <>
+      {error && <Error/>}
       <StarCanvas />
       <Box style={{ position: "relative", zIndex: "25" }}>
         <div className="domains">
