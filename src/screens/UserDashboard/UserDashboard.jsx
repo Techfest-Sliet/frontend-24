@@ -686,63 +686,10 @@ const UserDashboard = () => {
                                   <GrGroup />
                                 </Button>
                               </Tooltip>
-                              {addMember && (
-                                <Modal
-                                  open={true}
-                                  onClose={() => {
-                                    setAddMember(false);
-                                  }}
-                                  aria-labelledby="child-modal-title"
-                                  aria-describedby="child-modal-description"
-                                >
-                                  <Box sx={style}>
-                                    <Typography>
-                                      Add Team Member's Detail
-                                    </Typography>
-                                    <TextField
-                                      id="standard-basic"
-                                      label="Team Name"
-                                      variant="standard"
-                                      sx={{ marginBottom: 2 }}
-                                      onChange={(e) =>
-                                        setTeamName(e.target.value)
-                                      }
-                                    />
-                                    <TextField
-                                      id="standard-basic"
-                                      label="Email"
-                                      variant="standard"
-                                      sx={{ marginBottom: 2 }}
-                                      onChange={(e) =>
-                                        setTeamMemberEmail(e.target.value)
-                                      }
-                                    />
-                                    <TextField
-                                      id="standard-basic"
-                                      label="Phone Number"
-                                      variant="standard"
-                                      sx={{ marginBottom: 2 }}
-                                      onChange={(e) =>
-                                        setTeamMemberPhone(e.target.value)
-                                      }
-                                    />
-                                    <Button
-                                      variant="contained"
-                                      style={{
-                                        display: "flex",
-                                        marginLeft: "auto",
-                                      }}
-                                      onClick={addTeamMember}
-                                    >
-                                      OK
-                                    </Button>
-                                  </Box>
-                                </Modal>
-                              )}
                             </Box>
                           );
                         })}
-                      {showTeamTable && (
+                      {/* {showTeamTable && (
                         <Box>
                           <Modal
                             open={true}
@@ -755,7 +702,7 @@ const UserDashboard = () => {
                             <TeamTable teamMembers={teamMembers} />
                           </Modal>
                         </Box>
-                      )}
+                      )} */}
                     </Grid>
                   </Grid>
                 </Box>

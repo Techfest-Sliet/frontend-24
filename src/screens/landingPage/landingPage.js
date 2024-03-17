@@ -1,12 +1,7 @@
-import { Box, CardMedia, Button } from "@mui/material";
-
+import { Box, CardMedia } from "@mui/material";
 import StarCanvas from "./StarbackGround";
-
 import "./landingPage.css";
-import NavBar from "../../components/navbar/Navbar";
-
 import Hero from "./Hero";
-import { FaAngleDoubleUp } from "react-icons/fa";
 import { useState } from "react";
 
 import ModalComp from "./ModalComp";
@@ -20,7 +15,6 @@ function App() {
     setCloset(false);
   };
 
-  const capsuleDiv = {};
   return (
     <>
       <StarCanvas />

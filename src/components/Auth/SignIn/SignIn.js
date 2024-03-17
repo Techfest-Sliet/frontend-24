@@ -84,7 +84,7 @@ const SignIn = () => {
             userRole: res.data.userRole,
           };
           authContext.login(userData);
-          navigate("/user-dashboard");
+          navigate("/user");
         } else {
           setErrorsMade(res.data.message);
         }

@@ -1,5 +1,4 @@
-import { Box, Stack } from "@mui/system";
-
+import { Stack } from "@mui/system";
 import {  motion } from "framer-motion";
 import { slideInFromLeft, slideInFromRight } from "../../constants";
 import "./Hero.css";
