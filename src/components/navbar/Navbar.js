@@ -128,8 +128,11 @@ const NavBar = () => {
             fontFamily: "Droid Sans",
           }}
         >
-          {authContext.token === " " ? (
-            <Link to="sign-in">SignIN</Link>
+          {authContext.isUserLoggedIn === false ? (
+ 
+            <Link to="sign-in">
+              <p style={{color:"white", fontFamily:"Droid Sans"}}>SignIN</p>
+            </Link>
           ) : (
             <>
               <Link to={"/user"}>

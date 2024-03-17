@@ -21,11 +21,11 @@ import AuthContext from "../../components/Auth/Auth";
 import { baseUrl } from "../../API/Api";
 import Loader from "../../components/Loader/loader";
 
-import { MdOutlineGroupAdd } from "react-icons/md";
 import { GrGroup } from "react-icons/gr";
 
 import TeamTable from "./TeamTable";
 import { IoLogoWhatsapp } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 
 const style = {
   position: "absolute",
@@ -47,7 +47,7 @@ const UserDashboard = () => {
   const [errorMade, setErrorMade] = useState();
   const [userId, setUserId] = useState();
   const [workshops, setWorkshops] = useState("");
-  const [events, setEvents] = useState("");
+  const [events, setEvents] = useState([]);
   const [teamMembers, setTeamMembers] = useState("");
   const [openEditPersonal, setOpenEditPersonal] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
@@ -100,7 +100,7 @@ const UserDashboard = () => {
       .post(
         `${baseUrl}/user/pullevent`,
         { id: userId },
-
+        
         {
           headers: {
             Authorization: "Bearer " + authContext.token,
@@ -684,9 +684,9 @@ const UserDashboard = () => {
                                   </Button>
                                 </Tooltip>
                               </a>
-                              <Tooltip title="Team Table">
-                                <Button variant=" " onClick={toggleTeamTable}>
-                                  <GrGroup />
+                              <Tooltip title="Delete Event">
+                                <Button variant=" " onClick={deleteEvent}>
+                                  <MdDelete/>
                                 </Button>
                               </Tooltip>
                             </Box>
@@ -714,7 +714,7 @@ const UserDashboard = () => {
             <Divider
               sx={{
                 border: "1px solid white",
-                height: 400,
+                height: 500,
                 display: isMobile ? "none" : "block",
               }}
             />
