@@ -128,8 +128,11 @@ const NavBar = () => {
             fontFamily: "Droid Sans",
           }}
         >
-          {authContext.token === " " ? (
-            <Link to="sign-in">SignIN</Link>
+          {authContext.isUserLoggedIn === false ? (
+ 
+            <Link to="sign-in">
+              <p style={{color:"white", fontFamily:"Droid Sans"}}>SignIN</p>
+            </Link>
           ) : (
             <>
               <Link to={"/user"}>
@@ -152,7 +155,7 @@ const NavBar = () => {
                 onClick={() => {
                   handleClose();
                   authContext.isUserLoggedIn = false;
-                  localStorage.removeItem(authContext.token);
+                  localStorage.removeItem("jwtToken");
                   navigate("/");
                 }}
               >
@@ -361,6 +364,7 @@ const NavBar = () => {
             >
               <MenuItem
                 onClick={() => {
+                  handleClose();
                   navigate("/user");
                 }}
               >
@@ -370,7 +374,7 @@ const NavBar = () => {
                 onClick={() => {
                   handleClose();
                   authContext.isUserLoggedIn = false;
-                  localStorage.removeItem(authContext.token);
+                  localStorage.removeItem("jwtToken");
                   navigate("/");
                 }}
               >

@@ -9,7 +9,7 @@ import Particle from "./Particle";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../images/festLogo.png";
 import AuthContext from "../Auth";
-import Loader from "../../Loader/loader";
+import  Loader from "../../Loader/loader";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#90e0ef" : "#90e0ef",
@@ -123,22 +123,12 @@ const SignIn = () => {
     <>
       {isLoading && <Loader />} 
       <Particle />
-      {/* <Toast open={open} message={message} success={success}/> */}
       <Stack direction="row" spacing={5} justifyContent={"space-between"}>
         <Item>
           <img src={logo} alt="Techfest'24 logo" className="techFestLogo" />
         </Item>
         <Item>
           <div className="signInContainer">
-            {/* <Modal
-          open={true}
-          aria-labelledby="child-modal-title"
-          aria-describedby="child-modal-description"
-          style={{
-            border: "2px solid #90e0ef",
-            letterSpacing: "2px",
-          }}
-        > */}
             <Box
               className="signin-box"
               sx={{
@@ -285,7 +275,6 @@ const SignIn = () => {
                 </Link>
               </p>
             </Box>
-            {/* </Modal> */}
           </div>
         </Item>
       </Stack>

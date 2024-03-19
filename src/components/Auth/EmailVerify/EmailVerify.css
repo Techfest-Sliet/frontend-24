@@ -1,0 +1,4 @@
+.bgImage{
+    background-image:url('./logo.png');
+    filter: blur("5px");
+}

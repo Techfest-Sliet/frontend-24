@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 import VentureVault from "../../utils/DOMAIN_LOGOS/VentureVault.png";
 import axios from "axios";
 import { baseUrl } from "../../API/Api";
-import Error from "../../components/Error/Error"
+import Error from "../../components/Error/Error";
+import Loader from "../../components/Loader/loader";
 
 const Domains = ({ domains }) => {
   const [activeCards, setActiveCards] = useState({});
   const [click, setClick] = useState(false);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const toggleActive = (index) => {
     setActiveCards((prev) => ({
@@ -22,116 +24,131 @@ const Domains = ({ domains }) => {
   };
 
   const [domainDetails, setDomainDetails] = useState([]);
-  
+
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
     const getAllDomains = async () => {
       await axios
         .get(`${baseUrl}/domain/getAllDomains`)
         .then((result) => {
           setDomainDetails(result.data);
         })
-        .catch(err => {
-          setError(true)
-          console.log("err===>",err);
-        })
+        .catch((err) => {
+          setError(true);
+          console.log("err===>", err);
+        });
     };
+    
+    clearTimeout(timeout);
     getAllDomains();
   }, []);
 
   const navigate = useNavigate();
 
+  const clickDomain = (index) => {
+    try {
+      navigate(`/domains/${domainDetails[index].domainName}`);
+    } catch (error) {
+      console.log(error)
+      setError(true);
+    }
+  };
+
   return (
     <>
-      {error && <Error/>}
       <StarCanvas />
-      <Box style={{ position: "relative", zIndex: "25" }}>
-        <div className="domains">
-          <div class="wrapper">
-            {domains.map((domain, index) => {
-              return (
-                <div
-                  class="card"
-                  key={domain._id}
-                  className={`card ${activeCards[index] ? "active" : ""}`}
-                  onClick={() => toggleActive(index)}
-                >
-                  <img
-                    src={domain.imagePath}
-                    alt={domain.name}
-                    style={{ margin: "5%" }}
-                  />
-                  <h2>{domain.name.toUpperCase()}</h2>
-                  <Button
-                    sx={{
-                      color: "black",
-                      background: "#00b4d8",
-                      "&:hover": {
-                        backgroundColor: "#00b4d8",
-                      },
-                      "&:focus": {
-                        backgroundColor: "#00b4d8",
-                      },
-                      "&:active": {
-                        backgroundColor: "#00b4d8",
-                      },
-                    }}
-                    onClick={() => {
-                      navigate(`/domains/${domainDetails[index].domainName}`);
-                    }}
+      {isLoading && <Loader/>}
+      {error ? (
+        <Error />
+      ) : (
+        <Box style={{ position: "relative", zIndex: "25" }}>
+          <div className="domains">
+            <div class="wrapper">
+              {domains.map((domain, index) => {
+                return (
+                  <div
+                    class="card"
+                    key={domain._id}
+                    className={`card ${activeCards[index] ? "active" : ""}`}
+                    onClick={() => toggleActive(index)}
                   >
-                    Explore
-                  </Button>
-                  <p>{domain.description}</p>
-                </div>
-              );
-            })}
-            <div
-              class="card"
-              // key={domain.id}
-              className={`card ${activeCards[0] ? "active" : ""}`}
-              onClick={() => toggleActive(0)}
-            >
-              <img
-                src={VentureVault}
-                alt={VentureVault}
-                style={{ margin: "5%" }}
-              />
-              <h2>VENTURE VAULT</h2>
-              <Button
-                sx={{
-                  color: "black",
-                  background: "#00b4d8",
-                  "&:hover": {
-                    backgroundColor: "#00b4d8",
-                  },
-                  "&:focus": {
-                    backgroundColor: "#00b4d8",
-                  },
-                  "&:active": {
-                    backgroundColor: "#00b4d8",
-                  },
-                }}
-                onClick={() => {
-                  setClick(true);
-                  // navigate(`/domains/${domain.id}`);
-                }}
+                    <img
+                      src={domain.imagePath}
+                      alt={domain.name}
+                      style={{ margin: "5%" }}
+                    />
+                    <h2>{domain.name.toUpperCase()}</h2>
+                    <Button
+                      sx={{
+                        color: "black",
+                        background: "#00b4d8",
+                        "&:hover": {
+                          backgroundColor: "#00b4d8",
+                        },
+                        "&:focus": {
+                          backgroundColor: "#00b4d8",
+                        },
+                        "&:active": {
+                          backgroundColor: "#00b4d8",
+                        },
+                      }}
+                      onClick={() => {
+                        clickDomain(index);
+                      }}
+                    >
+                      Explore
+                    </Button>
+                    <p>{domain.description}</p>
+                  </div>
+                );
+              })}
+              <div
+                class="card"
+                // key={domain.id}
+                className={`card ${activeCards[0] ? "active" : ""}`}
+                onClick={() => toggleActive(0)}
               >
-                Explore
-              </Button>
-              {click && (
-                <p style={{ color: "red" }}>
-                  This section is under construction.
-                </p>
-              )}
-              <p>Domain of Business</p>
+                <img
+                  src={VentureVault}
+                  alt={VentureVault}
+                  style={{ margin: "5%" }}
+                />
+                <h2>VENTURE VAULT</h2>
+                <Button
+                  sx={{
+                    color: "black",
+                    background: "#00b4d8",
+                    "&:hover": {
+                      backgroundColor: "#00b4d8",
+                    },
+                    "&:focus": {
+                      backgroundColor: "#00b4d8",
+                    },
+                    "&:active": {
+                      backgroundColor: "#00b4d8",
+                    },
+                  }}
+                  onClick={() => {
+                    setClick(true);
+                    // navigate(`/domains/${domain.id}`);
+                  }}
+                >
+                  Explore
+                </Button>
+                {click && (
+                  <p style={{ color: "red" }}>
+                    This section is under construction.
+                  </p>
+                )}
+                <p>Domain of Business</p>
+              </div>
             </div>
           </div>
-        </div>
-      </Box>
-
-      {/* <div style={{position:"relative", zIndex:"10"}}>
-        <ComingSoon/>
-      </div> */}
+        </Box>
+      )}
     </>
   );
 };
