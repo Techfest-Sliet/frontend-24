@@ -20,13 +20,12 @@ import "./UserDashboard.css";
 import AuthContext from "../../components/Auth/Auth";
 import { baseUrl } from "../../API/Api";
 import Loader from "../../components/Loader/loader";
-//loader
-//error model
 
 import { MdOutlineGroupAdd } from "react-icons/md";
 import { GrGroup } from "react-icons/gr";
 
 import TeamTable from "./TeamTable";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 const style = {
   position: "absolute",
@@ -52,7 +51,6 @@ const UserDashboard = () => {
   const [teamMembers, setTeamMembers] = useState("");
   const [openEditPersonal, setOpenEditPersonal] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
-  const [openTeamTable, setOpenTeamTable] = useState(false);
   const [addMember, setAddMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
@@ -136,7 +134,7 @@ const UserDashboard = () => {
       name: name,
       email: user.email,
       phone: Number(phone),
-      whatsappPhoneNumber: wphone,
+      whatsappNumber: wphone,
     };
     setIsLoading(true);
     await axios
@@ -160,6 +158,8 @@ const UserDashboard = () => {
         console.log(err.response.data);
         return;
       });
+
+    window.location.reload();
   };
 
   //get user id from the context api
@@ -209,6 +209,8 @@ const UserDashboard = () => {
         console.log(err.response.data);
         return;
       });
+
+    window.location.reload();
   };
 
   const addTeamMember = async (e) => {
@@ -292,7 +294,6 @@ const UserDashboard = () => {
 
   return (
     <>
-      {/* <StarCanvas /> */}
       {isLoading && <Loader />}
       <div
         className="userDashboard"
@@ -671,16 +672,18 @@ const UserDashboard = () => {
                               >
                                 {event.eventDate}
                               </Typography>
-                              <Tooltip title="Add Team">
-                                <Button
-                                  variant=" "
-                                  onClick={() => {
-                                    setAddMember(true);
-                                  }}
-                                >
-                                  <MdOutlineGroupAdd />
-                                </Button>
-                              </Tooltip>
+                              <a href={event.whatsappLink} target="_main">
+                                <Tooltip title="Group Whatsapp Link">
+                                  <Button
+                                    variant=" "
+                                    onClick={() => {
+                                      setAddMember(true);
+                                    }}
+                                  >
+                                    <IoLogoWhatsapp color="green" />
+                                  </Button>
+                                </Tooltip>
+                              </a>
                               <Tooltip title="Team Table">
                                 <Button variant=" " onClick={toggleTeamTable}>
                                   <GrGroup />
@@ -711,7 +714,7 @@ const UserDashboard = () => {
             <Divider
               sx={{
                 border: "1px solid white",
-                height: 300,
+                height: 400,
                 display: isMobile ? "none" : "block",
               }}
             />
