@@ -155,7 +155,7 @@ const NavBar = () => {
                 onClick={() => {
                   handleClose();
                   authContext.isUserLoggedIn = false;
-                  localStorage.removeItem(authContext.token);
+                  localStorage.removeItem("jwtToken");
                   navigate("/");
                 }}
               >
@@ -364,6 +364,7 @@ const NavBar = () => {
             >
               <MenuItem
                 onClick={() => {
+                  handleClose();
                   navigate("/user");
                 }}
               >
@@ -373,7 +374,7 @@ const NavBar = () => {
                 onClick={() => {
                   handleClose();
                   authContext.isUserLoggedIn = false;
-                  localStorage.removeItem(authContext.token);
+                  localStorage.removeItem("jwtToken");
                   navigate("/");
                 }}
               >

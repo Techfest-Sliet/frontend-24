@@ -19,7 +19,6 @@ import FAQ from "./components/FAQ/Faq";
 
 import AboutUs from "./screens/AboutUs/AboutUs";
 import UserDashBoard from "./screens/UserDashboard/UserDashboard";
-import Payment from "./components/Payment/Payment"
 import NavBar from "./components/navbar/Navbar";
 
 import Footer from "./components/Footer/Footer";
@@ -68,9 +67,6 @@ function App() {
           )}
           {!authContext.isUserLoggedIn && (
             <Route path="/team" element={<TeamTable />} />
-          )}
-          {!authContext.isUserLoggedIn && (
-            <Route path="/payment" element={<Payment />} />
           )}
           {/* {!authContext.isUserLoggedIn && (
             <Route path="/register" element={<RegisterEvent />} />

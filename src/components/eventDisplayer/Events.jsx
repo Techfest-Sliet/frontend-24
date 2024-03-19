@@ -7,7 +7,7 @@ import axios from "axios";
 import { baseUrl } from "../../API/Api";
 import Error from "../Error/Error";
 
-function Events({ domains }) {
+function Events() {
   const { domainName } = useParams();
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ function Events({ domains }) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-       const getDomainById = async () => {
+       const getEventByDomainName = () => {
       axios
         .get(`${baseUrl}/event/geteventbydomainname/${domainName}`)
         .then((result) => {
@@ -26,7 +26,7 @@ function Events({ domains }) {
           console.log("err ==>",err);
         });
     };
-    getDomainById();
+    getEventByDomainName();
   }, []);
 
   return (

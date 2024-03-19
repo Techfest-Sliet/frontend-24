@@ -15,6 +15,10 @@ import AuthContext from "../../components/Auth/Auth";
 import { Verified } from "@mui/icons-material";
 import { IoMdPersonAdd } from "react-icons/io";
 import { Box, TextField } from "@mui/material";
+import axios from "axios";
+import { baseUrl } from "../../API/Api";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const style = {
   position: "absolute",
@@ -51,45 +55,110 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function TeamTable(teamMembers) {
-  console.log(teamMembers.teamMembers);
+function TeamTable({ teamMembers }) {
   const authContext = useContext(AuthContext);
-  const [members, setMembers] = useState(teamMembers.teamMembers);
+  const [members, setMembers] = useState(teamMembers);
+  console.log(members, "   type ==>", typeof members);
   const [addMember, setAddMember] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [teamMemberEmail, setTeamMemberEmail] = useState("");
-  const [teamMemberPhone, setTeamMemberPhone] = useState("");
   const [fieldErr, setFieldErr] = useState(null);
 
-  const addTeamMember = () => {
-    // if (
-    //   !teamMemberEmail.trim.includes("@") ||
-    //   teamMemberPhone.trim().length === 0 ||
-    //   teamName.trim().length === 0
-    // ) {
-    //   setFieldErr("Invalid Values");
-    //   setTimeout(() => {
-    //     setFieldErr(null);
-    //   }, 3000);
-    //   return;
-    // }
+  const navigate = useNavigate();
 
-    setAddMember(false);
+  async function registerTeamEvent() {
+    if (authContext.isUserLoggedIn === false) {
+      navigate("/sign-in");
+    }
+
+    const createTeam = async () => {
+      await axios
+        .post(
+          `${baseUrl}/team/create`,
+          {
+            teamName: teamName,
+            members: teamMemberEmail,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authContext.token}`,
+            },
+          }
+        )
+        .then((result) => {
+          if (result.data.message === "team created") {
+            Swal.fire({
+              title: "Great!!",
+              text: `Your team is succesfully created`,
+              icon: "success",
+              confirmButtonColor: "skyblue",
+            });
+          }
+          console.log("result.data ==> ", result.data);
+        });
+    };
+
+    const addTeam = async () => {
+      await axios
+        .post(
+          `${baseUrl}/user/addevent`,
+          {
+            // eventId: `${eventId}`,
+            type: "team",
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authContext.token}`,
+            },
+          }
+        )
+        .then((result) => {
+          console.log("Result Data===>", result.data);
+          Swal.fire({
+            title: "Great!!",
+            text: `${result.data.message}`,
+            icon: "success",
+            confirmButtonColor: "skyblue",
+          });
+          navigate(`/user`);
+        });
+    };
+
+    createTeam();
+    // addTeam();
+  }
+
+  const handleTeamDelete = (id) => {
+    axios
+      .post(
+        `${baseUrl}/team/delete`,
+        { id },
+        {
+          headers: {
+            Authorization: "Bearer" + authContext.token,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("team delete result ==>", result);
+      });
   };
 
   const isMobile = useMediaQuery("(max-width:450px)");
   return (
     <>
-      <StarCanvas />
+      {/* <StarCanvas /> */}
       <div
         className="Team"
         style={{
+          width: "70%",
           position: "relative",
           zIndex: "30",
-          marginTop: "4.5rem",
+          // marginTop: "4.5rem",
           marginRight: "10%",
           marginLeft: "5%",
           overflowX: "scroll",
+          overflowY: "scroll",
         }}
       >
         <Typography
@@ -118,76 +187,21 @@ function TeamTable(teamMembers) {
               <TableRow>
                 <StyledTableCell>
                   Team Name
-                  <Button
-                    variant=" "
-                    onClick={() => {
-                      setAddMember(true);
-                    }}
-                  >
-                    <IoMdPersonAdd />
-                  </Button>
-                  {addMember && (
-                    <Modal
-                      open={true}
-                      onClose={() => {
-                        setAddMember(false);
-                      }}
-                      aria-labelledby="child-modal-title"
-                      aria-describedby="child-modal-description"
-                    >
-                      <Box sx={style}>
-                        <Typography>Add Team Member's Details</Typography>
-                        <TextField
-                          id="standard-basic"
-                          label="Team Name"
-                          variant="standard"
-                          sx={{ marginBottom: 2 }}
-                          onChange={(e) => setTeamName(e.target.value)}
-                        />
-                        {fieldErr && (
-                          <>
-                            <Typography style={{ color: "red" }}>
-                              {fieldErr}
-                            </Typography>
-                          </>
-                        )}
-                        <TextField
-                          id="standard-basic"
-                          label="Email"
-                          variant="standard"
-                          sx={{ marginBottom: 2 }}
-                          onChange={(e) => setTeamMemberEmail(e.target.value)}
-                        />
-                        <TextField
-                          id="standard-basic"
-                          label="Phone Number"
-                          variant="standard"
-                          sx={{ marginBottom: 2 }}
-                          onChange={(e) => setTeamMemberPhone(e.target.value)}
-                        />
-                        <Button
-                          variant="contained"
-                          style={{
-                            display: "flex",
-                            marginLeft: "auto",
-                          }}
-                          onClick={addTeamMember}
-                        >
-                          OK
-                        </Button>
-                      </Box>
-                    </Modal>
-                  )}
                 </StyledTableCell>
-                <StyledTableCell align="right">Event Name</StyledTableCell>
-                <StyledTableCell align="right">Members</StyledTableCell>
+                <StyledTableCell align="right">
+                  Members
+                  <StyledTableCell>Email</StyledTableCell>
+                  <StyledTableCell align="right">Status</StyledTableCell>
+                </StyledTableCell>
                 <StyledTableCell align="right">Leader Name</StyledTableCell>
+                <StyledTableCell align="right">Add Member</StyledTableCell>
+                <StyledTableCell align="right">Delete Team</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {members &&
                 members.length > 0 &&
-                members.map((team) => {
+                Object.values(members).map((team) => {
                   return (
                     <StyledTableRow key={team._id}>
                       <StyledTableCell
@@ -207,21 +221,27 @@ function TeamTable(teamMembers) {
                         align="right"
                         style={{ background: "grey" }}
                       >
-                        {team.memberDetails.map((eachMember) => {
-                          <StyledTableCell
-                            component="th"
-                            scope="row"
-                            style={{ background: "grey" }}
-                            key={eachMember.memberId}
-                            className={
-                              eachMember.status ? "verified" : "notVerified"
-                            }
-                          >
-                            {eachMember.email}
-                          </StyledTableCell>;
-                          <StyledTableRow>
-                            {eachMember.status ? "verified" : "notVerified"}
-                          </StyledTableRow>;
+                        {team.members.map((eachMember) => {
+                          return (
+                            <>
+                              <StyledTableCell
+                                component="th"
+                                scope="row"
+                                style={{ background: "grey" }}
+                                key={eachMember.memberId}
+                                className={
+                                  eachMember.status ? "verified" : "notVerified"
+                                }
+                              >
+                                <Typography style={{ color: "black" }}>
+                                  {eachMember.email}
+                                </Typography>
+                              </StyledTableCell>
+                              <StyledTableCell>
+                                {eachMember.status ? "verified" : "notVerified"}
+                              </StyledTableCell>
+                            </>
+                          );
                         })}
                       </StyledTableCell>
                       <StyledTableCell
@@ -234,13 +254,62 @@ function TeamTable(teamMembers) {
                         align="right"
                         style={{ background: "grey" }}
                       >
-                        not paid
+                        <Button
+                          onClick={() => {
+                            setAddMember(true);
+                          }}
+                        >
+                          <IoMdPersonAdd color="white" />
+                        </Button>
                       </StyledTableCell>
+                      {addMember && (
+                        <Modal
+                          open={true}
+                          onClose={() => {
+                            setAddMember(false);
+                          }}
+                          aria-labelledby="child-modal-title"
+                          aria-describedby="child-modal-description"
+                        >
+                          <Box sx={style}>
+                            {fieldErr && (
+                              <>
+                                <Typography style={{ color: "red" }}>
+                                  {fieldErr}
+                                </Typography>
+                              </>
+                            )}
+                            <TextField
+                              id="standard-basic"
+                              label="Member Email"
+                              variant="standard"
+                              sx={{ marginBottom: 2 }}
+                              onChange={(e) => setTeamMemberEmail(e.target.value)}
+                            />
+                            <Button
+                              variant="contained"
+                              style={{
+                                display: "flex",
+                                marginLeft: "auto",
+                              }}
+                              onClick={registerTeamEvent}
+                            >
+                              OK
+                            </Button>
+                          </Box>
+                        </Modal>
+                      )}
                       <StyledTableCell
                         align="right"
                         style={{ background: "grey" }}
                       >
-                        <MdDelete color="white" />
+                        <Button
+                          onClick={() => {
+                            handleTeamDelete(team._id);
+                          }}
+                        >
+                          <MdDelete color="white" />
+                        </Button>
                       </StyledTableCell>
                     </StyledTableRow>
                   );
