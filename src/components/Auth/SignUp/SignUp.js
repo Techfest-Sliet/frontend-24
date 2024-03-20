@@ -145,6 +145,10 @@ const Signup = () => {
       }, 3000);
       return;
     }
+    if(dob.length === 0){
+      setFieldErr("Field(s) should not be empty.")
+    }
+    
 
     const user = {
       name: name,
@@ -207,7 +211,7 @@ const Signup = () => {
       >
         <div>
           <img
-            src="/festLogo.png"
+            src="/logo.png"
             alt="techFest'23"
             className={styles.signup__logo}
           />
@@ -233,22 +237,6 @@ const Signup = () => {
                 placeholder="Enter your whatsapp number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                required
-                autoComplete="off"
-              />
-              <label htmlFor="profession" className={styles.signup__label}>
-                Profession
-              </label>
-              {fieldErr && (
-                <p style={{ color: "red", fontSize: "1rem" }}>{fieldErr}</p>
-              )}
-              <input
-                type="text"
-                id="profession"
-                name="profession"
-                placeholder="Enter your profession"
-                value={profession}
-                onChange={(e) => setProfession(e.target.value)}
                 required
                 autoComplete="off"
               />

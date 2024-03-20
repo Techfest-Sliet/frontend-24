@@ -69,8 +69,6 @@ const UserDashboard = () => {
 
   const [user, setUser] = useState({});
 
-  console.log("Event ==> ", setEvents);
-
   const [showTeamTable, setShowTeamTable] = useState(false);
 
   const navigate = useNavigate();
@@ -306,7 +304,9 @@ const UserDashboard = () => {
         setCollegeName(result.data.user.collegeName);
         setWorkshops(result.data.user.workshops);
         setTeamMembers(result.data.user.teamMembers);
+        console.log("teamMembers ==> ",result.data.user.teamMembers); 
         setEvents(result.data.user.events);
+        console.log(result.data.user.events);
       })
       .catch((err) => {
         setErrorMade(true);
@@ -353,7 +353,7 @@ const UserDashboard = () => {
               }}
             >
               {" "}
-              Welcome to the Universe&nbsp;{" "}
+              Welcome to the Universe &nbsp;{" "}
               <span
                 style={{ color: "#25c6e5", fontWeight: isMobile ? 600 : 700 }}
               >
@@ -654,21 +654,13 @@ const UserDashboard = () => {
                     <Typography sx={{ fontSize: isMobile ? 25 : 30 }}>
                       Events Registered
                     </Typography>
-                    <Tooltip title="Team Table">
-                      <Button
-                        variant=" "
-                        onClick={() => setOpenTeamTable(true)}
-                      >
-                        <GrGroup />
-                      </Button>
-                    </Tooltip>
                   </Box>
                   <Box>
                     <Grid container spacing={2}>
                       <Grid item xs={6}>
-                        {events &&
-                          events.length === 0 &&
-                          "Not Registered to any event 🙄."}
+                        {events && events.length === 0 && (
+                          <p>Not Registered to any event 🙄.</p>
+                        )}
                         {events &&
                           events.length > 0 &&
                           events.map((event) => {
@@ -709,38 +701,6 @@ const UserDashboard = () => {
                                     </Button>
                                   </Tooltip>
                                 </a>
-                                {event.eventParticipationType !==
-                                  "Individual" && (
-                                  <>
-                                    <Tooltip title="Team Table">
-                                      <Button
-                                        variant=" "
-                                        onClick={() => setOpenTeamTable(true)}
-                                      >
-                                        <GrGroup />
-                                      </Button>
-                                    </Tooltip>
-                                  </>
-                                )}
-                                {openTeamTable && (
-                                  <>
-                                    <Modal
-                                      open={openTeamTable}
-                                      onClose={() => {
-                                        setOpenTeamTable(false);
-                                      }}
-                                      aria-labelledby="modal-modal-title"
-                                      aria-describedby="modal-modal-description"
-                                    >
-                                      <Box sx={teamModalStyle}>
-                                        <TeamTable
-                                          teamMembers={teamMembers}
-                                          leaderId={user && user._id}
-                                        />
-                                      </Box>
-                                    </Modal>
-                                  </>
-                                )}
                                 <Tooltip title="Delete Event">
                                   <Button
                                     variant=" "
@@ -851,10 +811,24 @@ const UserDashboard = () => {
               </Card>
             </Box>
 
-
             {/* team table */}
 
-            <TeamTable/>
+            <Card
+              sx={{
+                width: "100%",
+                border: "2px solid white",
+                bgcolor: "transparent",
+                borderRadius: "5px",
+                color: "white",
+              }}
+            >
+              <Box sx={{ margin: "7%" }}>
+                <TeamTable
+                  teamMembers={teamMembers}
+                  leaderId={user && user._id}
+                />
+              </Box>
+            </Card>
           </div>
         </div>
       ) : (

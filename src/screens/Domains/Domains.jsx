@@ -24,6 +24,7 @@ const Domains = ({ domains }) => {
   };
 
   const [domainDetails, setDomainDetails] = useState([]);
+  const [comingSoon, setComingSoon] = useState(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -35,13 +36,14 @@ const Domains = ({ domains }) => {
         .get(`${baseUrl}/domain/getAllDomains`)
         .then((result) => {
           setDomainDetails(result.data);
+          console.log("domainsDetails[0] ==> ", domainDetails[0]);
         })
         .catch((err) => {
           setError(true);
           console.log("err===>", err);
         });
     };
-    
+
     clearTimeout(timeout);
     getAllDomains();
   }, []);
@@ -50,9 +52,13 @@ const Domains = ({ domains }) => {
 
   const clickDomain = (index) => {
     try {
-      navigate(`/domains/${domainDetails[index].domainName}`);
+      if (index !== 2 && index !== 6 && index !== 9) {
+        navigate(`/domains/${domainDetails[index].domainName}`);
+      } else {
+        setComingSoon(true);
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setError(true);
     }
   };
@@ -60,10 +66,11 @@ const Domains = ({ domains }) => {
   return (
     <>
       <StarCanvas />
-      {isLoading && <Loader/>}
+      {isLoading && <Loader />}
       {error ? (
         <Error />
       ) : (
+        
         <Box style={{ position: "relative", zIndex: "25" }}>
           <div className="domains">
             <div class="wrapper">
@@ -101,7 +108,13 @@ const Domains = ({ domains }) => {
                     >
                       Explore
                     </Button>
-                    <p>{domain.description}</p>
+                    {
+                     !comingSoon && <p>{domain.description}</p>
+                    }
+                    {
+                      comingSoon && <p>The Section is under construction.</p>
+                    }
+                    
                   </div>
                 );
               })}

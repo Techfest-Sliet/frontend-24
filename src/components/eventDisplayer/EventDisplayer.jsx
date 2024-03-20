@@ -1,4 +1,4 @@
-import { Stack, Box, Typography, Button } from "@mui/material";
+import { Stack, Box, Typography, Button, Divider, Select } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
@@ -7,11 +7,10 @@ import { baseUrl } from "../../API/Api";
 import axios from "axios";
 import AuthContext from "../Auth/Auth";
 import { ImCross } from "react-icons/im";
-import { Menu, MenuItem, Modal, TextField, Tooltip } from "@mui/material";
+import { Menu, MenuItem, Modal, TextField } from "@mui/material";
 import Error from "../Error/Error";
 import Swal from "sweetalert2";
-import { IoMdRemoveCircle } from "react-icons/io";
-import { MdGroupAdd } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -36,7 +35,7 @@ const EventDisplayer = () => {
   const [error, setError] = useState(false);
   const [teamDetails, setTeamDetails] = useState(false);
   const [teamName, setTeamName] = useState("");
-  const [teamMemberEmails, setTeamMemberEmails] = useState([" "]);
+  const [teams, setTeams] = useState([]);
 
   const { eventId } = useParams();
   const token = localStorage.getItem("jwtToken");
@@ -72,8 +71,22 @@ const EventDisplayer = () => {
       });
     };
 
+    const getProperTeam = async () => {
+      await axios
+        .get(`${baseUrl}/team/properteam`, {
+          headers: {
+            Authorization: "Bearer " + authContext.token,
+          },
+        })
+        .then((result) => {
+          console.log("teams ==>", result);
+          setTeams(result.data.teams);
+        });
+    };
+
     getEventById();
     getUserById();
+    getProperTeam();
   }, [authContext, authContext.login]);
 
   const navigate = useNavigate();
@@ -85,6 +98,34 @@ const EventDisplayer = () => {
   };
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
+  };
+
+  const addTeam = async (eventId, teamName) => {
+    handleClose();
+    await axios
+      .post(
+        `${baseUrl}/user/addevent`,
+        {
+          eventId: eventId,
+          type: "team",
+          teamName: teamName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authContext.token}`,
+          },
+        }
+      )
+      .then((result) => {
+        console.log("Result Data===>", result.data);
+        Swal.fire({
+          title: "Great!!",
+          text: `${result.data.message}`,
+          icon: "success",
+          confirmButtonColor: "skyblue",
+        });
+        navigate(`/user`);
+      });
   };
 
   // Individual Registration
@@ -116,86 +157,6 @@ const EventDisplayer = () => {
         });
         navigate(`/user`);
       });
-  }
-
-  // Team Registration
-
-  const handleMemberEmail = (index, e) => {
-    const newEmails = [...teamMemberEmails];
-    newEmails[index] = e.target.value;
-    setTeamMemberEmails(newEmails);
-  };
-
-  const addTeamMember = () => {
-    setTeamMemberEmails([...teamMemberEmails, " "]);
-  };
-
-  const removeMember = (index) => {
-    const newEmails = [...teamMemberEmails];
-    newEmails.splice(index, 1);
-    setTeamMemberEmails(newEmails);
-  };
-
-  async function registerTeamEvent() {
-    if (authContext.isUserLoggedIn === false) {
-      navigate("/sign-in");
-    }
-
-    const createTeam = async () => {
-      await axios
-        .post(
-          `${baseUrl}/team/create`,
-          {
-            teamName: teamName,
-            members: teamMemberEmails,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${authContext.token}`,
-            },
-          }
-        )
-        .then((result) => {
-          if (result.data.message === "team created") {
-            Swal.fire({
-              title: "Great!!",
-              text: `Your team is succesfully created`,
-              icon: "success",
-              confirmButtonColor: "skyblue",
-            });
-          }
-          console.log("result.data ==> ", result.data);
-        });
-    };
-
-    const addTeam = async () => {
-      await axios
-        .post(
-          `${baseUrl}/user/addevent`,
-          {
-            eventId: `${eventId}`,
-            type: "team",
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${authContext.token}`,
-            },
-          }
-        )
-        .then((result) => {
-          console.log("Result Data===>", result.data);
-          Swal.fire({
-            title: "Great!!",
-            text: `${result.data.message}`,
-            icon: "success",
-            confirmButtonColor: "skyblue",
-          });
-          navigate(`/user`);
-        });
-    };
-
-    createTeam();
-    // addTeam();
   }
 
   return (
@@ -389,6 +350,7 @@ const EventDisplayer = () => {
                               <MenuItem
                                 onClick={() => {
                                   setTeamDetails(true);
+                                  handleClose();
                                 }}
                               >
                                 Join as Team
@@ -406,80 +368,48 @@ const EventDisplayer = () => {
                                   aria-describedby="child-modal-description"
                                 >
                                   <Box sx={style}>
-                                    <div
-                                      className="firstLine"
-                                      style={{ display: "flex" }}
-                                    >
-                                      <TextField
-                                        id="standard-basic"
-                                        label="Team Name"
-                                        variant="standard"
-                                        sx={{ marginBottom: 2 }}
-                                        onChange={(e) => {
-                                          setTeamName(e.target.value);
-                                        }}
-                                      />
-                                      <div
-                                        className="addButton"
-                                        style={{ marginLeft: "auto" }}
-                                      >
-                                        <Tooltip title="Add Member">
-                                          <Button
-                                            variant=" "
-                                            onClick={addTeamMember}
-                                          >
-                                            <MdGroupAdd />
-                                          </Button>
-                                        </Tooltip>
-                                      </div>
-                                    </div>
-                                    {teamMemberEmails.map((member, index) => {
-                                      return (
-                                        <>
-                                          <div style={{ display: "flex" }}>
-                                            <TextField
-                                              id="standard-basic"
-                                              label="Member Email"
-                                              variant="standard"
-                                              value={member}
-                                              sx={{ marginBottom: 2 }}
-                                              onChange={(e) =>
-                                                handleMemberEmail(index, e)
-                                              }
-                                            />
-                                            {/* {index > 0 && ( */}
-                                            <>
-                                              <div
-                                                className="removeButton"
-                                                style={{ margin: "4%" }}
+                                    {teams &&
+                                      teams.map((team) => {
+                                        return (
+                                          <>
+                                            <Select value={teamName} onChange={(e) => {
+                                              setTeamName(e.target.value);
+                                            }}>
+                                              <MenuItem
+                                                onClick={() => {
+                                                  addTeam(
+                                                    eventId,
+                                                    team.teamName
+                                                  );
+                                                }}
+                                                key={team._id}
                                               >
-                                                <Tooltip title="Remove Member">
-                                                  <Button
-                                                    variant=" "
-                                                    onClick={() =>
-                                                      removeMember(index)
-                                                    }
-                                                  >
-                                                    <IoMdRemoveCircle />
-                                                  </Button>
-                                                </Tooltip>
-                                              </div>
-                                            </>
-                                            {/* )} */}
-                                          </div>
-                                        </>
-                                      );
-                                    })}
+                                                {team.teamName}
+                                              </MenuItem>
+                                            </Select>
+                                          </>
+                                        );
+                                      })}
                                     <Button
                                       variant="contained"
                                       style={{
                                         display: "flex",
                                         marginLeft: "auto",
                                       }}
-                                      onClick={registerTeamEvent}
+                                      onClick={addTeam}
                                     >
                                       OK
                                     </Button>
+                                    <Divider />
+                                    <Typography>Add Your Team</Typography>
+                                    <Link to="/addteam">
+                                      <Button
+                                        variant="contained"
+                                        sx={{ margin: "3%" }}
+                                      >
+                                        Add Team
+                                      </Button>
+                                    </Link>
                                   </Box>
                                 </Modal>
                               </>

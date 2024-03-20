@@ -23,6 +23,7 @@ import Chitresh from "./images/Chitresh.jpg";
 import Shudhanshu from "./images/Shudhanshu.jpg";
 import Arpit from "./images/Arpit .jpg";
 import Prakhyat from "./images/Prakhyat.jpg";
+import Sandeep from "./images/Sandeep.jpg";
 
 export const photos = {
   Director,
@@ -43,4 +44,5 @@ export const photos = {
   Shudhanshu,
   Arpit,
   Prakhyat,
+  Sandeep,
 };

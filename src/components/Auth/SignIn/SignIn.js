@@ -7,7 +7,6 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Particle from "./Particle";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../../images/festLogo.png";
 import AuthContext from "../Auth";
 import  Loader from "../../Loader/loader";
 
@@ -125,7 +124,7 @@ const SignIn = () => {
       <Particle />
       <Stack direction="row" spacing={5} justifyContent={"space-between"}>
         <Item>
-          <img src={logo} alt="Techfest'24 logo" className="techFestLogo" />
+          <img src="/logo.png" alt="Techfest'24 logo" className="techFestLogo" />
         </Item>
         <Item>
           <div className="signInContainer">
@@ -226,6 +225,8 @@ const SignIn = () => {
                 }}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {(mailErr) && <span style={{color:"red"}}>The Email is not registered, redirecting to signup page...  </span>}
+              {(passwordErr) && <span style={{color:"red"}}>Incorrect Password</span>}
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 justifyContent={"space-between"}

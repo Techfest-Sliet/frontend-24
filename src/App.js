@@ -38,6 +38,7 @@ import TeamTable from "./screens/UserDashboard/TeamTable";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useMediaQuery } from "@mui/material";
+import AddTeam from "./screens/UserDashboard/addTeam";
 
 
 function App() {
@@ -67,6 +68,9 @@ function App() {
           )}
           {!authContext.isUserLoggedIn && (
             <Route path="/team" element={<TeamTable />} />
+          )}
+          {!authContext.isUserLoggedIn && (
+            <Route path="/addteam" element={<AddTeam />} />
           )}
           {/* {!authContext.isUserLoggedIn && (
             <Route path="/register" element={<RegisterEvent />} />
