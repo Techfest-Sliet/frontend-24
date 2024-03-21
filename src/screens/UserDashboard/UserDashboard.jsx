@@ -615,15 +615,6 @@ const UserDashboard = () => {
                             sx={{ marginBottom: 2 }}
                             onChange={(e) => setPhone(e.target.value)}
                           />
-
-                          <TextField
-                            id="standard-basic"
-                            label=" Whatsapp Number"
-                            variant="standard"
-                            sx={{ marginBottom: 2 }}
-                            onChange={(e) => setWphone(e.target.value)}
-                          />
-
                           <Button
                             variant="contained"
                             style={{ display: "flex", marginLeft: "auto" }}

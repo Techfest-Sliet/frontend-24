@@ -246,9 +246,7 @@ const OurTeam = () => {
             name={"Sandeep Kumar"}
             post={"Backend & Hosting Expert"}
             mail={"2241028@sliet.ac.in"}
-            linkedIn={
-              "https://www.linkedin.com/in/sandeep-kumar-746095257"
-            }
+            linkedIn={"https://www.linkedin.com/in/sandeep-kumar-746095257"}
             image={photos.Sandeep}
           />
         </section>

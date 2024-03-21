@@ -175,7 +175,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Gallery
                     </Button>
                   </Link>
-                  <Link to="#">
+                  <Link to="/aboutus">
                     <Button
                       style={{
                         color: "white",

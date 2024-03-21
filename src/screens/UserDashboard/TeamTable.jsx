@@ -59,7 +59,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function TeamTable({ teamMembers }) {
   const authContext = useContext(AuthContext);
   console.log(typeof teamMembers);
-  const [members, setMembers] = useState({teamMembers});
+  const [members, setMembers] = useState({ teamMembers });
   const [addMember, setAddMember] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [teamMemberEmail, setTeamMemberEmail] = useState("");
@@ -131,9 +131,7 @@ function TeamTable({ teamMembers }) {
         >
           <GroupAddIcon />
         </Button> */}
-        {openAddTeam && <>
-          
-        </>}
+        {openAddTeam && <></>}
       </div>
       <TableContainer>
         <Table
@@ -153,36 +151,18 @@ function TeamTable({ teamMembers }) {
                 align="right"
                 style={{ backgroundColor: "transparent", color: "white" }}
               >
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell
-                      align="right"
-                      style={{ backgroundColor: "transparent", color: "white" }}
-                    >
-                      Members
-                    </StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <StyledTableCell
-                      align="right"
-                      style={{ backgroundColor: "transparent", color: "white" }}
-                    >
-                      Email
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="right"
-                      style={{
-                        backgroundColor: "transparent",
-                        color: "white",
-                      }}
-                    >
-                      Status
-                    </StyledTableCell>
-                  </TableRow>
-                </TableBody>
+               Member Email
               </StyledTableCell>
+              <StyledTableCell
+                align="right"
+                style={{
+                  backgroundColor: "transparent",
+                  color: "white",
+                }}
+              >
+                Status
+              </StyledTableCell>
+
               <StyledTableCell
                 align="right"
                 style={{ backgroundColor: "transparent", color: "white" }}

@@ -81,7 +81,7 @@ function App() {
           <Route path="/sponsor" element={<Sponsors />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/ourteam" element={<OurTeam />} />
-          {/* <Route path="/about-us" element={<AboutUs />} /> */}
+          <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/workshops" element={<WorkShops />} />
           <Route path="/domains" element={<Domains domains={domainData} />} />
           <Route
