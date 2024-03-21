@@ -52,7 +52,7 @@ const Domains = ({ domains }) => {
 
   const clickDomain = (index) => {
     try {
-      if (index !== 2 && index !== 6 && index !== 9) {
+      if (index !== 2) {
         navigate(`/domains/${domainDetails[index].domainName}`);
       } else {
         setComingSoon(true);
