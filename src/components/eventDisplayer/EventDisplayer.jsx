@@ -11,6 +11,7 @@ import { Menu, MenuItem, Modal, TextField } from "@mui/material";
 import Error from "../Error/Error";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -159,6 +160,8 @@ const EventDisplayer = () => {
       });
   }
 
+  const isMobile = useMediaQuery("(max-width : 480px)");
+
   return (
     <>
       <StarCanvas />
@@ -175,18 +178,19 @@ const EventDisplayer = () => {
                 alignItems: "center",
                 position: "relative",
                 zIndex: "25",
+                marginBottom: isMobile && "4rem",
               }}
             >
               <div
                 className="container-div"
                 style={{
                   color: "white",
-                  height: "90%",
-                  width: "86%",
+                  height: "100%",
+                  width: isMobile ? "100%" : "86%",
                   display: "flex",
                   alignItems: "center",
                   flexDirection: "column",
-                  padding: "6rem 0 0 0",
+                  padding: isMobile ? "3rem 0 0 0" : "6rem 0 0 0",
                 }}
               >
                 <Typography
@@ -194,9 +198,13 @@ const EventDisplayer = () => {
                     fontSize: "3rem",
                     fontFamily: "Orbitron",
                     fontWeight: "600",
+                    marginBottom: isMobile && "2rem",
                   }}
                 >
                   {eventDetails.eventName}
+                </Typography>
+                <Typography style={{ color: "red" }}>
+                  Registrations opening soon...
                 </Typography>
                 <Box
                   sx={{
@@ -207,7 +215,12 @@ const EventDisplayer = () => {
                 >
                   <Button
                     variant=" "
-                    style={{ postion: "relative", top: "4.5rem", zIndex: "10" }}
+                    style={{
+                      postion: "relative",
+                      top: isMobile ? "-1rem" : "4.5rem",
+                      right: isMobile && "-2rem",
+                      zIndex: "10",
+                    }}
                     onClick={() => {
                       navigate(-1);
                     }}
@@ -219,13 +232,13 @@ const EventDisplayer = () => {
                   className="div1"
                   style={{
                     height: "115%",
-                    width: "75%",
-
+                    width: isMobile ? "95%" : "75%",
                     backgroundColor: "#90e0ef34",
                     position: "relative",
+                    clipPath: isMobile
+                      ? "0 0, 0 100%, 100% 100%,100% 0"
+                      : "polygon(0 0 ,45% 0 ,50% 8% ,100% 8% ,100% 86% , 95% 95% ,85% 95%, 80% 85% , 6% 85%, 0 75%)",
 
-                    clipPath:
-                      "polygon(0 0 ,45% 0 ,50% 8% ,100% 8% ,100% 86% , 95% 95% ,85% 95%, 80% 85% , 6% 85%, 0 75%)",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -234,9 +247,9 @@ const EventDisplayer = () => {
                   <div
                     style={{
                       position: "absolute",
-                      width: "75%",
-                      height: "65%",
-                      border: "1px spolid red ",
+                      width: isMobile ? "100%" : "75%",
+                      height: isMobile ? "auto" : "65%",
+                      padding: isMobile && "1rem",
                       zIndex: "15",
                       display: "flex",
                       justifyContent: "center",
@@ -244,7 +257,7 @@ const EventDisplayer = () => {
                     }}
                   >
                     <Stack
-                      direction={"row"}
+                      direction={isMobile ? "column" : "row"}
                       style={{
                         width: "100%",
                         height: "90%",
@@ -268,6 +281,7 @@ const EventDisplayer = () => {
                           style={{
                             objectFit: "cover",
                             boxShadow: "4px 5px 4px  #030014",
+                            display: isMobile ? "none" : "block",
                           }}
                         />
                       </Box>
@@ -310,6 +324,7 @@ const EventDisplayer = () => {
                             height: "12%",
                             zIndex: "30",
                             display: "flex",
+                            flexDirection: isMobile && "column",
                             alignItems: "center",
                             justifyContent: "space-between",
                             marginTop: "1.2rem",
@@ -320,10 +335,15 @@ const EventDisplayer = () => {
                           <a href={eventDetails.driveLink} target="_main">
                             <Button>Problem Statement</Button>
                           </a>
-                          <Box display={"flex"} gap={1}>
-                            <Button variant="contained" onClick={handleMenu}>
+                          <Box
+                            display={"flex"}
+                            flexDirection={isMobile && "column"}
+                            width={isMobile && "100%"}
+                            gap={1}
+                          >
+                            {/* <Button variant="contained" onClick={handleMenu}>
                               Register
-                            </Button>
+                            </Button> */}
                             <Menu
                               id="menu-appbar"
                               anchorEl={anchorEl}
@@ -372,9 +392,12 @@ const EventDisplayer = () => {
                                       teams.map((team) => {
                                         return (
                                           <>
-                                            <Select value={teamName} onChange={(e) => {
-                                              setTeamName(e.target.value);
-                                            }}>
+                                            <Select
+                                              value={teamName}
+                                              onChange={(e) => {
+                                                setTeamName(e.target.value);
+                                              }}
+                                            >
                                               <MenuItem
                                                 onClick={() => {
                                                   addTeam(
@@ -439,6 +462,7 @@ const EventDisplayer = () => {
                 alignItems: "center",
                 zIndex: "25",
                 position: "relative",
+                marginBottom: isMobile && "4rem",
                 // border: "1px solid red",
               }}
             >
@@ -447,11 +471,11 @@ const EventDisplayer = () => {
                 style={{
                   color: "white",
                   height: "90%",
-                  width: "86%",
+                  width: isMobile ? "100%" : "86%",
                   display: "flex",
                   alignItems: "center",
                   flexDirection: "column",
-                  padding: "6rem 0 0 0",
+                  padding: isMobile ? "3rem 0 0 0" : "6rem 0 0 0",
                 }}
               >
                 <Typography
@@ -459,6 +483,7 @@ const EventDisplayer = () => {
                     fontSize: "3rem",
                     fontFamily: "Orbitron",
                     fontWeight: "600",
+                    marginBottom: isMobile && "0rem",
                   }}
                 >
                   {eventDetails.eventName}
@@ -472,7 +497,12 @@ const EventDisplayer = () => {
                 >
                   <Button
                     variant=" "
-                    style={{ postion: "relative", top: "4.5rem", zIndex: "10" }}
+                    style={{
+                      postion: "relative",
+                      top: isMobile ? "3rem" : "4.5rem",
+                      right: isMobile && "-2rem",
+                      zIndex: "10",
+                    }}
                     onClick={() => {
                       navigate(-1);
                     }}
@@ -485,13 +515,15 @@ const EventDisplayer = () => {
                   className="div1"
                   style={{
                     height: "95%",
-                    width: "75%",
+                    width: isMobile ? "95%" : "75%",
 
                     backgroundColor: "#90e0ef34",
                     position: "relative",
 
-                    clipPath:
-                      "polygon(0 0 ,45% 0 ,50% 8% ,100% 8% ,100% 86% , 95% 95% ,85% 95%, 80% 85% , 6% 85%, 0 75%)",
+                    clipPath: isMobile
+                      ? "0 0, 0 100%, 100% 100%,100% 0"
+                      : "polygon(0 0 ,45% 0 ,50% 8% ,100% 8% ,100% 86% , 95% 95% ,85% 95%, 80% 85% , 6% 85%, 0 75%)",
+
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -500,10 +532,10 @@ const EventDisplayer = () => {
                   <div
                     style={{
                       position: "absolute",
-                      width: "75%",
-                      height: "65%",
-                      // border: "1px spolid red ",
-                      // zIndex: "15",
+                      width: isMobile ? "100%" : "75%",
+                      height: isMobile? "100%" :"65%",
+                      padding: isMobile && "1rem",
+                      backgroundColor:"#90e0ef34",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",

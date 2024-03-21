@@ -66,12 +66,12 @@ function App() {
           {!authContext.isUserLoggedIn && (
             <Route path="/user" element={<UserDashBoard />} />
           )}
-          {!authContext.isUserLoggedIn && (
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/team" element={<TeamTable />} />
           )}
           {!authContext.isUserLoggedIn && (
             <Route path="/addteam" element={<AddTeam />} />
-          )}
+          )} */}
           {/* {!authContext.isUserLoggedIn && (
             <Route path="/register" element={<RegisterEvent />} />
           )} */}

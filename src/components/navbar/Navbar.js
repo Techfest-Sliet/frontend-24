@@ -53,7 +53,7 @@ const NavBar = () => {
       />
       <div>
         <Link to="/">
-          <img src="techfest24logo1.png" alt="" width="60%" />
+          <img src="/techfest24logo1.png" alt="" width="60%" />
         </Link>
         <Divider flexItem />
       </div>
@@ -225,7 +225,7 @@ const NavBar = () => {
             }}
           >
             <img
-              src="techfest24logo1.png"
+              src="/techfest24logo1.png"
               alt="logo"
               height="55%"
               style={{ filter: "none" }}
@@ -341,7 +341,7 @@ const NavBar = () => {
                 </Typography>
               </Link>
             ) : (
-              <Tooltip title="user">
+              <Tooltip title="Profile">
                 <Button onClick={handleMenu}>
                   <Avatar alt="User" sx={{ height: 35 }} />
                 </Button>
@@ -368,7 +368,7 @@ const NavBar = () => {
                   navigate("/user");
                 }}
               >
-                User
+                Profile
               </MenuItem>
               <MenuItem
                 onClick={() => {

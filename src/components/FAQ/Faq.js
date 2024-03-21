@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Faq.css";
-import linkedIn from "./../../assets/icons8-linkedin-50.png"
-import instagram from "./../../assets/icons8-instagram-50.png"
+import linkedIn from "./../../assets/icons8-linkedin-50.png";
+import instagram from "./../../assets/icons8-instagram-50.png";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
+import { Button } from "@mui/material";
 
 const Card = ({ heading, details }) => {
   return (
@@ -132,11 +133,11 @@ const Faq = () => {
           <div> &copy;2024 techFest'24. All Right Reserved </div>
           <div>
             {" "}
-            <a href="https://www.linkedin.com/company/techfest-sliet/">
-              <img src={linkedIn} alt="" style={{width:"30%"}}/>
+            <a href="https://www.linkedin.com/company/techfest-sliet/" target="main">
+              <img src={linkedIn} alt="" style={{ width: "30%" }} />
             </a>{" "}
-            <a href="https://www.instagram.com/techfestsliet_/">
-              <img src={instagram} alt="" style={{width:"30%"}}/>
+            <a href="https://www.instagram.com/techfestsliet_/" target="main">
+              <img src={instagram} alt="" style={{ width: "30%" }} />
             </a>
           </div>
         </div>

@@ -56,14 +56,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function TeamTable({ teamMembers, leaderId }) {
+function TeamTable({ teamMembers }) {
   const authContext = useContext(AuthContext);
   console.log(typeof teamMembers);
-  const [members, setMembers] = useState(teamMembers);
+  const [members, setMembers] = useState({teamMembers});
   const [addMember, setAddMember] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [teamMemberEmail, setTeamMemberEmail] = useState("");
-  const [fieldErr, setFieldErr] = useState(null);
   const [openAddTeam, setOpenAddTeam] = useState(false);
 
   const navigate = useNavigate();
@@ -118,12 +117,12 @@ function TeamTable({ teamMembers, leaderId }) {
           style={{
             color: "white",
             fontSize: 30,
-            fontWeight: 600,
+            // fontWeight: 600,
           }}
         >
           Team Table :
         </Typography>
-        <Button
+        {/* <Button
           className="addBtn"
           variant=" "
           onClick={() => {
@@ -131,8 +130,10 @@ function TeamTable({ teamMembers, leaderId }) {
           }}
         >
           <GroupAddIcon />
-        </Button>
-        {openAddTeam && <></>}
+        </Button> */}
+        {openAddTeam && <>
+          
+        </>}
       </div>
       <TableContainer>
         <Table
@@ -219,12 +220,6 @@ function TeamTable({ teamMembers, leaderId }) {
                       align="right"
                       style={{ background: "grey" }}
                     >
-                      {team.events}
-                    </StyledTableCell>
-                    <StyledTableCell
-                      align="right"
-                      style={{ background: "grey" }}
-                    >
                       {team.members.map((eachMember) => {
                         return (
                           <>
@@ -237,7 +232,7 @@ function TeamTable({ teamMembers, leaderId }) {
                                 eachMember.status ? "verified" : "notVerified"
                               }
                             >
-                              <Typography style={{ color: "black" }}>
+                              <Typography style={{ color: "red" }}>
                                 {eachMember.email}
                               </Typography>
                             </StyledTableCell>

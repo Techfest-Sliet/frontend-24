@@ -304,7 +304,7 @@ const UserDashboard = () => {
         setCollegeName(result.data.user.collegeName);
         setWorkshops(result.data.user.workshops);
         setTeamMembers(result.data.user.teamMembers);
-        console.log("teamMembers ==> ",result.data.user.teamMembers); 
+        console.log("teamMembers ==> ", result.data.user.teamMembers);
         setEvents(result.data.user.events);
         console.log(result.data.user.events);
       })
@@ -388,21 +388,34 @@ const UserDashboard = () => {
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
                       <Typography
-                        sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          fontWeight: 500,
+                          height: isMobile ? "6rem" : "3rem",
+                        }}
                       >
                         Profession
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
                       <Typography
-                        sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          fontWeight: 500,
+                          height: isMobile ? "6rem" : "3rem",
+                        }}
                       >
                         {!isMobile
                           ? "Organisation/College Name"
                           : "College Name"}
                       </Typography>
                     </Box>
-                    <Box sx={{ marginBottom: "5%" }}>
+                    <Box
+                      sx={{
+                        marginBottom: "5%",
+                        height: isMobile ? "6rem" : "3rem",
+                      }}
+                    >
                       <Typography
                         sx={{
                           fontSize: isMobile ? 20 : 25,
@@ -415,7 +428,11 @@ const UserDashboard = () => {
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
                       <Typography
-                        sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          fontWeight: 500,
+                          height: isMobile ? "6rem" : "3rem",
+                        }}
                       >
                         Date of Birth
                       </Typography>
@@ -476,22 +493,42 @@ const UserDashboard = () => {
                       </Modal>
                     )}
                     <Box sx={{ marginBottom: "5%" }}>
-                      <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      <Typography
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          height: isMobile ? "4.5rem" : "3rem",
+                        }}
+                      >
                         Student
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
-                      <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      <Typography
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          height: isMobile ? "7rem" : "3rem",
+                        }}
+                      >
                         {user && user.collegeName}
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
-                      <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      <Typography
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          height: isMobile ? "6rem" : "3rem",
+                        }}
+                      >
                         {user && user.branch}
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
-                      <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      <Typography
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          height: isMobile ? "6rem" : "3rem",
+                        }}
+                      >
                         {user && formattedDate}
                       </Typography>
                     </Box>
@@ -515,21 +552,33 @@ const UserDashboard = () => {
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
                       <Typography
-                        sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          fontWeight: 500,
+                          height: isMobile ? "4rem" : "3rem",
+                        }}
                       >
                         {isMobile ? "E-mail" : "E-mail Address"}
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
                       <Typography
-                        sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          fontWeight: 500,
+                          height: isMobile ? "4rem" : "3rem",
+                        }}
                       >
                         Phone Number
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
                       <Typography
-                        sx={{ fontSize: isMobile ? 20 : 25, fontWeight: 500 }}
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          fontWeight: 500,
+                          height: isMobile ? "4rem" : "3rem",
+                        }}
                       >
                         TechBucks 🪙
                       </Typography>
@@ -589,21 +638,32 @@ const UserDashboard = () => {
                       <Typography
                         sx={{
                           fontSize: isMobile ? 18 : 25,
-                          left: isMobile ? "-5rem" : "0rem",
+                          left: isMobile ? "0rem" : "0rem",
                           position: "relative",
                           whiteSpace: "nowrap",
+                          height: isMobile ? "4rem" : "3rem",
                         }}
                       >
                         {user && user.email}
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
-                      <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      <Typography
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          height: isMobile ? "4rem" : "3rem",
+                        }}
+                      >
                         {user && user.phone}
                       </Typography>
                     </Box>
                     <Box sx={{ marginBottom: "5%" }}>
-                      <Typography sx={{ fontSize: isMobile ? 20 : 25 }}>
+                      <Typography
+                        sx={{
+                          fontSize: isMobile ? 20 : 25,
+                          height: isMobile ? "4rem" : "3rem",
+                        }}
+                      >
                         {user && user.techbucks}
                       </Typography>
                     </Box>

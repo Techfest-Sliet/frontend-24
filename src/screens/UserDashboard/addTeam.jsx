@@ -20,7 +20,8 @@ function AddTeam() {
   const authContext = useContext(AuthContext);
   const [teamName, setTeamName] = useState(false);
   const [members, setMembers] = useState([" "]);
-  const [error, setError] = useState("");
+
+  console.log("members ==>", members);
 
   const handleMemberEmail = (index, e) => {
     const newEmails = [...members];
@@ -29,7 +30,7 @@ function AddTeam() {
   };
 
   const addMember = () => {
-    setMembers([...members, { id: "", name: "", email: "" }]);
+    setMembers([...members, " "]);
   };
 
   const removeMember = (index) => {
@@ -58,7 +59,7 @@ function AddTeam() {
       )
       .then((result) => {
         console.log("team create ==>", result.data);
-        setError(result.data.title);
+        alert(result.data.title);
       });
   };
 
@@ -119,7 +120,7 @@ function AddTeam() {
                     setTeamName(e.target.value);
                   }}
                 />
-                {members?.map((member, index) => {
+                {members.map((member, index) => {
                   return (
                     <>
                       {index <= 2 && (
@@ -150,7 +151,6 @@ function AddTeam() {
                     </>
                   );
                 })}
-                {error && <span style={{color:"red"}}>{error}</span>}
                 <Button variant=" " onClick={addMember}>
                   <GroupAdd />
                 </Button>

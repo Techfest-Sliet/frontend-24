@@ -91,3 +91,47 @@ a{
     gap: 1rem;
 }
 
+@media screen and (max-width : 450px) {
+    .faqHeading{
+        font-size: 15px;
+        position: relative;
+    width: 70%;
+    padding-top:10rem;
+    margin: 0 50%;
+    transform: translate(-50%);
+    }
+    .faqSubHeading{
+        font-size: 12px;
+        color: rgb(145, 145, 149);
+        position: relative;
+        width: 95%;
+        margin: 0 50%;
+        transform: translate(-50%);
+    }
+    .faq{
+        font-size: 40px;
+    }
+    .side-arrow{
+        display: none;
+    }
+    .textScroller{
+        flex-direction: column;
+        position: absolute;
+    margin: 2rem 50%;
+    transform: translate(-50%);
+    gap: 1rem;
+    }
+    .faqCardDetails{
+        padding: 1rem 0.5rem;
+        font-size: 15px;
+        width: 12rem;
+        font-weight: 550;
+        height: auto;
+        color: rgb(145, 145, 149);
+        text-align: center;
+        margin-bottom: 1.2rem;
+    }
+    .faqFooter{
+        display: none;
+    }
+}

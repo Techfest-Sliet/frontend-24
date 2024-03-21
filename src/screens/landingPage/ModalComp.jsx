@@ -315,6 +315,17 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       Enquiry
                     </Button>
                   </Link>
+                  <Link to="/faq">
+                    <Button
+                      style={{
+                        color: "white",
+                        fontFamily: "Droid sans",
+                        fontWeight: "800",
+                      }}
+                    >
+                      FAQ
+                    </Button>
+                  </Link>
                   <Link to="/ourteam">
                     <Button
                       style={{
