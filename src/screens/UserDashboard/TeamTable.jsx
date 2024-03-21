@@ -58,12 +58,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function TeamTable({ teamMembers }) {
   const authContext = useContext(AuthContext);
-  console.log(typeof teamMembers);
-  const [members, setMembers] = useState({ teamMembers });
+  console.log("teamMembers ==>", teamMembers);
+  const [members, setMembers] = useState(teamMembers);
   const [addMember, setAddMember] = useState(false);
-  const [teamName, setTeamName] = useState("");
   const [teamMemberEmail, setTeamMemberEmail] = useState("");
   const [openAddTeam, setOpenAddTeam] = useState(false);
+
+  console.log("members ==>", members);
 
   const navigate = useNavigate();
 
@@ -83,14 +84,14 @@ function TeamTable({ teamMembers }) {
       });
   };
 
-  const addTeam = (e) => {
+  const addTeam = (e, index) => {
     e.preventDefault();
 
     axios
       .post(
         `${baseUrl}/team/create`,
         {
-          teamName: teamName,
+          teamName: members[index].teamName,
           members,
         },
         {
@@ -151,7 +152,7 @@ function TeamTable({ teamMembers }) {
                 align="right"
                 style={{ backgroundColor: "transparent", color: "white" }}
               >
-               Member Email
+                Member Email
               </StyledTableCell>
               <StyledTableCell
                 align="right"
@@ -162,7 +163,6 @@ function TeamTable({ teamMembers }) {
               >
                 Status
               </StyledTableCell>
-
               <StyledTableCell
                 align="right"
                 style={{ backgroundColor: "transparent", color: "white" }}
@@ -186,7 +186,7 @@ function TeamTable({ teamMembers }) {
           <TableBody>
             {members &&
               members.length > 0 &&
-              Object.keys(members).map((team) => {
+              Object.keys(members).map((team, index) => {
                 return (
                   <StyledTableRow key={team._id}>
                     <StyledTableCell
@@ -266,7 +266,7 @@ function TeamTable({ teamMembers }) {
                             display: "flex",
                             marginLeft: "auto",
                           }}
-                          onClick={() => addTeam(team._id)}
+                          onClick={(e) => addTeam(e, index)}
                         >
                           OK
                         </Button>

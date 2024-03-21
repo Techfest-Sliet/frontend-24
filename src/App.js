@@ -1,10 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import LandingPage from "./screens/landingPage/landingPage";
 import { Routes, Route } from "react-router-dom";
 
 import WorkShops from "./screens/Workshops/Workshops";
-// import UserDashboard from "./screens/UserDashboard/UserDashboard";
-import Loader from "./components/Loader/loader";
 import Error from "./components/Error/Error";
 import SignIn from "./components/Auth/SignIn/SignIn";
 import SignUp from "./components/Auth/SignUp/SignUp";
@@ -66,17 +64,9 @@ function App() {
           {!authContext.isUserLoggedIn && (
             <Route path="/user" element={<UserDashBoard />} />
           )}
-          {/* {!authContext.isUserLoggedIn && (
-            <Route path="/team" element={<TeamTable />} />
-          )}
           {!authContext.isUserLoggedIn && (
             <Route path="/addteam" element={<AddTeam />} />
-          )} */}
-          {/* {!authContext.isUserLoggedIn && (
-            <Route path="/register" element={<RegisterEvent />} />
-          )} */}
-          {/* <Route path="/add-team" element={<AddTeam />} />
-        <Route path="/team" element={<Team />} /> */}
+          )}
 
           <Route path="/sponsor" element={<Sponsors />} />
           <Route path="/gallery" element={<Gallery />} />

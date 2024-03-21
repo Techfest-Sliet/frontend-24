@@ -66,7 +66,7 @@ const EventDisplayer = () => {
     };
 
     const getEventById = () => {
-      axios.get(`${baseUrl}/event/getEventById/${eventId}`).then((result) => {
+      axios.get(`${baseUrl}/event/geteventbyid/${eventId}`).then((result) => {
         setEventDetails(result.data.event);
         setEventCoor(result.data.event.studentCoordinator);
       });
@@ -339,12 +339,12 @@ const EventDisplayer = () => {
                           <Box
                             display={"flex"}
                             flexDirection={isMobile && "column"}
-                            width={isMobile && "100%"}
+                            width={isMobile ? "100%": "35%"}
                             gap={1}
                           >
-                            {/* <Button variant="contained" onClick={handleMenu}>
+                            <Button variant="contained" onClick={handleMenu}>
                               Register
-                            </Button> */}
+                            </Button>
                             <Menu
                               id="menu-appbar"
                               anchorEl={anchorEl}

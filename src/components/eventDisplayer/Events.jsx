@@ -6,6 +6,7 @@ import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { baseUrl } from "../../API/Api";
 import Error from "../Error/Error";
+import Loader from "../Loader/loader";
 
 function Events() {
   const { domainName } = useParams();
@@ -13,12 +14,14 @@ function Events() {
 
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
        const getEventByDomainName = () => {
       axios
         .get(`${baseUrl}/event/geteventbydomainname/${domainName}`)
         .then((result) => {
+          setIsLoading(false);
           setEvents(result.data.event);
         })
         .catch((err) => {
@@ -32,6 +35,7 @@ function Events() {
   return (
     <>
     {error && <Error/>}
+    {isLoading && <Loader/>}
       <StarCanvas />
       <Box style={{ position: "relative", zIndex: "25" }}>
         <div className="event_container">
@@ -70,19 +74,6 @@ function Events() {
                   Explore
                 </button>
               </div>
-              {/* {openEventDisplayer && (
-                <Modal
-                  open={openEventDisplayer}
-                  onClose={handleCloseEventDisplayer}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <EventDisplayer
-                    eventDetails={events}
-                    onCancel={handleCloseEventDisplayer}
-                  />
-                </Modal>
-              )} */}
             </>
           );
         })}
