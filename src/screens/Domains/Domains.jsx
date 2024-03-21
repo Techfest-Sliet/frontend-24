@@ -11,6 +11,7 @@ import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/loader";
 
 const Domains = ({ domains }) => {
+  console.log("Domains==>",domains)
   const [activeCards, setActiveCards] = useState({});
   const [click, setClick] = useState(false);
   const [error, setError] = useState(false);
@@ -24,7 +25,7 @@ const Domains = ({ domains }) => {
   };
 
   const [domainDetails, setDomainDetails] = useState([]);
-  const [comingSoon, setComingSoon] = useState(true);
+  const [comingSoon, setComingSoon] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -36,11 +37,10 @@ const Domains = ({ domains }) => {
         .get(`${baseUrl}/domain/getAllDomains`)
         .then((result) => {
           setDomainDetails(result.data);
-          console.log("domainsDetails[0] ==> ", domainDetails[0]);
+          console.log("domains ==>", result.data);
         })
         .catch((err) => {
           setError(true);
-          console.log("err===>", err);
         });
     };
 
@@ -52,10 +52,10 @@ const Domains = ({ domains }) => {
 
   const clickDomain = (index) => {
     try {
-      if (index !== 2) {
-        navigate(`/domains/${domainDetails[index].domainName}`);
-      } else {
+      if (index === 2) {
         setComingSoon(true);
+      } else {
+        navigate(`/domains/${domains[index].name}`);
       }
     } catch (error) {
       console.log(error);
@@ -70,7 +70,6 @@ const Domains = ({ domains }) => {
       {error ? (
         <Error />
       ) : (
-        
         <Box style={{ position: "relative", zIndex: "25" }}>
           <div className="domains">
             <div class="wrapper">
@@ -108,13 +107,8 @@ const Domains = ({ domains }) => {
                     >
                       Explore
                     </Button>
-                    {
-                     !comingSoon && <p>{domain.description}</p>
-                    }
-                    {
-                      comingSoon && <p>The Section is under construction.</p>
-                    }
-                    
+                    {!comingSoon && <p>{domain.description}</p>}
+                    {comingSoon && <p>The Section is under construction.</p>}
                   </div>
                 );
               })}
