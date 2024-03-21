@@ -16,7 +16,7 @@ import { GroupAdd, Verified } from "@mui/icons-material";
 import { IoMdPersonAdd } from "react-icons/io";
 import { Box, TextField } from "@mui/material";
 import axios from "axios";
-import { baseUrl } from "../../API/Api";
+import { baseUrl } from "../../API/api";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";

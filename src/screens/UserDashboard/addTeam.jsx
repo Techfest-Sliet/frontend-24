@@ -10,11 +10,9 @@ import { Card } from "@mui/material";
 import GroupAdd from "@mui/icons-material/GroupAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { useNavigate } from "react-router-dom";
-import { color } from "framer-motion";
 import axios from "axios";
-import { baseUrl } from "../../API/Api";
+import { baseUrl } from "../../API/api";
 import AuthContext from "../../components/Auth/Auth";
-import { red } from "@mui/material/colors";
 
 function AddTeam() {
   const authContext = useContext(AuthContext);

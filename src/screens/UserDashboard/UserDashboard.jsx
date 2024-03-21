@@ -18,7 +18,7 @@ import "./UserDashboard.css";
 
 //user imports
 import AuthContext from "../../components/Auth/Auth";
-import { baseUrl } from "../../API/Api";
+import { baseUrl } from "../../API/api";
 import Loader from "../../components/Loader/loader";
 
 import TeamTable from "./TeamTable";

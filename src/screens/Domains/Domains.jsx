@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VentureVault from "../../utils/DOMAIN_LOGOS/VentureVault.png";
 import axios from "axios";
-import { baseUrl } from "../../API/Api";
+import { baseUrl } from "../../API/api";
 import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/loader";
 

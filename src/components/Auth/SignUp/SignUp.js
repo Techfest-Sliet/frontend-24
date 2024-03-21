@@ -6,7 +6,7 @@ import ErrorModel from "../../Error/Error.js";
 import Loader from "../../Loader/loader.js";
 // import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import StarCanvas from "../../../screens/landingPage/StarbackGround.jsx";
-import { baseUrl } from "../../../API/Api.js";
+import { baseUrl } from "../../../API/api.js";
 
 const Signup = () => {
   // const { executeRecaptcha } = useGoogleReCaptcha();

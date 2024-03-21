@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { baseUrl } from "../../API/Api";
+import { baseUrl } from "../../API/api";
 import axios from "axios";
 import AuthContext from "../Auth/Auth";
 import { ImCross } from "react-icons/im";
@@ -342,9 +342,9 @@ const EventDisplayer = () => {
                             width={isMobile ? "100%": "35%"}
                             gap={1}
                           >
-                            <Button variant="contained" onClick={handleMenu}>
+                            {/* <Button variant="contained" onClick={handleMenu}>
                               Register
-                            </Button>
+                            </Button> */}
                             <Menu
                               id="menu-appbar"
                               anchorEl={anchorEl}

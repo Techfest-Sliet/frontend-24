@@ -38,12 +38,9 @@ import "aos/dist/aos.css";
 import { useMediaQuery } from "@mui/material";
 import AddTeam from "./screens/UserDashboard/addTeam";
 
-
 function App() {
- 
   const isMobile = useMediaQuery("(min-width:450px)");
 
-  
   return (
     <>
       <NavBar />
@@ -64,9 +61,9 @@ function App() {
           {!authContext.isUserLoggedIn && (
             <Route path="/user" element={<UserDashBoard />} />
           )}
-          {!authContext.isUserLoggedIn && (
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/addteam" element={<AddTeam />} />
-          )}
+          )} */}
 
           <Route path="/sponsor" element={<Sponsors />} />
           <Route path="/gallery" element={<Gallery />} />

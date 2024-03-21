@@ -4,7 +4,7 @@ import "./Events.css";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { Box, Button } from "@mui/material";
 import axios from "axios";
-import { baseUrl } from "../../API/Api";
+import { baseUrl } from "../../API/api";
 import Error from "../Error/Error";
 import Loader from "../Loader/loader";
 
