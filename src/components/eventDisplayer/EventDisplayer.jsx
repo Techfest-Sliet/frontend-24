@@ -198,6 +198,7 @@ const EventDisplayer = () => {
                     fontSize: "3rem",
                     fontFamily: "Orbitron",
                     fontWeight: "600",
+                    marginTop:isMobile && "1rem",
                     marginBottom: isMobile && "2rem",
                   }}
                 >
