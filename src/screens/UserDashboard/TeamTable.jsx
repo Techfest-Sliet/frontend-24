@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +15,7 @@ import { Box, TextField } from "@mui/material";
 import axios from "axios";
 import { baseUrl } from "../../API/api";
 import { useNavigate } from "react-router-dom";
+import GroupAdd from "@mui/icons-material/GroupAdd";
 
 const style = {
   position: "absolute",
@@ -51,13 +52,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function TeamTable({ teamMembers }) {
+function TeamTable({ teamMembers, events }) {
   const authContext = useContext(AuthContext);
-  const [members, setMembers] = useState(teamMembers);
   const [addMember, setAddMember] = useState(false);
-  const [teamMemberEmail, setTeamMemberEmail] = useState("");
-  const [openAddTeam, setOpenAddTeam] = useState(false);
-
+  const [teamMemberEmail, setTeamMemberEmail] = useState(""); 
 
   const navigate = useNavigate();
 
@@ -68,12 +66,12 @@ function TeamTable({ teamMembers }) {
         { id },
         {
           headers: {
-            Authorization: "Bearer" + authContext.token,
+            Authorization: `Bearer ${authContext.token}`,
           },
         }
       )
       .then((result) => {
-        console.log("team delete result ==>", result);
+        window.location.reload();
       });
   };
 
@@ -84,8 +82,8 @@ function TeamTable({ teamMembers }) {
       .post(
         `${baseUrl}/team/create`,
         {
-          teamName: members[index].teamName,
-          members,
+          teamName: teamMembers[index].teamName,
+          teamMembers,
         },
         {
           headers: {
@@ -114,16 +112,15 @@ function TeamTable({ teamMembers }) {
         >
           Team Table :
         </Typography>
-        {/* <Button
+        <Button
           className="addBtn"
           variant=" "
           onClick={() => {
             navigate("/addteam");
           }}
         >
-          <GroupAddIcon />
-        </Button> */}
-        {openAddTeam && <></>}
+          <GroupAdd />
+        </Button>
       </div>
       <TableContainer>
         <Table
@@ -135,18 +132,19 @@ function TeamTable({ teamMembers }) {
           <TableHead>
             <TableRow>
               <StyledTableCell
+                align="center"
                 style={{ backgroundColor: "transparent", color: "white" }}
               >
                 Team Name
               </StyledTableCell>
               <StyledTableCell
-                align="right"
+                align="center"
                 style={{ backgroundColor: "transparent", color: "white" }}
               >
                 Member Email
               </StyledTableCell>
               <StyledTableCell
-                align="right"
+                align="center"
                 style={{
                   backgroundColor: "transparent",
                   color: "white",
@@ -155,19 +153,19 @@ function TeamTable({ teamMembers }) {
                 Status
               </StyledTableCell>
               <StyledTableCell
-                align="right"
+                align="center"
                 style={{ backgroundColor: "transparent", color: "white" }}
               >
                 Leader Name
               </StyledTableCell>
               <StyledTableCell
-                align="right"
+                align="center"
                 style={{ backgroundColor: "transparent", color: "white  " }}
               >
                 Add Member
               </StyledTableCell>
               <StyledTableCell
-                align="right"
+                align="center"
                 style={{ backgroundColor: "transparent", color: "white  " }}
               >
                 Delete Team
@@ -175,53 +173,59 @@ function TeamTable({ teamMembers }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {members &&
-              members.length > 0 &&
-              Object.keys(members).map((team, index) => {
+            {teamMembers &&
+              teamMembers.length > 0 &&
+              Object.values(teamMembers).map((team, index) => {
                 return (
                   <StyledTableRow key={team._id}>
                     <StyledTableCell
                       component="th"
                       scope="row"
+                      align="center"
                       style={{ background: "grey" }}
                     >
                       {team.teamName}
                     </StyledTableCell>
-                    <StyledTableCell
-                      align="right"
-                      style={{ background: "grey" }}
-                    >
-                      {team.members.map((eachMember) => {
-                        return (
-                          <>
-                            <StyledTableCell
-                              component="th"
-                              scope="row"
-                              style={{ background: "grey" }}
-                              key={eachMember.memberId}
-                              className={
-                                eachMember.status ? "verified" : "notVerified"
-                              }
+
+                    {team.members.map((eachMember) => {
+                      return (
+                        <>
+                          <StyledTableCell
+                            component="th"
+                            scope="row"
+                            style={{ background: "grey" }}
+                            key={eachMember.memberId}
+                            className={
+                              eachMember.status ? "verified" : "notVerified"
+                            }
+                            align="center"
+                          >
+                            <Typography
+                              style={{
+                                color:
+                                  eachMember.status === true ? "green" : "red",
+                              }}
                             >
-                              <Typography style={{ color: "red" }}>
-                                {eachMember.email}
-                              </Typography>
-                            </StyledTableCell>
-                            <StyledTableCell>
-                              {eachMember.status ? "verified" : "notVerified"}
-                            </StyledTableCell>
-                          </>
-                        );
-                      })}
-                    </StyledTableCell>
+                              {eachMember.email}
+                            </Typography>
+                          </StyledTableCell>
+                          <StyledTableCell
+                            align="center"
+                            style={{ backgroundColor: "grey" }}
+                          >
+                            {eachMember.status ? "verified" : "notVerified"}
+                          </StyledTableCell>
+                        </>
+                      );
+                    })}
                     <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ background: "grey" }}
                     >
                       {team.leaderName}
                     </StyledTableCell>
                     <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ background: "grey" }}
                     >
                       <Button
@@ -231,40 +235,38 @@ function TeamTable({ teamMembers }) {
                       >
                         <IoMdPersonAdd color="white" />
                       </Button>
-                    </StyledTableCell>
-                    {addMember && (
-                      <Modal
-                        open={addMember}
-                        onClose={() => {
-                          setAddMember(false);
-                        }}
-                        aria-labelledby="child-modal-title"
-                        aria-describedby="child-modal-description"
-                      >
-                        <Box sx={style}>
-                          <TextField
-                            id="filled-basic"
-                            label="Member Email"
-                            variant="filled"
-                            onChange={(e) => {
-                              setTeamMemberEmail(e.target.value);
-                            }}
-                          />
-                        </Box>
-                        <Button
-                          variant="contained"
-                          style={{
-                            display: "flex",
-                            marginLeft: "auto",
+                      {/* {addMember && (
+                        <Modal
+                          open={addMember}
+                          onClose={() => {
+                            setAddMember(false);
                           }}
-                          onClick={(e) => addTeam(e, index)}
                         >
-                          OK
-                        </Button>
-                      </Modal>
-                    )}
+                          <Box sx={style}>
+                            <TextField
+                              id="filled-basic"
+                              label="Member Email"
+                              variant="filled"
+                              onChange={(e) => {
+                                setTeamMemberEmail(e.target.value);
+                              }}
+                            />
+                          </Box>
+                          <Button
+                            variant="contained"
+                            style={{
+                              display: "flex",
+                              marginLeft: "auto",
+                            }}
+                            onClick={(e) => addTeam(e, index)}
+                          >
+                            OK
+                          </Button>
+                        </Modal>
+                      )} */}
+                    </StyledTableCell>
                     <StyledTableCell
-                      align="right"
+                      align="center"
                       style={{ background: "grey" }}
                     >
                       <Button

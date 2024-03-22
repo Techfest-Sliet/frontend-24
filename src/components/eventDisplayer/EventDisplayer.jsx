@@ -329,9 +329,9 @@ const EventDisplayer = () => {
                             width={isMobile ? "100%" : "35%"}
                             gap={1}
                           >
-                            {/* <Button variant="contained" onClick={handleMenu}>
+                            <Button variant="contained" onClick={handleMenu}>
                               Register
-                            </Button> */}
+                            </Button>
                             <Menu
                               id="menu-appbar"
                               anchorEl={anchorEl}
@@ -376,16 +376,20 @@ const EventDisplayer = () => {
                                   aria-describedby="child-modal-description"
                                 >
                                   <Box sx={style}>
-                                    {teams &&
-                                      teams.map((team) => {
-                                        return (
-                                          <>
-                                            <Select
-                                              value={teamName}
-                                              onChange={(e) => {
-                                                setTeamName(e.target.value);
-                                              }}
-                                            >
+                                    <Typography>
+                                      Choose from your existing Team(s).
+                                    </Typography>
+                                    <Select
+                                      value={teamName}
+                                      style={{ width: "40%" }}
+                                      onChange={(e) => {
+                                        setTeamName(e.target.value);
+                                      }}
+                                    >
+                                      {teams &&
+                                        teams.map((team) => {
+                                          return (
+                                            <>
                                               <MenuItem
                                                 onClick={() => {
                                                   addTeam(
@@ -397,21 +401,21 @@ const EventDisplayer = () => {
                                               >
                                                 {team.teamName}
                                               </MenuItem>
-                                            </Select>
-                                          </>
-                                        );
-                                      })}
+                                            </>
+                                          );
+                                        })}
+                                    </Select>
                                     <Button
                                       variant="contained"
                                       style={{
                                         display: "flex",
                                         marginLeft: "auto",
                                       }}
-                                      onClick={addTeam}
+                                      // onClick={addTeam}
                                     >
                                       OK
                                     </Button>
-                                    <Divider />
+                                    <Divider style={{ marginTop: "10%" }} />
                                     <Typography>Add Your Team</Typography>
                                     <Link to="/addteam">
                                       <Button

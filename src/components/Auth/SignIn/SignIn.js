@@ -75,12 +75,7 @@ const SignIn = () => {
       .then((result) => {
         setIsLoading(false);
         const res = result;
-        if (res.status === 204) {
-          setTimeout(() => {
-            setMailErr(null);
-            navigate("/sign-up");
-          }, 3000);
-        } else if (res.status === 208) {
+        if (res.status === 208) {
           setPasswordErr(res.data.message);
           setTimeout(() => {
             setPasswordErr(null);

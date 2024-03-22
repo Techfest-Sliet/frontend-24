@@ -579,7 +579,7 @@ const UserDashboard = () => {
                           left: isMobile ? "0rem" : "0rem",
                           position: "relative",
                           whiteSpace: "nowrap",
-                          height: isMobile ? "4rem" : "3rem",
+                          height: isMobile ? "4rem" : "3rem", 
                         }}
                       >
                         {user && user.email}
@@ -823,6 +823,7 @@ const UserDashboard = () => {
               <Box sx={{ margin: "7%" }}>
                 <TeamTable
                   teamMembers={teamMembers}
+                  events = {events}
                   leaderId={user && user._id}
                 />
               </Box>
