@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import StarCanvas from "../landingPage/StarbackGround";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,19 +6,15 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { Button, Typography, useMediaQuery } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { Modal } from "@mui/material";
 import AuthContext from "../../components/Auth/Auth";
-import { GroupAdd, Verified } from "@mui/icons-material";
 import { IoMdPersonAdd } from "react-icons/io";
 import { Box, TextField } from "@mui/material";
 import axios from "axios";
 import { baseUrl } from "../../API/api";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
 
 const style = {
   position: "absolute",
@@ -58,13 +53,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function TeamTable({ teamMembers }) {
   const authContext = useContext(AuthContext);
-  console.log("teamMembers ==>", teamMembers);
   const [members, setMembers] = useState(teamMembers);
   const [addMember, setAddMember] = useState(false);
   const [teamMemberEmail, setTeamMemberEmail] = useState("");
   const [openAddTeam, setOpenAddTeam] = useState(false);
 
-  console.log("members ==>", members);
 
   const navigate = useNavigate();
 
@@ -108,8 +101,6 @@ function TeamTable({ teamMembers }) {
   const isMobile = useMediaQuery("(max-width:450px)");
   return (
     <>
-      {/* <StarCanvas /> */}
-
       <div
         className="heading"
         style={{ width: "100%", display: "flex", marginLeft: "auto" }}

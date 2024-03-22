@@ -7,7 +7,7 @@ import { baseUrl } from "../../API/api";
 import axios from "axios";
 import AuthContext from "../Auth/Auth";
 import { ImCross } from "react-icons/im";
-import { Menu, MenuItem, Modal, TextField } from "@mui/material";
+import { Menu, MenuItem, Modal } from "@mui/material";
 import Error from "../Error/Error";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -50,16 +50,13 @@ const EventDisplayer = () => {
 
   useEffect(() => {
     const getUserById = () => {
-      console.log("Token===>", token);
       axios
         .get(`${baseUrl}/user/getUserById`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((result) => {
-          console.log("Getuserby Id ==> ", result.data);
-        })
+        .then((result) => {})
         .catch((err) => {
           setError(true);
         });
@@ -80,7 +77,6 @@ const EventDisplayer = () => {
           },
         })
         .then((result) => {
-          console.log("teams ==>", result);
           setTeams(result.data.teams);
         });
     };
@@ -118,7 +114,6 @@ const EventDisplayer = () => {
         }
       )
       .then((result) => {
-        console.log("Result Data===>", result.data);
         Swal.fire({
           title: "Great!!",
           text: `${result.data.message}`,
@@ -149,7 +144,6 @@ const EventDisplayer = () => {
         }
       )
       .then((result) => {
-        console.log("Result Data===>", result.data);
         Swal.fire({
           title: "Great!!",
           text: `${result.data.message}`,
@@ -198,7 +192,7 @@ const EventDisplayer = () => {
                     fontSize: "3rem",
                     fontFamily: "Orbitron",
                     fontWeight: "600",
-                    marginTop:isMobile && "1rem",
+                    marginTop: isMobile && "1rem",
                     marginBottom: isMobile && "2rem",
                   }}
                 >
@@ -232,7 +226,7 @@ const EventDisplayer = () => {
                 <div
                   className="div1"
                   style={{
-                    height: "115%",
+                    height: "65%",
                     width: isMobile ? "95%" : "75%",
                     backgroundColor: "#90e0ef34",
                     position: "relative",
@@ -274,8 +268,6 @@ const EventDisplayer = () => {
                         }}
                       >
                         <img
-                          // className={Img}
-                          // src={Img}
                           alt="eventLogo"
                           width={500}
                           height={250}
@@ -289,7 +281,6 @@ const EventDisplayer = () => {
                       <Box
                         style={{
                           width: "100%",
-                          // border: "1px solid red",
                           height: "65%",
                           zIndex: "20",
                         }}
@@ -297,13 +288,11 @@ const EventDisplayer = () => {
                         <Typography
                           textAlign={"end"}
                           variant={"h3"}
-                          // paddingRight={"2.5rem"}
                         ></Typography>
                         <Box
                           sx={{
                             width: "100%",
                             height: "128%",
-                            // border:"1px solid red",
                             overflowY: "auto",
                           }}
                         >
@@ -329,17 +318,15 @@ const EventDisplayer = () => {
                             alignItems: "center",
                             justifyContent: "space-between",
                             marginTop: "1.2rem",
-
-                            // border: "1px solid red",
                           }}
                         >
-                          <a href={eventDetails.driveLink} target="_main">
+                          <a href={eventDetails.driveLink} target="main">
                             <Button>Problem Statement</Button>
                           </a>
                           <Box
                             display={"flex"}
                             flexDirection={isMobile && "column"}
-                            width={isMobile ? "100%": "35%"}
+                            width={isMobile ? "100%" : "35%"}
                             gap={1}
                           >
                             {/* <Button variant="contained" onClick={handleMenu}>
@@ -464,7 +451,6 @@ const EventDisplayer = () => {
                 zIndex: "25",
                 position: "relative",
                 marginBottom: isMobile && "4rem",
-                // border: "1px solid red",
               }}
             >
               <div
@@ -534,9 +520,8 @@ const EventDisplayer = () => {
                     style={{
                       position: "absolute",
                       width: isMobile ? "100%" : "75%",
-                      height: isMobile? "100%" :"65%",
+                      height: isMobile ? "100%" : "65%",
                       padding: isMobile && "1rem",
-                      backgroundColor:"#90e0ef34",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -545,7 +530,6 @@ const EventDisplayer = () => {
                     <Stack
                       direction={"column"}
                       style={{
-                        // border: "1px solid red",
                         width: "100%",
                         height: "90%",
                         gap: "2rem",
@@ -554,14 +538,18 @@ const EventDisplayer = () => {
                       <Box
                         height={"85%"}
                         width={"100%"}
-                        // boxShadow={"2px 2px 12px #030014"}
                         padding={".4rem"}
                         paddingTop={".8rem"}
                         borderRadius={".4rem"}
                       >
                         <Typography variant="h4"> Contact Us </Typography>
                         &nbsp;
-                        <div style={{ display: "flex" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: isMobile ? "column" : "row",
+                          }}
+                        >
                           {eventCoor.map((coordinator, index) => {
                             return (
                               <Box key={coordinator._id}>
@@ -570,6 +558,7 @@ const EventDisplayer = () => {
                                   style={{
                                     color: "white",
                                     fontFamily: "sans-serif",
+                                    marginRight: "1.5rem",
                                   }}
                                 >
                                   {coordinator.coordinatorName}
@@ -579,6 +568,7 @@ const EventDisplayer = () => {
                                   style={{
                                     color: "white",
                                     fontFamily: "sans-serif",
+                                    marginRight: "1.5rem",
                                   }}
                                 >
                                   {coordinator.coordinatorEmail}
@@ -588,6 +578,7 @@ const EventDisplayer = () => {
                                   style={{
                                     color: "white",
                                     fontFamily: "sans-serif",
+                                    marginRight: "1.5rem",
                                   }}
                                 >
                                   {coordinator.coordinatorPhone}
@@ -606,11 +597,9 @@ const EventDisplayer = () => {
                           alignItems: "center",
                           justifyContent: "space-between",
                           marginTop: "1.2rem",
-
-                          // border: "1px solid red",
                         }}
                       >
-                        <a href={eventDetails.driveLink}>
+                        <a href={eventDetails.driveLink} target="main">
                           <Button>Problem Statement</Button>
                         </a>
                         <Box display={"flex"} gap={1}>

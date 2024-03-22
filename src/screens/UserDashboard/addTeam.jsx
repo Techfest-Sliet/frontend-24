@@ -19,8 +19,6 @@ function AddTeam() {
   const [teamName, setTeamName] = useState(false);
   const [members, setMembers] = useState([" "]);
 
-  console.log("members ==>", members);
-
   const handleMemberEmail = (index, e) => {
     const newEmails = [...members];
     newEmails[index] = e.target.value;
@@ -56,7 +54,6 @@ function AddTeam() {
         }
       )
       .then((result) => {
-        console.log("team create ==>", result.data);
         alert(result.data.title);
       });
   };

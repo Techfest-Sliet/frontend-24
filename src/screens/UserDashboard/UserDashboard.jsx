@@ -24,9 +24,7 @@ import Loader from "../../components/Loader/loader";
 import TeamTable from "./TeamTable";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import { GrGroup } from "react-icons/gr";
 import Swal from "sweetalert2";
-import { Navigate, useNavigate } from "react-router-dom";
 import Error from "../../components/Error/Error";
 
 const style = {
@@ -53,7 +51,6 @@ const UserDashboard = () => {
   const [teamMembers, setTeamMembers] = useState("");
   const [openEditPersonal, setOpenEditPersonal] = useState(false);
   const [openEditContact, setOpenEditContact] = useState(false);
-  const [addMember, setAddMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [collegeName, setCollegeName] = useState("");
@@ -62,16 +59,8 @@ const UserDashboard = () => {
   const [wphone, setWphone] = useState("");
   const [fieldErr, setFieldErr] = useState(null);
   const [branchErr, setBranchErr] = useState(null);
-  const [teamMemberEmail, setTeamMemberEmail] = useState(false);
-  const [teamMemberPhone, setTeamMemberPhone] = useState(false);
-  const [teamName, setTeamName] = useState(false);
-  const [openTeamTable, setOpenTeamTable] = useState(false);
 
   const [user, setUser] = useState({});
-
-  const [showTeamTable, setShowTeamTable] = useState(false);
-
-  const navigate = useNavigate();
 
   const options = {
     day: "2-digit",
@@ -150,7 +139,7 @@ const UserDashboard = () => {
             }
           })
           .catch((err) => {
-            console.log("Error==>", err);
+            setErrorMade(err);
           });
       }
     });
@@ -242,55 +231,15 @@ const UserDashboard = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err.response.data);
         return;
       });
 
     window.location.reload();
   };
 
-  const addTeamMember = async (e) => {
-    e.preventDefault();
-    // if (teamMemberEmail.trim().length === 0) {
-    //   setFieldErr("Field(s) should not be empty");
-    //   setTimeout(() => {
-    //     setFieldErr(null);
-    //   }, 3000);
-    //   return;
-    // }
-    setAddMember(false);
-    setIsLoading(true);
-    await axios
-      .post(`${baseUrl}/team/create`, {
-        teamName: teamName,
-        members: teamMemberEmail,
-      })
-      .then((result) => {
-        const res = result;
-        console.log(res);
-        if (res.status === 400) {
-          setFieldErr(
-            "Incomplete Team request! Kindly try again in some time."
-          );
-        } else if (res.status === 201) {
-          setErrorMade({
-            title: "Updated!",
-            message: "Team member added successfully.",
-          });
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err.response.data);
-        return;
-      });
-  };
-
   useEffect(() => {
     setIsLoading(true);
     setUserId(authContext.userId);
-    // console.log("userId ==> ", authContext.userId);
-    // const userId = authContext.userId.slice(1);
     const token = localStorage.getItem("jwtToken");
     axios
       .get(`${baseUrl}/user/getUserById`, {
@@ -304,9 +253,7 @@ const UserDashboard = () => {
         setCollegeName(result.data.user.collegeName);
         setWorkshops(result.data.user.workshops);
         setTeamMembers(result.data.user.teamMembers);
-        console.log("teamMembers ==> ", result.data.user.teamMembers);
         setEvents(result.data.user.events);
-        console.log(result.data.user.events);
       })
       .catch((err) => {
         setErrorMade(true);

@@ -5,13 +5,10 @@ import { Box, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VentureVault from "../../utils/DOMAIN_LOGOS/VentureVault.png";
-import axios from "axios";
-import { baseUrl } from "../../API/api";
 import Error from "../../components/Error/Error";
 import Loader from "../../components/Loader/loader";
 
 const Domains = ({ domains }) => {
-  console.log("Domains==>",domains)
   const [activeCards, setActiveCards] = useState({});
   const [click, setClick] = useState(false);
   const [error, setError] = useState(false);
@@ -24,28 +21,12 @@ const Domains = ({ domains }) => {
     }));
   };
 
-  const [domainDetails, setDomainDetails] = useState([]);
   const [comingSoon, setComingSoon] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-
-    const getAllDomains = async () => {
-      await axios
-        .get(`${baseUrl}/domain/getAllDomains`)
-        .then((result) => {
-          setDomainDetails(result.data);
-          console.log("domains ==>", result.data);
-        })
-        .catch((err) => {
-          setError(true);
-        });
-    };
-
-    clearTimeout(timeout);
-    getAllDomains();
   }, []);
 
   const navigate = useNavigate();
@@ -58,7 +39,6 @@ const Domains = ({ domains }) => {
         navigate(`/domains/${domains[index].name}`);
       }
     } catch (error) {
-      console.log(error);
       setError(true);
     }
   };
