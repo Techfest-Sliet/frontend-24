@@ -61,9 +61,9 @@ function App() {
           {!authContext.isUserLoggedIn && (
             <Route path="/user" element={<UserDashBoard />} />
           )}
-          {!authContext.isUserLoggedIn && (
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/addteam" element={<AddTeam />} />
-          )}
+          )} */}
 
           <Route path="/sponsor" element={<Sponsors />} />
           <Route path="/gallery" element={<Gallery />} />
