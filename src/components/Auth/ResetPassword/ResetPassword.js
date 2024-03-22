@@ -13,7 +13,7 @@ import Particle from "../SignIn/Particle";
 import logo from "../../../images/forget-password.png";
 import axios from "axios";
 import Toast from "../../Toast";
-import { FaLeaf } from "react-icons/fa";
+import { baseUrl } from "../../../API/api";
 
 const style = {
   position: "absolute",
@@ -83,7 +83,7 @@ const ResetPassword = () => {
         email: email,
       };
       await axios
-        .post("http://localhost:4030/auth/forgot-password", user)
+        .post(`${baseUrl}/auth/forgot-password`, user)
         .then((res) => {
           const obj = JSON.parse(res?.data);
           if (obj?.title == "Success") setSuccess(true);

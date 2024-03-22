@@ -1,7 +1,8 @@
 import React from "react";
 import error from "./../../assets/Error.png";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
-import { useMediaQuery } from "@mui/material";
+import { Typography, useMediaQuery } from "@mui/material";
+import { TypeAnimation } from "react-type-animation";
 
 const Error = () => {
   const isMobile = useMediaQuery("(max-width:450px)");
@@ -19,10 +20,17 @@ const Error = () => {
           top: "40%",
         }}
       >
-        <img
-          src={error}
-          alt="error"
-          style={{ width: "40%", height: "50%", position:"relative", top: isMobile ? "30%" : "0%"}}
+        <TypeAnimation
+          sequence={["Looks like Something Went Wrong !!😧"]}
+          wrapper="span"
+          speed={50}
+          style={{
+            fontSize: "2rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          repeat={0}
         />
       </div>
     </div>

@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Particle from "./Particle";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Auth";
-import  Loader from "../../Loader/loader";
+import Loader from "../../Loader/loader";
 import { baseUrl } from "../../../API/api";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -38,15 +38,35 @@ const SignIn = () => {
   const authContext = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorsMade, setErrorsMade] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [fieldErr, setFieldErr] = useState(null);
   const [mailErr, setMailErr] = useState(null);
   const [passwordErr, setPasswordErr] = useState(null);
   const navigate = useNavigate();
 
-  const userLoginHandle = async () => {
+  const userLoginHandle = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
+
+    if (email.trim().length === 0 || password.trim().length === 0) {
+      setFieldErr("Field should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+    if (!email.trim().includes("@")) {
+      setMailErr("Invalid mail!");
+      setTimeout(() => {
+        setMailErr(null);
+      }, 3000);
+      return;
+    }
+    const user = {
+      email: email,
+      password: password,
+    };
+
     await axios
       .post(`${baseUrl}/auth/sign-in`, {
         email: email,
@@ -85,47 +105,25 @@ const SignIn = () => {
           };
           authContext.login(userData);
           navigate("/user");
-        } else {
-          setErrorsMade(res.data.message);
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("signup error ==>", err);
         return;
       });
   };
 
-  const PostData = async (e) => {
-    e.preventDefault();
-    if (email.trim().length === 0 || password.trim().length === 0) {
-      setFieldErr("Field should not be empty");
-      setTimeout(() => {
-        setFieldErr(null);
-      }, 3000);
-      return;
-    }
-    if (!email.trim().includes("@")) {
-      setMailErr("Invalid mail!");
-      setTimeout(() => {
-        setMailErr(null);
-      }, 3000);
-      return;
-    }
-    const user = {
-      email: email,
-      password: password,
-    };
-    setIsLoading(true);
-    userLoginHandle(user);
-  };
-
   return (
     <>
-      {isLoading && <Loader />} 
       <Particle />
+      {isLoading && <Loader />}
       <Stack direction="row" spacing={5} justifyContent={"space-between"}>
         <Item>
-          <img src="/logo.png" alt="Techfest'24 logo" className="techFestLogo" />
+          <img
+            src="/logo.png"
+            alt="Techfest'24 logo"
+            className="techFestLogo"
+          />
         </Item>
         <Item>
           <div className="signInContainer">
@@ -133,7 +131,6 @@ const SignIn = () => {
               className="signin-box"
               sx={{
                 ...style,
-                // width: "20rem",
                 height: "auto",
                 background: "rgba(0,0,0,0.3)",
               }}
@@ -188,7 +185,7 @@ const SignIn = () => {
               <p style={{ fontSize: "1rem", marginTop: "0.5rem" }}>PASSWORD</p>
               <TextField
                 id="outlined-basic"
-                // label="PASSWORD"
+                type="password"
                 variant="outlined"
                 fullWidth
                 size="small"
@@ -226,15 +223,12 @@ const SignIn = () => {
                 }}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {(mailErr) && <span style={{color:"red"}}>The Email is not registered, redirecting to signup page...  </span>}
-              {(passwordErr) && <span style={{color:"red"}}>Incorrect Password</span>}
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 justifyContent={"space-between"}
                 spacing={4}
                 mt={2}
               >
-                {/* <p style={{ marginTop: "0.5rem" }}>Forgot Password?</p> */}
                 <Link
                   to="/reset-password"
                   style={{
@@ -242,11 +236,9 @@ const SignIn = () => {
                     color: "#ffffff",
                     marginRight: "1.7rem",
                   }}
-                  // onClick={PostData}
                 >
                   Forget Password ?
                 </Link>
-                {/* <Link to="/forget-password" style={{marginTop:"0.5rem"}}>ForgetPassword</Link> */}
                 <Item
                   sx={{
                     ":hover": {
@@ -258,11 +250,12 @@ const SignIn = () => {
                     backgroundColor: "#ffffff",
                     fontSize: "1rem",
                   }}
-                  onClick={userLoginHandle}
+                  onClick={(e) => userLoginHandle(e)}
                 >
                   Sign In
                 </Item>
               </Stack>
+              {fieldErr && <span style={{color:"red"}}>{fieldErr}</span>}
               <p style={{ margin: "1rem 0" }}>
                 Don't have a account?{" "}
                 <Link

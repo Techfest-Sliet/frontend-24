@@ -33,7 +33,7 @@ const EventDisplayer = () => {
   const [variable, setVariable] = useState(1);
   const [eventDetails, setEventDetails] = useState([]);
   const [eventCoor, setEventCoor] = useState([]);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [teamDetails, setTeamDetails] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [teams, setTeams] = useState([]);
@@ -58,7 +58,7 @@ const EventDisplayer = () => {
         })
         .then((result) => {})
         .catch((err) => {
-          setError(true);
+          setError();
         });
     };
 
