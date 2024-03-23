@@ -19,7 +19,7 @@ import "./UserDashboard.css";
 //user imports
 import AuthContext from "../../components/Auth/Auth";
 import { baseUrl } from "../../API/api";
-import Loader from "../../components/Loader/loader";
+// import Loader from "../../components/Loader/loader";
 
 import TeamTable from "./TeamTable";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -248,14 +248,17 @@ const UserDashboard = () => {
         },
       })
       .then((result) => {
+        console.log("User==>",result.data);
         setIsLoading(false);
         setUser(result.data.user);
         setCollegeName(result.data.user.collegeName);
         setWorkshops(result.data.user.workshops);
         setTeamMembers(result.data.user.teamMembers);
+        console.log(result.data.user.teamMembers);
         setEvents(result.data.user.events);
       })
       .catch((err) => {
+        setIsLoading(false);
         setErrorMade(true);
       });
   }, [authContext, authContext.login]);
@@ -264,7 +267,7 @@ const UserDashboard = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       {!errorMade ? (
         <div
           className="userDashboard"

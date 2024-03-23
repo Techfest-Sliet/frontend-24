@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Card } from "@mui/material";
+import { Card, useMediaQuery } from "@mui/material";
 import GroupAdd from "@mui/icons-material/GroupAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { useNavigate } from "react-router-dom";
@@ -58,6 +58,8 @@ function AddTeam() {
       });
   };
 
+  const isMobile = useMediaQuery("(max-width:480px)");
+
   return (
     <>
       <StarCanvas />
@@ -72,7 +74,7 @@ function AddTeam() {
       >
         <Card
           sx={{
-            width: "40%",
+            width: isMobile ? "99%":"40%",
             border: "2px solid white",
             bgcolor: "transparent",
             borderRadius: "5px",
@@ -83,7 +85,7 @@ function AddTeam() {
           <Container
             component="main"
             maxWidth="xs"
-            style={{ marginTop: "4.5rem" }}
+            style={{ marginTop: "4.5rem", margin:isMobile && "0 0.5rem" }}
           >
             <CssBaseline />
             <Box

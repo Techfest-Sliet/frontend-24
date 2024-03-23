@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Particle from "./Particle";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Auth";
-import Loader from "../../Loader/loader";
+// import Loader from "../../Loader/loader";
 import { baseUrl } from "../../../API/api";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -38,7 +38,7 @@ const SignIn = () => {
   const authContext = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(false);
   const [fieldErr, setFieldErr] = useState(null);
   const [mailErr, setMailErr] = useState(null);
   const [passwordErr, setPasswordErr] = useState(null);
@@ -46,7 +46,6 @@ const SignIn = () => {
 
   const userLoginHandle = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
     if (email.trim().length === 0 || password.trim().length === 0) {
       setFieldErr("Field should not be empty");
@@ -73,9 +72,14 @@ const SignIn = () => {
         password: password,
       })
       .then((result) => {
-        setIsLoading(false);
+        // setIsLoading(false);
         const res = result;
-        if (res.status === 208) {
+        if (res.status === 204) {
+          setTimeout(() => {
+            setMailErr(null);
+            navigate("/sign-up");
+          }, 3000);
+        } else if (res.status === 208) {
           setPasswordErr(res.data.message);
           setTimeout(() => {
             setPasswordErr(null);
@@ -103,7 +107,8 @@ const SignIn = () => {
         }
       })
       .catch((err) => {
-        console.log("signup error ==>", err);
+        // setIsLoading(false);
+        console.log("signin error ==>", err);
         return;
       });
   };
@@ -111,7 +116,7 @@ const SignIn = () => {
   return (
     <>
       <Particle />
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <Stack direction="row" spacing={5} justifyContent={"space-between"}>
         <Item>
           <img
@@ -177,6 +182,7 @@ const SignIn = () => {
                 }}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {mailErr && <p>Fill the Email</p>}
               <p style={{ fontSize: "1rem", marginTop: "0.5rem" }}>PASSWORD</p>
               <TextField
                 id="outlined-basic"
@@ -250,7 +256,7 @@ const SignIn = () => {
                   Sign In
                 </Item>
               </Stack>
-              {fieldErr && <span style={{color:"red"}}>{fieldErr}</span>}
+              {fieldErr && <span style={{ color: "red" }}>{fieldErr}</span>}
               <p style={{ margin: "1rem 0" }}>
                 Don't have a account?{" "}
                 <Link

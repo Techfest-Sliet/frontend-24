@@ -1,4 +1,12 @@
-import { Stack, Box, Typography, Button, Divider, Select } from "@mui/material";
+import {
+  Stack,
+  Box,
+  Typography,
+  Button,
+  Divider,
+  Select,
+  TextField,
+} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +20,7 @@ import Error from "../Error/Error";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
+// import Loader from "../Loader/loader";
 
 const style = {
   position: "absolute",
@@ -37,6 +46,11 @@ const EventDisplayer = () => {
   const [teamDetails, setTeamDetails] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [teams, setTeams] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [eventParticipationType, setEventParticipationType] = useState("");
+  const [modal, setModal] = useState(false);
+
+console.log("teams ==>",teams);
 
   const { eventId } = useParams();
   const token = localStorage.getItem("jwtToken");
@@ -49,21 +63,10 @@ const EventDisplayer = () => {
   };
 
   useEffect(() => {
-    const getUserById = () => {
-      axios
-        .get(`${baseUrl}/user/getUserById`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((result) => {})
-        .catch((err) => {
-          setError();
-        });
-    };
-
+    setIsLoading(true);
     const getEventById = () => {
       axios.get(`${baseUrl}/event/geteventbyid/${eventId}`).then((result) => {
+        setIsLoading(false);
         setEventDetails(result.data.event);
         setEventCoor(result.data.event.studentCoordinator);
       });
@@ -77,12 +80,12 @@ const EventDisplayer = () => {
           },
         })
         .then((result) => {
+          setIsLoading(false);
           setTeams(result.data.teams);
         });
     };
 
     getEventById();
-    getUserById();
     getProperTeam();
   }, [authContext, authContext.login]);
 
@@ -97,45 +100,53 @@ const EventDisplayer = () => {
     setAnchorEl(e.currentTarget);
   };
 
-  const addTeam = async (eventId, teamName) => {
-    handleClose();
-    await axios
-      .post(
-        `${baseUrl}/user/addevent`,
-        {
-          eventId: eventId,
-          type: "team",
-          teamName: teamName,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${authContext.token}`,
-          },
-        }
-      )
-      .then((result) => {
-        Swal.fire({
-          title: "Great!!",
-          text: `${result.data.message}`,
-          icon: "success",
-          confirmButtonColor: "skyblue",
-        });
-        navigate(`/user`);
-      });
-  };
+  // const addTeam = async (eventId, teamName) => {
+  //   handleClose();
+  //   if (authContext.isUserLoggedIn === false) {
+  //     navigate("/sign-in");
+  //   }
+  //   setIsLoading(true);
+  //   await axios
+  //     .post(
+  //       `${baseUrl}/user/addevent`,
+  //       {
+  //         eventId: `${eventId}`,
+  //         type: "team",
+  //         teamName: teamName,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${authContext.token}`,
+  //         },
+  //       }
+  //     )
+  //     .then((result) => {
+  //       isLoading(false);
+  //       Swal.fire({
+  //         title: "Great!!",
+  //         text: `${result.data.message}`,
+  //         icon: "success",
+  //         confirmButtonColor: "#0096FF",
+  //       });
+  //       navigate(`/user`);
+  //     });
+  // };
 
   // Individual Registration
-  async function registerIndividualEvent() {
+  async function registerEvent() {
     setAnchorEl(null);
     if (authContext.isUserLoggedIn === false) {
       navigate("/sign-in");
     }
+
+    setIsLoading(true);
     await axios
       .post(
         `${baseUrl}/user/addevent`,
         {
+          teamName: teamName,
           eventId: `${eventId}`,
-          type: "Individual",
+          type: eventParticipationType,
         },
         {
           headers: {
@@ -144,9 +155,10 @@ const EventDisplayer = () => {
         }
       )
       .then((result) => {
+        setIsLoading(false);
         Swal.fire({
           title: "Great!!",
-          text: `${result.data.message}`,
+          text: `${result.data.message}.`,
           icon: "success",
           confirmButtonColor: "skyblue",
         });
@@ -159,6 +171,7 @@ const EventDisplayer = () => {
   return (
     <>
       <StarCanvas />
+      {/* {isLoading && <Loader />} */}
       {!error ? (
         <>
           {variable === 1 ? (
@@ -211,7 +224,7 @@ const EventDisplayer = () => {
                   <Button
                     variant=" "
                     style={{
-                      postion: "relative",
+                      position: "relative",
                       top: isMobile ? "-1rem" : "4.5rem",
                       right: isMobile && "-2rem",
                       zIndex: "10",
@@ -351,18 +364,59 @@ const EventDisplayer = () => {
                                 boxShadow: "5x 5px 5px #030014",
                               }}
                             >
-                              <MenuItem onClick={registerIndividualEvent}>
-                                Join as Individual
-                              </MenuItem>
-                              {/* {eventDetails.eventParticipationType !== 'Individual' && ( */}
                               <MenuItem
                                 onClick={() => {
-                                  setTeamDetails(true);
+                                  setModal(true);
                                   handleClose();
+                                  setEventParticipationType("Individual");
                                 }}
                               >
-                                Join as Team
+                                Join as Individual
                               </MenuItem>
+                              {modal && (
+                                <>
+                                  <Modal
+                                    open={modal}
+                                    onClose={() => {
+                                      setModal(false);
+                                    }}
+                                    aria-labelledby="child-modal-title"
+                                    aria-describedby="child-modal-description"
+                                  >
+                                    <Box sx={style}>
+                                      <TextField
+                                        id="outlined-basic"
+                                        label="Your Name"
+                                        variant="outlined"
+                                        onChange={(e) => {
+                                          setTeamName(e.target.value);
+                                        }}
+                                      />
+                                      <Button
+                                        variant="contained"
+                                        style={{
+                                          display: "flex",
+                                          marginLeft: "auto",
+                                        }}
+                                        onClick={() => registerEvent()}
+                                      >
+                                        OK
+                                      </Button>
+                                    </Box>
+                                  </Modal>
+                                </>
+                              )}
+                              {/* {eventDetails.eventParticipationType !== */}
+                                {/* "Individual" && ( */}
+                                <MenuItem
+                                  onClick={() => {
+                                    setTeamDetails(true);
+                                    handleClose();
+                                    setEventParticipationType("team");
+                                  }}
+                                >
+                                  Join as Team
+                                </MenuItem>
                               {/* )} */}
                             </Menu>
                             {teamDetails && (
@@ -392,10 +446,7 @@ const EventDisplayer = () => {
                                             <>
                                               <MenuItem
                                                 onClick={() => {
-                                                  addTeam(
-                                                    eventId,
-                                                    team.teamName
-                                                  );
+                                                  registerEvent();
                                                 }}
                                                 key={team._id}
                                               >

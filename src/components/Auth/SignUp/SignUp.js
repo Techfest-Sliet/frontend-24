@@ -3,7 +3,7 @@ import styles from "./Signup.module.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorModel from "../../Error/Error.js";
-import Loader from "../../Loader/loader.js";
+// import Loader from "../../Loader/loader.js";
 // import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import StarCanvas from "../../../screens/landingPage/StarbackGround.jsx";
 import { baseUrl } from "../../../API/api.js";
@@ -176,7 +176,7 @@ const Signup = () => {
             navigate("/sign-in");
           }, 3000);
         } else if (res.status === 400 || res.status === 208) {
-          setIsLoading(true);
+          setIsLoading(false);
           setErrorsMade(res.data.message);
           setTimeout(() => {
             if (res.data.message.includes("email")) {
@@ -196,7 +196,7 @@ const Signup = () => {
   return (
     <>
       <StarCanvas />
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       {errorMade && (
         <ErrorModel
           title={errorMade.title}

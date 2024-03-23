@@ -6,7 +6,7 @@ import { Box, Button } from "@mui/material";
 import axios from "axios";
 import { baseUrl } from "../../API/api";
 import Error from "../Error/Error";
-import Loader from "../Loader/loader";
+// import Loader from "../Loader/loader";
 
 function Events() {
   const { domainName } = useParams();
@@ -14,10 +14,11 @@ function Events() {
 
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-       const getEventByDomainName = () => {
+    const getEventByDomainName = () => {
+      setIsLoading(true);
       axios
         .get(`${baseUrl}/event/geteventbydomainname/${domainName}`)
         .then((result) => {
@@ -26,7 +27,7 @@ function Events() {
         })
         .catch((err) => {
           setError(true);
-          console.log("err ==>",err);
+          setIsLoading(false);
         });
     };
     getEventByDomainName();
@@ -34,8 +35,8 @@ function Events() {
 
   return (
     <>
-    {error && <Error/>}
-    {isLoading && <Loader/>}
+      {error && <Error />}
+      {/* {isLoading && <Loader />} */}
       <StarCanvas />
       <Box style={{ position: "relative", zIndex: "25" }}>
         <div className="event_container">

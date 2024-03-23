@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VentureVault from "../../utils/DOMAIN_LOGOS/VentureVault.png";
 import Error from "../../components/Error/Error";
-import Loader from "../../components/Loader/loader";
+// import Loader from "../../components/Loader/loader";
 
 const Domains = ({ domains }) => {
   const [activeCards, setActiveCards] = useState({});
@@ -46,7 +46,7 @@ const Domains = ({ domains }) => {
   return (
     <>
       <StarCanvas />
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       {error ? (
         <Error />
       ) : (
