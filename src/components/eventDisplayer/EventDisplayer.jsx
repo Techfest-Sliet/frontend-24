@@ -234,7 +234,7 @@ const EventDisplayer = () => {
                         gap: "2rem",
                       }}
                     >
-                      <Box
+                      {/* <Box
                         width={"15%"}
                         style={{
                           display: "flex",
@@ -252,7 +252,7 @@ const EventDisplayer = () => {
                             display: isMobile ? "none" : "block",
                           }}
                         />
-                      </Box>
+                      </Box> */}
                       <Box
                         style={{
                           width: "100%",
