@@ -37,7 +37,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useMediaQuery } from "@mui/material";
 import AddTeam from "./screens/UserDashboard/addTeam";
-import AddMember from "./screens/UserDashboard/addMember";
 
 function App() {
   const isMobile = useMediaQuery("(min-width:450px)");
@@ -65,9 +64,7 @@ function App() {
           {!authContext.isUserLoggedIn && (
             <Route path="/addteam" element={<AddTeam />} />
           )}
-          {!authContext.isUserLoggedIn && (
-            <Route path="/addmember/:teamId" element={<AddMember />} />
-          )}
+          
 
           <Route path="/sponsor" element={<Sponsors />} />
           <Route path="/gallery" element={<Gallery />} />

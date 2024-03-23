@@ -109,6 +109,7 @@ function AddTeam() {
                   margin="normal"
                   required
                   fullWidth
+                  variant="outlined"
                   label="Team Name"
                   type="Team Name"
                   sx={{ background: "grey" }}

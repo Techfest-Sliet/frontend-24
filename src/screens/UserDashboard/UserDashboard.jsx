@@ -248,13 +248,12 @@ const UserDashboard = () => {
         },
       })
       .then((result) => {
-        console.log("User==>",result.data);
+        console.log("User==>", result.data);
         setIsLoading(false);
         setUser(result.data.user);
         setCollegeName(result.data.user.collegeName);
         setWorkshops(result.data.user.workshops);
         setTeamMembers(result.data.user.teamMembers);
-        console.log(result.data.user.teamMembers);
         setEvents(result.data.user.events);
       })
       .catch((err) => {
@@ -352,7 +351,7 @@ const UserDashboard = () => {
                         sx={{
                           fontSize: isMobile ? 20 : 25,
                           fontWeight: 500,
-                          height: isMobile ? "6rem" : "3rem",
+                          height: isMobile ? "6rem" : "5rem",
                         }}
                       >
                         {!isMobile
@@ -466,7 +465,7 @@ const UserDashboard = () => {
                       <Typography
                         sx={{
                           fontSize: isMobile ? 20 : 25,
-                          height: isMobile ? "6rem" : "3rem",
+                          height: isMobile ? "6rem" : "4rem",
                         }}
                       >
                         {user && user.branch}
@@ -582,7 +581,7 @@ const UserDashboard = () => {
                           left: isMobile ? "0rem" : "0rem",
                           position: "relative",
                           whiteSpace: "nowrap",
-                          height: isMobile ? "4rem" : "3rem", 
+                          height: isMobile ? "4rem" : "3rem",
                         }}
                       >
                         {user && user.email}
@@ -641,6 +640,7 @@ const UserDashboard = () => {
                     color: "white",
                     minWidth: 300,
                     height: 300,
+                    overflowY: "scroll",
                   }}
                 >
                   <Box sx={{ display: "flex" }}>
@@ -740,6 +740,7 @@ const UserDashboard = () => {
                     color: "white",
                     minWidth: 300,
                     height: 300,
+                    overflowY: "scroll",
                   }}
                 >
                   <Box sx={{ display: "flex" }}>
@@ -826,7 +827,7 @@ const UserDashboard = () => {
               <Box sx={{ margin: "7%" }}>
                 <TeamTable
                   teamMembers={teamMembers}
-                  events = {events}
+                  events={events}
                   leaderId={user && user._id}
                 />
               </Box>

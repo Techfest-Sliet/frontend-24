@@ -16,6 +16,7 @@ import axios from "axios";
 import { baseUrl } from "../../API/api";
 import { useNavigate } from "react-router-dom";
 import GroupAdd from "@mui/icons-material/GroupAdd";
+import Swal from "sweetalert2";
 
 const style = {
   position: "absolute",
@@ -55,24 +56,58 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function TeamTable({ teamMembers, events }) {
   const authContext = useContext(AuthContext);
   const [addMember, setAddMember] = useState(false);
-  const [teamMemberEmail, setTeamMemberEmail] = useState("");
+  const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
-  
 
   const handleTeamDelete = (id) => {
+    Swal.fire({
+      title: "Do you want to delete this event!!",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: "No",
+      backdrop: true,
+      customClass: {
+        actions: "my-actions",
+        cancelButton: "order-1 right-gap",
+        confirmButton: "order-2",
+        denyButton: "order-3",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .post(
+            `${baseUrl}/team/delete`,
+            { id },
+            {
+              headers: {
+                Authorization: `Bearer ${authContext.token}`,
+              },
+            }
+          )
+          .then((result) => {
+            window.location.reload();
+          });
+      }
+    });
+  };
+
+  const addTeamMember = (teamId) => {
     axios
-      .post(
-        `${baseUrl}/team/delete`,
-        { id },
-        {
-          headers: {
-            Authorization: `Bearer ${authContext.token}`,
-          },
-        }
-      )
+      .post(`${baseUrl}/team/addmember`, {
+        teamId: teamId,
+        email: email,
+      })
       .then((result) => {
-        window.location.reload();
+        if (email.trim().length === 0) {
+          alert("fill the email field");
+        } else {
+          Swal.fire({
+            text: `${result.data.message}`,
+            confirmButtonColor: "#0096FF",
+          });
+        }
       });
   };
 
@@ -157,12 +192,12 @@ function TeamTable({ teamMembers, events }) {
               teamMembers.length > 0 &&
               Object.values(teamMembers).map((team) => {
                 return (
-                  <StyledTableRow key={team._id} style={{height:"6rem", border:"2px solid red"}}>
+                  <StyledTableRow key={team._id} style={{ height: "6rem" }}>
                     <StyledTableCell
                       component="th"
                       scope="row"
                       align="center"
-                      style={{ background: "grey", height:"2rem" }}
+                      style={{ background: "grey" }}
                     >
                       {team.teamName}
                     </StyledTableCell>
@@ -170,35 +205,37 @@ function TeamTable({ teamMembers, events }) {
                     {team.members.map((eachMember) => {
                       return (
                         <>
-                          <StyledTableRow>
-                            <StyledTableCell
-                              component="th"
-                              scope="row"
-                              style={{ background: "grey" }}
-                              key={eachMember.memberId}
-                              className={
-                                eachMember.status ? "verified" : "notVerified"
-                              }
-                              align="right"
+                          <StyledTableCell
+                            component="th"
+                            scope="row"
+                            style={{
+                              background: "grey",
+                              height: "6rem",
+                              width: isMobile && "15rem",
+                            }}
+                            key={eachMember.memberId}
+                            className={
+                              eachMember.status ? "verified" : "notVerified"
+                            }
+                            align="center"
+                          >
+                            <Typography
+                              style={{
+                                color:
+                                  eachMember.status === true ? "green" : "red",
+                              }}
                             >
-                              <Typography
-                                style={{
-                                  color:
-                                    eachMember.status === true
-                                      ? "green"
-                                      : "red",
-                                }}
-                              >
-                                {eachMember.email}
-                              </Typography>
-                            </StyledTableCell>
-                            <StyledTableCell
-                              align="right"
-                              style={{ backgroundColor: "grey" }}
-                            >
-                              <Typography>{eachMember.status ? "verified" : "notVerified"}</Typography>
-                            </StyledTableCell>
-                          </StyledTableRow>
+                              {eachMember.email}
+                            </Typography>
+                          </StyledTableCell>
+                          <StyledTableCell
+                            align="center"
+                            style={{ backgroundColor: "grey" }}
+                          >
+                            <Typography>
+                              {eachMember.status ? "verified" : "notVerified"}
+                            </Typography>
+                          </StyledTableCell>
                         </>
                       );
                     })}
@@ -214,7 +251,7 @@ function TeamTable({ teamMembers, events }) {
                     >
                       <Button
                         onClick={() => {
-                          navigate(`/addmember/${team._id}`);
+                          setAddMember(true);
                         }}
                       >
                         <IoMdPersonAdd color="white" />
@@ -232,7 +269,7 @@ function TeamTable({ teamMembers, events }) {
                         <MdDelete color="white" />
                       </Button>
                     </StyledTableCell>
-                    {/* {/* {addMember && (
+                    {addMember && (
                       <Modal
                         open={addMember}
                         onClose={() => {
@@ -245,22 +282,22 @@ function TeamTable({ teamMembers, events }) {
                             label="Member Email"
                             variant="filled"
                             onChange={(e) => {
-                              setTeamMemberEmail(e.target.value);
+                              setEmail(e.target.value);
                             }}
                           />
+                          <Button
+                            variant="contained"
+                            style={{
+                              display: "flex",
+                              marginLeft: "auto",
+                            }}
+                            onClick={() => addTeamMember(team._id)}
+                          >
+                            OK
+                          </Button>
                         </Box>
-                        <Button
-                          variant="contained"
-                          style={{
-                            display: "flex",
-                            marginLeft: "auto",
-                          }}
-                          onClick={() => addTeamMember(team._id)}
-                        >
-                          OK
-                        </Button>
-                      </Modal> 
-                    )} */}
+                      </Modal>
+                    )}
                   </StyledTableRow>
                 );
               })}

@@ -50,10 +50,7 @@ const EventDisplayer = () => {
   const [eventParticipationType, setEventParticipationType] = useState("");
   const [modal, setModal] = useState(false);
 
-console.log("teams ==>",teams);
-
   const { eventId } = useParams();
-  const token = localStorage.getItem("jwtToken");
 
   const handleVariableSeting = () => {
     setVariable(2);
@@ -81,7 +78,7 @@ console.log("teams ==>",teams);
         })
         .then((result) => {
           setIsLoading(false);
-          setTeams(result.data.teams);
+            setTeams(result.data.teams);
         });
     };
 
@@ -99,38 +96,6 @@ console.log("teams ==>",teams);
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
-
-  // const addTeam = async (eventId, teamName) => {
-  //   handleClose();
-  //   if (authContext.isUserLoggedIn === false) {
-  //     navigate("/sign-in");
-  //   }
-  //   setIsLoading(true);
-  //   await axios
-  //     .post(
-  //       `${baseUrl}/user/addevent`,
-  //       {
-  //         eventId: `${eventId}`,
-  //         type: "team",
-  //         teamName: teamName,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${authContext.token}`,
-  //         },
-  //       }
-  //     )
-  //     .then((result) => {
-  //       isLoading(false);
-  //       Swal.fire({
-  //         title: "Great!!",
-  //         text: `${result.data.message}`,
-  //         icon: "success",
-  //         confirmButtonColor: "#0096FF",
-  //       });
-  //       navigate(`/user`);
-  //     });
-  // };
 
   // Individual Registration
   async function registerEvent() {
@@ -150,7 +115,7 @@ console.log("teams ==>",teams);
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${authContext.token}`,
           },
         }
       )
@@ -407,16 +372,16 @@ console.log("teams ==>",teams);
                                 </>
                               )}
                               {/* {eventDetails.eventParticipationType !== */}
-                                {/* "Individual" && ( */}
-                                <MenuItem
-                                  onClick={() => {
-                                    setTeamDetails(true);
-                                    handleClose();
-                                    setEventParticipationType("team");
-                                  }}
-                                >
-                                  Join as Team
-                                </MenuItem>
+                              {/* "Individual" && ( */}
+                              <MenuItem
+                                onClick={() => {
+                                  setTeamDetails(true);
+                                  handleClose();
+                                  setEventParticipationType("team");
+                                }}
+                              >
+                                Join as Team
+                              </MenuItem>
                               {/* )} */}
                             </Menu>
                             {teamDetails && (
@@ -433,7 +398,7 @@ console.log("teams ==>",teams);
                                     <Typography>
                                       Choose from your existing Team(s).
                                     </Typography>
-                                    <Select
+                                    <select
                                       value={teamName}
                                       style={{ width: "40%" }}
                                       onChange={(e) => {
@@ -444,29 +409,37 @@ console.log("teams ==>",teams);
                                         teams.map((team) => {
                                           return (
                                             <>
-                                              <MenuItem
-                                                onClick={() => {
-                                                  registerEvent();
-                                                }}
-                                                key={team._id}
-                                              >
+                                              <option value={team.teamName}>
                                                 {team.teamName}
-                                              </MenuItem>
+                                              </option>
                                             </>
                                           );
                                         })}
-                                    </Select>
+                                    </select>
                                     <Button
                                       variant="contained"
                                       style={{
                                         display: "flex",
                                         marginLeft: "auto",
                                       }}
-                                      // onClick={addTeam}
+                                      onClick={() => {
+                                        registerEvent();
+                                        navigate(`/user`);
+                                      }}
                                     >
                                       OK
                                     </Button>
-                                    <Divider style={{ marginTop: "10%" }} />
+
+                                    <Divider
+                                      style={{
+                                        marginTop: "10%",
+                                        marginBottom: "10%",
+                                      }}
+                                    >
+                                      <Typography style={{ color: "darkgrey" }}>
+                                        OR
+                                      </Typography>
+                                    </Divider>
                                     <Typography>Add Your Team</Typography>
                                     <Link to="/addteam">
                                       <Button
