@@ -78,7 +78,7 @@ const EventDisplayer = () => {
         })
         .then((result) => {
           setIsLoading(false);
-            setTeams(result.data.teams);
+          setTeams(result.data.teams);
         });
     };
 
@@ -368,18 +368,18 @@ const EventDisplayer = () => {
                                   </Modal>
                                 </>
                               )}
-                              {/* {eventDetails.eventParticipationType !== */}
-                              {/* "Individual" && ( */}
-                              <MenuItem
-                                onClick={() => {
-                                  setTeamDetails(true);
-                                  handleClose();
-                                  setEventParticipationType("team");
-                                }}
-                              >
-                                Join as Team
-                              </MenuItem>
-                              {/* )} */}
+                              {eventDetails.eventParticipationType !==
+                                "Individual" && (
+                                <MenuItem
+                                  onClick={() => {
+                                    setTeamDetails(true);
+                                    handleClose();
+                                    setEventParticipationType("team");
+                                  }}
+                                >
+                                  Join as Team
+                                </MenuItem>
+                              )}
                             </Menu>
                             {teamDetails && (
                               <>
@@ -575,7 +575,7 @@ const EventDisplayer = () => {
                             flexDirection: isMobile ? "column" : "row",
                           }}
                         >
-                          {eventCoor.map((coordinator, index) => {
+                          {eventCoor.map((coordinator) => {
                             return (
                               <Box key={coordinator._id}>
                                 <Typography
@@ -584,6 +584,7 @@ const EventDisplayer = () => {
                                     color: "white",
                                     fontFamily: "sans-serif",
                                     marginRight: "1.5rem",
+                                    marginTop: isMobile ? "1rem" : "0rem",
                                   }}
                                 >
                                   {coordinator.coordinatorName}
