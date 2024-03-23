@@ -176,9 +176,6 @@ const EventDisplayer = () => {
                 >
                   {eventDetails.eventName}
                 </Typography>
-                <Typography style={{ color: "red" }}>
-                  Registrations opening soon...
-                </Typography>
                 <Box
                   sx={{
                     display: "flex",

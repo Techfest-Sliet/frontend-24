@@ -97,7 +97,7 @@ a{
         position: relative;
     width: 70%;
     padding-top:10rem;
-    margin: 0 50%;
+    margin: 0 55%;
     transform: translate(-50%);
     }
     .faqSubHeading{
@@ -105,7 +105,7 @@ a{
         color: rgb(145, 145, 149);
         position: relative;
         width: 95%;
-        margin: 0 50%;
+        margin: 0 55%;
         transform: translate(-50%);
     }
     .faq{

@@ -45,8 +45,7 @@ const Faq = () => {
     {
       id: 3,
       question: "Do I need to pay any fee for registration?",
-      answer:
-        "There is a registration fees of Rs.100 for SLIETians and for non-SLIETians it goes to Rs.1000",
+      answer: "No fees is required for techFEST'24.",
     },
     {
       id: 4,
@@ -133,7 +132,10 @@ const Faq = () => {
           <div> &copy;2024 techFest'24. All Right Reserved </div>
           <div>
             {" "}
-            <a href="https://www.linkedin.com/company/techfest-sliet/" target="main">
+            <a
+              href="https://www.linkedin.com/company/techfest-sliet/"
+              target="main"
+            >
               <img src={linkedIn} alt="" style={{ width: "30%" }} />
             </a>{" "}
             <a href="https://www.instagram.com/techfestsliet_/" target="main">
