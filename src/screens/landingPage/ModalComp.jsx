@@ -304,7 +304,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     gap: "1.3rem",
                   }}
                 >
-                  <Link to="#">
+                  <Link to="/enquiry">
                     <Button
                       style={{
                         color: "white",
