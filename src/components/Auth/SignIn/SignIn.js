@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Auth";
 // import Loader from "../../Loader/loader";
 import { baseUrl } from "../../../API/api";
+import { red } from "@mui/material/colors";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#90e0ef" : "#90e0ef",
@@ -182,7 +183,9 @@ const SignIn = () => {
                 }}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {mailErr && <p>Fill the Email</p>}
+              {mailErr && (
+                <span style={{ color: "red" }}>Fill the Registered Email</span>
+              )}
               <p style={{ fontSize: "1rem", marginTop: "0.5rem" }}>PASSWORD</p>
               <TextField
                 id="outlined-basic"
@@ -224,6 +227,7 @@ const SignIn = () => {
                 }}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {fieldErr && <span style={{ color: "red" }}>{fieldErr}</span>}
               <Stack
                 direction={{ xs: "column", sm: "row" }}
                 justifyContent={"space-between"}
@@ -256,7 +260,7 @@ const SignIn = () => {
                   Sign In
                 </Item>
               </Stack>
-              {fieldErr && <span style={{ color: "red" }}>{fieldErr}</span>}
+
               <p style={{ margin: "1rem 0" }}>
                 Don't have a account?{" "}
                 <Link

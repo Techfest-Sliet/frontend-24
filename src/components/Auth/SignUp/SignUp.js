@@ -2,8 +2,7 @@ import { useState } from "react";
 import styles from "./Signup.module.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import ErrorModel from "../../Error/Error.js";
-// import Loader from "../../Loader/loader.js";
+import Loader from "../../Loader/loader.js";
 // import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import StarCanvas from "../../../screens/landingPage/StarbackGround.jsx";
 import { baseUrl } from "../../../API/api.js";
@@ -52,9 +51,9 @@ const Signup = () => {
 
   const showDivTwo = () => {
     if (
-      email.trim().length === 0 ||
-      password.trim().length === 0 ||
-      name.trim().length === 0 ||
+      email.trim().length === 0 &&
+      password.trim().length === 0 &&
+      name.trim().length === 0 &&
       cPassword.trim().length === 0
     ) {
       setFieldErr("Field should not be empty");
@@ -95,19 +94,39 @@ const Signup = () => {
     // const token = await executeRecaptcha("signUp");
     e.preventDefault();
 
-    if (
-      email.trim().length === 0 ||
-      password.trim().length === 0 ||
-      name.trim().length === 0 ||
-      cPassword.trim().length === 0 ||
-      phone.trim().length === 0 ||
-      collegeName.trim().length === 0
-    ) {
+    if (email.trim().length === 0) {
       setFieldErr("Field should not be empty");
       setTimeout(() => {
         setFieldErr(null);
       }, 3000);
       return;
+    }
+    if (collegeName.trim().length === 0) {
+      setFieldErr("Field should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+    if (password.trim().length === 0) {
+      setFieldErr("Field should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+    if (cPassword.trim().length === 0) {
+      setFieldErr("Field should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+    if (name.trim().length === 0) {
+      setFieldErr("Field should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
     }
     if (!email.trim().includes("@")) {
       setMailErr("Invalid mail!");
@@ -145,10 +164,9 @@ const Signup = () => {
       }, 3000);
       return;
     }
-    if(dob.length === 0){
-      setFieldErr("Field(s) should not be empty.")
+    if (dob.length === 0) {
+      setFieldErr("Field(s) should not be empty.");
     }
-    
 
     const user = {
       name: name,
@@ -196,14 +214,7 @@ const Signup = () => {
   return (
     <>
       <StarCanvas />
-      {/* {isLoading && <Loader />} */}
-      {errorMade && (
-        <ErrorModel
-          title={errorMade.title}
-          message={errorMade.message}
-          onErrorsClick={onErrorMadeHandle}
-        />
-      )}
+      {isLoading && <Loader />}
 
       <div
         className={styles.signup__content}
