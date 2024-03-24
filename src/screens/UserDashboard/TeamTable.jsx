@@ -94,20 +94,20 @@ function TeamTable({ teamMembers, events }) {
   };
 
   const addTeamMember = (teamId) => {
+    if (email.trim().length === 0) {
+      alert("fill the email field");
+    }
+    setAddMember(false);
     axios
       .post(`${baseUrl}/team/addmember`, {
         teamId: teamId,
         email: email,
       })
       .then((result) => {
-        if (email.trim().length === 0) {
-          alert("fill the email field");
-        } else {
-          Swal.fire({
-            text: `${result.data.message}`,
-            confirmButtonColor: "#0096FF",
-          });
-        }
+        Swal.fire({
+          text: `${result.data.message}`,
+          confirmButtonColor: "#0096FF",
+        });
       });
   };
 
@@ -160,15 +160,6 @@ function TeamTable({ teamMembers, events }) {
               </StyledTableCell>
               <StyledTableCell
                 align="center"
-                style={{
-                  backgroundColor: "transparent",
-                  color: "white",
-                }}
-              >
-                Status
-              </StyledTableCell>
-              <StyledTableCell
-                align="center"
                 style={{ backgroundColor: "transparent", color: "white" }}
               >
                 Leader Name
@@ -192,12 +183,15 @@ function TeamTable({ teamMembers, events }) {
               teamMembers.length > 0 &&
               Object.values(teamMembers).map((team) => {
                 return (
-                  <StyledTableRow key={team._id} style={{ height: "6rem" }}>
+                  <StyledTableRow
+                    key={team._id}
+                    style={{ height: "6rem", border: "2px solid white" }}
+                  >
                     <StyledTableCell
                       component="th"
                       scope="row"
                       align="center"
-                      style={{ background: "grey" }}
+                      style={{ background: "transparent", height: "2rem" }}
                     >
                       {team.teamName}
                     </StyledTableCell>
@@ -205,49 +199,50 @@ function TeamTable({ teamMembers, events }) {
                     {team.members.map((eachMember) => {
                       return (
                         <>
-                          <StyledTableCell
-                            component="th"
-                            scope="row"
-                            style={{
-                              background: "grey",
-                              height: "6rem",
-                              width: isMobile && "15rem",
-                            }}
-                            key={eachMember.memberId}
-                            className={
-                              eachMember.status ? "verified" : "notVerified"
-                            }
-                            align="center"
-                          >
-                            <Typography
-                              style={{
-                                color:
-                                  eachMember.status === true ? "green" : "red",
-                              }}
+                          <StyledTableRow>
+                            <StyledTableCell
+                              component="th"
+                              scope="row"
+                              style={{ background: "transparent",  width :"15rem", }}
+                              key={eachMember.memberId}
+                              className={
+                                eachMember.status ? "verified" : "notVerified"
+                              }
+                              align="center"
                             >
-                              {eachMember.email}
-                            </Typography>
-                          </StyledTableCell>
-                          <StyledTableCell
-                            align="center"
-                            style={{ backgroundColor: "grey" }}
-                          >
-                            <Typography>
-                              {eachMember.status ? "verified" : "notVerified"}
-                            </Typography>
-                          </StyledTableCell>
+                              <Typography
+                                style={{
+                                  color:
+                                    eachMember.status === true
+                                      ? "green"
+                                      : "red",
+                                      width:"100%"
+                                }}
+                              >
+                                {eachMember.email}
+                              </Typography>
+                            </StyledTableCell>
+                            <StyledTableCell
+                              align="center"
+                              style={{ backgroundColor: "transparent",  width :"10rem" }}
+                            >
+                              <Typography>
+                                {eachMember.status ? "verified" : "notVerified"}
+                              </Typography>
+                            </StyledTableCell>
+                          </StyledTableRow>
                         </>
                       );
                     })}
                     <StyledTableCell
                       align="center"
-                      style={{ background: "grey" }}
+                      style={{ background: "transparent" }}
                     >
                       {team.leaderName}
                     </StyledTableCell>
                     <StyledTableCell
                       align="center"
-                      style={{ background: "grey" }}
+                      style={{ background: "transparent" }}
                     >
                       <Button
                         onClick={() => {
@@ -259,7 +254,7 @@ function TeamTable({ teamMembers, events }) {
                     </StyledTableCell>
                     <StyledTableCell
                       align="center"
-                      style={{ background: "grey" }}
+                      style={{ background: "transparent" }}
                     >
                       <Button
                         onClick={() => {

@@ -15,7 +15,7 @@ import { baseUrl } from "../../API/api";
 import axios from "axios";
 import AuthContext from "../Auth/Auth";
 import { ImCross } from "react-icons/im";
-import { Menu, MenuItem, Modal } from "@mui/material";
+import { Menu, MenuItem, Modal, FormControl, InputLabel } from "@mui/material";
 import Error from "../Error/Error";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -49,6 +49,8 @@ const EventDisplayer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [eventParticipationType, setEventParticipationType] = useState("");
   const [modal, setModal] = useState(false);
+
+  console.log(teamName);
 
   const { eventId } = useParams();
 
@@ -109,7 +111,7 @@ const EventDisplayer = () => {
       .post(
         `${baseUrl}/user/addevent`,
         {
-          teamName: teamName,
+          teamName: eventParticipationType !== "Individual" ? teamName : "",
           eventId: `${eventId}`,
           type: eventParticipationType,
         },
@@ -128,6 +130,7 @@ const EventDisplayer = () => {
           confirmButtonColor: "skyblue",
         });
         navigate(`/user`);
+        window.location.reload();
       });
   }
 
@@ -331,11 +334,12 @@ const EventDisplayer = () => {
                                   setModal(true);
                                   handleClose();
                                   setEventParticipationType("Individual");
+                                  registerEvent();
                                 }}
                               >
                                 Join as Individual
                               </MenuItem>
-                              {modal && (
+                              {/* {modal && (
                                 <>
                                   <Modal
                                     open={modal}
@@ -367,7 +371,7 @@ const EventDisplayer = () => {
                                     </Box>
                                   </Modal>
                                 </>
-                              )}
+                              )} */}
                               {eventDetails.eventParticipationType !==
                                 "Individual" && (
                                 <MenuItem
@@ -393,26 +397,35 @@ const EventDisplayer = () => {
                                 >
                                   <Box sx={style}>
                                     <Typography>
-                                      Choose from your existing Team(s).
+                                      Register from your existing Team(s).
                                     </Typography>
-                                    <select
-                                      value={teamName}
+                                    <FormControl
+                                      variant="outlined"
                                       style={{ width: "40%" }}
-                                      onChange={(e) => {
-                                        setTeamName(e.target.value);
-                                      }}
                                     >
-                                      {teams &&
-                                        teams.map((team) => {
-                                          return (
-                                            <>
-                                              <option value={team.teamName}>
+                                      <InputLabel>Select Team</InputLabel>
+                                      <Select
+                                        value={teamName}
+                                        style={{ width: "100%" }}
+                                        onChange={(e) => {
+                                          setTeamName(e.target.value);
+                                        }}
+                                        label="Select Team"
+                                        defaultValue=""
+                                      >
+                                        {teams &&
+                                          teams.map((team) => {
+                                            return (
+                                              <MenuItem
+                                                key={team.teamName}
+                                                value={team.teamName}
+                                              >
                                                 {team.teamName}
-                                              </option>
-                                            </>
-                                          );
-                                        })}
-                                    </select>
+                                              </MenuItem>
+                                            );
+                                          })}
+                                      </Select>
+                                    </FormControl>
                                     <Button
                                       variant="contained"
                                       style={{
