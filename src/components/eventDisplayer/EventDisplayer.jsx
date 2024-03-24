@@ -237,25 +237,27 @@ const EventDisplayer = () => {
                         gap: "2rem",
                       }}
                     >
-                      {/* <Box
+                      <Box
                         width={"15%"}
                         style={{
                           display: "flex",
                           justifyContent: "center",
                           height: "100%",
+                          marginRight:"2%"
                         }}
                       >
                         <img
+                        src="/mascot.png"
                           alt="eventLogo"
-                          width={500}
-                          height={250}
+                          width={150}
+                          height={200}
                           style={{
                             objectFit: "cover",
                             boxShadow: "4px 5px 4px  #030014",
                             display: isMobile ? "none" : "block",
                           }}
                         />
-                      </Box> */}
+                      </Box>
                       <Box
                         style={{
                           width: "100%",
