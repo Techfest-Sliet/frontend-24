@@ -53,12 +53,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function TeamTable({ teamMembers, events }) {
+function TeamTable({ teamMembers }) {
   const authContext = useContext(AuthContext);
   const [addMember, setAddMember] = useState(false);
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  console.log("teamMembers ==>", teamMembers);
 
   const handleTeamDelete = (id) => {
     Swal.fire({
@@ -107,8 +110,14 @@ function TeamTable({ teamMembers, events }) {
         Swal.fire({
           text: `${result.data.message}`,
           confirmButtonColor: "#0096FF",
+          customClass: {
+            confirmButton: "order-2",
+          },
         });
-      });
+        window.location.reload();
+      }).catch((error) => {
+        alert(`${error.response.data.message}`);
+      })
   };
 
   const isMobile = useMediaQuery("(max-width:450px)");
@@ -203,7 +212,10 @@ function TeamTable({ teamMembers, events }) {
                             <StyledTableCell
                               component="th"
                               scope="row"
-                              style={{ background: "transparent",  width :"15rem", }}
+                              style={{
+                                background: "transparent",
+                                width: "15rem",
+                              }}
                               key={eachMember.memberId}
                               className={
                                 eachMember.status ? "verified" : "notVerified"
@@ -216,7 +228,7 @@ function TeamTable({ teamMembers, events }) {
                                     eachMember.status === true
                                       ? "green"
                                       : "red",
-                                      width:"100%"
+                                  width: "100%",
                                 }}
                               >
                                 {eachMember.email}
@@ -224,7 +236,10 @@ function TeamTable({ teamMembers, events }) {
                             </StyledTableCell>
                             <StyledTableCell
                               align="center"
-                              style={{ backgroundColor: "transparent",  width :"10rem" }}
+                              style={{
+                                backgroundColor: "transparent",
+                                width: "10rem",
+                              }}
                             >
                               <Typography>
                                 {eachMember.status ? "verified" : "notVerified"}

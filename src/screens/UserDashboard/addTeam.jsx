@@ -18,6 +18,8 @@ function AddTeam() {
   const authContext = useContext(AuthContext);
   const [teamName, setTeamName] = useState(false);
   const [members, setMembers] = useState([" "]);
+  const [teamNameError, setTeamNameError] = useState("");
+  const [membersError, setMembersError] = useState("");
 
   const handleMemberEmail = (index, e) => {
     const newEmails = [...members];
@@ -40,6 +42,15 @@ function AddTeam() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (teamName.trim().length === 0) {
+      setTeamNameError("Please fill a team name.");
+    }
+
+    // for (let member of members) {
+    //   if (member.trim().includes("@")) {
+    //     setMembersError("Please fill correct email id");
+    //   }
+    // }
     axios
       .post(
         `${baseUrl}/team/create`,
@@ -74,7 +85,7 @@ function AddTeam() {
       >
         <Card
           sx={{
-            width: isMobile ? "99%":"40%",
+            width: isMobile ? "99%" : "40%",
             border: "2px solid white",
             bgcolor: "transparent",
             borderRadius: "5px",
@@ -85,7 +96,7 @@ function AddTeam() {
           <Container
             component="main"
             maxWidth="xs"
-            style={{ marginTop: "4.5rem", margin:isMobile && "0 0.5rem" }}
+            style={{ marginTop: "4.5rem", margin: isMobile && "0 0.5rem" }}
           >
             <CssBaseline />
             <Box
@@ -118,7 +129,12 @@ function AddTeam() {
                     setTeamName(e.target.value);
                   }}
                 />
+
+                {teamNameError && (
+                  <span style={{ color: "red" }}>Please fill a team name.</span>
+                )}
                 {members.map((member, index) => {
+                  console.log("member ==> ", member)
                   return (
                     <>
                       {index <= 2 && (
@@ -127,7 +143,7 @@ function AddTeam() {
                             margin="normal"
                             required
                             label="Member Email Address"
-                            value={member.email}
+                            value={member}
                             sx={{
                               background: "grey",
                               width: 300,
@@ -149,6 +165,9 @@ function AddTeam() {
                     </>
                   );
                 })}
+                {membersError && (
+                  <span style={{ color: "red" }}>Please fill a Email.</span>
+                )}
                 <Button variant=" " onClick={addMember}>
                   <GroupAdd />
                 </Button>
