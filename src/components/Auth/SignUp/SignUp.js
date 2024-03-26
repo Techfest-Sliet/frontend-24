@@ -29,6 +29,7 @@ const Signup = () => {
   const [divOne, setDivOne] = useState(true);
   const [divTwo, setDivTwo] = useState(false);
   const [errorMade, setErrorMade] = useState();
+  const [cpError, setCpError] = useState();
 
   const onErrorMadeHandle = () => {
     setErrorMade(null);
@@ -56,7 +57,14 @@ const Signup = () => {
       name.trim().length === 0 &&
       cPassword.trim().length === 0
     ) {
-      setFieldErr("Field should not be empty");
+      setFieldErr("Field(s) should not be empty");
+      setTimeout(() => {
+        setFieldErr(null);
+      }, 3000);
+      return;
+    }
+    if (name.trim().length === 0) {
+      setFieldErr("Field(s) should not be empty");
       setTimeout(() => {
         setFieldErr(null);
       }, 3000);
@@ -66,6 +74,13 @@ const Signup = () => {
       setMailErr("Invalid mail!");
       setTimeout(() => {
         setMailErr(null);
+      }, 3000);
+      return;
+    }
+    if (cPassword.trim().length === 0) {
+      setCpError("Please fill the confirm password.");
+      setTimeout(() => {
+          setCpError(null);
       }, 3000);
       return;
     }
@@ -441,6 +456,9 @@ const Signup = () => {
                 </label>
                 {{ confirm_err } && (
                   <p style={{ color: "red" }}>{confirm_err}</p>
+                )}
+                {cpError && (
+                  <p style={{color:"red"}}>{cpError}</p>
                 )}
                 <input
                   value={cPassword}

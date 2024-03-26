@@ -134,7 +134,7 @@ function AddTeam() {
                   <span style={{ color: "red" }}>Please fill a team name.</span>
                 )}
                 {members.map((member, index) => {
-                  console.log("member ==> ", member)
+                  console.log("member ==> ", member);
                   return (
                     <>
                       {index <= 2 && (
@@ -159,7 +159,8 @@ function AddTeam() {
                       )}
                       {index === 3 && (
                         <p style={{ color: "red" }}>
-                          A team can have maximum 4 members.
+                          A team can have maximum 4 members.Please refer to the
+                          Problem Statement for more clarity.
                         </p>
                       )}
                     </>
@@ -188,7 +189,7 @@ function AddTeam() {
                       navigate(-1);
                     }}
                   >
-                    Cancel
+                   Go Back
                   </Button>
                 </div>
               </Box>

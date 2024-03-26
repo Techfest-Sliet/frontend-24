@@ -97,6 +97,9 @@ const EventDisplayer = () => {
   };
   const handleMenu = (e) => {
     setAnchorEl(e.currentTarget);
+    if (authContext.isUserLoggedIn === false) {
+      navigate("/sign-in");
+    }
   };
 
   // Individual Registration
@@ -243,11 +246,11 @@ const EventDisplayer = () => {
                           display: "flex",
                           justifyContent: "center",
                           height: "100%",
-                          marginRight:"2%"
+                          marginRight: "2%",
                         }}
                       >
                         <img
-                        src="/mascot.png"
+                          src="/mascot.png"
                           alt="eventLogo"
                           width={150}
                           height={200}

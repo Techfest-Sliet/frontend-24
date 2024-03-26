@@ -33,11 +33,7 @@ const Domains = ({ domains }) => {
 
   const clickDomain = (index) => {
     try {
-      if (index === 2) {
-        setComingSoon(true);
-      } else {
-        navigate(`/domains/${domains[index].name.toLowerCase()}`);
-      }
+      navigate(`/domains/${domains[index].name.toLowerCase()}`);
     } catch (error) {
       setError(true);
     }
