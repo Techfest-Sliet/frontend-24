@@ -50,8 +50,6 @@ const EventDisplayer = () => {
   const [eventParticipationType, setEventParticipationType] = useState("");
   const [modal, setModal] = useState(false);
 
-  console.log(teamName);
-
   const { eventId } = useParams();
 
   const handleVariableSeting = () => {
@@ -103,7 +101,7 @@ const EventDisplayer = () => {
   };
 
   // Individual Registration
-  async function registerEvent() {
+  async function registerEvent(participationType) {
     setAnchorEl(null);
     if (authContext.isUserLoggedIn === false) {
       navigate("/sign-in");
@@ -114,9 +112,9 @@ const EventDisplayer = () => {
       .post(
         `${baseUrl}/user/addevent`,
         {
-          teamName: eventParticipationType !== "Individual" ? teamName : "",
           eventId: `${eventId}`,
-          type: eventParticipationType,
+          type: participationType,
+          teamName: eventParticipationType !== "Individual" ? teamName : "",
         },
         {
           headers: {
@@ -131,8 +129,11 @@ const EventDisplayer = () => {
           text: `${result.data.message}.`,
           icon: "success",
           confirmButtonColor: "skyblue",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate(`/user`);
+          }
         });
-        navigate(`/user`);
         window.location.reload();
       });
   }
@@ -339,7 +340,7 @@ const EventDisplayer = () => {
                                   setModal(true);
                                   handleClose();
                                   setEventParticipationType("Individual");
-                                  registerEvent();
+                                  registerEvent("Individual");
                                 }}
                               >
                                 Join as Individual
@@ -377,18 +378,18 @@ const EventDisplayer = () => {
                                   </Modal>
                                 </>
                               )} */}
-                              {eventDetails.eventParticipationType !==
-                                "Individual" && (
-                                <MenuItem
-                                  onClick={() => {
-                                    setTeamDetails(true);
-                                    handleClose();
-                                    setEventParticipationType("team");
-                                  }}
-                                >
-                                  Join as Team
-                                </MenuItem>
-                              )}
+                              {/* {eventDetails.eventParticipationType !== */}
+                              {/* "Individual" && ( */}
+                              <MenuItem
+                                onClick={() => {
+                                  setTeamDetails(true);
+                                  handleClose();
+                                  setEventParticipationType("team");
+                                }}
+                              >
+                                Join as Team
+                              </MenuItem>
+                              {/* )} */}
                             </Menu>
                             {teamDetails && (
                               <>
@@ -431,6 +432,11 @@ const EventDisplayer = () => {
                                           })}
                                       </Select>
                                     </FormControl>
+                                    <Typography style={{ fontSize: "60%" }}>
+                                      Note: Every Team Member should verify the
+                                      team through team invitation, otherwise
+                                      team list will not be shown.
+                                    </Typography>
                                     <Button
                                       variant="contained"
                                       style={{
@@ -438,7 +444,7 @@ const EventDisplayer = () => {
                                         marginLeft: "auto",
                                       }}
                                       onClick={() => {
-                                        registerEvent();
+                                        registerEvent("Team");
                                         navigate(`/user`);
                                       }}
                                     >
