@@ -163,7 +163,11 @@ const UserDashboard = () => {
     };
     setIsLoading(true);
     await axios
-      .post(`${baseUrl}/user/updateuser`, update_user)
+      .post(`${baseUrl}/user/updateuser`, update_user, {
+        headers : {
+          "Authorization" : `Bearer ${authContext.token}`
+        }
+      })
       .then((result) => {
         const res = result;
         // console.log(res);
@@ -214,7 +218,11 @@ const UserDashboard = () => {
     };
     setIsLoading(true);
     await axios
-      .post(`${baseUrl}/user/updateuser`, update_user)
+      .post(`${baseUrl}/user/updateuser`, update_user, {
+        headers : {
+          "Authorization" : `Bearer ${authContext.token}`
+        }
+      })
       .then((result) => {
         const res = result;
         console.log(res);
