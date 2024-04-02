@@ -58,12 +58,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/verify" element={<EmailVerify />} />
-          {!authContext.isUserLoggedIn && (
+          {/* {!authContext.isUserLoggedIn && (
             <Route path="/user" element={<UserDashBoard />} />
           )}
           {!authContext.isUserLoggedIn && (
             <Route path="/addteam" element={<AddTeam />} />
-          )}
+          )} */}
           
 
           <Route path="/sponsor" element={<Sponsors />} />
@@ -72,14 +72,14 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/workshops" element={<WorkShops />} />
           <Route path="/domains" element={<Domains domains={domainData} />} />
-          <Route
+          {/* <Route
             path="/domains/:domainName"
             element={<Events domains={domainData} />}
           />
           <Route
             path="/events/:eventId"
             element={<EventDisplayer events={eventsData} />}
-          />
+          /> */}
 
           <Route path="/faq" element={<FAQ />} />
           {/* <Route path="/ca" element={<CA />} /> */}

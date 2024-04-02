@@ -40,7 +40,7 @@ const Faq = () => {
     {
       id: 2,
       question: "When is techFEST'24?",
-      answer: "The techfest is scheduled to be held on 5th-6th April.",
+      answer: "The techfest is postponed due to unavoidable reasons.",
     },
     {
       id: 3,

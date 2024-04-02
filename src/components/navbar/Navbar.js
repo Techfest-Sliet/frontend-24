@@ -121,7 +121,7 @@ const NavBar = () => {
             Our Team
           </Button>
         </Link>
-        <Button
+        {/* <Button
           style={{
             color: "white",
             fontWeight: "normal",
@@ -165,7 +165,7 @@ const NavBar = () => {
           </Button>
         ) : (
           " "
-        )}
+        )} */}
       </div>
     </Box>
   );
@@ -327,7 +327,7 @@ const NavBar = () => {
               Our Team
             </Button>
           </Link>
-          <Button
+          {/* <Button
             style={{
               color: "white",
               fontWeight: "normal",
@@ -381,7 +381,7 @@ const NavBar = () => {
                 Logout
               </MenuItem>
             </Menu>
-          </Button>
+          </Button> */}
         </Box>
       </Box>
       <Box>

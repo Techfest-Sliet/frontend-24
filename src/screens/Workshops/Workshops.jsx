@@ -1,7 +1,7 @@
 import React from "react";
 import "./Workshops.module.css";
 import StarCanvas from "../landingPage/StarbackGround";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import dummyImage from "../../images/Naruto.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,6 +19,8 @@ const Workshops = () => {
   };
 
   const navigate = useNavigate();
+
+  const isMobile = useMediaQuery  ("(max-width:480px)");
 
   return (
     <>
@@ -81,9 +83,43 @@ const Workshops = () => {
             <button class="btn fill">BUY NOW</button>
           </div>
         </div> */}
-        <div>
-          <ComingSoon/>
-        </div>
+        <div
+        style={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          width: "100vw",
+          height: "100vh",
+          justifyContent: "center",
+          alignItems: "center",
+          padding:isMobile? "2.5rem":"1.5rem"
+        }}
+      >
+        <p
+          style={{
+            color: "white",
+            fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
+          }}
+        >
+          Sorry!{" "}
+          <span
+            style={{
+              color: "aqua",
+            }}
+          >
+            {" "}
+            &nbsp;techFEST'24 SLIET&nbsp;
+          </span>{" "}
+          is postponed due to unavoidable reasons.
+        </p>
+        <p
+          style={{
+            color: "white",
+            fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
+          }}
+        >
+          Restart of registrations will be notified.
+        </p>
+      </div>
       </div>
     </>
   );
