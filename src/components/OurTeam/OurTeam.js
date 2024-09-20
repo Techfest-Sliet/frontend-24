@@ -119,22 +119,6 @@ const OurTeam = () => {
             image={photos.Rohit}
           />
           <MemberCard
-            name={"Arjun Sharma"}
-            post={"Core Coordinator"}
-            image={photos.Arjun}
-            linkedIn={"https://www.linkedin.com/in/arjun-sharma-as23/"}
-            mail={"2236036@sliet.ac.in"}
-          />
-          <MemberCard
-            name={"Gaurav Sharma"}
-            post={"Core Coordinator"}
-            mail={"2140113@sliet.ac.in"}
-            linkedIn={
-              "https://www.linkedin.com/in/gaurav-sharma-81a344201?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            }
-            image={photos.Gaurav}
-          />
-          <MemberCard
             name={"Kishan Kashyap"}
             post={"Core Coordinator"}
             image={photos.Kishan}
@@ -142,40 +126,6 @@ const OurTeam = () => {
               "https://www.linkedin.com/in/kishan-kashyap-b42544228?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
             }
             mail={"2236089@sliet.ac.in"}
-          />
-        </div>
-        <div
-          className="coreTeam"
-          style={{
-            display: "flex",
-            marginBottom: "4.5rem",
-            flexDirection: isMobile && "column",
-          }}
-        >
-          <MemberCard
-            name={"Sakshi Priya"}
-            post={"Core Coordinator"}
-            image={photos.Sakshi}
-            linkedIn={"https://in.linkedin.com/in/sakshi-priya-5b5375229"}
-            mail={"2140021@sliet.ac.in"}
-          />
-          <MemberCard
-            name={"Swati Dhiman"}
-            post={"Core Coordinator"}
-            image={photos.Swati}
-            linkedIn={
-              "https://www.linkedin.com/in/swati0003-d-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            }
-            mail={""}
-          />
-          <MemberCard
-            name={"Shambhavi Sukhtanker"}
-            post={"Core Coordinator"}
-            image={photos.Shambhavi}
-            linkedIn={
-              "https://www.linkedin.com/in/shambhavi-sukhtanker-14b3a3257?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            }
-            mail={"2235001@sliet.ac.in"}
           />
         </div>
         <h1 style={{ display: "flex", justifyContent: "center" }}>
@@ -189,50 +139,6 @@ const OurTeam = () => {
             flexDirection: isMobile && "column",
           }}
         >
-          <MemberCard
-            name={"Naman Kulshresth"}
-            post={"Domain Representative"}
-            image={photos.Naman}
-            linkedIn={"https://www.linkedin.com/in/naman-kulshresth"}
-            mail={"2140101@sliet.ac.in"}
-          />
-          <MemberCard
-            name={"Ravi Ranjan"}
-            post={"Web Coordinator & Backend Lead"}
-            image={photos.Ravi}
-            linkedIn={"https://www.linkedin.com/in/ravi2003"}
-            mail={"2140131@sliet.ac.in"}
-          />
-          <MemberCard
-            name={"Chitresh Gupta"}
-            post={"Frontend Developer"}
-            linkedIn={"https://www.linkedin.com/in/chitresh-gupta"}
-            image={photos.Chitresh}
-            mail={"2140108@sliet.ac.in"}
-          />
-          <MemberCard
-            name={"Shudhanshu Arya"}
-            post={"Frontend Developer"}
-            mail={"2140155@sliet.ac.in"}
-            linkedIn={"https://www.linkedin.com/in/aryashudhanshu09/"}
-            image={photos.Shudhanshu}
-          />
-        </section>
-        <section
-          className="developers"
-          style={{
-            display: "flex",
-            marginBottom: "4.5rem",
-            flexDirection: isMobile && "column",
-          }}
-        >
-          <MemberCard
-            name={"Arpit Singh"}
-            post={"Frontend Developer"}
-            mail={"2343011@sliet.ac.in"}
-            linkedIn={"https://www.linkedin.com/in/arpit-singh-b2ba5b279"}
-            image={photos.Arpit}
-          />
           <MemberCard
             name={"Prakhyat Prakhar"}
             post={"Android App Developer"}
