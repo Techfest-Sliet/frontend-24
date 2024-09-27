@@ -26,7 +26,7 @@ const Workshops = () => {
     <>
       <StarCanvas />
       <div className="workshops">
-        <Box style={{position:"relative",zIndex:"25"}}>
+        {/* <Box style={{position:"relative",zIndex:"25"}}>
           <div class="wrapper">
             {workshops.map((workshop, index) => {
               return (
@@ -63,11 +63,10 @@ const Workshops = () => {
               );
             })}
           </div>
-        </Box>
-        </div>
-        {/* <div style={{position:"relative", zIndex:"10"}}> 
+        </Box> */}
+        <div style={{position:"relative", zIndex:"10"}}> 
         <ComingSoon/>
-      </div> */}
+      </div>
 
         {/* 
         <div class="container">
@@ -121,7 +120,9 @@ const Workshops = () => {
             Restart of registrations will be notified.
           </p>
         </div>
-      </div> */}
+     */}
+              </div>
+
     </>
   );
 };
