@@ -64,6 +64,7 @@ const Workshops = () => {
             })}
           </div>
         </Box>
+        </div>
         {/* <div style={{position:"relative", zIndex:"10"}}> 
         <ComingSoon/>
       </div> */}
