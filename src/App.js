@@ -72,14 +72,14 @@ function App() {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/workshops" element={<WorkShops />} />
           <Route path="/domains" element={<Domains domains={domainData} />} />
-          {/* <Route
+          <Route
             path="/domains/:domainName"
             element={<Events domains={domainData} />}
           />
           <Route
             path="/events/:eventId"
             element={<EventDisplayer events={eventsData} />}
-          /> */}
+          />
 
           <Route path="/faq" element={<FAQ />} />
           {/* <Route path="/ca" element={<CA />} /> */}

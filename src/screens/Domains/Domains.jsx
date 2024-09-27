@@ -1,7 +1,7 @@
 import React from "react";
 import "./Domains.css";
 import StarCanvas from "../landingPage/StarbackGround";
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import VentureVault from "../../utils/DOMAIN_LOGOS/VentureVault.png";
@@ -39,52 +39,11 @@ const Domains = ({ domains }) => {
     }
   };
 
-  const isMobile = useMediaQuery("(max-width:480px)");
-
   return (
     <>
       <StarCanvas />
       {/* {isLoading && <Loader />} */}
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          width: "100vw",
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
-          padding:isMobile? "2.5rem":"1.5rem"
-        }}
-      >
-        <p
-          style={{
-            color: "white",
-            fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
-          }}
-        >
-          Sorry!{" "}
-          <span
-            style={{
-              color: "aqua",
-            }}
-          >
-            {" "}
-            &nbsp;techFEST'24 SLIET&nbsp;
-          </span>{" "}
-          is postponed due to unavoidable reasons.
-        </p>
-        <p
-          style={{
-            color: "white",
-            fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
-          }}
-        >
-          Restart of registrations will be notified.
-        </p>
-      </div>
-
-      {/* {error ? (
+      {error ? (
         <Error />
       ) : (
         <Box style={{ position: "relative", zIndex: "25" }}>
@@ -172,7 +131,7 @@ const Domains = ({ domains }) => {
             </div>
           </div>
         </Box>
-      )} */}
+      )}
     </>
   );
 };

@@ -20,13 +20,13 @@ const Workshops = () => {
 
   const navigate = useNavigate();
 
-  const isMobile = useMediaQuery  ("(max-width:480px)");
+  const isMobile = useMediaQuery("(max-width:480px)");
 
   return (
     <>
       <StarCanvas />
       <div className="workshops">
-        {/* <Box style={{position:"relative",zIndex:"25"}}>
+        <Box style={{position:"relative",zIndex:"25"}}>
           <div class="wrapper">
             {workshops.map((workshop, index) => {
               return (
@@ -63,12 +63,12 @@ const Workshops = () => {
               );
             })}
           </div>
-        </Box> */}
+        </Box>
         {/* <div style={{position:"relative", zIndex:"10"}}> 
         <ComingSoon/>
       </div> */}
 
-{/* 
+        {/* 
         <div class="container">
           <div class="wrapper">
             <div class="banner-image"> </div>
@@ -83,44 +83,44 @@ const Workshops = () => {
             <button class="btn fill">BUY NOW</button>
           </div>
         </div> */}
-        <div
-        style={{
-          display: "flex",
-          flexDirection: isMobile ? "column" : "row",
-          width: "100vw",
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
-          padding:isMobile? "2.5rem":"1.5rem"
-        }}
-      >
-        <p
+        {/* <div
           style={{
-            color: "white",
-            fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            width: "100vw",
+            height: "100vh",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: isMobile ? "2.5rem" : "1.5rem"
           }}
         >
-          Sorry!{" "}
-          <span
+          <p
             style={{
-              color: "aqua",
+              color: "white",
+              fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
             }}
           >
-            {" "}
-            &nbsp;techFEST'24 SLIET&nbsp;
-          </span>{" "}
-          is postponed due to unavoidable reasons.
-        </p>
-        <p
-          style={{
-            color: "white",
-            fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
-          }}
-        >
-          Restart of registrations will be notified.
-        </p>
-      </div>
-      </div>
+            Sorry!{" "}
+            <span
+              style={{
+                color: "aqua",
+              }}
+            >
+              {" "}
+              &nbsp;techFEST'24 SLIET&nbsp;
+            </span>{" "}
+            is postponed due to unavoidable reasons.
+          </p>
+          <p
+            style={{
+              color: "white",
+              fontSize: "clamp(2rem, 0.9375rem + 3vw, 3.125rem);",
+            }}
+          >
+            Restart of registrations will be notified.
+          </p>
+        </div>
+      </div> */}
     </>
   );
 };
