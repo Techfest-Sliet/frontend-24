@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const baseUrl = `${window.location.protocol}://${window.location.host}/api`;
+export const baseUrl = `/api`;
 // export const baseUrl = 'http://localhost:3000';
 
 export const localUrlIns = axios.create({
