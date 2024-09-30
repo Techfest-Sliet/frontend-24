@@ -12,10 +12,8 @@ import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../API/api";
-import AuthContext from "../../components/Auth/Auth";
 
 function AddTeam() {
-  const authContext = useContext(AuthContext);
   const [teamName, setTeamName] = useState(false);
   const [members, setMembers] = useState([" "]);
   const [teamNameError, setTeamNameError] = useState("");
@@ -58,11 +56,6 @@ function AddTeam() {
           teamName: teamName,
           members,
         },
-        {
-          headers: {
-            Authorization: "Bearer " + authContext.token,
-          },
-        }
       )
       .then((result) => {
         alert(result.data.title);

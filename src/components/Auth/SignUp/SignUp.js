@@ -7,23 +7,27 @@ import Loader from "../../Loader/loader.js";
 import StarCanvas from "../../../screens/landingPage/StarbackGround.jsx";
 import { baseUrl } from "../../../API/api.js";
 
+const departments = await fetch(`${baseUrl}/departments`).then((v) => v.json()).then(Object.entries);
+
 const Signup = () => {
   // const { executeRecaptcha } = useGoogleReCaptcha();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [regNo, setRegNo] = useState("");
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [collegeName, setCollegeName] = useState("");
+  const [college, setCollege] = useState("");
   const [dob, setDob] = useState();
   const [profession, setProfession] = useState();
-  const [branch, setBranch] = useState("0");
+  const [department, setDepartment] = useState("0");
   const [confirm_err, setConfirmErr] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorsMade, setErrorsMade] = useState(null);
   const [fieldErr, setFieldErr] = useState(null);
-  const [branchErr, setBranchErr] = useState(null);
+  const [departmentErr, setDepartmentErr] = useState(null);
   const [mailErr, setMailErr] = useState(null);
+  const [regNoErr, setRegNoErr] = useState(null);
   const [passwordErr, setPasswordErr] = useState(null);
   const [phoneErr, setPhoneErr] = useState(null);
   const [divOne, setDivOne] = useState(true);
@@ -116,7 +120,7 @@ const Signup = () => {
       }, 3000);
       return;
     }
-    if (collegeName.trim().length === 0) {
+    if (college.trim().length === 0) {
       setFieldErr("Field should not be empty");
       setTimeout(() => {
         setFieldErr(null);
@@ -150,10 +154,17 @@ const Signup = () => {
       }, 3000);
       return;
     }
-    if (branch === "0") {
-      setBranchErr("Please choose your branch");
+    if (department === "0") {
+      setDepartmentErr("Please choose your department");
       setTimeout(() => {
-        setBranchErr(null);
+        setDepartmentErr(null);
+      }, 3000);
+      return;
+    }
+    if (!regNo.length) {
+      setRegNoErr("Please choose your branch");
+      setTimeout(() => {
+        setRegNoErr(null);
       }, 3000);
       return;
     }
@@ -188,15 +199,21 @@ const Signup = () => {
       email: email,
       password: password,
       phone: Number(phone),
-      branch: branch,
-      collegeName: collegeName,
+      dept: department,
+      college: college,
       dob: dob,
       profession: profession,
+      reg_no: regNo,
       // reCaptchaToken: token,
     };
     setIsLoading(true);
     await axios
-      .post(`${baseUrl}/auth/sign-up`, user) //needed to be updated
+      .post(`${baseUrl}/auth/student/sign_up`, user, {
+	withCredentials: true,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }) //needed to be updated
       .then((result) => {
         const res = result;
         setIsLoading(false);
@@ -206,7 +223,7 @@ const Signup = () => {
             message: "Kindly check your inbox/spam for verification mail!",
           });
           setTimeout(() => {
-            navigate("/sign-in");
+            navigate("/user");
           }, 3000);
         } else if (res.status === 400 || res.status === 208) {
           setIsLoading(false);
@@ -243,8 +260,8 @@ const Signup = () => {
           />
         </div>
 
-        <form method="post" className={styles.signup__inputFields} action="">
-          <h1 className={styles.signup__title}>Hi {stringArray[0]}!</h1>
+        <form method="post" className={styles.signup__inputFields} action={`${baseUrl}/auth/student/sign_up`}>
+          <h1 className={styles.signup__title}>{!stringArray[0] ? "Registering to techFEST SLIET" : `Hi ${stringArray[0]}!`}</h1>
           {divTwo && (
             <div className={styles.signup__page2}>
               {errorsMade && <p style={{ color: "red" }}>{errorsMade}</p>}
@@ -266,99 +283,18 @@ const Signup = () => {
                 required
                 autoComplete="off"
               />
-              {branchErr && <p style={{ color: "red" }}>{branchErr}</p>}
+              {departmentErr && <p style={{ color: "red" }}>{departmentErr}</p>}
               <select
                 className={styles.signup__select}
                 sx={{ height: "20px" }}
-                onChange={(e) => setBranch(e.target.value)}
-                id="branch"
-                name="branch"
-                value={branch}
+                onChange={(e) => setDepartment(e.target.value)}
+                id="department"
+                name="department"
+                value={department}
                 required
               >
-                <option value="0">Branch Enrolled</option>
-                <option value="Aeronautical Engineering">
-                  Aeronautical Engineering
-                </option>
-                <option value="Aerospace Engineering">
-                  Aerospace Engineering
-                </option>
-                <option value="Automobile Engineering">
-                  Automobile Engineering
-                </option>
-                <option value="Biomedical Engineering">
-                  Biomedical Engineering
-                </option>
-                <option value="Biotechnology Engineering">
-                  Biotechnology Engineering
-                </option>
-                <option value="Ceramic Engineering">Ceramic Engineering</option>
-                <option value="Chemical Engineering">
-                  Chemical Engineering
-                </option>
-                <option value="Civil Engineering">Civil Engineering</option>
-                <option value="Communications Engineering">
-                  Communications Engineering
-                </option>
-                <option value="Computer Science Engineering">
-                  Computer Science Engineering
-                </option>
-                <option value="Construction Engineering">
-                  Construction Engineering
-                </option>
-                <option value="Electrical Engineering">
-                  Electrical Engineering
-                </option>
-                <option value="Electronics & Communication Engineering">
-                  Electronics & Communication Engineering
-                </option>
-                <option value="Electronics Engineering">
-                  Electronics Engineering
-                </option>
-                <option value="Environmental Engineering">
-                  Environmental Engineering
-                </option>
-                <option value="Food Engineering and Technology">
-                  Food Engineering and Technology
-                </option>
-                <option value="Industrial Engineering">
-                  Industrial Engineering
-                </option>
-                <option value="Instrumentation and Control Engineering">
-                  Instrumentation and Control Engineering
-                </option>
-                <option value="Marine Engineering">Marine Engineering</option>
-                <option value="Mechanical Engineering">
-                  Mechanical Engineering
-                </option>
-                <option value="Mechatronics Engineering">
-                  Mechatronics Engineering
-                </option>
-                <option value="Metallurgical Engineering">
-                  Metallurgical Engineering
-                </option>
-                <option value="Mining Engineering">Mining Engineering</option>
-                <option value="Petroleum Engineering">
-                  Petroleum Engineering
-                </option>
-                <option value="Power Engineering">Power Engineering</option>
-                <option value="Production Engineering">
-                  Production Engineering
-                </option>
-                <option value="Robotics Engineering">
-                  Robotics Engineering
-                </option>
-                <option value="Structural Engineering">
-                  Structural Engineering
-                </option>
-                <option value="Telecommunication Engineering">
-                  Telecommunication Engineering
-                </option>
-                <option value="Textile Engineering">Textile Engineering</option>
-                <option value="Tool Engineering">Tool Engineering</option>
-                <option value="Transportation Engineering">
-                  Transportation Engineering
-                </option>
+                <option value="0">Department Enrolled</option>
+		{departments.map((e) => <><option value={e[0]}>{e[1]}</option></>)}
               </select>
               <label htmlFor="collegeName" className={styles.signup__label}>
                 College Name
@@ -368,8 +304,8 @@ const Signup = () => {
                 id="collegeName"
                 name="collegeName"
                 placeholder="Enter your college name"
-                value={collegeName}
-                onChange={(e) => setCollegeName(e.target.value)}
+                value={college}
+                onChange={(e) => setCollege(e.target.value)}
                 required
                 autoComplete="off"
               />
@@ -382,7 +318,7 @@ const Signup = () => {
                 name="dob"
                 placeholder="dd-mm-yyyy"
                 value={dob}
-                onChange={(e) => setDob(e.target.value)}
+                onChange={(e) => {console.log(e.target.value);setDob(e.target.value)}}
                 required
                 autoComplete="off"
               />
@@ -434,6 +370,20 @@ const Signup = () => {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="off"
+                />
+                <label htmlFor="reg_no" className={styles.signup__label}>
+                  REGISTERAION NUMBER*
+                </label>
+                {regNoErr && <p style={{ color: "red" }}>{regNoErr}</p>}
+                <input
+                  type="reg_no"
+                  id="reg_no"
+                  name="reg_no"
+                  placeholder="Enter your reg_no"
+                  value={regNo}
+                  onChange={(e) => setRegNo(e.target.value)}
                   required
                   autoComplete="off"
                 />

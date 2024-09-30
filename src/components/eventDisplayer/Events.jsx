@@ -9,7 +9,7 @@ import Error from "../Error/Error";
 // import Loader from "../Loader/loader";
 
 function Events() {
-  const { domainName } = useParams();
+  const domain = useParams();
   const navigate = useNavigate();
 
   const [events, setEvents] = useState([]);
@@ -19,16 +19,7 @@ function Events() {
   useEffect(() => {
     const getEventByDomainName = () => {
       setIsLoading(true);
-      axios
-        .get(`${baseUrl}/event/geteventbydomainname/${domainName}`)
-        .then((result) => {
-          setIsLoading(false);
-          setEvents(result.data.event);
-        })
-        .catch((err) => {
-          setError(true);
-          setIsLoading(false);
-        });
+      fetch(`${baseUrl}/event?id=${domain.id}`).then((v) => v.json()).then((v) => setEvents(v))
     };
     getEventByDomainName();
   }, []);
@@ -41,23 +32,23 @@ function Events() {
       <Box style={{ position: "relative", zIndex: "25" }}>
         <div className="event_container">
           <h1 style={{ fontSize: "4rem", color: "#90E0EF" }}>
-            {domainName.toUpperCase()}
+            {domain.name.toUpperCase()}
           </h1>
           <p className="domain_description"></p>
         </div>
         {events.map((item, index) => {
           return (
             <>
-              <div className="eventCard" key={item.eventName}>
-                <h1>{item.eventName}</h1>
+              <div className="eventCard" key={item.name}>
+                <h1>{item.name}</h1>
                 <div className="eventDescription">
                   <p>
-                    {item.eventDescription.slice(0, 200)}
+                    {item.description.slice(0, 200)}
                     <Button
                       variant=" "
                       sx={{ color: "grey" }}
                       onClick={() => {
-                        navigate(`/events/${events[index]._id}`);
+                        navigate(`/events/${events[index].id}`);
                       }}
                     >
                       Read More
@@ -69,7 +60,7 @@ function Events() {
                   value="next"
                   type="button"
                   onClick={() => {
-                    navigate(`/events/${events[index]._id}`);
+                    navigate(`/events/${events[index].id}`);
                   }}
                 >
                   Explore

@@ -9,7 +9,6 @@ import TableRow from "@mui/material/TableRow";
 import { Button, Typography, useMediaQuery } from "@mui/material";
 import { MdDelete } from "react-icons/md";
 import { Modal } from "@mui/material";
-import AuthContext from "../../components/Auth/Auth";
 import { IoMdPersonAdd } from "react-icons/io";
 import { Box, TextField } from "@mui/material";
 import axios from "axios";
@@ -54,7 +53,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function TeamTable({ teamMembers }) {
-  const authContext = useContext(AuthContext);
   const [addMember, setAddMember] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -83,11 +81,6 @@ function TeamTable({ teamMembers }) {
           .post(
             `${baseUrl}/team/delete`,
             { id },
-            {
-              headers: {
-                Authorization: `Bearer ${authContext.token}`,
-              },
-            }
           )
           .then((result) => {
             window.location.reload();
@@ -188,7 +181,7 @@ function TeamTable({ teamMembers }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {teamMembers &&
+            {/*teamMembers &&
               teamMembers.length > 0 &&
               Object.values(teamMembers).map((team) => {
                 return (
@@ -310,11 +303,11 @@ function TeamTable({ teamMembers }) {
                     )}
                   </StyledTableRow>
                 );
-              })}
+              })*/}
           </TableBody>
-          {teamMembers.length === 0 && (
+          {/*teamMembers.length === 0 && (
             <Typography> No team created</Typography>
-          )}
+          )*/}
         </Table>
       </TableContainer>
     </>

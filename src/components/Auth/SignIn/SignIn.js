@@ -7,7 +7,6 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Particle from "./Particle";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../Auth";
 // import Loader from "../../Loader/loader";
 import { baseUrl } from "../../../API/api";
 import { red } from "@mui/material/colors";
@@ -36,7 +35,6 @@ const style = {
 };
 
 const SignIn = () => {
-  const authContext = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
@@ -68,9 +66,14 @@ const SignIn = () => {
     };
 
     await axios
-      .post(`${baseUrl}/auth/sign-in`, {
+      .post(`${baseUrl}/auth/sign_in`, {
         email: email,
         password: password,
+      }, {
+	withCredentials: true,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
       })
       .then((result) => {
         // setIsLoading(false);
@@ -98,12 +101,6 @@ const SignIn = () => {
           return;
         }
         if (res.status === 200) {
-          const userData = {
-            token: res.data.token,
-            userId: res.data.userId,
-            userRole: res.data.userRole,
-          };
-          authContext.login(userData);
           navigate("/user");
         }
       })
