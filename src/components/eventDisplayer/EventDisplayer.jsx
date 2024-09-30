@@ -506,7 +506,7 @@ const EventDisplayer = () => {
                                                                         </Button>
                                                                 </Box>
 
-                                                                <div
+								{/* <div
                                                                         className="div1"
                                                                         style={{
                                                                                 height: "95%",
@@ -608,7 +608,7 @@ const EventDisplayer = () => {
                                                                                                         marginTop: "1.2rem",
                                                                                                 }}
                                                                                         >
-                                                                                                <a href={eventDetails.driveLink} target="main">
+                                                                                                <a href={eventDetails.ps_link} target="main">
                                                                                                         <Button>Problem Statement</Button>
                                                                                                 </a>
                                                                                                 <Box display={"flex"} gap={1}>
@@ -623,7 +623,7 @@ const EventDisplayer = () => {
                                                                                         </Box>
                                                                                 </Stack>
                                                                         </div>
-                                                                </div>
+                                                                </div>*/}
                                                         </div>
                                                 </Box>
                                         ) : null}
