@@ -52,12 +52,12 @@ const UserDashboard = () => {
         const [student, setStudent] = useState({});
         const navigate = useNavigate();
         if (!user.name) {
-                fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then(setUser).then(() => fetch(`${baseUrl}/event/joined/individual`, {credentials: "include"})).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); navigate("/") });
+                fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then(setUser).then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); navigate("/") });
                 fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
         }
-	console.log(`User => `, user)
-	console.log(`Student => `, student)
-	console.log(`Events =>`, events)
+        console.log(`User => `, user)
+        console.log(`Student => `, student)
+        console.log(`Events =>`, events)
 
         const options = {
                 day: "2-digit",
@@ -235,7 +235,7 @@ const UserDashboard = () => {
         return (
                 <>
                         {/* {isLoading && <Loader />} */}
-                        {!errorMade ? (
+                        { user ? (
                                 <div
                                         className="userDashboard"
                                         style={{
@@ -776,7 +776,7 @@ const UserDashboard = () => {
                                                                 <TeamTable
                                                                         //teamMembers={teamMembers}
                                                                         //events={events}
-                                                                        leaderId={user && user._id}
+                                                                        leaderId={user && user.id}
                                                                 />
                                                         </Box>
                                                 </Card>
