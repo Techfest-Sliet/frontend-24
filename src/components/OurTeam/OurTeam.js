@@ -42,13 +42,13 @@ const OurTeam = () => {
           }}
         >
           <MemberCard
-            name={"Dr. Rajesh Kumar"}
+            name={"Dr. A.S. Dhaliwal"}
             post={"Dean - Student Welfare"}
             linkedIn={
-              "https://www.linkedin.com/in/rajesh-kumar-0318a820?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              "https://in.linkedin.com/in/amarjit-singh-dhaliwal-79267724"
             }
             image={photos.DeanSW}
-            mail={"rajesh_krs@sliet.ac.in"}
+            mail={"dhaliwalas@hotmail.com"}
           />
         </section>
         <h1 style={{ display: "flex", justifyContent: "center" }}>Chairman</h1>
