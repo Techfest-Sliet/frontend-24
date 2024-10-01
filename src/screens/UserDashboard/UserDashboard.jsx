@@ -47,12 +47,13 @@ const departments = await fetch(`${baseUrl}/departments`).then((v) => v.json());
 const UserDashboard = () => {
         const [errorMade, setErrorMade] = useState();
         const [isLoading, setIsLoading] = useState(true);
-        const [user, setUser] = useState({});
+        const [user, setUser] = useState(false);
         const [events, setEvents] = useState({});
         const [student, setStudent] = useState({});
         const navigate = useNavigate();
         if (!user.name) {
                 fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then(setUser).then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); navigate("/") });
+		console.log(user);
                 if (user.role === "PARTICIPANT") {
                         fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
                 }
