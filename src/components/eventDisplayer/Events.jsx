@@ -19,7 +19,7 @@ function Events() {
   useEffect(() => {
     const getEventByDomainName = () => {
       setIsLoading(true);
-      fetch(`${baseUrl}/event?id=${domain.id}`).then((v) => v.json()).then((v) => setEvents(v))
+      fetch(`${baseUrl}/domain/event?id=${domain.id}`).then((v) => v.json()).then((v) => setEvents(v))
     };
     getEventByDomainName();
   }, []);
