@@ -37,7 +37,7 @@ const style = {
 
 const EventDisplayer = () => {
         const [variable, setVariable] = useState(1);
-        const [eventDetails, setEventDetails] = useState({});
+        const [eventDetails, setEventDetails] = useState(false);
         const [eventCoor, setEventCoor] = useState([]);
         const [error, setError] = useState("");
         const [teamDetails, setTeamDetails] = useState(false);
@@ -59,6 +59,7 @@ const EventDisplayer = () => {
         const getEventById = () => {
                 fetch(`${baseUrl}/event?id=${eventId}`, { credentials: "include" }).then(v => v.json()).then((v) => {
                         setEventDetails(v)
+			console.log(eventDetails);
                 })
         };
 
@@ -102,7 +103,7 @@ const EventDisplayer = () => {
                 <>
                         <StarCanvas />
                         {/* {isLoading && <Loader />} */}
-                        {eventDetails === {} ? (
+                        {!eventDetails  ? (
                                 <>
                                         {variable === 1 ? (
                                                 <Box
