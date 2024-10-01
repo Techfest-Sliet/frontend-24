@@ -51,7 +51,7 @@ const UserDashboard = () => {
         const [events, setEvents] = useState({});
         const [student, setStudent] = useState({});
         const navigate = useNavigate();
-        if (!user.name) {
+        if (!user) {
                 fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then(setUser).then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); navigate("/") });
 		console.log(user);
                 if (user.role === "PARTICIPANT") {

@@ -374,7 +374,7 @@ const NavBar = () => {
                                                         </MenuItem>
                                                         <MenuItem
                                                                 onClick={() => {
-									fetch(`${baseUrl}/auth/logout`, {credentials: "include"})
+									fetch(`${baseUrl}/api/auth/logout`, {credentials: "include"})
                                                                         navigate("/");
                                                                         handleClose();
                                                                 }}
