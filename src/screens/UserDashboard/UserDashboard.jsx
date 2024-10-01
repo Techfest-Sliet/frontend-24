@@ -53,7 +53,7 @@ const UserDashboard = () => {
         const navigate = useNavigate();
         if (!user) {
                 fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then(setUser).then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); navigate("/") });
-		console.log(user);
+                console.log(user);
                 if (user.role === "PARTICIPANT") {
                         fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
                 }
@@ -306,6 +306,27 @@ const UserDashboard = () => {
                                                                                                 Profile Information
                                                                                         </Typography>
                                                                                 </Box>
+
+                                                                                {!user.verified &&
+                                                                                        <Button
+                                                                                                onClick={fetch(`${baseUrl}/auth/verify`, { method: "POST" })}
+                                                                                                variant="contained"
+                                                                                                sx={{
+                                                                                                        backgroundColor: "#9867c5",
+                                                                                                        "&:hover": {
+                                                                                                                backgroundColor: "#9867c5",
+                                                                                                        },
+                                                                                                        "&:focus": {
+                                                                                                                backgroundColor: "#9867c5",
+                                                                                                        },
+                                                                                                        "&:active": {
+                                                                                                                backgroundColor: "#9867c5",
+                                                                                                        },
+                                                                                                        zIndex: "24"
+                                                                                                }}
+                                                                                        >
+                                                                                                Resend Verification Email
+                                                                                        </Button>}
                                                                                 <Box sx={{ marginBottom: "5%" }}>
                                                                                         <Typography
                                                                                                 sx={{
@@ -790,7 +811,8 @@ const UserDashboard = () => {
                                 <>
                                         <Error />
                                 </>
-                        )}
+                        )
+                        }
                 </>
         );
 };
