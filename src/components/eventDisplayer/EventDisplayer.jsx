@@ -61,6 +61,8 @@ const EventDisplayer = () => {
                         console.log(v);
                         setEventDetails(v)
                         console.log(eventDetails);
+                }).then(() => {
+                        fetch(`${baseUrl}/event/coordinator?id=${eventId}`).then(v => v.json()).then(setEventCoor)
                 })
         };
 
@@ -507,7 +509,7 @@ const EventDisplayer = () => {
                                                                         </Button>
                                                                 </Box>
 
-                                                                {/* <div
+                                                                {<div
                                                                         className="div1"
                                                                         style={{
                                                                                 height: "95%",
@@ -561,7 +563,7 @@ const EventDisplayer = () => {
                                                                                                 >
                                                                                                         {eventCoor.map((coordinator) => {
                                                                                                                 return (
-                                                                                                                        <Box key={coordinator._id}>
+                                                                                                                        <Box key={coordinator.id}>
                                                                                                                                 <Typography
                                                                                                                                         variant="h5"
                                                                                                                                         style={{
@@ -571,7 +573,7 @@ const EventDisplayer = () => {
                                                                                                                                                 marginTop: isMobile ? "1rem" : "0rem",
                                                                                                                                         }}
                                                                                                                                 >
-                                                                                                                                        {coordinator.coordinatorName}
+                                                                                                                                        {coordinator.name}
                                                                                                                                 </Typography>
                                                                                                                                 <Typography
                                                                                                                                         variant="h6"
@@ -581,7 +583,7 @@ const EventDisplayer = () => {
                                                                                                                                                 marginRight: "1.5rem",
                                                                                                                                         }}
                                                                                                                                 >
-                                                                                                                                        {coordinator.coordinatorEmail}
+                                                                                                                                        {coordinator.email}
                                                                                                                                 </Typography>
                                                                                                                                 <Typography
                                                                                                                                         variant=""
@@ -591,7 +593,7 @@ const EventDisplayer = () => {
                                                                                                                                                 marginRight: "1.5rem",
                                                                                                                                         }}
                                                                                                                                 >
-                                                                                                                                        {coordinator.coordinatorPhone}
+                                                                                                                                        {coordinator.phone}
                                                                                                                                 </Typography>
                                                                                                                         </Box>
                                                                                                                 );
@@ -624,7 +626,7 @@ const EventDisplayer = () => {
                                                                                         </Box>
                                                                                 </Stack>
                                                                         </div>
-                                                                </div>*/}
+                                                                </div>}
                                                         </div>
                                                 </Box>
                                         ) : null}
