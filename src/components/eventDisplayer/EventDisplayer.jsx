@@ -103,7 +103,7 @@ const EventDisplayer = () => {
                 <>
                         <StarCanvas />
                         {/* {isLoading && <Loader />} */}
-                        {!error ? (
+                        {eventDetails ? (
                                 <>
                                         {variable === 1 ? (
                                                 <Box
