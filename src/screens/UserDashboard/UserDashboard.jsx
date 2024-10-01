@@ -53,7 +53,9 @@ const UserDashboard = () => {
         const navigate = useNavigate();
         if (!user.name) {
                 fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then(setUser).then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); navigate("/") });
-                fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
+                if (user.role === "PARTICIPANT") {
+                        fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
+                }
         }
         console.log(`User => `, user)
         console.log(`Student => `, student)
@@ -235,7 +237,7 @@ const UserDashboard = () => {
         return (
                 <>
                         {/* {isLoading && <Loader />} */}
-                        { user ? (
+                        {user ? (
                                 <div
                                         className="userDashboard"
                                         style={{
@@ -419,27 +421,28 @@ const UserDashboard = () => {
                                                                                                 {user.role}
                                                                                         </Typography>
                                                                                 </Box>
-                                                                                <Box sx={{ marginBottom: "5%" }}>
-                                                                                        <Typography
-                                                                                                sx={{
-                                                                                                        fontSize: isMobile ? 20 : 25,
-                                                                                                        height: isMobile ? "7rem" : "3rem",
-                                                                                                }}
-                                                                                        >
-                                                                                                {student && student.college}
-                                                                                        </Typography>
-                                                                                </Box>
-                                                                                <Box sx={{ marginBottom: "5%" }}>
-                                                                                        <Typography
-                                                                                                sx={{
-                                                                                                        fontSize: isMobile ? 20 : 25,
-                                                                                                        height: isMobile ? "6rem" : "4rem",
-                                                                                                }}
-                                                                                        >
-                                                                                                {console.log(departments)}
-                                                                                                {student && departments && departments[student.dept]}
-                                                                                        </Typography>
-                                                                                </Box>
+                                                                                {user.role === "PARTICIPANT" && <>
+                                                                                        <Box sx={{ marginBottom: "5%" }}>
+                                                                                                <Typography
+                                                                                                        sx={{
+                                                                                                                fontSize: isMobile ? 20 : 25,
+                                                                                                                height: isMobile ? "7rem" : "3rem",
+                                                                                                        }}
+                                                                                                >
+                                                                                                        {student && student.college}
+                                                                                                </Typography>
+                                                                                        </Box>
+                                                                                        <Box sx={{ marginBottom: "5%" }}>
+                                                                                                <Typography
+                                                                                                        sx={{
+                                                                                                                fontSize: isMobile ? 20 : 25,
+                                                                                                                height: isMobile ? "6rem" : "4rem",
+                                                                                                        }}
+                                                                                                >
+                                                                                                        {console.log(departments)}
+                                                                                                        {student && departments && departments[student.dept]}
+                                                                                                </Typography>
+                                                                                        </Box> </>}
                                                                                 <Box sx={{ marginBottom: "5%" }}>
                                                                                         <Typography
                                                                                                 sx={{
