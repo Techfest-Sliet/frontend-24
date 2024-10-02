@@ -7,12 +7,13 @@ import aarambhEvents from "../../utils/aarambh.js";
 import arshGoyal from "../../images/arsh_goyal-removebg-preview.png";
 import { Typography } from "@mui/material";
 
-const Card = ({ heading, detail, route }) => {
+const Card = ({ heading, detail, route, date }) => {
   return (
     <>
       <div className="arambhCard">
         <h1>{heading}</h1>
         <p>{detail}</p>
+        <p>Date : {date}</p>
         <button className="arambh__button" value="next" type="button">
           <Link to={route && `${route}`}>
             {heading === "Technical Movie Show" || heading === "Workshop"
@@ -85,6 +86,7 @@ const Arambh = () => {
               heading={item.heading}
               detail={item.detail}
               route={item.route}
+              date={item.date}
             />
           );
         })}
