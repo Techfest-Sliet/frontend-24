@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import { slideInFromBottom } from "../../constants";
 import { saveAs } from "file-saver";
 
-const ModalComp = ({ closet, handleClose, handleOpen }) => {
+const ModalComp = ({ closet, handleClose, handleOpen, userLogIn }) => {
   // const [open,setOpen] = useState(false);
   // const handleClose=()=>setOpen((value)=>!value)
   const handleKeyDown = (event) => {
@@ -207,7 +207,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     alignItems: "center",
                   }}
                 >
-                  <Link to="/sign-in">
+                  {!userLogIn && <Link to="/sign-in">
                     <Button
                       style={{
                         color: "white",
@@ -218,7 +218,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     >
                       Sign In
                     </Button>
-                  </Link>
+                  </Link>}
                   <Box
                     marginTop={{ xs: "20%" }}
                     style={{

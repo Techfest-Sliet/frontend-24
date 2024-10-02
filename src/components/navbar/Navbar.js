@@ -19,11 +19,11 @@ import { ImCross } from "react-icons/im";
 
 import { baseUrl } from "../../API/api.js";
 
-const NavBar = () => {
+const NavBar = ({userLogIn}) => {
         const [mobileOpen, setMobileOpen] = useState(false);
         const navigate = useNavigate();
-	const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-        fetch(`${baseUrl}/profile`, {credentials: "include"}).then(v => setIsUserLoggedIn(v.status === 200));
+	// const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+        // fetch(`${baseUrl}/profile`, {credentials: "include"}).then(v => setIsUserLoggedIn(v.status === 200));
 
         const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -347,7 +347,7 @@ const NavBar = () => {
                                                         fontFamily: "Droid Sans",
                                                 }}
                                         >
-                                                {isUserLoggedIn === false ? (
+                                                {userLogIn === false ? (
                                                         <Link to="/sign-in">
                                                                 <Typography sx={{ color: "white", fontFamily: "Droid Sans" }}>
                                                                         SIGNIN

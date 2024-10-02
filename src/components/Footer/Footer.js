@@ -3,7 +3,7 @@ import { Box, Button } from "@mui/material";
 import ModalComp from "../../screens/landingPage/ModalComp";
 import { FaAngleDoubleUp } from "react-icons/fa";
 
-const Footer = () => {
+const Footer = ({userLogIn}) => {
   const [closet, setCloset] = useState(false);
   const handleOpen = () => {
     setCloset(true);
@@ -46,6 +46,7 @@ const Footer = () => {
         closet={closet}
         handleClose={handleClose}
         handleOpen={handleOpen}
+        userLogIn={userLogIn}
       />
     </>
   );
