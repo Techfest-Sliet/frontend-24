@@ -10,7 +10,6 @@ import { Card, useMediaQuery } from "@mui/material";
 import GroupAdd from "@mui/icons-material/GroupAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { baseUrl } from "../../API/api";
 
 function AddTeam() {
@@ -49,7 +48,7 @@ function AddTeam() {
     //     setMembersError("Please fill correct email id");
     //   }
     // }
-    axios
+    fetch()
       .post(
         `${baseUrl}/team/create`,
         {

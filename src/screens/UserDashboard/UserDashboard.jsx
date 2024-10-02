@@ -14,7 +14,6 @@ import {
         useMediaQuery,
 } from "@mui/material";
 import Modal from "@mui/material/Modal";
-import axios from "axios";
 import "./UserDashboard.css";
 
 //user imports
@@ -52,11 +51,12 @@ const UserDashboard = () => {
         const [student, setStudent] = useState({});
         const navigate = useNavigate();
         if (!user) {
-                fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then(setUser).then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); navigate("/") });
+                fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then((u) => { setUser(u); return u; }).then((u) => {
+                        if (u.role === "PARTICIPANT") {
+                                return fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
+                        }
+                }).then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents).catch((e) => { console.error(e); window.location = window.location; navigate("/") });
                 console.log(user);
-                if (user.role === "PARTICIPANT") {
-                        fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
-                }
         }
         console.log(`User => `, user)
         console.log(`Student => `, student)
@@ -81,23 +81,6 @@ const UserDashboard = () => {
         const dateObj = new Date(user.dob);
         const formattedDate = dateObj.toLocaleDateString("en-GB", options);
 
-        const handleClosePersonal = () => {
-                //setOpenEditPersonal(false);
-        };
-
-        const handleCloseContact = () => {
-                //setOpenEditContact(false);
-        };
-
-        function editPersonalInfo() {
-                //setOpenEditPersonal(true);
-        }
-
-        function editContactInfo() {
-                console.log("inside edit Contact info");
-                //setOpenEditContact(true);
-        }
-
         const deleteEvent = (eventId) => {
                 Swal.fire({
                         title: "Do you want to delete this event!!",
@@ -115,9 +98,9 @@ const UserDashboard = () => {
                 }).then((result) => {
                         if (result.isConfirmed) {
                                 setIsLoading(true);
-                                axios
+                                fetch(`${baseUrl}/user/pullevent`, { method: "POST" })
                                         .post(
-                                                `${baseUrl}/user/pullevent`,
+
                                                 { eventId },
                                         )
                                         .then((result) => {
@@ -157,7 +140,7 @@ const UserDashboard = () => {
                         //whatsappNumber: wphone,
                 };
                 setIsLoading(true);
-                await axios
+                await fetch()
                         .post(`${baseUrl}/user/updateuser`, update_user)
                         .then((result) => {
                                 const res = result;
@@ -185,21 +168,6 @@ const UserDashboard = () => {
         //get user id from the context api
         const updatePersonalInfo = async (e) => {
                 e.preventDefault();
-                //if (collegeName.trim().length === 0) {
-                //setFieldErr("Field(s) should not be empty");
-                //setTimeout(() => {
-                //setFieldErr(null);
-                //}, 3000);
-                //return;
-                //}
-                //if (branch === "0") {
-                //setBranchErr("Please choose your branch");
-                //setTimeout(() => {
-                //setBranchErr(null);
-                //}, 3000);
-                //return;
-                //}
-                //setOpenEditPersonal(false);
 
                 const update_user = {
                         //name: name,
@@ -208,7 +176,7 @@ const UserDashboard = () => {
                         //collegeName: collegeName,
                 };
                 setIsLoading(true);
-                await axios
+                await fetch()
                         .post(`${baseUrl}/user/updateuser`, update_user)
                         .then((result) => {
                                 const res = result;
@@ -277,7 +245,7 @@ const UserDashboard = () => {
                                                         <span
                                                                 style={{ color: "#25c6e5", fontWeight: isMobile ? 600 : 700 }}
                                                         >
-                                                                {user && user.name}
+                                                                {user.name}
                                                         </span>
                                                         👋
                                                 </div>
@@ -385,7 +353,7 @@ const UserDashboard = () => {
                                                                                                 title="Edit Personal Detail"
                                                                                                 placement="bottom-end"
                                                                                         >
-                                                                                                <Button variant="" onClick={editPersonalInfo}>
+                                                                                                <Button variant="" onClick={() => { }}>
                                                                                                         <BiEdit
                                                                                                                 style={{
                                                                                                                         height: isMobile ? "30px" : "50px",
@@ -522,7 +490,7 @@ const UserDashboard = () => {
                                                                                                 title="Edit Contact Detail"
                                                                                                 placement="bottom-end"
                                                                                         >
-                                                                                                <Button variant="" onClick={editContactInfo}>
+                                                                                                <Button variant="" onClick={() => { }}>
                                                                                                         <BiEdit
                                                                                                                 style={{
                                                                                                                         height: isMobile ? "30px" : "50px",

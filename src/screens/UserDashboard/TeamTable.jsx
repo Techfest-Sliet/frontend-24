@@ -11,7 +11,6 @@ import { MdDelete } from "react-icons/md";
 import { Modal } from "@mui/material";
 import { IoMdPersonAdd } from "react-icons/io";
 import { Box, TextField } from "@mui/material";
-import axios from "axios";
 import { baseUrl } from "../../API/api";
 import { useNavigate } from "react-router-dom";
 import GroupAdd from "@mui/icons-material/GroupAdd";
@@ -77,7 +76,7 @@ function TeamTable({ teamMembers }) {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
+        fetch()
           .post(
             `${baseUrl}/team/delete`,
             { id },
@@ -94,7 +93,7 @@ function TeamTable({ teamMembers }) {
       alert("fill the email field");
     }
     setAddMember(false);
-    axios
+    fetch()
       .post(`${baseUrl}/team/addmember`, {
         teamId: teamId,
         email: email,

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import LandingPage from "./screens/landingPage/landingPage";
 import { Routes, Route } from "react-router-dom";
 
@@ -42,37 +42,37 @@ import { baseUrl } from "./API/api.js";
 function App() {
         const [userLogIn, setUserLogIn] = useState(false);
         // const [checkStatus, setCheckStatus] = useState(false);
-      
+
         useEffect(() => {
                 const checkUserStatus = async () => {
-                  try {
-                    // Override console.error temporarily
-                    const originalConsoleError = console.error;
-                    console.error = () => {};
-            
-                    const response = await fetch('https://www.techfestsliet.org/api/profile');
-                    if (response.status === 200) {
-                      setUserLogIn(true);
-                    } else {
-                      setUserLogIn(false);
-                    }
-                    
-                    // Restore original console.error
-                    console.error = originalConsoleError;
-                  } catch (error) {
-                    // Log error silently if needed
-                    setUserLogIn(false);
-                  }
+                        try {
+                                // Override console.error temporarily
+                                const originalConsoleError = console.error;
+                                console.error = () => { };
+
+                                const response = await fetch('https://www.techfestsliet.org/api/profile');
+                                if (response.status === 200) {
+                                        setUserLogIn(true);
+                                } else {
+                                        setUserLogIn(false);
+                                }
+
+                                // Restore original console.error
+                                console.error = originalConsoleError;
+                        } catch (error) {
+                                // Log error silently if needed
+                                setUserLogIn(false);
+                        }
                 };
-            
+
                 checkUserStatus();
-              }, []);
+        }, []);
         // const isMobile = useMediaQuery("(min-width:450px)");
-	// const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+        // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
         // fetch(`${baseUrl}/profile`, {credentials: "include"}).then(v => setIsUserLoggedIn(v.status === 200));
         return (
                 <>
-                        <NavBar userLogIn={userLogIn}/>
+                        <NavBar userLogIn={userLogIn} />
                         {/* <Universe/> */}
                         <div className="app">
                                 <Routes>
@@ -88,11 +88,8 @@ function App() {
                                         <Route path="/login" element={<Login />} />
                                         <Route path="/reset-password" element={<ResetPassword />} />
                                         <Route path="/verify" element={<EmailVerify />} />
-                                        {userLogIn && <>
-                                                <Route path="/user" element={<UserDashBoard />} />
-                                                <Route path="/addteam" element={<AddTeam />} />
-                                        </>
-                                        }
+                                        <Route path="/user" element={<UserDashBoard />} />
+                                        <Route path="/addteam" element={<AddTeam />} />
 
 
                                         <Route path="/sponsor" element={<Sponsors />} />
@@ -112,11 +109,11 @@ function App() {
                                         />
 
                                         <Route path="/faq" element={<FAQ />} />
-                                        {/* <Route path="/ca" element={<CA />} /> */}
-                                        {/* <Route path="/aarambh" element={<Arambh />} /> */}
-                                </Routes>
-                                <Footer userLogIn={userLogIn}/>
-                        </div>
+        {/* <Route path="/ca" element={<CA />} /> */ }
+        {/* <Route path="/aarambh" element={<Arambh />} /> */ }
+                                </Routes >
+                <Footer userLogIn={userLogIn} />
+                        </div >
                 </>
         );
 }

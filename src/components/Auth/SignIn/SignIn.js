@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import "./SignIn.css";
 import Box from "@mui/material/Box";
 import { TextField, Stack } from "@mui/material";
@@ -65,16 +64,17 @@ const SignIn = () => {
                         password: password,
                 };
 
-                await axios
-                        .post(`${baseUrl}/auth/sign_in`, {
+                await fetch(`${baseUrl}/auth/sign_in`, {
+                        credentials: "include",
+                        headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        method: "POST",
+                        body: new URLSearchParams({
                                 email: email,
                                 password: password,
-                        }, {
-                                withCredentials: true,
-                                headers: {
-                                        'Content-Type': 'application/x-www-form-urlencoded'
-                                }
                         })
+                })
                         .then((result) => {
                                 // setIsLoading(false);
                                 const res = result;
@@ -102,7 +102,7 @@ const SignIn = () => {
                                         navigate("/user");
                                 }
                                 if (res.status === 401) {
-					console.log("Unauthorized");	
+                                        console.log("Unauthorized");
                                 }
                         })
                         .catch((err) => {
