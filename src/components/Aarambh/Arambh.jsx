@@ -40,7 +40,7 @@ const Arambh = () => {
           </p>
         </div>
 
-        <div className="specialCard">
+        {/* <div className="specialCard">
           <Typography
             style={{
               positon: "relative",
@@ -77,7 +77,7 @@ const Arambh = () => {
           <button className="arambh__button" value="next" type="button">
             Register
           </button>
-        </div>
+        </div> */}
 
         {aarambhEvents.map((item) => {
           return (

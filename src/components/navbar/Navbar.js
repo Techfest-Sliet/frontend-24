@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-
 import "./navbar.css";
 import {
         Box,
@@ -61,7 +60,7 @@ const NavBar = () => {
                         </div>
 
                         <div className="mobile-view">
-                                <Link to="/workshops">
+                                <Link to="/arambh">
                                         <Button
                                                 style={{
                                                         color: "white",
@@ -70,7 +69,7 @@ const NavBar = () => {
                                                 }}
                                                 className="nav-link nav-link-ltr"
                                         >
-                                                WorkShops
+                                                Aarambh
                                         </Button>
                                 </Link>
 
@@ -267,7 +266,7 @@ const NavBar = () => {
                                         }}
                                         className="navbar"
                                 >
-                                        <Link to="/workshops">
+                                        <Link to="/arambh">
                                                 <Button
                                                         style={{
                                                                 color: "white",
@@ -276,7 +275,7 @@ const NavBar = () => {
                                                         }}
                                                         className="nav-link nav-link-ltr"
                                                 >
-                                                        WorkShops
+                                                        Aarambh
                                                 </Button>
                                         </Link>
 
@@ -327,6 +326,18 @@ const NavBar = () => {
                                                         className="nav-link nav-link-ltr"
                                                 >
                                                         Our Team
+                                                </Button>
+                                        </Link>
+                                        <Link to="aboutus">
+                                                <Button
+                                                        style={{
+                                                                color: "white",
+                                                                fontWeight: "normal",
+                                                                fontFamily: "Droid Sans",
+                                                        }}
+                                                        className="nav-link nav-link-ltr"
+                                                >
+                                                        About us
                                                 </Button>
                                         </Link>
                                         <Button

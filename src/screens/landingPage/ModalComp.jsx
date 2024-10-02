@@ -226,7 +226,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                       width: "100%",
                       display: "flex",
                       flexDirection: "column",
-                      justifyContent: "center",
+                      justifyContent: "space-around",
                       alignItems: "center",
                       gap: "0.9rem",
                       // border: "1px solid red",
@@ -244,7 +244,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     >
                       <FaLinkedin color="white" fontSize={fontSize + "rem"} />
                     </a>
-                    <a href="https://twitter.com/techFEST_SLIET" target="main">
+                    {/* <a href="https://twitter.com/techFEST_SLIET" target="main">
                       <FaXTwitter color="white" fontSize={fontSize + "rem"} />
                     </a>
                     <a
@@ -255,7 +255,7 @@ const ModalComp = ({ closet, handleClose, handleOpen }) => {
                     </a>
                     <a href="#" target="main">
                       <FaMeta color="white" fontSize={fontSize + "rem"} />
-                    </a>
+                    </a> */}
 
                     {/* {social.map((item, index) => (
                     <a href="#" key={index}>

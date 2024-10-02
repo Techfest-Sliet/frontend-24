@@ -9,6 +9,7 @@ import { baseUrl } from "../../../API/api.js";
 
 const departments = await fetch(`${baseUrl}/departments`).then((v) => v.json()).then(Object.entries);
 
+
 const Signup = () => {
         // const { executeRecaptcha } = useGoogleReCaptcha();
         const [name, setName] = useState("");
