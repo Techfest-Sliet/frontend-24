@@ -120,7 +120,7 @@ const ModalComp = ({ closet, handleClose, handleOpen, userLogIn }) => {
                       Shows
                     </Button>
                   </Link>
-                  <Link to="/workshops">
+                  {/* <Link to="/workshops">
                     <Button
                       style={{
                         color: "white",
@@ -130,7 +130,7 @@ const ModalComp = ({ closet, handleClose, handleOpen, userLogIn }) => {
                     >
                       Workshops
                     </Button>
-                  </Link>
+                  </Link> */}
                   <Link to="/domains">
                     <Button
                       style={{
@@ -337,7 +337,7 @@ const ModalComp = ({ closet, handleClose, handleOpen, userLogIn }) => {
                       Our Team
                     </Button>
                   </Link>
-                  <Link to="#">
+                  {/* <Link to="#">
                     <Button
                       style={{
                         color: "white",
@@ -347,7 +347,7 @@ const ModalComp = ({ closet, handleClose, handleOpen, userLogIn }) => {
                     >
                       Hospitality
                     </Button>
-                  </Link>
+                  </Link> */}
                   <Link to="#">
                     <Button
                       style={{
