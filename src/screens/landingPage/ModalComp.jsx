@@ -359,7 +359,7 @@ const ModalComp = ({ closet, handleClose, handleOpen, userLogIn }) => {
                       Exhibition
                     </Button>
                   </Link>
-                  <Link to="#">
+                  <Link to="/merchandise">
                     <Button
                       style={{
                         color: "white",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LandingPage from "./screens/landingPage/landingPage";
 import { Routes, Route } from "react-router-dom";
-
+import Merchandise from "./components/Merchandise/Merchandise.jsx"
 import WorkShops from "./screens/Workshops/Workshops";
 import Error from "./components/Error/Error";
 import SignIn from "./components/Auth/SignIn/SignIn";
@@ -96,7 +96,8 @@ function App() {
                                         <Route path="/gallery" element={<Gallery />} />
                                         <Route path="/ourteam" element={<OurTeam />} />
                                         <Route path="/aboutus" element={<AboutUs />} />
-                                        <Route path="/workshops" element={<WorkShops />} />
+                                        <Route path="/merchandise" element={<Merchandise />} />
+                                        {/* <Route path="/workshops" element={<WorkShops />} /> */}
                                         <Route path="/arambh" element={<Arambh />} />
                                         <Route path="/domains" element={<Domains />} />
                                         <Route
