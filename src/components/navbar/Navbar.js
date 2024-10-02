@@ -22,8 +22,6 @@ import { baseUrl } from "../../API/api.js";
 const NavBar = ({userLogIn}) => {
         const [mobileOpen, setMobileOpen] = useState(false);
         const navigate = useNavigate();
-	// const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-        // fetch(`${baseUrl}/profile`, {credentials: "include"}).then(v => setIsUserLoggedIn(v.status === 200));
 
         const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -385,9 +383,10 @@ const NavBar = ({userLogIn}) => {
                                                         </MenuItem>
                                                         <MenuItem
                                                                 onClick={() => {
-									fetch(`${baseUrl}/api/auth/logout`, {credentials: "include"})
-                                                                        navigate("/");
-                                                                        handleClose();
+                                                                        fetch(`${baseUrl}/auth/logout`, { credentials: "include" }).then(() => {
+										window.location = "/";
+                                                                        })
+
                                                                 }}
                                                         >
                                                                 Logout
