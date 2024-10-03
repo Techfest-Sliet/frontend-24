@@ -40,83 +40,59 @@ import AddTeam from "./screens/UserDashboard/addTeam";
 import { baseUrl } from "./API/api.js";
 
 function App() {
-        const [userLogIn, setUserLogIn] = useState(false);
-        // const [checkStatus, setCheckStatus] = useState(false);
+    const [userLogIn, setUserLogIn] = useState(false);
+    // const [checkStatus, setCheckStatus] = useState(false);
 
-        useEffect(() => {
-                const checkUserStatus = async () => {
-                        try {
-                                // Override console.error temporarily
-                                const originalConsoleError = console.error;
-                                console.error = () => { };
+    // const isMobile = useMediaQuery("(min-width:450px)");
+    // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    fetch(`${baseUrl}/profile`, {credentials: "include"}).then(v => setUserLogIn(v.status === 200));
+    return (
+        <>
+            <NavBar userLogIn={userLogIn} />
+            {/* <Universe/> */}
+            <div className="app">
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="*" element={<Error />} />
+                    {
+                        !userLogIn && <>
+                            <Route path="/sign-in" element={<SignIn />} />
+                            <Route path="/sign-up" element={<SignUp />} />
+                        </>
 
-                                const response = await fetch('https://www.techfestsliet.org/api/profile');
-                                if (response.status === 200) {
-                                        setUserLogIn(true);
-                                } else {
-                                        setUserLogIn(false);
-                                }
-
-                                // Restore original console.error
-                                console.error = originalConsoleError;
-                        } catch (error) {
-                                // Log error silently if needed
-                                setUserLogIn(false);
-                        }
-                };
-
-                checkUserStatus();
-        }, []);
-        // const isMobile = useMediaQuery("(min-width:450px)");
-        // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-        // fetch(`${baseUrl}/profile`, {credentials: "include"}).then(v => setIsUserLoggedIn(v.status === 200));
-        return (
-                <>
-                        <NavBar userLogIn={userLogIn} />
-                        {/* <Universe/> */}
-                        <div className="app">
-                                <Routes>
-                                        <Route path="/" element={<LandingPage />} />
-                                        <Route path="*" element={<Error />} />
-                                        {
-                                                !userLogIn && <>
-                                                        <Route path="/sign-in" element={<SignIn />} />
-                                                        <Route path="/sign-up" element={<SignUp />} />
-                                                </>
-
-                                        }
-                                        <Route path="/login" element={<Login />} />
-                                        <Route path="/reset-password" element={<ResetPassword />} />
-                                        <Route path="/verify" element={<EmailVerify />} />
-                                        <Route path="/user" element={<UserDashBoard />} />
-                                        <Route path="/addteam" element={<AddTeam />} />
+                    }
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
+                    <Route path="/verify" element={<EmailVerify />} />
+                    <Route path="/user" element={<UserDashBoard />} />
+                    <Route path="/addteam" element={<AddTeam />} />
 
 
-                                        <Route path="/sponsor" element={<Sponsors />} />
-                                        <Route path="/gallery" element={<Gallery />} />
-                                        <Route path="/ourteam" element={<OurTeam />} />
-                                        <Route path="/aboutus" element={<AboutUs />} />
-                                        <Route path="/merchandise" element={<Merchandise />} />
-                                        {/* <Route path="/workshops" element={<WorkShops />} /> */}
-                                        <Route path="/arambh" element={<Arambh />} />
-                                        <Route path="/domains" element={<Domains />} />
-                                        <Route
-                                                path="/domains/:id/:name"
-                                                element={<Events />}
-                                        />
-                                        <Route
-                                                path="/events/:eventId"
-                                                element={<EventDisplayer events={eventsData} />}
-                                        />
+                    <Route path="/sponsor" element={<Sponsors />} />
+                    <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/ourteam" element={<OurTeam />} />
+                    <Route path="/aboutus" element={<AboutUs />} />
+                    <Route path="/merchandise" element={<Merchandise />} />
+                    {/* <Route path="/workshops" element={<WorkShops />} /> */}
+                    <Route path="/arambh" element={<Arambh />} />
+                    <Route path="/domains" element={<Domains />} />
+                    <Route
+                        path="/domains/:id/:name"
+                        element={<Events />}
+                    />
+                    <Route
+                        path="/events/:eventId"
+                        element={<EventDisplayer events={eventsData} />}
+                    />
 
-                                        <Route path="/faq" element={<FAQ />} />
-        {/* <Route path="/ca" element={<CA />} /> */ }
-        {/* <Route path="/aarambh" element={<Arambh />} /> */ }
-                                </Routes >
+                    <Route path="/faq" element={<FAQ />} />
+                    {/* <Route path="/ca" element={<CA />} /> */}
+                    {/* <Route path="/aarambh" element={<Arambh />} /> */}
+                </Routes >
                 <Footer userLogIn={userLogIn} />
-                        </div >
-                </>
-        );
+            </div >
+        </>
+    );
 }
 
 export default App;

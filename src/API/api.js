@@ -1,2 +1,2 @@
-export const baseUrl = `/api`;
-// export const baseUrl = 'http://localhost:4030';
+//export const baseUrl = `/api`;
+export const baseUrl = 'http://localhost:3000';

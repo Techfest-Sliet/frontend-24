@@ -14,7 +14,7 @@ import { baseUrl } from "../../API/api";
 
 function AddTeam() {
         const [teamName, setTeamName] = useState(false);
-        const [members, setMembers] = useState([" "]);
+        const [members, setMembers] = useState([]);
         const [teamNameError, setTeamNameError] = useState("");
         const [membersError, setMembersError] = useState("");
 
@@ -48,6 +48,7 @@ function AddTeam() {
                 //     setMembersError("Please fill correct email id");
                 //   }
                 // }
+				console.log(members);
                 fetch(`${baseUrl}/team`, {
                         method: "POST", credentials: "include", body: new URLSearchParams({
                                 name: teamName,
