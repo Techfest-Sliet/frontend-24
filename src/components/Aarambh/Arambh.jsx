@@ -3,24 +3,25 @@ import "./Arambh.css";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import aarambhEvents from "../../utils/aarambh.js";
+import {upcomingAarambhEvents, completedAarambhEvents} from "../../utils/aarambh.js";
 import arshGoyal from "../../images/arsh_goyal-removebg-preview.png";
 import { Typography } from "@mui/material";
 
-const Card = ({ heading, detail, route, date }) => {
+const Card = ({ heading, detail, route, date, register }) => {
   return (
     <>
       <div className="arambhCard">
         <h1>{heading}</h1>
         <p>{detail}</p>
         <p>Date : {date}</p>
-        <button className="arambh__button" value="next" type="button">
+        {register && <button className="arambh__button" value="next" type="button">
           <Link to={route && `${route}`}>
-            {heading === "Technical Movie Show" || heading === "Workshop"
+            {/* {heading === "Technical Movie Show" || heading === "Workshop"
               ? "Explore"
-              : "Register"}
+              : "Register"} */}
+              Register
           </Link>
-        </button>
+        </button>}
       </div>
     </>
   );
@@ -79,14 +80,38 @@ const Arambh = () => {
             Register
           </button>
         </div> */}
-
-        {aarambhEvents.map((item) => {
+        <div className="heading">
+          <span
+          >
+            Upcoming Events
+          </span>
+        </div>
+        {upcomingAarambhEvents.map((item) => {
           return (
             <Card
               heading={item.heading}
               detail={item.detail}
               route={item.route}
               date={item.date}
+              register={true}
+            />
+          );
+        })}
+
+<div className="heading">
+          <span
+          >
+           Completed Events
+          </span>
+        </div>
+        {completedAarambhEvents.map((item) => {
+          return (
+            <Card
+              heading={item.heading}
+              detail={item.detail}
+              route={item.route}
+              date={item.date}
+              register={false}
             />
           );
         })}
