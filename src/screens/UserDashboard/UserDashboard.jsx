@@ -52,7 +52,7 @@ const UserDashboard = () => {
     const [events, setEvents] = useState({});
     const [student, setStudent] = useState({});
     const [teams, setTeam] = useState(null);
-    if (teams && !teams[0].members) {
+    if (teams && teams[0] &&!teams[0].members) {
         Promise.all(teams.map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t }))).then(setTeam)
     }
     const [teamMembers, setTeamMembers] = useState(null);
