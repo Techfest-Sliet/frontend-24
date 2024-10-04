@@ -1,20 +1,70 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./Arambh.css";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import {upcomingAarambhEvents, completedAarambhEvents} from "../../utils/aarambh.js";
-import arshGoyal from "../../images/arsh_goyal-removebg-preview.png";
-import { Typography } from "@mui/material";
+import {baseUrl} from "../../API/api"
+const Workshop = [{
+  id: 1,
+  name: "Olympiad – Quiz 1",
+  description: "A quiz will be conducted for students of different schools in nearby areas to encourage creativity and awareness about trending tech and software. All participating students will receive e-certificates, and the top 3 students will get winning certificates in the techfest.",
+  start_time: "2024-10-03T10:00:00",
+  end_time: "2024-10-05T10:00:00"
+},
+{
+  id: 2,
+  name: "Olympiad – Quiz 2",
+  description: "A quiz will be conducted for students of different schools in nearby areas to encourage creativity and awareness about trending tech and software. All participating students will receive e-certificates, and the top 3 students will get winning certificates in the techfest.",
+  start_time: "2024-09-28T10:00:00",
+  end_time: "2024-09-30T10:00:00"
+},
+{
+  id: 3,
+  name: "Olympiad – Quiz 3",
+  description: "A quiz will be conducted for students of different schools in nearby areas to encourage creativity and awareness about trending tech and software. All participating students will receive e-certificates, and the top 3 students will get winning certificates in the techfest.",
+  start_time: "2024-10-08T10:00:00",
+  end_time: "2024-10-13T10:00:00"
+}]
 
-const Card = ({ heading, detail, route, date, register }) => {
+const aarambhEvents = await fetch(`${baseUrl}/workshop`)
+.then(response => response.json());
+
+
+const currentDate = new Date();
+const upcomingEvents = [];
+const completedEvents = [];
+aarambhEvents.forEach(event => {
+  const start_time = new Date(event.start_time);
+  const end_time = new Date(event.end_time);
+  if(end_time > currentDate)
+    upcomingEvents.push(event);
+  else
+    completedEvents.push(event);
+})
+
+const Card = ({ name, description, start_date, end_date, route, isCompleted, register }) => {
+  const startD = new Date(start_date)
+  const endD = new Date(end_date)
+  const startDate = startD.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+  });
+  const endDate = endD.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+  });
   return (
     <>
       <div className="arambhCard">
-        <h1>{heading}</h1>
-        <p>{detail}</p>
-        <p>Date : {date}</p>
-        {register && <button className="arambh__button" value="next" type="button">
+        <h1>{name}</h1>
+        <p>{description}</p>
+        {!isCompleted ? (
+          <>
+          <p>Start Date : {startDate}</p>
+        <p>End Date : {endDate}</p>
+          </>
+        ) : (<p>Date : {endDate}</p>)}
+        {!isCompleted && <button className="arambh__button" value="next" type="button">
           <Link to={route && `${route}`}>
             {/* {heading === "Technical Movie Show" || heading === "Workshop"
               ? "Explore"
@@ -28,6 +78,13 @@ const Card = ({ heading, detail, route, date, register }) => {
 };
 
 const Arambh = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+            setIsLoading(false);
+    }, 1500);
+}, []);
+
   return (
     <>
       <StarCanvas />
@@ -86,13 +143,14 @@ const Arambh = () => {
             Upcoming Events
           </span>
         </div>
-        {upcomingAarambhEvents.map((item) => {
+        {upcomingEvents.map((item) => {
           return (
             <Card
-              heading={item.heading}
-              detail={item.detail}
+              name={item.name}
+              description={item.description}
+              start_date={item.start_time}
+              end_date={item.end_time}
               route={item.route}
-              date={item.date}
               register={true}
             />
           );
@@ -104,14 +162,16 @@ const Arambh = () => {
            Completed Events
           </span>
         </div>
-        {completedAarambhEvents.map((item) => {
+        {completedEvents.map((item) => {
           return (
             <Card
-              heading={item.heading}
-              detail={item.detail}
-              route={item.route}
-              date={item.date}
-              register={false}
+            name={item.name}
+            description={item.description}
+            start_date={item.start_time}
+            end_date={item.end_time}
+            route={item.route}
+            isCompleted={true}
+            register={true}
             />
           );
         })}
