@@ -61,7 +61,7 @@ const UserDashboard = () => {
         fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then((u) => { setUser(u); return u; })
             .then((u) => {
                 if (u.role === "PARTICIPANT") {
-                    return fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/") });
+                    return fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/student_profile") });
                 }
             })
             .then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents)

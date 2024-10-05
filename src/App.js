@@ -16,6 +16,7 @@ import FAQ from "./components/FAQ/Faq";
 
 import AboutUs from "./screens/AboutUs/AboutUs";
 import UserDashBoard from "./screens/UserDashboard/UserDashboard";
+import StudentProfile from "./screens/UserDashboard/Profile/Profile";
 import NavBar from "./components/navbar/Navbar";
 
 import Footer from "./components/Footer/Footer";
@@ -76,6 +77,7 @@ function App() {
                     {/* <Route path="/workshops" element={<WorkShops />} /> */}
                     <Route path="/arambh" element={<Arambh />} />
                     <Route path="/domains" element={<Domains />} />
+                    <Route path="/student_profile" element={<StudentProfile />} />
                     <Route
                         path="/domains/:id/:name"
                         element={<Events />}
