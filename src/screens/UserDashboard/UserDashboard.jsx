@@ -52,7 +52,7 @@ const UserDashboard = () => {
     const [events, setEvents] = useState({});
     const [student, setStudent] = useState({});
     const [teams, setTeam] = useState(null);
-    if (teams && teams[0] &&!teams[0].members) {
+    if (teams && teams[0] && !teams[0].members) {
         Promise.all(teams.map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t }))).then(setTeam)
     }
     const [teamMembers, setTeamMembers] = useState(null);
@@ -109,18 +109,15 @@ const UserDashboard = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 setIsLoading(true);
-                fetch(`${baseUrl}/user/pullevent`, { method: "POST" })
-                    .post(
-
-                        { eventId },
-                    )
+                fetch(`${baseUrl}/event/join/individual?id=${eventId}`, { method: "DELETE", credentials: "include" })
                     .then((result) => {
                         // setErrorMade({ title: "Success", message: result.data.message });
                         setIsLoading(false);
-                        if (result.data.isError) {
-                            setErrorMade({ title: "Error", message: result.data.message });
+                        if (!result.ok) {
+                            setErrorMade({ title: "Error", message: "Unexpected Error" });
                             return;
                         } else {
+                            window.location = window.location;
                             //                          const updatedEvents = events.filter(
                             //                                  (event) => event._id !== eventId
                             //                         );
