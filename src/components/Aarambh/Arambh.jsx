@@ -1,32 +1,69 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./Arambh.css";
 import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import aarambhEvents from "../../utils/aarambh.js";
-import arshGoyal from "../../images/arsh_goyal-removebg-preview.png";
-import { Typography } from "@mui/material";
+import {baseUrl} from "../../API/api"
 
-const Card = ({ heading, detail, route, date }) => {
+const aarambhEvents = await fetch(`${baseUrl}/workshop`)
+.then(response => response.json());
+
+
+const currentDate = new Date();
+const upcomingEvents = [];
+const completedEvents = [];
+aarambhEvents.forEach(event => {
+  const start_time = new Date(event.start_time);
+  const end_time = new Date(event.end_time);
+  if(end_time > currentDate)
+    upcomingEvents.push(event);
+  else
+    completedEvents.push(event);
+})
+
+const Card = ({ name, description, start_date, end_date, route, isCompleted, register }) => {
+  const startD = new Date(start_date)
+  const endD = new Date(end_date)
+  const startDate = startD.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+  });
+  const endDate = endD.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+  });
   return (
     <>
       <div className="arambhCard">
-        <h1>{heading}</h1>
-        <p>{detail}</p>
-        <p>Date : {date}</p>
-        <button className="arambh__button" value="next" type="button">
+        <h1>{name}</h1>
+        <p>{description}</p>
+        {!isCompleted ? (
+          <>
+          <p>Start Date : {startDate}</p>
+        <p>End Date : {endDate}</p>
+          </>
+        ) : (<p>Date : {endDate}</p>)}
+        {!isCompleted && <button className="arambh__button" value="next" type="button">
           <Link to={route && `${route}`}>
-            {heading === "Technical Movie Show" || heading === "Workshop"
+            {/* {heading === "Technical Movie Show" || heading === "Workshop"
               ? "Explore"
-              : "Register"}
+              : "Register"} */}
+              Register
           </Link>
-        </button>
+        </button>}
       </div>
     </>
   );
 };
 
 const Arambh = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+            setIsLoading(false);
+    }, 1500);
+}, []);
+
   return (
     <>
       <StarCanvas />
@@ -40,7 +77,6 @@ const Arambh = () => {
             that will make get you pull up your socks.
           </p>
         </div>
-
         {/* <div className="specialCard">
           <Typography
             style={{
@@ -79,14 +115,59 @@ const Arambh = () => {
             Register
           </button>
         </div> */}
-
-        {aarambhEvents.map((item) => {
+        <div style={{
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "30px",
+    paddingBottom: "0px",
+    fontSize: "40px",
+    color: "white",
+    fontWeight: 800,
+    textShadow: "2px 2px red",
+  }}>
+          <span
+          >
+            Upcoming Events
+          </span>
+        </div>
+        {upcomingEvents.map((item) => {
           return (
             <Card
-              heading={item.heading}
-              detail={item.detail}
+              name={item.name}
+              description={item.description}
+              start_date={item.start_time}
+              end_date={item.end_time}
               route={item.route}
-              date={item.date}
+              register={true}
+            />
+          );
+        })}
+
+<div style={{
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "30px",
+    paddingBottom: "0px",
+    fontSize: "40px",
+    color: "white",
+    fontWeight: 800,
+    textShadow: "2px 2px red",
+  }}>
+          <span
+          >
+           Completed Events
+          </span>
+        </div>
+        {completedEvents.map((item) => {
+          return (
+            <Card
+            name={item.name}
+            description={item.description}
+            start_date={item.start_time}
+            end_date={item.end_time}
+            route={item.route}
+            isCompleted={true}
+            register={true}
             />
           );
         })}
