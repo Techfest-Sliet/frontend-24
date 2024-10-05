@@ -23,7 +23,7 @@
     gap: 1.5rem;
     justify-content: center;
     align-items: center;
-
+    color: white;
     background-color: #90e0ef34;
 }
 
@@ -159,4 +159,14 @@
       white-space: nowrap;
     } */
     
+  }
+  .heading{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    padding-bottom: 0px;
+    font-size: 40px;
+    color: white;
+    font-weight: 800;
+    text-shadow: 2px 2px red;
   }
