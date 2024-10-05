@@ -90,6 +90,11 @@ const EventDisplayer = () => {
 
     const navigate = useNavigate();
 
+	if (isTeam && teamDetails && teamDetails.length === 0) {
+		navigate("/addteam")
+	}
+
+
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClose = () => {
@@ -110,6 +115,13 @@ const EventDisplayer = () => {
             credentials: "include",
             headers: { "content-type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ id: eventId }),
+        });
+        Swal.fire({
+            text: `You have joined this event as Individual`,
+            confirmButtonColor: "#0096FF",
+            customClass: {
+                confirmButton: "order-2",
+            },
         });
     }
 
