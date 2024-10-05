@@ -18,7 +18,7 @@ const Signup = () => {
     const [cPassword, setCPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [college, setCollege] = useState("");
-    const [dob, setDob] = useState();
+    const [dob, setDob] = useState(null);
     const [profession, setProfession] = useState();
     const [department, setDepartment] = useState("0");
     const [confirm_err, setConfirmErr] = useState(null);

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { BiEdit } from "react-icons/bi";
+import { BiCool, BiEnvelopeOpen } from "react-icons/bi";
 import { FaRegLightbulb } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {
@@ -285,7 +285,7 @@ const UserDashboard = () => {
 
                                         {!user.verified &&
                                             <Button
-                                                onClick={fetch(`${baseUrl}/auth/verify`, { method: "POST" })}
+                                                onClick={() => fetch(`${baseUrl}/auth/verify`, { method: "POST", credentials: "include" })}
                                                 variant="contained"
                                                 sx={{
                                                     backgroundColor: "#9867c5",
@@ -357,19 +357,12 @@ const UserDashboard = () => {
                                     </Grid>
                                     <Grid item xs={6} sx={{ textAlign: "right" }}>
                                         <Box sx={{ marginBottom: "5%" }}>
-                                            <Tooltip
-                                                title="Edit Personal Detail"
-                                                placement="bottom-end"
-                                            >
-                                                <Button variant="" onClick={() => { }}>
-                                                    <BiEdit
-                                                        style={{
-                                                            height: isMobile ? "30px" : "50px",
-                                                            width: "35px",
-                                                        }}
-                                                    />
-                                                </Button>
-                                            </Tooltip>
+                                            <BiCool
+                                                style={{
+                                                    height: isMobile ? "30px" : "50px",
+                                                    width: "35px",
+                                                }}
+                                            />
                                         </Box>
                                         {/*openEditPersonal && (
                                                                                         <Modal
@@ -499,7 +492,7 @@ const UserDashboard = () => {
                                                 placement="bottom-end"
                                             >
                                                 <Button variant="" onClick={() => { }}>
-                                                    <BiEdit
+                                                    <BiEnvelopeOpen
                                                         style={{
                                                             height: isMobile ? "30px" : "50px",
                                                             width: "35px",
