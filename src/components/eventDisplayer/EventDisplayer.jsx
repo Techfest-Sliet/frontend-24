@@ -90,6 +90,11 @@ const EventDisplayer = () => {
 
     const navigate = useNavigate();
 
+	if (isTeam && teamDetails && teamDetails.length === 0) {
+		navigate("/addteam")
+	}
+
+
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClose = () => {
@@ -110,6 +115,13 @@ const EventDisplayer = () => {
             credentials: "include",
             headers: { "content-type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ id: eventId }),
+        });
+        Swal.fire({
+            text: `You have joined this event as Individual`,
+            confirmButtonColor: "#0096FF",
+            customClass: {
+                confirmButton: "order-2",
+            },
         });
     }
 
@@ -410,49 +422,14 @@ const EventDisplayer = () => {
                                                             )}
                                                             <MenuItem
                                                                 onClick={() => {
-                                                                    setModal(true);
-                                                                    handleClose();
-                                                                    setEventParticipationType("Individual");
                                                                     registerEvent("Individual");
+                                                                    handleClose();
                                                                 }}
                                                             >
                                                                 Join as Individual
                                                             </MenuItem>
-                                                            {modal && (
-                                                                <>
-                                                                    <Modal
-                                                                        open={modal}
-                                                                        onClose={() => {
-                                                                            setModal(false);
-                                                                        }}
-                                                                        aria-labelledby="child-modal-title"
-                                                                        aria-describedby="child-modal-description"
-                                                                    >
-                                                                        <Box sx={style}>
-                                                                            <TextField
-                                                                                id="outlined-basic"
-                                                                                label="Your Name"
-                                                                                variant="outlined"
-                                                                                onChange={(e) => {
-                                                                                    setTeamName(e.target.value);
-                                                                                }}
-                                                                            />
-                                                                            <Button
-                                                                                variant="contained"
-                                                                                style={{
-                                                                                    display: "flex",
-                                                                                    marginLeft: "auto",
-                                                                                }}
-                                                                                onClick={() => registerEvent()}
-                                                                            >
-                                                                                OK
-                                                                            </Button>
-                                                                        </Box>
-                                                                    </Modal>
-                                                                </>
-                                                            )}
-                                                            {eventDetails.eventParticipationType !==
-                                                                "Individual" && (
+                                                            {eventDetails.participation_type !==
+                                                                "INDIVIDUAL" && (
                                                                     <MenuItem
                                                                         onClick={() => {
                                                                             setTeamDetails(true);
