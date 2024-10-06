@@ -64,6 +64,7 @@ const UserDashboard = () => {
                     return fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/student_profile") });
                 }
             })
+            .then(() => fetch(`${baseUrl}/profile/requests`, { credentials: "include" })).then((v) => v.json()).then(setInvitations)
             .then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents)
             .then(() => fetch(`${baseUrl}/team`, { credentials: "include" })).then(v => v.json()).then(v => { setTeam(v); return v })
             .catch((e) => { console.error(e); });
