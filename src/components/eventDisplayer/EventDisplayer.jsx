@@ -66,7 +66,11 @@ const EventDisplayer = () => {
     const [modal, setModal] = useState(false);
     const [isTeam, setIsTeam] = useState(false)
     const { eventId } = useParams();
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(r => r.ok &&
+        fetch(`${baseUrl}/team`, { credentials: "include" }).then(throwError).then(v => v.json()).then(v => { setTeams(v); return v })
+            .catch((e) => { throwTextError(e); console.error(e); })
+    )
     const handleVariableSeting = () => {
         setVariable(2);
     };
@@ -400,13 +404,13 @@ const EventDisplayer = () => {
                                                                                     {teams &&
                                                                                         teams.map((team) => {
                                                                                             return (
-                                                                                                <MenuItem
+                                                                                                <option
                                                                                                     key={team.id}
                                                                                                     value={team.id}
                                                                                                 >
 
                                                                                                     {team.name}
-                                                                                                </MenuItem>
+                                                                                                </option>
                                                                                             );
                                                                                         })}
                                                                                 </Select>
