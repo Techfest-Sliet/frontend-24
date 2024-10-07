@@ -81,7 +81,7 @@ function AddTeam() {
                 customClass: {
                     confirmButton: "order-2",
                 },
-            })).catch((e) => { throwTextError(e); console.error(e); });
+            })).then(() => navigate("/user")).catch((e) => { throwTextError(e); console.error(e); });
     };
 
     const isMobile = useMediaQuery("(max-width:480px)");
