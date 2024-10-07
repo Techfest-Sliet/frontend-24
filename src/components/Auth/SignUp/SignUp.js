@@ -225,7 +225,7 @@ const Signup = () => {
                         message: "Kindly check your inbox/spam for verification mail!",
                     });
                     setTimeout(() => {
-                        navigate("/user");
+						window.location = "/user";
                     }, 3000);
                 } else {
                     setIsLoading(false);

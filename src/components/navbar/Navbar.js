@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./navbar.css";
+import Swal from "sweetalert2";
 import {
     Box,
     Button,
@@ -19,9 +20,33 @@ import { ImCross } from "react-icons/im";
 
 import { baseUrl } from "../../API/api.js";
 
+const throwError = (e) => {
+    if (!e.ok) {
+        Swal.fire({
+            title: 'Error!',
+            text: `Unexpected Error: ${e.statusText}`,
+            icon: 'error',
+        })
+    }
+    return e;
+}
+
+const throwTextError = (e) => {
+    Swal.fire({
+        title: 'Error!',
+        text: `Unexpected Error: ${e}`,
+        icon: 'error',
+    })
+}
+
 const NavBar = ({ userLogIn }) => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const navigate = useNavigate();
+
+    const [user, setUser] = useState(null);
+
+
+    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(throwError).then(v => v.json()).then((u) => { setUser(u); return u; })
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -345,8 +370,7 @@ const NavBar = ({ userLogIn }) => {
                             fontFamily: "Droid Sans",
                         }}
                     >
-						{console.log(`Is user logged In: ${userLogIn}`)}
-                        {userLogIn === false ? (
+                        {!user ? (
                             <Link to="/sign-in">
                                 <Typography sx={{ color: "white", fontFamily: "Droid Sans" }}>
                                     SIGNIN

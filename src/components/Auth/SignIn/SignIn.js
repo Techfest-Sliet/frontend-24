@@ -105,7 +105,7 @@ const SignIn = () => {
                     icon: 'error',
                 })
             } else {
-                navigate("/user");
+                window.location = "/user";
             }
         })
             .catch((e) => { throwTextError(e); console.error(e); });
