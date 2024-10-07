@@ -78,9 +78,11 @@ function TeamTable({ teams, setTeams }) {
     const [addMember, setAddMember] = useState(false);
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
+	const [user, setUser] = useState(null);
 
     const navigate = useNavigate();
 
+    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(throwError).then(v => v.json()).then((u) => { setUser(u); return u; })
 
     const handleTeamDelete = (id) => {
         Swal.fire({
@@ -119,6 +121,7 @@ function TeamTable({ teams, setTeams }) {
 
     const isMobile = useMediaQuery("(max-width:450px)");
     return (
+		user &&
         <>
             <div
                 className="heading"
@@ -245,25 +248,29 @@ function TeamTable({ teams, setTeams }) {
                                             align="center"
                                             style={{ background: "transparent" }}
                                         >
-                                            <Button
-                                                onClick={() => {
-                                                    setAddMember(true);
-                                                }}
-                                            >
-                                                Add Member
-                                            </Button>
+                                            {team.members.some((u) => u.email === user.email && u.is_leader) &&
+                                                <Button
+                                                    onClick={() => {
+                                                        setAddMember(true);
+                                                    }}
+                                                >
+                                                    Add Member
+                                                </Button>
+                                            }
                                         </StyledTableCell>
                                         <StyledTableCell
                                             align="center"
                                             style={{ background: "transparent" }}
                                         >
-                                            <Button
-                                                onClick={() => {
-                                                    handleTeamDelete(team.id);
-                                                }}
-                                            >
-                                                Delete Team
-                                            </Button>
+                                            {team.members.some((u) => u.email === user.email && u.is_leader) &&
+                                                <Button
+                                                    onClick={() => {
+                                                        handleTeamDelete(team.id);
+                                                    }}
+                                                >
+                                                    Delete Team
+                                                </Button>
+                                            }
                                         </StyledTableCell>
                                         {addMember && (
                                             <Modal
