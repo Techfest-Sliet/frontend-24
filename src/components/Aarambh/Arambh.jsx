@@ -4,6 +4,7 @@ import StarCanvas from "../../screens/landingPage/StarbackGround";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../API/api"
+import Swal from "sweetalert2";
 
 const aarambhEvents = await fetch(`${baseUrl}/workshop`)
     .then(response => response.json());
@@ -21,6 +22,25 @@ aarambhEvents.forEach(event => {
     else
         completedEvents.push(event);
 })
+
+const throwError = (e) => {
+    if (!e.ok) {
+        Swal.fire({
+            title: 'Error!',
+            text: `Unexpected Error: ${e.statusText}`,
+            icon: 'error',
+        })
+    }
+    return e;
+}
+
+const throwTextError = (e) => {
+    Swal.fire({
+        title: 'Error!',
+        text: `Unexpected Error: ${e}`,
+        icon: 'error',
+    })
+}
 
 const Card = ({ name, description, start_date, end_date, route, isCompleted, register }) => {
     const startD = new Date(start_date)
@@ -45,10 +65,20 @@ const Card = ({ name, description, start_date, end_date, route, isCompleted, reg
                     </>
                 ) : (<p>Date : {endDate}</p>)}
                 {!isCompleted && <button className="arambh__button" value="next" type="button">
-                    <Link onClick={() => { fetch(route, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded" } }) }}>
-                        {/* {heading === "Technical Movie Show" || heading === "Workshop"
-              ? "Explore"
-              : "Register"} */}
+                    <Link onClick={() => {
+                        fetch(route, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded" } }).then(throwError)
+                        .then((r) => {
+                            r.ok &&
+                                Swal.fire({
+                                    text: `You have joined this workshop`,
+                                    confirmButtonColor: "#0096FF",
+                                    customClass: {
+                                        confirmButton: "order-2",
+                                    },
+                                })
+                        })
+                        .catch((e) => { throwTextError(e); console.error(e); })
+                    }}>
                         Register
                     </Link>
                 </button>}
@@ -78,44 +108,6 @@ const Arambh = () => {
                         that will make get you pull up your socks.
                     </p>
                 </div>
-                {/* <div className="specialCard">
-          <Typography
-            style={{
-              positon: "relative",
-              top: "10%",
-              fontSize: 40,
-              color: "white",
-              fontWeight: "800",
-              textShadow: "2px 2px red",
-            }}
-          >
-            लक्ष्य
-          </Typography>
-          <article>
-            <figure>
-              <img src={arshGoyal} alt="" />
-            </figure>
-            <h2>Arsh Goyal</h2>
-            <p>
-              Samsung | LinkedIn Top Voice ‘24 | Ex- ISRO | Gold Medalist - NIT
-            </p>
-            <p>Jalandhar | Educator - Unacademy | CodeChef | 150k+ YouTube &</p>
-            <p> Instagram</p>
-            <br/>
-            <section className="date" style={{display:"flex"}}>
-              <Typography style={{fontWeight:800}}>Date:</Typography>
-              <Typography>&nbsp;6<sup>th</sup> March 2024</Typography>
-            </section>
-            <br/>
-            <section className="venue" style={{display:"flex"}}>
-              <Typography style={{fontWeight:800}}>Venue:</Typography>
-              <Typography>&nbsp;Main Auditorium</Typography>
-            </section>
-          </article>
-          <button className="arambh__button" value="next" type="button">
-            Register
-          </button>
-        </div> */}
                 <div style={{
                     display: "flex",
                     justifyContent: "center",

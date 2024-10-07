@@ -35,6 +35,24 @@ const style = {
     borderRadius: 5,
 };
 
+const throwError = (e) => {
+    if (!e.ok) {
+        Swal.fire({
+            title: 'Error!',
+            text: `Unexpected Error: ${e.statusText}`,
+            icon: 'error',
+        })
+    }
+    return e;
+}
+
+const throwTextError = (e) => {
+    Swal.fire({
+        title: 'Error!',
+        text: `Unexpected Error: ${e}`,
+        icon: 'error',
+    })
+}
 const EventDisplayer = () => {
     const [variable, setVariable] = useState(1);
     const [eventDetails, setEventDetails] = useState(null);
@@ -90,9 +108,9 @@ const EventDisplayer = () => {
 
     const navigate = useNavigate();
 
-	if (isTeam && teamDetails && teamDetails.length === 0) {
-		navigate("/addteam")
-	}
+    if (isTeam && teamDetails && teamDetails.length === 0) {
+        navigate("/addteam")
+    }
 
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -115,14 +133,18 @@ const EventDisplayer = () => {
             credentials: "include",
             headers: { "content-type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ id: eventId }),
-        });
-        Swal.fire({
-            text: `You have joined this event as Individual`,
-            confirmButtonColor: "#0096FF",
-            customClass: {
-                confirmButton: "order-2",
-            },
-        });
+        }).then(throwError)
+            .then((r) => {
+                r.ok &&
+                    Swal.fire({
+                        text: `You have joined this event as Individual`,
+                        confirmButtonColor: "#0096FF",
+                        customClass: {
+                            confirmButton: "order-2",
+                        },
+                    })
+            })
+            .catch((e) => { throwTextError(e); console.error(e); });
     }
 
     // Individual Registration
@@ -135,7 +157,18 @@ const EventDisplayer = () => {
             credentials: "include",
             headers: { "content-type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ team_id: tId, event_id: eventId }),
-        });
+        }).then(throwError)
+            .then((r) => {
+                r.ok &&
+                    Swal.fire({
+                        text: `You have joined this event as Team`,
+                        confirmButtonColor: "#0096FF",
+                        customClass: {
+                            confirmButton: "order-2",
+                        },
+                    })
+            })
+            .catch((e) => { throwTextError(e); console.error(e); });
     }
 
     const isMobile = useMediaQuery("(max-width : 480px)");

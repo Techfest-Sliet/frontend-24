@@ -21,7 +21,7 @@ function Events() {
       fetch(`${baseUrl}/domain/event?id=${domain.id}`).then((v) => v.json()).then((v) => setEvents(v))
     };
     getEventByDomainName();
-  }, []);
+  }, [domain.id]);
 
   return (
     <>
