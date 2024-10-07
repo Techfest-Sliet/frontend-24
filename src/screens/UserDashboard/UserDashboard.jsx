@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiCool, BiEnvelopeOpen } from "react-icons/bi";
 import { FaRegLightbulb } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +10,13 @@ import {
     Grid,
     Typography,
     Tooltip,
-    TextField,
     useMediaQuery,
 } from "@mui/material";
-import Modal from "@mui/material/Modal";
 import "./UserDashboard.css";
 
 //user imports
 import { baseUrl } from "../../API/api";
-// import Loader from "../../components/Loader/loader";
+import Loader from "../../components/Loader/loader";
 
 import TeamTable from "./TeamTable";
 import TeamRequestTable from "./TeamRequestTable";
@@ -44,50 +42,57 @@ const style = {
 
 const departments = await fetch(`${baseUrl}/departments`).then((v) => v.json());
 
+const throwError = (e) => {
+    if (!e.ok) {
+        Swal.fire({
+            title: 'Error!',
+            text: `Unexpected Error: ${e.statusText}`,
+            icon: 'error',
+        })
+    }
+    return e;
+}
+
+const throwTextError = (e) => {
+    Swal.fire({
+        title: 'Error!',
+        text: `Unexpected Error: ${e}`,
+        icon: 'error',
+    })
+}
+
 const UserDashboard = () => {
-    const [errorMade, setErrorMade] = useState();
-    const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(false);
     const [invitations, setInvitations] = useState(null);
-    const [events, setEvents] = useState({});
+    const [events, setEvents] = useState([]);
+    const [workshops, setWorkshops] = useState([]);
     const [student, setStudent] = useState({});
     const [teams, setTeam] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     if (teams && teams[0] && !teams[0].members) {
         Promise.all(teams.map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t }))).then(setTeam)
     }
-    const [teamMembers, setTeamMembers] = useState(null);
     const navigate = useNavigate();
     if (!user) {
-        fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.json()).then((u) => { setUser(u); return u; })
+        fetch(`${baseUrl}/profile`, { credentials: "include" }).then(throwError).then(v => v.json()).then((u) => { setUser(u); return u; })
             .then((u) => {
                 if (u.role === "PARTICIPANT") {
-                    return fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/student_profile") });
+                    return fetch(`${baseUrl}/profile/student`, { credentials: "include" }).then(throwError).then(v => v.json()).then(setStudent).catch((e) => { console.error(e); navigate("/student_profile") });
                 }
             })
-            .then(() => fetch(`${baseUrl}/profile/requests`, { credentials: "include" })).then((v) => v.json()).then(setInvitations)
-            .then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then((v) => v.json()).then(setEvents)
-            .then(() => fetch(`${baseUrl}/team`, { credentials: "include" })).then(v => v.json()).then(v => { setTeam(v); return v })
-            .catch((e) => { console.error(e); });
+            .then(() => fetch(`${baseUrl}/profile/requests`, { credentials: "include" })).then(throwError).then((v) => v.json()).then(setInvitations)
+            .then(() => fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" })).then(throwError).then((v) => v.json()).then(setEvents)
+            .then(() => fetch(`${baseUrl}/workshop/joined/individual`, { credentials: "include" })).then(throwError).then((v) => v.json()).then(setWorkshops)
+            .then(() => fetch(`${baseUrl}/team/request`, { credentials: "include" })).then(throwError).then((v) => v.json()).then(setInvitations)
+            .then(() => fetch(`${baseUrl}/team`, { credentials: "include" })).then(throwError).then(v => v.json()).then(v => { setTeam(v); return v })
+            .catch((e) => { throwTextError(e); console.error(e); });
         console.log(user);
     }
-    console.log(`User => `, user)
-    console.log(`Student => `, student)
-    console.log(`Events =>`, events)
 
     const options = {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
-    };
-
-    const teamModalStyle = {
-        width: "100%",
-        position: "absolute",
-        top: "50%",
-        left: "55%",
-        transform: "translate(-50%, -50%)",
-        bgcolor: "transparent",
-        p: 4,
     };
 
     const dateObj = new Date(user.dob);
@@ -111,110 +116,31 @@ const UserDashboard = () => {
             if (result.isConfirmed) {
                 setIsLoading(true);
                 fetch(`${baseUrl}/event/join/individual?id=${eventId}`, { method: "DELETE", credentials: "include" })
-                    .then((result) => {
+                    .then(throwError).then(throwError).then((result) => {
                         // setErrorMade({ title: "Success", message: result.data.message });
                         setIsLoading(false);
-                        if (!result.ok) {
-                            setErrorMade({ title: "Error", message: "Unexpected Error" });
-                            return;
-                        } else {
-                            window.location = window.location;
-                            //                          const updatedEvents = events.filter(
-                            //                                  (event) => event._id !== eventId
-                            //                         );
-                            //                        setEvents(updatedEvents);
+                        if (result.ok) {
+                            fetch(`${baseUrl}/event/joined/individual`, { credentials: "include" }).then(throwError).then((v) => v.json()).then(setEvents)
+                                .catch((e) => { throwTextError(e); console.error(e); });
                         }
                     })
-                    .catch((err) => {
-                        setErrorMade(err);
+                    .catch((e) => {
+                        throwTextError(e);
+                        console.log(e)
                     });
             }
         });
     };
 
-    const updateContactInfo = async (e) => {
-        e.preventDefault();
-        //if (phone.trim().length === 0) {
-        //setFieldErr("Field(s) should not be empty");
-        //setTimeout(() => {
-        //setFieldErr(null);
-        //}, 3000);
-        //return;
-        //}
-        //setOpenEditContact(false);
-        const update_user = {
-            //name: name,
-            email: user.email,
-            //phone: Number(phone),
-            //whatsappNumber: wphone,
-        };
-        setIsLoading(true);
-        await fetch()
-            .post(`${baseUrl}/user/updateuser`, update_user)
-            .then((result) => {
-                const res = result;
-                // console.log(res);
-                if (res.status === 400) {
-                    //setFieldErr(
-                    //"Incomplete update request! Kindly try again in some time."
-                    //);
-                } else if (res.status === 201) {
-                    setErrorMade({
-                        title: "Updated!",
-                        message: "User details updated successfully.",
-                    });
-                }
-            })
-            .catch((err) => {
-                // setIsLoading(false);
-                console.log(err.response.data);
-                return;
-            });
-
-        window.location.reload();
-    };
 
     //get user id from the context api
-    const updatePersonalInfo = async (e) => {
-        e.preventDefault();
-
-        const update_user = {
-            //name: name,
-            email: user.email,
-            //branch: branch,
-            //collegeName: collegeName,
-        };
-        setIsLoading(true);
-        await fetch()
-            .post(`${baseUrl}/user/updateuser`, update_user)
-            .then((result) => {
-                const res = result;
-                console.log(res);
-                if (res.status === 400) {
-                    //setFieldErr(
-                    //"Incomplete update request! Kindly try again in some time."
-                    //);
-                } else if (res.status === 201) {
-                    setErrorMade({
-                        title: "Updated!",
-                        message: "User details updated successfully.",
-                    });
-                }
-            })
-            .catch((err) => {
-                setIsLoading(false);
-                return;
-            });
-
-        window.location.reload();
-    };
 
     const isMobile = useMediaQuery("(max-width:450px)");
 
 
     return (
         <>
-            {/* {isLoading && <Loader />} */}
+            {isLoading && <Loader />}
             {user ? (
                 <div
                     className="userDashboard"
@@ -286,7 +212,7 @@ const UserDashboard = () => {
 
                                         {!user.verified &&
                                             <Button
-                                                onClick={() => fetch(`${baseUrl}/auth/verify`, { method: "POST", credentials: "include" })}
+                                                onClick={() => fetch(`${baseUrl}/auth/verify`, { method: "POST", credentials: "include" }).then(throwError).catch(throwTextError)}
                                                 variant="contained"
                                                 sx={{
                                                     backgroundColor: "#9867c5",
@@ -365,44 +291,6 @@ const UserDashboard = () => {
                                                 }}
                                             />
                                         </Box>
-                                        {/*openEditPersonal && (
-                                                                                        <Modal
-                                                                                                open={true}
-                                                                                                onClose={handleClosePersonal}
-                                                                                                aria-labelledby="child-modal-title"
-                                                                                                aria-describedby="child-modal-description"
-                                                                                        >
-                                                                                                <Box sx={style}>
-                                                                                                        {fieldErr && (
-                                                                                                                <p style={{ color: "red" }}>{fieldErr}</p>
-                                                                                                        )}
-
-                                                                                                        <TextField
-                                                                                                                id="standard-basic"
-                                                                                                                label="Organisation/College"
-                                                                                                                variant="standard"
-                                                                                                                sx={{ marginBottom: 2 }}
-                                                                                                                onChange={(e) => setCollegeName(e.target.value)}
-                                                                                                        />
-
-                                                                                                        <TextField
-                                                                                                                id="standard-basic"
-                                                                                                                label="Course Enrolled"
-                                                                                                                variant="standard"
-                                                                                                                sx={{ marginBottom: 2 }}
-                                                                                                                onChange={(e) => setBranch(e.target.value)}
-                                                                                                        />
-
-                                                                                                        <Button
-                                                                                                                variant="contained"
-                                                                                                                style={{ display: "flex", marginLeft: "auto" }}
-                                                                                                                onClick={updatePersonalInfo}
-                                                                                                        >
-                                                                                                                OK
-                                                                                                        </Button>
-                                                                                                </Box>
-                                                                                        </Modal>
-                                                                                )*/}
                                         <Box sx={{ marginBottom: "5%" }}>
                                             <Typography
                                                 sx={{
@@ -502,31 +390,6 @@ const UserDashboard = () => {
                                                 </Button>
                                             </Tooltip>
                                         </Box>
-                                        {/*openEditContact && (
-                                                                                        <Modal
-                                                                                                open={true}
-                                                                                                onClose={handleCloseContact}
-                                                                                                aria-labelledby="child-modal-title"
-                                                                                                aria-describedby="child-modal-description"
-                                                                                        >
-                                                                                                <Box sx={style}>
-                                                                                                        <TextField
-                                                                                                                id="standard-basic"
-                                                                                                                label="Phone Number"
-                                                                                                                variant="standard"
-                                                                                                                sx={{ marginBottom: 2 }}
-                                                                                                                onChange={(e) => setPhone(e.target.value)}
-                                                                                                        />
-                                                                                                        <Button
-                                                                                                                variant="contained"
-                                                                                                                style={{ display: "flex", marginLeft: "auto" }}
-                                                                                                                onClick={updateContactInfo}
-                                                                                                        >
-                                                                                                                OK
-                                                                                                        </Button>
-                                                                                                </Box>
-                                                                                        </Modal>
-                                                                                )*/}
                                         <Box sx={{ marginBottom: "5%" }}>
                                             <Typography
                                                 sx={{
@@ -707,48 +570,48 @@ const UserDashboard = () => {
                                     <Box>
                                         <Grid container spacing={2}>
                                             <Grid item xs={6}>
-                                                {/*workshops &&
-                                                                                                        workshops.length === 0 &&
-                                                                                                        "Not registered to any workshop 🙄."*/}
-                                                {/*workshops &&
-                                                                                                        workshops.length > 0 &&
-                                                                                                        workshops.map((workshop) => {
-                                                                                                                return (
-                                                                                                                        <Box sx={{ margin: "10%" }}>
-                                                                                                                                <Typography
-                                                                                                                                        sx={{
-                                                                                                                                                fontSize: 20,
-                                                                                                                                                fontWeight: 500,
-                                                                                                                                                color: "white",
-                                                                                                                                        }}
-                                                                                                                                        key={workshop._id}
-                                                                                                                                >
-                                                                                                                                        {workshop.workshopName}
-                                                                                                                                </Typography>
-                                                                                                                                <Divider
-                                                                                                                                        sx={{
-                                                                                                                                                border: "0.2px solid grey",
-                                                                                                                                                width: 400,
-                                                                                                                                        }}
-                                                                                                                                />
-                                                                                                                        </Box>
-                                                                                                                );
-                                                                                                        })*/}
+                                                {workshops &&
+                                                    workshops.length === 0 &&
+                                                    "Not registered to any workshop 🙄."}
+                                                {workshops &&
+                                                    workshops.length > 0 &&
+                                                    workshops.map((workshop) => {
+                                                        return (
+                                                            <Box sx={{ margin: "10%" }}>
+                                                                <Typography
+                                                                    sx={{
+                                                                        fontSize: 20,
+                                                                        fontWeight: 500,
+                                                                        color: "white",
+                                                                    }}
+                                                                    key={workshop._id}
+                                                                >
+                                                                    {workshop.workshopName}
+                                                                </Typography>
+                                                                <Divider
+                                                                    sx={{
+                                                                        border: "0.2px solid grey",
+                                                                        width: 400,
+                                                                    }}
+                                                                />
+                                                            </Box>
+                                                        );
+                                                    })}
                                             </Grid>
                                             <Grid item xs={6} sx={{ textAlign: "right" }}>
-                                                {/*workshops &&
-                                                                                                        workshops.length > 0 &&
-                                                                                                        workshops.map((workshop) => {
-                                                                                                                return (
-                                                                                                                        <Box sx={{ margin: "10%" }}>
-                                                                                                                                <Typography
-                                                                                                                                        sx={{ fontSize: 20, fontWeight: 500 }}
-                                                                                                                                >
-                                                                                                                                        {workshop.workshopDate}
-                                                                                                                                </Typography>
-                                                                                                                        </Box>
-                                                                                                                );
-                                                                                                        })*/}
+                                                {workshops &&
+                                                    workshops.length > 0 &&
+                                                    workshops.map((workshop) => {
+                                                        return (
+                                                            <Box sx={{ margin: "10%" }}>
+                                                                <Typography
+                                                                    sx={{ fontSize: 20, fontWeight: 500 }}
+                                                                >
+                                                                    {workshop.workshopDate}
+                                                                </Typography>
+                                                            </Box>
+                                                        );
+                                                    })}
                                             </Grid>
                                         </Grid>
                                     </Box>
@@ -767,7 +630,6 @@ const UserDashboard = () => {
                         >
                             <Box sx={{ margin: "7%" }}>
                                 <TeamRequestTable
-                                    setInvitations={setInvitations}
                                 />
                             </Box>
                         </Card>}
@@ -786,7 +648,7 @@ const UserDashboard = () => {
                             <Box sx={{ margin: "7%" }}>
                                 <TeamTable
                                     teams={teams}
-                                //events={events}
+									setTeams={setTeams}
                                 />
                             </Box>
                         </Card>

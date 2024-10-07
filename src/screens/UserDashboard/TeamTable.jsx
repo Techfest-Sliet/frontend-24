@@ -50,7 +50,31 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function TeamTable({ teams }) {
+const throwError = (e) => {
+    if (!e.ok) {
+        Swal.fire({
+            title: 'Error!',
+            text: `Unexpected Error: ${e.statusText}`,
+            icon: 'error',
+        })
+    }
+    return e;
+}
+
+const throwTextError = (e) => {
+    Swal.fire({
+        title: 'Error!',
+        text: `Unexpected Error: ${e}`,
+        icon: 'error',
+    })
+}
+
+const updateTeams = (setTeams) =>
+    fetch(`${baseUrl}/team`, { credentials: "include" }).then(throwError).then(v => v.json()).then(v => { setTeams(v); return v })
+        .catch((e) => { throwTextError(e); console.error(e); })
+
+
+function TeamTable({ teams, setTeams }) {
     const [addMember, setAddMember] = useState(false);
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
@@ -72,36 +96,25 @@ function TeamTable({ teams }) {
                 confirmButton: "order-2",
                 denyButton: "order-3",
             },
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`${baseUrl}/team?id=${id}`, { method: "DELETE", credentials: "include" })
-                    .then((result) => {
-                        if (result.ok) {
-                            window.location.reload();
-                        }
-                    });
-            }
-        });
-    };
+        }).then(response => response.isConfirmed && fetch(`${baseUrl}/team?id=${id}`, { method: "DELETE", credentials: "include" })).then(throwError).then(r => r.ok && updateTeams(setTeams)).catch(throwTextError)
+    }
 
     const addTeamMember = (teamId) => {
         if (email.trim().length === 0) {
             alert("fill the email field");
         }
         setAddMember(false);
-        fetch(`${baseUrl}/team/request`, { method: "POST", credentials: "include", body: new URLSearchParams({ team_id: teamId, email: email }) })
-            .then((result) => {
+        fetch(`${baseUrl}/team/request`, { method: "POST", credentials: "include", body: new URLSearchParams({ team_id: teamId, email: email }) }).then(throwError)
+            .then((resp) =>
+                resp.ok &&
                 Swal.fire({
                     text: `Request Sent`,
                     confirmButtonColor: "#0096FF",
                     customClass: {
                         confirmButton: "order-2",
                     },
-                });
-                window.location.reload();
-            }).catch((error) => {
-                alert(`${error.response.data.message}`);
-            })
+                })
+            ).catch(throwTextError)
     };
 
     const isMobile = useMediaQuery("(max-width:450px)");

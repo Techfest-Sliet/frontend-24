@@ -47,43 +47,67 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function TeamRequestTable({ setInvitations }) {
-
-	const [request, setRequest] = useState(null);
-    if (!request) {
-        fetch(`${baseUrl}/team/request`, { credentials: "include" }).then(v => v.json()).then(setRequest);
-    }
-
-	setInvitations(request)
-
-    const handleTeamDelete = (id) => {
+const throwError = (e) => {
+    if (!e.ok) {
         Swal.fire({
-            title: "Do you want to delete this event!!",
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: "Yes",
-            denyButtonText: "No",
-            backdrop: true,
-            customClass: {
-                actions: "my-actions",
-                cancelButton: "order-1 right-gap",
-                confirmButton: "order-2",
-                denyButton: "order-3",
-            },
-        }).then((result) => {
-            if (result.isConfirmed) {
-                fetch()
-                    .post(
-                        `${baseUrl}/team/delete`,
-                        { id },
-                    )
-                    .then((result) => {
-                        window.location.reload();
-                    });
-            }
-        });
-    };
+            title: 'Error!',
+            text: `Unexpected Error: ${e.statusText}`,
+            icon: 'error',
+        })
+    }
+    return e;
+}
 
+const throwTextError = (e) => {
+    Swal.fire({
+        title: 'Error!',
+        text: `Unexpected Error: ${e}`,
+        icon: 'error',
+    })
+}
+
+const updateRequests = (setRequests) =>
+    fetch(`${baseUrl}/team/request`, { credentials: "include" }).then(throwError).then(v => v.json()).then(setRequests)
+        .catch((e) => { throwTextError(e); console.error(e); })
+
+const acceptRequest = (team) =>
+    Swal.fire({
+        title: "Do you want to accept this request?",
+        showDenyButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: "No",
+        backdrop: true,
+        customClass: {
+            actions: "my-actions",
+            cancelButton: "order-1 right-gap",
+            confirmButton: "order-2",
+            denyButton: "order-3",
+        },
+    }).then(response => response.isConfirmed && fetch(`${baseUrl}/team/request?id=${team.team_id}`, { method: "PUT", credentials: "include" }).then(throwError)).catch(throwTextError)
+
+const rejectRequest = (team) =>
+    Swal.fire({
+        title: "Do you want to reject this request?",
+        showDenyButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: "No",
+        backdrop: true,
+        customClass: {
+            actions: "my-actions",
+            cancelButton: "order-1 right-gap",
+            confirmButton: "order-2",
+            denyButton: "order-3",
+        },
+    }).then(response => response.isConfirmed && fetch(`${baseUrl}/team/request?id=${team.team_id}`, { method: "DELETE", credentials: "include" })).then(throwError).catch(throwTextError)
+
+
+
+function TeamRequestTable() {
+
+    const [request, setRequest] = useState(null);
+    if (!request) {
+        updateRequests(setRequest)
+    }
 
     const isMobile = useMediaQuery("(max-width:450px)");
     return (
@@ -170,10 +194,7 @@ function TeamRequestTable({ setInvitations }) {
                                         >
                                             <Button
                                                 onClick={() => {
-                                                    fetch(`${baseUrl}/team/request?id=${team.team_id}`, { method: "PUT", credentials: "include" }).then(
-                                                        () =>
-                                                            setRequest(null)
-                                                    )
+                                                    acceptRequest(team).then(updateRequests(setRequest))
                                                 }}
                                             >
                                                 Accept
@@ -185,10 +206,7 @@ function TeamRequestTable({ setInvitations }) {
                                         >
                                             <Button
                                                 onClick={() => {
-                                                    fetch(`${baseUrl}/team/request?id=${team.team_id}`, { method: "DELETE", credentials: "include" }).then(
-                                                        () =>
-                                                            setRequest(null)
-                                                    )
+                                                    rejectRequest(team).then(updateRequests(setRequest))
                                                 }}
                                             >
                                                 Reject
@@ -198,9 +216,6 @@ function TeamRequestTable({ setInvitations }) {
                                 );
                             })}
                     </TableBody>
-                    {/*teamMembers.length === 0 && (
-            <Typography> No team created</Typography>
-          )*/}
                 </Table>
             </TableContainer>
         </>
