@@ -648,7 +648,7 @@ const UserDashboard = () => {
                             <Box sx={{ margin: "7%" }}>
                                 <TeamTable
                                     teams={teams}
-									setTeams={setTeams}
+									setTeams={setTeam}
                                 />
                             </Box>
                         </Card>
