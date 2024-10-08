@@ -59,18 +59,23 @@ const EventDisplayer = () => {
     const [eventCoor, setEventCoor] = useState([]);
     const [error, setError] = useState("");
     const [teamDetails, setTeamDetails] = useState(false);
-    const [teamId, setTeamName] = useState("");
+    const [teamId, setTeamName] = useState(-1);
     const [teams, setTeams] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [eventParticipationType, setEventParticipationType] = useState("");
     const [modal, setModal] = useState(false);
     const [isTeam, setIsTeam] = useState(false)
     const { eventId } = useParams();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(r => r.ok &&
+    const [user, setUser] = useState(null);
+    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(r => {
+        r.ok &&
         fetch(`${baseUrl}/team`, { credentials: "include" }).then(throwError).then(v => v.json()).then(v => { setTeams(v); return v })
-            .catch((e) => { throwTextError(e); console.error(e); })
-    )
+            .catch((e) => { throwTextError(e); console.error(e); });
+        return r.json()
+    }).then(setUser)
+    if (teams && teams[0] && !teams[0].members) {
+        Promise.all(teams.map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t }))).then(setTeams)
+    }
     const handleVariableSeting = () => {
         setVariable(2);
     };
@@ -387,34 +392,31 @@ const EventDisplayer = () => {
                                                                             <Typography>
                                                                                 Register from your existing Team(s).
                                                                             </Typography>
-                                                                            <FormControl
-                                                                                variant="outlined"
-                                                                                style={{ width: "40%" }}
+                                                                            <label for="teamId">Select Team</label>
+                                                                            <select
+                                                                                id="teamId"
+                                                                                name="teamId"
+                                                                                value={teamId}
+                                                                                style={{ width: "100%" }}
+                                                                                onChange={(e) => {
+                                                                                    setTeamName(e.target.value);
+                                                                                }}
+                                                                                label="Select Team"
+                                                                                defaultValue=""
                                                                             >
-                                                                                <InputLabel>Select Team</InputLabel>
-                                                                                <Select
-                                                                                    value={teamId}
-                                                                                    style={{ width: "100%" }}
-                                                                                    onChange={(e) => {
-                                                                                        setTeamName(e.target.value);
-                                                                                    }}
-                                                                                    label="Select Team"
-                                                                                    defaultValue=""
-                                                                                >
-                                                                                    {teams &&
-                                                                                        teams.map((team) => {
-                                                                                            return (
-                                                                                                <option
-                                                                                                    key={team.id}
-                                                                                                    value={team.id}
-                                                                                                >
+                                                                                {teams &&
+                                                                                    teams.filter(t => t.some(m => m.id == user.id && user.is_leader)).map((team) => {
+                                                                                        return (
+                                                                                            <option
+                                                                                                key={team.id}
+                                                                                                value={team.id}
+                                                                                            >
 
-                                                                                                    {team.name}
-                                                                                                </option>
-                                                                                            );
-                                                                                        })}
-                                                                                </Select>
-                                                                            </FormControl>
+                                                                                                {team.name}
+                                                                                            </option>
+                                                                                        );
+                                                                                    })}
+                                                                            </select>
                                                                             <Typography style={{ fontSize: "60%" }}>
                                                                                 Note: Every Team Member should verify the
                                                                                 team through team invitation, otherwise

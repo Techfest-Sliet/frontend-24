@@ -145,51 +145,62 @@ const NavBar = ({ userLogIn }) => {
                         Our Team
                     </Button>
                 </Link>
-                {/* <Button
-          style={{
-            color: "white",
-            fontWeight: "normal",
-            fontFamily: "Droid Sans",
-          }}
-        >
-          {authContext.isUserLoggedIn === false ? (
- 
-            <Link to="sign-in">
-              <p style={{color:"white", fontFamily:"Droid Sans"}}>SignIN</p>
-            </Link>
-          ) : (
-            <>
-              <Link to={"/user"}>
-                <p style={{ color: "white" }}>Profile</p>
-              </Link>
-            </>
-          )}
-        </Button>
-        {authContext.isUserLoggedIn === true ? (
-          <Button
-            style={{
-              color: "white",
-              fontWeight: "normal",
-              fontFamily: "Droid Sans",
-            }}
-          >
-            <Link to={"/"}>
-              <p
-                style={{ color: "white" }}
-                onClick={() => {
-                  handleClose();
-                  authContext.isUserLoggedIn = false;
-                  localStorage.removeItem("jwtToken");
-                  navigate("/");
-                }}
-              >
-                Logout
-              </p>
-            </Link>
-          </Button>
-        ) : (
-          " "
-        )} */}
+
+                <Button
+                    style={{
+                        color: "white",
+                        fontWeight: "normal",
+                        fontFamily: "Droid Sans",
+                    }}
+                >
+                    {!user ? (
+                        <Link to="/sign-in">
+                            <Typography sx={{ color: "white", fontFamily: "Droid Sans" }}>
+                                SIGNIN
+                            </Typography>
+                        </Link>
+                    ) : (
+                        <Tooltip title="Profile">
+                            <Button onClick={handleMenu}>
+                                <Avatar alt="User" sx={{ height: 35 }} />
+                            </Button>
+                        </Tooltip>
+                    )}
+                    <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                            vertical: "center",
+                            horizontal: "center",
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem
+                            onClick={() => {
+                                handleClose();
+                                navigate("/user");
+                            }}
+                        >
+                            Profile
+                        </MenuItem>
+                        <MenuItem
+                            onClick={() => {
+                                fetch(`${baseUrl}/auth/logout`, { credentials: "include" }).then(() => {
+                                    window.location = "/";
+                                })
+
+                            }}
+                        >
+                            Logout
+                        </MenuItem>
+                    </Menu>
+                </Button>
             </div>
         </Box>
     );
