@@ -373,7 +373,7 @@ const Signup = () => {
                                     autoComplete="off"
                                 />
                                 <label htmlFor="reg_no" className={styles.signup__label}>
-                                    REGISTERAION NUMBER*
+                                    REGISTERATION NUMBER*
                                 </label>
                                 {regNoErr && <p style={{ color: "red" }}>{regNoErr}</p>}
                                 <input

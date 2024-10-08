@@ -125,17 +125,6 @@ const ModalComp = ({ closet, handleClose, handleOpen, user }) => {
                                             Home
                                         </Button>
                                     </Link>
-                                    <Link to="#">
-                                        <Button
-                                            style={{
-                                                color: "white",
-                                                fontFamily: "Droid sans",
-                                                fontWeight: "800",
-                                            }}
-                                        >
-                                            Shows
-                                        </Button>
-                                    </Link>
                                     {/* <Link to="/workshops">
                     <Button
                       style={{
@@ -410,17 +399,6 @@ const ModalComp = ({ closet, handleClose, handleOpen, user }) => {
                                             Exhibition
                                         </Button>
                                     </Link>
-                                    <Link to="/merchandise">
-                                        <Button
-                                            style={{
-                                                color: "white",
-                                                fontFamily: "Droid sans",
-                                                fontWeight: "800",
-                                            }}
-                                        >
-                                            Merchandise
-                                        </Button>
-                                    </Link>
                                     <Link to="#">
                                         <Button
                                             style={{
@@ -430,17 +408,6 @@ const ModalComp = ({ closet, handleClose, handleOpen, user }) => {
                                             }}
                                         >
                                             Special Initiative
-                                        </Button>
-                                    </Link>
-                                    <Link to="#">
-                                        <Button
-                                            style={{
-                                                color: "white",
-                                                fontFamily: "Droid sans",
-                                                fontWeight: "800",
-                                            }}
-                                        >
-                                            Campus Ambassador Portal
                                         </Button>
                                     </Link>
                                 </Box>
