@@ -59,7 +59,7 @@ const EventDisplayer = () => {
     const [eventCoor, setEventCoor] = useState([]);
     const [error, setError] = useState("");
     const [teamDetails, setTeamDetails] = useState(false);
-    const [teamId, setTeamName] = useState(-1);
+    const [teamId, setTeamName] = useState(null);
     const [teams, setTeams] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [eventParticipationType, setEventParticipationType] = useState("");
@@ -69,8 +69,8 @@ const EventDisplayer = () => {
     const [user, setUser] = useState(null);
     fetch(`${baseUrl}/profile`, { credentials: "include" }).then(r => {
         r.ok &&
-        fetch(`${baseUrl}/team`, { credentials: "include" }).then(throwError).then(v => v.json()).then(v => { setTeams(v); return v })
-            .catch((e) => { throwTextError(e); console.error(e); });
+            fetch(`${baseUrl}/team`, { credentials: "include" }).then(throwError).then(v => v.json()).then(v => { setTeams(v); return v })
+                .catch((e) => { throwTextError(e); console.error(e); });
         return r.json()
     }).then(setUser)
     if (teams && teams[0] && !teams[0].members) {
