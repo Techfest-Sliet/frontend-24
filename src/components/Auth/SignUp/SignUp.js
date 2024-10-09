@@ -104,6 +104,19 @@ const Signup = () => {
         setDivTwo(false);
     };
 
+    const handlePart1 = (e) => {
+        if (e.key === 'Enter') {
+            showDivTwo();
+        }
+      };
+    const handlePart2 = (e) => {
+        if(e.key === 'Enter'){
+            
+        e.preventDefault();
+            PostData();
+        }
+    }
+
     const PostData = async (e) => {
         // if (!executeRecaptcha) {
         //   // console.log('Execute recaptcha not yet available');
@@ -111,7 +124,6 @@ const Signup = () => {
         // }
 
         // const token = await executeRecaptcha("signUp");
-        e.preventDefault();
 
         if (email.trim().length === 0) {
             setFieldErr("Field should not be empty");
@@ -320,6 +332,7 @@ const Signup = () => {
                                 onChange={(e) => { console.log(e.target.value); setDob(e.target.value) }}
                                 required
                                 autoComplete="off"
+                                onKeyPress={handlePart2}
                             />
 
                             <button
@@ -416,6 +429,7 @@ const Signup = () => {
                                     onChange={(e) => handleConfirm(e.target.value)}
                                     type="password"
                                     autoComplete="off"
+                                    onKeyPress={handlePart1}
                                 />
                                 <button
                                     className={styles.signup__button}
