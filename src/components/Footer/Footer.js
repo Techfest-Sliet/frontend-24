@@ -36,9 +36,8 @@ const Footer = () => {
     };
     const [user, setUser] = useState(null);
 
-    const navigate = useNavigate();
 
-    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(throwError).then(v => v.json()).then((u) => { setUser(u); return u; })
+    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.ok && v.json()).then((u) => { setUser(u); return u; })
         .catch((e) => { throwTextError(e); console.error(e); })
     return (
         <>
