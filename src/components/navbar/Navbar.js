@@ -46,7 +46,7 @@ const NavBar = ({ userLogIn }) => {
     const [user, setUser] = useState(null);
 
 
-    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(throwError).then(v => v.json()).then(setUser)
+    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.ok && v.json()).then(setUser)
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
