@@ -67,12 +67,14 @@ const EventDisplayer = () => {
     const [isTeam, setIsTeam] = useState(false)
     const { eventId } = useParams();
     const [user, setUser] = useState(null);
-    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(r => {
-        r.ok &&
-            fetch(`${baseUrl}/team`, { credentials: "include" }).then(throwError).then(v => v.json()).then(v => { setTeams(v); return v })
-                .catch((e) => { throwTextError(e); console.error(e); });
-        return r.json()
-    }).then(setUser)
+    if (!teams) {
+        fetch(`${baseUrl}/profile`, { credentials: "include" }).then(r => {
+            r.ok &&
+                fetch(`${baseUrl}/team`, { credentials: "include" }).then(throwError).then(v => v.json()).then(v => { setTeams(v); return v })
+                    .catch((e) => { throwTextError(e); console.error(e); });
+            return r.json()
+        }).then(setUser)
+    }
     if (teams && teams[0] && !teams[0].members) {
         Promise.all(teams.map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t }))).then(setTeams)
     }
@@ -405,7 +407,7 @@ const EventDisplayer = () => {
                                                                                 defaultValue=""
                                                                             >
                                                                                 {teams &&
-                                                                                    teams.filter(t => t.some(m => m.id == user.id && user.is_leader)).map((team) => {
+                                                                                    teams.filter(t => t.some(m => m.id === user.id && user.is_leader)).map((team) => {
                                                                                         return (
                                                                                             <option
                                                                                                 key={team.id}
