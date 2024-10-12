@@ -9,6 +9,7 @@ import SignUp from "./components/Auth/SignUp/SignUp";
 import Login from "./components/Auth/Login/Login";
 
 import ResetPassword from "./components/Auth/ResetPassword/ResetPassword";
+import ResetPasswordForm from "./components/Auth/ResetPassword/ResetPasswordForm.js"
 
 import EmailVerify from "./components/Auth/EmailVerify/EmailVerify";
 
@@ -64,6 +65,7 @@ function App() {
                     }
                     <Route path="/login" element={<Login />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
+                    <Route path="/password_reset/verify" element={<ResetPasswordForm />} />
                     <Route path="/verify" element={<EmailVerify />} />
                     <Route path="/user" element={<UserDashBoard />} />
                     <Route path="/addteam" element={<AddTeam />} />

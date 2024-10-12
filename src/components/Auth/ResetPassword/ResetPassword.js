@@ -77,22 +77,28 @@ const ResetPassword = () => {
             }
 
             setCheckEmail(true);
-
             const user = {
                 email: email,
             };
-            await fetch()
-                .post(`${baseUrl}/auth/forgot-password`, user)
-                .then((res) => {
-                    const obj = JSON.parse(res?.data);
-                    if (obj?.title == "Success") setSuccess(true);
-                    else setSuccess(false);
-                    setMessage(obj?.message);
-                    openToast();
-                })
-                .catch((err) => {
-                    console.log(err);
+            try {
+                const response = await fetch(`${baseUrl}/profile/password_reset`, {
+                    method: "PUT", 
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams(user).toString(), 
                 });
+                if (response.ok) setSuccess(true);
+                else setSuccess(false);
+    
+                setMessage(response.statusText);
+                openToast();
+            } catch (err) {
+                console.log("Error:", err);
+                setMessage("Something went wrong.");
+                setSuccess(false);
+                openToast();
+            }
         }
     };
 
