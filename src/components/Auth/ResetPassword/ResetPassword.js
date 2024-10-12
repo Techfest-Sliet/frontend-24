@@ -88,10 +88,10 @@ const ResetPassword = () => {
                     },
                     body: new URLSearchParams(user).toString(), 
                 });
-                if (data.ok) setSuccess(true);
+                if (response.ok) setSuccess(true);
                 else setSuccess(false);
     
-                setMessage(data.statusText);
+                setMessage(response.statusText);
                 openToast();
             } catch (err) {
                 console.log("Error:", err);
