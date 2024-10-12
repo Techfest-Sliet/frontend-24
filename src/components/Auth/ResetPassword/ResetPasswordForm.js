@@ -80,17 +80,11 @@ const ResetPasswordForm = () => {
                 setMessage(`Error: ${response.status} - ${response.statusText}`);
                 openToast();
                 return;
-            }
-            const data = await response.json();
-            if (data?.title === "Success") {
+            } else {
                 setSuccess(true);
                 setMessage("Password reset successfully");
                 openToast();
                 setTimeout(() => navigate("/login"), 3000);
-            } else {
-                setSuccess(false);
-                setMessage(data?.message);
-                openToast();
             }
         } catch (err) {
             console.log("Error:", err);
