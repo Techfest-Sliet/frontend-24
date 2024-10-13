@@ -37,8 +37,10 @@ const Footer = () => {
     const [user, setUser] = useState(null);
 
 
-    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.ok && v.json()).then((u) => { setUser(u); return u; })
-        .catch((e) => { throwTextError(e); console.error(e); })
+    if (!user) {
+        fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.ok && v.json()).then((u) => { setUser(u); return u; })
+            .catch((e) => { throwTextError(e); console.error(e); })
+    }
     return (
         <>
             <Box
@@ -74,7 +76,7 @@ const Footer = () => {
                 closet={closet}
                 handleClose={handleClose}
                 handleOpen={handleOpen}
-				user={user}
+                user={user}
             />
         </>
     );
