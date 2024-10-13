@@ -75,7 +75,7 @@ const EventDisplayer = () => {
             return r.json()
         }).then(setUser)
     }
-    if (teams && teams[0] && !teams[0].members) {
+    if (teams.length > 0) {
         Promise.all(teams.map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t }))).then(setTeams)
     }
     const handleVariableSeting = () => {
