@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 import ModalComp from "../../screens/landingPage/ModalComp";
 import { FaAngleDoubleUp } from "react-icons/fa";
@@ -37,8 +37,11 @@ const Footer = () => {
     const [user, setUser] = useState(null);
 
 
-    fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.ok && v.json()).then((u) => { setUser(u); return u; })
+    useEffect(() => {
+        fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.ok && v.json()).then((u) => { setUser(u); return u; })
         .catch((e) => { throwTextError(e); console.error(e); })
+    }, [])
+    
     return (
         <>
             <Box

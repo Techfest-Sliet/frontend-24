@@ -90,13 +90,15 @@ function TeamTable({ teams, setTeams }) {
 
   const navigate = useNavigate();
 
-  fetch(`${baseUrl}/profile`, { credentials: "include" })
+  useEffect(()=>{
+    fetch(`${baseUrl}/profile`, { credentials: "include" })
     .then(throwError)
     .then((v) => v.json())
     .then((u) => {
       setUser(u);
       return u;
     });
+  }, [])
 
   const handleTeamDelete = (id) => {
     Swal.fire({
