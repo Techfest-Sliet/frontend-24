@@ -69,14 +69,17 @@ const UserDashboard = () => {
     const [teams, setTeam] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     if (teams && teams[0] && !teams[0].members) {
-        Promise.all(teams.map(team => fetch(`${baseUrl}/event/joined/team?id=${team.id}`, { credentials: "include" }).then(eventsResp => eventsResp.json())
-            .then(events => {
-                Promise.all(events.forEach(event => fetch(`${baseUrl}/event/domain?id=${event.id}`, { credentials: "include" })
-                    .then(domainResp => domainResp.json()).then(domain => event.domain = domain))); return events;
-            })
-            .then(events => { team.events = events; return team; }).then(team =>
-                fetch(`${baseUrl}/team/member?id=${team.id}`, { credentials: "include" }).then(membersResp => membersResp.json()).then(members => team.members = members)
-            ))).then(setTeam);
+        console.log("Team =>>", teams);
+        Promise.all(teams.map(team =>
+            fetch(`${baseUrl}/event/joined/team?id=${team.id}`, { credentials: "include" }).then(eventsResp => eventsResp.json())
+                .then(events =>
+                    Promise.all(events.map(event => fetch(`${baseUrl}/event/domain?id=${event.id}`, { credentials: "include" })
+                        .then(domainResp => domainResp.json()).then(domain => { event.domain = domain; return event })))
+                )
+                .then(events => { team.events = events; return team; }).then(team =>
+                    fetch(`${baseUrl}/team/member?id=${team.id}`, { credentials: "include" }).then(membersResp => membersResp.json()).then(members => { team.members = members; return team })
+                )
+        )).then(setTeam);
     }
     const navigate = useNavigate();
     if (!user) {
