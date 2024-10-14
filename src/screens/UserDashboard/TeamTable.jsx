@@ -180,7 +180,7 @@ function TeamTable({ teams, setTeams }) {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`${baseUrl}/event/join/team`, { method: "DELETE", credentials: "include", body: new URLSearchParams({ "event_id": eventId, "team_id": eventId }), headers: { "Content-Type": "application/x-www-form-urlencoded" } })
+                fetch(`${baseUrl}/event/join/team`, { method: "DELETE", credentials: "include", body: new URLSearchParams({ "event_id": eventId, "team_id": teamId }), headers: { "Content-Type": "application/x-www-form-urlencoded" } })
                     .then(throwError).then(throwError).then((result) => {
                         // setErrorMade({ title: "Success", message: result.data.message });
                         if (result.ok) {
