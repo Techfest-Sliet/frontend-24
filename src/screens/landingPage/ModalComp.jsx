@@ -46,10 +46,10 @@ const ModalComp = ({ closet, handleClose, handleOpen, user }) => {
   }, []);
 
   const downloadPdf = () => {
-    const pdfUrl = "TF'24Brochure.pdf";
+    const pdfUrl = "https://drive.google.com/file/d/1YVuaR-smOeyq8lQOL5luSUXdL6l6zqgt/view?usp=drivesdk";
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "techFEST'24 Brochure.pdf"; // specify the filename
+    link.download = "https://drive.google.com/file/d/1YVuaR-smOeyq8lQOL5luSUXdL6l6zqgt/view?usp=drivesdk";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -308,19 +308,25 @@ const ModalComp = ({ closet, handleClose, handleOpen, user }) => {
                   ))} */}
                   </Box>
 
-                  <Button
-                    variant="outlined"
-                    style={{
-                      color: "white",
-                      fontFamily: "Droid sans",
-                      backgroundColor: "transparent",
-                      borderRadius: "15rem",
-                      padding: "0.4rem 1.6rem",
-                    }}
-                    onClick={downloadPdf}
-                  >
-                    Brochure
-                  </Button>
+                  <a
+  href="https://drive.google.com/uc?export=download&id=1YVuaR-smOeyq8lQOL5luSUXdL6l6zqgt"
+  target="_blank" // Open in a new tab
+  rel="noopener noreferrer" // Security best practice
+>
+  <Button
+    variant="outlined"
+    style={{
+      color: "white",
+      fontFamily: "Droid sans",
+      backgroundColor: "transparent",
+      borderRadius: "15rem",
+      padding: "0.4rem 1.6rem",
+    }}
+  >
+    Brochure
+  </Button>
+</a>
+
                 </Stack>
               </Box>
               <Box

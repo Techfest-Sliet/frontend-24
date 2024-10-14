@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./navbar.css";
 import Swal from "sweetalert2";
 import {
@@ -45,10 +45,14 @@ const NavBar = ({ userLogIn }) => {
 
     const [user, setUser] = useState(null);
 
+    
 
-    if (!user) {
-        fetch(`${baseUrl}/profile`, { credentials: "include" }).then(v => v.ok && v.json()).then(setUser)
-    }
+    useEffect(() => {
+        fetch(`${baseUrl}/profile`, { credentials: "include" })
+            .then((v) => v.ok && v.json())
+            .then(setUser)
+            .catch(throwTextError);
+    }, []);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
