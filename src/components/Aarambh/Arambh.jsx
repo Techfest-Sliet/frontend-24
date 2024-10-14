@@ -42,7 +42,7 @@ const throwTextError = (e) => {
     })
 }
 
-const Card = ({ name, description, start_date, end_date, route, isCompleted, register }) => {
+const Card = ({ name, description, start_date, end_date, route, isCompleted, id, register }) => {
     const startD = new Date(start_date)
     const endD = new Date(end_date)
     const startDate = startD.toLocaleDateString("en-US", {
@@ -66,18 +66,18 @@ const Card = ({ name, description, start_date, end_date, route, isCompleted, reg
                 ) : (<p>Date : {endDate}</p>)}
                 {!isCompleted && <button className="arambh__button" value="next" type="button">
                     <Link onClick={() => {
-                        fetch(route, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded" } }).then(throwError)
-                        .then((r) => {
-                            r.ok &&
-                                Swal.fire({
-                                    text: `You have joined this workshop`,
-                                    confirmButtonColor: "#0096FF",
-                                    customClass: {
-                                        confirmButton: "order-2",
-                                    },
-                                })
-                        })
-                        .catch((e) => { throwTextError(e); console.error(e); })
+                        fetch(route, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded", body: new URLSearchParams({ id: id }) } }).then(throwError)
+                            .then((r) => {
+                                r.ok &&
+                                    Swal.fire({
+                                        text: `You have joined this workshop`,
+                                        confirmButtonColor: "#0096FF",
+                                        customClass: {
+                                            confirmButton: "order-2",
+                                        },
+                                    })
+                            })
+                            .catch((e) => { throwTextError(e); console.error(e); })
                     }}>
                         Register
                     </Link>
@@ -131,6 +131,7 @@ const Arambh = () => {
                             start_date={item.start_time}
                             end_date={item.end_time}
                             route={`${baseUrl}/workshop/join?id=${item.id}`}
+							id={item.id}
                             register={true}
                         />
                     );
