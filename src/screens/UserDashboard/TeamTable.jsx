@@ -52,11 +52,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const throwError = (e) => {
     if (!e.ok) {
-        Swal.fire({
-            title: "Error!",
-            text: `Unexpected Error: ${e.statusText}`,
-            icon: "error",
-        });
+        if (e.status === 409) {
+            Swal.fire({
+                title: "Error!",
+                text: `Already Sent request`,
+                icon: "error",
+            });
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: `Unexpected Error: ${e.statusText}`,
+                icon: "error",
+            });
+        }
     }
     return e;
 };
@@ -90,15 +98,15 @@ function TeamTable({ teams, setTeams }) {
 
     const navigate = useNavigate();
 
-  useEffect(()=>{
-    fetch(`${baseUrl}/profile`, { credentials: "include" })
-    .then(throwError)
-    .then((v) => v.json())
-    .then((u) => {
-      setUser(u);
-      return u;
-    });
-  }, [])
+    useEffect(() => {
+        fetch(`${baseUrl}/profile`, { credentials: "include" })
+            .then(throwError)
+            .then((v) => v.json())
+            .then((u) => {
+                setUser(u);
+                return u;
+            });
+    }, [])
 
     const handleTeamDelete = (id) => {
         Swal.fire({
