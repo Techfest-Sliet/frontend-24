@@ -219,6 +219,12 @@ function TeamTable({ teams, setTeams }) {
                                     align="center"
                                     style={{ backgroundColor: "transparent", color: "white  " }}
                                 >
+                                    Events Joined
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    align="center"
+                                    style={{ backgroundColor: "transparent", color: "white  " }}
+                                >
                                     Delete Team
                                 </StyledTableCell>
                             </TableRow>
@@ -278,13 +284,40 @@ function TeamTable({ teams, setTeams }) {
                                                                     style={{
                                                                         backgroundColor: "transparent",
                                                                         width: "10rem",
-																		color: "white",
+                                                                        color: "white",
                                                                     }}
                                                                 >
                                                                     <Typography>
                                                                         {eachMember.verified
                                                                             ? "verified"
                                                                             : "notVerified"}
+                                                                    </Typography>
+                                                                </StyledTableCell>
+                                                            </StyledTableRow>
+                                                        </>
+                                                    );
+                                                })}
+                                            {team.events &&
+                                                team.events.map((eachEvent) => {
+                                                    return (
+                                                        <>
+                                                            <StyledTableRow>
+                                                                <StyledTableCell
+                                                                    component="th"
+                                                                    scope="row"
+                                                                    style={{
+                                                                        background: "transparent",
+                                                                        width: "15rem",
+                                                                    }}
+                                                                    key={eachEvent.id}
+                                                                    align="center"
+                                                                >
+                                                                    <Typography
+                                                                        style={{
+                                                                            width: "100%",
+                                                                        }}
+                                                                    >
+                                                                        {eachEvent.name}
                                                                     </Typography>
                                                                 </StyledTableCell>
                                                             </StyledTableRow>
