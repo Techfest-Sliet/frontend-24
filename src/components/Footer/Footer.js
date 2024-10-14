@@ -77,7 +77,7 @@ const Footer = () => {
                 closet={closet}
                 handleClose={handleClose}
                 handleOpen={handleOpen}
-				user={user}
+                user={user}
             />
         </>
     );

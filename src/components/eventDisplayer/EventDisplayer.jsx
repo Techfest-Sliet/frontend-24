@@ -78,8 +78,6 @@ const EventDisplayer = () => {
             .then((v) => v.json())
             .then((v) => {
               setTeams(v);
-              console.log(v);
-              console.log(teams);
               return v;
             })
             .catch((e) => {
@@ -94,7 +92,6 @@ const EventDisplayer = () => {
   }, []) 
   useEffect(() => {
     setIsTeams(true);
-    console.log('Updated teams:', teams);
   }, [teams]);
   if (teams && teams[0] && !teams[0].members) {
     Promise.all(
