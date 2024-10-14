@@ -247,83 +247,98 @@ function TeamTable({ teams, setTeams }) {
                                                 {team.name}
                                             </StyledTableCell>
 
-                                            {team.members &&
-                                                team.members.map((eachMember) => {
-                                                    return (
-                                                        <>
-                                                            <StyledTableRow>
-                                                                <StyledTableCell
-                                                                    component="th"
-                                                                    scope="row"
-                                                                    style={{
-                                                                        background: "transparent",
-                                                                        width: "15rem",
-                                                                    }}
-                                                                    key={eachMember.id}
-                                                                    className={
-                                                                        eachMember.verified
-                                                                            ? "verified"
-                                                                            : "notVerified"
-                                                                    }
-                                                                    align="center"
-                                                                >
-                                                                    <Typography
+                                            <StyledTableCell
+                                                component="th"
+                                                scope="row"
+                                                align="center"
+                                                style={{ background: "transparent", height: "2rem", color: "white" }}
+                                            >
+                                                {team.members &&
+                                                    team.members.map((eachMember) => {
+                                                        return (
+                                                            <>
+                                                                <StyledTableRow>
+                                                                    <StyledTableCell
+                                                                        component="th"
+                                                                        scope="row"
                                                                         style={{
-                                                                            color:
-                                                                                eachMember.verified === true
-                                                                                    ? "green"
-                                                                                    : "red",
-                                                                            width: "100%",
+                                                                            background: "transparent",
+                                                                            width: "15rem",
+                                                                        }}
+                                                                        key={eachMember.id}
+                                                                        className={
+                                                                            eachMember.verified
+                                                                                ? "verified"
+                                                                                : "notVerified"
+                                                                        }
+                                                                        align="center"
+                                                                    >
+                                                                        <Typography
+                                                                            style={{
+                                                                                color:
+                                                                                    eachMember.verified === true
+                                                                                        ? "green"
+                                                                                        : "red",
+                                                                                width: "100%",
+                                                                            }}
+                                                                        >
+                                                                            {eachMember.email}
+                                                                        </Typography>
+                                                                    </StyledTableCell>
+                                                                    <StyledTableCell
+                                                                        align="center"
+                                                                        style={{
+                                                                            backgroundColor: "transparent",
+                                                                            width: "10rem",
+                                                                            color: "white",
                                                                         }}
                                                                     >
-                                                                        {eachMember.email}
-                                                                    </Typography>
-                                                                </StyledTableCell>
-                                                                <StyledTableCell
-                                                                    align="center"
-                                                                    style={{
-                                                                        backgroundColor: "transparent",
-                                                                        width: "10rem",
-                                                                        color: "white",
-                                                                    }}
-                                                                >
-                                                                    <Typography>
-                                                                        {eachMember.verified
-                                                                            ? "verified"
-                                                                            : "notVerified"}
-                                                                    </Typography>
-                                                                </StyledTableCell>
-                                                            </StyledTableRow>
-                                                        </>
-                                                    );
-                                                })}
-                                            {team.events &&
-                                                team.events.map((eachEvent) => {
-                                                    return (
-                                                        <>
-                                                            <StyledTableRow>
-                                                                <StyledTableCell
-                                                                    component="th"
-                                                                    scope="row"
-                                                                    style={{
-                                                                        background: "transparent",
-                                                                        width: "15rem",
-                                                                    }}
-                                                                    key={eachEvent.id}
-                                                                    align="center"
-                                                                >
-                                                                    <Typography
+                                                                        <Typography>
+                                                                            {eachMember.verified
+                                                                                ? "verified"
+                                                                                : "notVerified"}
+                                                                        </Typography>
+                                                                    </StyledTableCell>
+                                                                </StyledTableRow>
+                                                            </>
+                                                        );
+                                                    })}
+                                            </StyledTableCell>
+                                            <StyledTableCell
+                                                component="th"
+                                                scope="row"
+                                                align="center"
+                                                style={{ background: "transparent", height: "2rem", color: "white" }}
+                                            >
+                                                {team.events &&
+                                                    team.events.map((eachEvent) => {
+                                                        return (
+                                                            <>
+                                                                <StyledTableRow>
+                                                                    <StyledTableCell
+                                                                        component="th"
+                                                                        scope="row"
                                                                         style={{
-                                                                            width: "100%",
+                                                                            background: "transparent",
+                                                                            width: "15rem",
                                                                         }}
+                                                                        key={eachEvent.id}
+                                                                        align="center"
                                                                     >
-                                                                        {eachEvent.name}
-                                                                    </Typography>
-                                                                </StyledTableCell>
-                                                            </StyledTableRow>
-                                                        </>
-                                                    );
-                                                })}
+                                                                        <Typography
+                                                                            style={{
+                                                                                width: "100%",
+                                                                                color: "white",
+                                                                            }}
+                                                                        >
+                                                                            {eachEvent.name}
+                                                                        </Typography>
+                                                                    </StyledTableCell>
+                                                                </StyledTableRow>
+                                                            </>
+                                                        );
+                                                    })}
+                                            </StyledTableCell>
                                             <StyledTableCell
                                                 align="center"
                                                 style={{ background: "transparent" }}
