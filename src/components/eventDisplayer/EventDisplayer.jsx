@@ -59,7 +59,7 @@ const EventDisplayer = () => {
   const [eventCoor, setEventCoor] = useState([]);
   const [error, setError] = useState("");
   const [teamDetails, setTeamDetails] = useState(false);
-  const [teamId, setTeamName] = useState(null);
+  const [teamId, setTeamId] = useState(null);
   const [teams, setTeams] = useState([]);
   const [isTeams, setIsTeams] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +78,9 @@ const EventDisplayer = () => {
             .then((v) => v.json())
             .then((v) => {
               setTeams(v);
+			  if (v != null && v.length > 0) {
+								setTeamId(v[0].id);
+							}
               return v;
             })
             .catch((e) => {
@@ -455,17 +458,17 @@ const EventDisplayer = () => {
                                         value={teamId}
                                         style={{ width: "100%", color: "white", backgroundColor: "black" }}
                                         onChange={(e) => {
-                                          setTeamName(e.target.value);
+                                          setTeamId(e.target.value);
                                         }}
                                         label="Select Team"
                                         defaultValue=""
                                       >
-                                        {isTeams &&
-  teams.map((team) => (
-    <option key={team.id} value={team.id}>
-      {team.name}
-    </option>
-  ))}
+									{isTeams &&
+										teams.map((team) => (
+											<option key={team.id} value={team.id}>
+												{team.name}
+											</option>
+										))}
 
 
                                       </select>
