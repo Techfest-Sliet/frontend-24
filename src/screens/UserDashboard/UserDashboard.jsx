@@ -115,7 +115,7 @@ const UserDashboard = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 setIsLoading(true);
-                fetch(`${baseUrl}/event/join/individual?id=${eventId}`, { method: "DELETE", credentials: "include", headers: {"Content-Type": "application/x-www-form-urlencoded"}})
+                fetch(`${baseUrl}/event/join/individual`, { method: "DELETE", credentials: "include", body: { id: eventId }, headers: { "Content-Type": "application/x-www-form-urlencoded" } })
                     .then(throwError).then(throwError).then((result) => {
                         // setErrorMade({ title: "Success", message: result.data.message });
                         setIsLoading(false);
@@ -648,7 +648,7 @@ const UserDashboard = () => {
                             <Box sx={{ margin: "7%" }}>
                                 <TeamTable
                                     teams={teams}
-									setTeams={setTeam}
+                                    setTeams={setTeam}
                                 />
                             </Box>
                         </Card>
