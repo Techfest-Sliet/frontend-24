@@ -593,9 +593,9 @@ const UserDashboard = () => {
                                                                         fontWeight: 500,
                                                                         color: "white",
                                                                     }}
-                                                                    key={workshop._id}
+                                                                    key={workshop.id}
                                                                 >
-                                                                    {workshop.workshopName}
+                                                                    {workshop.name}
                                                                 </Typography>
                                                                 <Divider
                                                                     sx={{
