@@ -130,8 +130,8 @@ const Arambh = () => {
                             description={item.description}
                             start_date={item.start_time}
                             end_date={item.end_time}
-                            route={`${baseUrl}/workshop/join?id=${item.id}`}
-							id={item.id}
+                            route={`${baseUrl}/workshop/join`}
+                            id={item.id}
                             register={true}
                         />
                     );
