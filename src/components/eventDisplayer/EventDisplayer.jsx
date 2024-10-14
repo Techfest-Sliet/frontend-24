@@ -18,7 +18,7 @@ import Error from "../Error/Error";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
-// import Loader from "../Loader/loader";
+import Loader from "../Loader/loader";
 
 const style = {
   position: "absolute",
@@ -738,7 +738,7 @@ const EventDisplayer = () => {
         </>
       ) : (
         <>
-          <Error />
+          <Loader />
         </>
       )}
     </>
