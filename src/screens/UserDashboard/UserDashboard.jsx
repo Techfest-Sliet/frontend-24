@@ -71,7 +71,7 @@ const UserDashboard = () => {
     if (teams && teams[0] && !teams[0].members) {
         Promise.all(teams
             .map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t })
-                .then(t => fetch(`${baseUrl}/event/joined/team?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(event => {
+                .then(t => fetch(`${baseUrl}/event/joined/team?id=${t.id}`, { credentials: "include" }).then(v => { v.json(); return v }).then(event => {
                     fetch(`${baseUrl}/event/domain?id=${event.id}`, { credentials: "include" }).then(v => { event.domain = v; return t })
                     return event;
                 }).then(v => { t.events = v; return t }))
