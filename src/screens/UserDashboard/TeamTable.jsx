@@ -213,13 +213,13 @@ function TeamTable({ teams, setTeams }) {
                                     align="center"
                                     style={{ backgroundColor: "transparent", color: "white  " }}
                                 >
-                                    Add Member
+                                    Events Joined
                                 </StyledTableCell>
                                 <StyledTableCell
                                     align="center"
                                     style={{ backgroundColor: "transparent", color: "white  " }}
                                 >
-                                    Events Joined
+                                    Add Member
                                 </StyledTableCell>
                                 <StyledTableCell
                                     align="center"
