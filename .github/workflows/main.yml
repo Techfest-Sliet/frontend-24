@@ -30,7 +30,7 @@ jobs:
         fi
         echo "tag=$tag" >> $GITHUB_OUTPUT
     - name: Archive
-      run: tar caf -I 'zstd -20 -T0' build.tar.xz build/ 
+      run: tar -I 'zstd -20 -T0' -caf build.tar.xz build/ 
     - name: Publish Release Build
       id: create_release
       uses: actions/create-release@v1
