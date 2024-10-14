@@ -123,7 +123,7 @@ function TeamRequestTable() {
                         // fontWeight: 600,
                     }}
                 >
-                    Team Table :
+                    Team Request Table :
                 </Typography>
             </div>
             <TableContainer>

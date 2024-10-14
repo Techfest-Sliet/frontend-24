@@ -462,7 +462,7 @@ const UserDashboard = () => {
                                             }}
                                         />
                                         <Typography sx={{ fontSize: isMobile ? 25 : 30 }}>
-                                            Events Registered
+                                            Events Registered Individually
                                         </Typography>
                                     </Box>
                                     <Box>
@@ -621,21 +621,6 @@ const UserDashboard = () => {
                                 </Box>
                             </Card>
                         </Box>
-                        {/*Team Requests Table*/}
-                        {invitations && <Card
-                            sx={{
-                                width: "100%",
-                                border: "2px solid white",
-                                bgcolor: "transparent",
-                                borderRadius: "5px",
-                                color: "white",
-                            }}
-                        >
-                            <Box sx={{ margin: "7%" }}>
-                                <TeamRequestTable
-                                />
-                            </Box>
-                        </Card>}
 
                         {/* team table */}
 
@@ -655,6 +640,21 @@ const UserDashboard = () => {
                                 />
                             </Box>
                         </Card>
+                        {/*Team Requests Table*/}
+                        {invitations && <Card
+                            sx={{
+                                width: "100%",
+                                border: "2px solid white",
+                                bgcolor: "transparent",
+                                borderRadius: "5px",
+                                color: "white",
+                            }}
+                        >
+                            <Box sx={{ margin: "7%" }}>
+                                <TeamRequestTable
+                                />
+                            </Box>
+                        </Card>}
                     </div>
                 </div>
             ) : (
