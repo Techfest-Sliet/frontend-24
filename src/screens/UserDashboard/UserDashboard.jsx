@@ -115,7 +115,7 @@ const UserDashboard = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 setIsLoading(true);
-                fetch(`${baseUrl}/event/join/individual`, { method: "DELETE", credentials: "include", body: { "id": eventId }, headers: { "Content-Type": "application/x-www-form-urlencoded" } })
+                fetch(`${baseUrl}/event/join/individual`, { method: "DELETE", credentials: "include", body: new URLSearchParams({ "id": eventId }), headers: { "Content-Type": "application/x-www-form-urlencoded" } })
                     .then(throwError).then(throwError).then((result) => {
                         // setErrorMade({ title: "Success", message: result.data.message });
                         setIsLoading(false);
