@@ -23,7 +23,6 @@ import TeamRequestTable from "./TeamRequestTable";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
-import Error from "../../components/Error/Error";
 
 const style = {
     position: "absolute",
