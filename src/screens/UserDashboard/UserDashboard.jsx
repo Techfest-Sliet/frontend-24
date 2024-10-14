@@ -70,10 +70,13 @@ const UserDashboard = () => {
     const [teams, setTeam] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     if (teams && teams[0] && !teams[0].members) {
-        Promise.all(teams.map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t }))).then(setTeam)
-    }
-    if (teams && teams[0] && !teams[0].events) {
-        Promise.all(teams.map(t => fetch(`${baseUrl}/event/joined/team?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.events = v; return t }))).then(setTeam)
+        Promise.all(teams
+            .map(t => fetch(`${baseUrl}/team/member?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.members = v; return t })
+                .then(t => fetch(`${baseUrl}/event/joined/team?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(event => {
+                    fetch(`${baseUrl}/event/domain?id=${event.id}`, { credentials: "include" }).then(v => { event.domain = v; return t })
+                    return event;
+                }).then(v => { t.events = v; return t }))
+            )).then(setTeam)
     }
     const navigate = useNavigate();
     if (!user) {

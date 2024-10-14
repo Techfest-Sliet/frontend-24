@@ -364,7 +364,7 @@ function TeamTable({ teams, setTeams }) {
                                                                                 color: "white",
                                                                             }}
                                                                         >
-                                                                            {eachEvent.name}
+																			{eachEvent.domain.name} : {eachEvent.name}
                                                                         </Typography>
                                                                     </StyledTableCell>
                                                                     <StyledTableCell
