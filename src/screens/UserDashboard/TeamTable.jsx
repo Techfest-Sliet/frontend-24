@@ -236,7 +236,7 @@ function TeamTable({ teams, setTeams }) {
                                                 component="th"
                                                 scope="row"
                                                 align="center"
-                                                style={{ background: "transparent", height: "2rem" }}
+                                                style={{ background: "transparent", height: "2rem", color: "white" }}
                                             >
                                                 {team.name}
                                             </StyledTableCell>
@@ -278,6 +278,7 @@ function TeamTable({ teams, setTeams }) {
                                                                     style={{
                                                                         backgroundColor: "transparent",
                                                                         width: "10rem",
+																		color: "white",
                                                                     }}
                                                                 >
                                                                     <Typography>
