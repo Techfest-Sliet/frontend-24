@@ -66,7 +66,7 @@ const Card = ({ name, description, start_date, end_date, route, isCompleted, id,
                 ) : (<p>Date : {endDate}</p>)}
                 {!isCompleted && <button className="arambh__button" value="next" type="button">
                     <Link onClick={() => {
-                        fetch(route, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded", body: new URLSearchParams({ id: id }) } }).then(throwError)
+                        fetch(`${baseUrl}/workshop/join`, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded", body: new URLSearchParams({ id: id }) } }).then(throwError)
                             .then((r) => {
                                 r.ok &&
                                     Swal.fire({
