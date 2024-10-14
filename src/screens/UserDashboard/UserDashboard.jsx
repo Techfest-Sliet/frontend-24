@@ -103,7 +103,7 @@ const UserDashboard = () => {
 
     const deleteEvent = (eventId) => {
         Swal.fire({
-            title: "Do you want to delete this event!!",
+            title: "Do you want to leave this event!!",
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: "Yes",

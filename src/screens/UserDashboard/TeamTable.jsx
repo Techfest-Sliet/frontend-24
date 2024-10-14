@@ -14,6 +14,9 @@ import { baseUrl } from "../../API/api";
 import { useNavigate } from "react-router-dom";
 import GroupAdd from "@mui/icons-material/GroupAdd";
 import Swal from "sweetalert2";
+import {Tooltip} from "@mui/material";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 
 const style = {
     position: "absolute",
@@ -161,6 +164,36 @@ function TeamTable({ teams, setTeams }) {
             .catch(throwTextError);
     };
 
+    const leaveEvent = (eventId, teamId) => {
+        Swal.fire({
+            title: "Do you want to leave this event!!",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            denyButtonText: "No",
+            backdrop: true,
+            customClass: {
+                actions: "my-actions",
+                cancelButton: "order-1 right-gap",
+                confirmButton: "order-2",
+                denyButton: "order-3",
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`${baseUrl}/event/join/team`, { method: "DELETE", credentials: "include", body: new URLSearchParams({ "event_id": eventId, "team_id": eventId }), headers: { "Content-Type": "application/x-www-form-urlencoded" } })
+                    .then(throwError).then(throwError).then((result) => {
+                        // setErrorMade({ title: "Success", message: result.data.message });
+                        if (result.ok) {
+                            Promise.all(teams.map(t => fetch(`${baseUrl}/event/joined/team?id=${t.id}`, { credentials: "include" }).then(v => v.json()).then(v => { t.events = v; return t }))).then(setTeams)
+                        }
+                    })
+                    .catch((e) => {
+                        throwTextError(e);
+                        console.log(e)
+                    });
+            }
+        });
+    };
     const isMobile = useMediaQuery("(max-width:450px)");
     return (
         user && (
@@ -333,6 +366,34 @@ function TeamTable({ teams, setTeams }) {
                                                                         >
                                                                             {eachEvent.name}
                                                                         </Typography>
+                                                                    </StyledTableCell>
+                                                                    <StyledTableCell
+                                                                        component="th"
+                                                                        scope="row"
+                                                                        style={{
+                                                                            background: "transparent",
+                                                                            width: "15rem",
+                                                                        }}
+                                                                        key={eachEvent.id}
+                                                                        align="center"
+                                                                    >
+                                                            <Box sx={{ margin: "10%" }}>
+                                                                <a href={eachEvent.whatsapp_link} target="_main">
+                                                                    <Tooltip title="Group Whatsapp Link">
+                                                                        <Button variant=" ">
+                                                                            <IoLogoWhatsapp color="green" />
+                                                                        </Button>
+                                                                    </Tooltip>
+                                                                </a>
+                                                                <Tooltip title="Delete Event">
+                                                                    <Button
+                                                                        variant=" "
+                                                                        onClick={() => leaveEvent(eachEvent.id, team.id)}
+                                                                    >
+                                                                        <MdDelete />
+                                                                    </Button>
+                                                                </Tooltip>
+                                                            </Box>
                                                                     </StyledTableCell>
                                                                 </StyledTableRow>
                                                             </>
