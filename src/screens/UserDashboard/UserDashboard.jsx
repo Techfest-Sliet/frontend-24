@@ -656,7 +656,7 @@ const UserDashboard = () => {
                 </div>
             ) : (
                 <>
-                    <Error />
+                    <Loader />
                 </>
             )
             }
