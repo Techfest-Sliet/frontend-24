@@ -4,7 +4,7 @@ import DeanSW from "./images/DeanSW.png";
 
 // chairmen
 import Chairman from "./images/GulshanJawaSir.jpg";
-import ViceChairmen1 from "./images/SunilKumarSir.png";
+import ViceChairmen1 from "./images/SunilKumarSir.jpg";
 import ViceChairmen2 from "./images/PKDasSir.png";
 
 //core team
@@ -24,6 +24,7 @@ import Shudhanshu from "./images/Shudhanshu.jpg";
 import Arpit from "./images/Arpit .jpg";
 import Prakhyat from "./images/Prakhyat.jpg";
 import Sandeep from "./images/Sandeep.jpg";
+import Raju from "./images/Raju.jpg";
 
 export const photos = {
   Director,
@@ -45,4 +46,5 @@ export const photos = {
   Arpit,
   Prakhyat,
   Sandeep,
+  Raju,
 };

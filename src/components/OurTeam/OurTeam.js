@@ -140,13 +140,13 @@ const OurTeam = () => {
           }}
         >
           <MemberCard
-            name={"Prakhyat Prakhar"}
-            post={"Android App Developer"}
-            mail={"2244218@sliet.ac.in"}
+            name={"Raju Kumar Maurya"}
+            post={"Frontend Web Developer"}
+            mail={"2341023@sliet.ac.in"}
             linkedIn={
-              "https://www.linkedin.com/in/prakhyat-prakhar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              "https://www.linkedin.com/in/raju-kumar-maurya-aaa714289?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
             }
-            image={photos.Prakhyat}
+            image={photos.Raju}
           />
           <MemberCard
             name={"Sandeep Kumar"}
