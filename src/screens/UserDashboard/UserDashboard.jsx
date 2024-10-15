@@ -141,6 +141,40 @@ const UserDashboard = () => {
         });
     };
 
+    const deleteWorkshop = (workshopId) => {
+        Swal.fire({
+            title: "Do you want to leave this workshop!!",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            denyButtonText: "No",
+            backdrop: true,
+            customClass: {
+                actions: "my-actions",
+                cancelButton: "order-1 right-gap",
+                confirmButton: "order-2",
+                denyButton: "order-3",
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setIsLoading(true);
+                fetch(`${baseUrl}/workshop/join`, { method: "DELETE", credentials: "include", body: new URLSearchParams({ "id": workshopId }), headers: { "Content-Type": "application/x-www-form-urlencoded" } })
+                    .then(throwError).then(throwError).then((result) => {
+                        // setErrorMade({ title: "Success", message: result.data.message });
+                        setIsLoading(false);
+                        if (result.ok) {
+                            fetch(`${baseUrl}/workshop/joined`, { credentials: "include" }).then(throwError).then((v) => v.json()).then(setWorkshops)
+                                .catch((e) => { throwTextError(e); console.error(e); });
+                        }
+                    })
+                    .catch((e) => {
+                        throwTextError(e);
+                        console.log(e)
+                    });
+            }
+        });
+    };
+
 
     //get user id from the context api
 
@@ -613,11 +647,21 @@ const UserDashboard = () => {
                                                     workshops.map((workshop) => {
                                                         return (
                                                             <Box sx={{ margin: "10%" }}>
-                                                                <Typography
-                                                                    sx={{ fontSize: 20, fontWeight: 500 }}
-                                                                >
-                                                                    {workshop.workshopDate}
-                                                                </Typography>
+                                                                <a href={workshop.whatsapp_link} target="_main">
+                                                                    <Tooltip title="Group Whatsapp Link">
+                                                                        <Button variant=" ">
+                                                                            <IoLogoWhatsapp color="green" />
+                                                                        </Button>
+                                                                    </Tooltip>
+                                                                </a>
+                                                                <Tooltip title="Delete Event">
+                                                                    <Button
+                                                                        variant=" "
+                                                                        onClick={() => deleteWorkshop(workshop.id)}
+                                                                    >
+                                                                        <MdDelete />
+                                                                    </Button>
+                                                                </Tooltip>
                                                             </Box>
                                                         );
                                                     })}
