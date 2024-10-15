@@ -16,6 +16,7 @@ import EmailVerify from "./components/Auth/EmailVerify/EmailVerify";
 import FAQ from "./components/FAQ/Faq";
 
 import AboutUs from "./screens/AboutUs/AboutUs";
+import Enquiry from "./screens/Enquiry/Enquiry.jsx";
 import UserDashBoard from "./screens/UserDashboard/UserDashboard";
 import StudentProfile from "./screens/UserDashboard/Profile/Profile";
 import NavBar from "./components/navbar/Navbar";
@@ -75,6 +76,7 @@ function App() {
                     <Route path="/gallery" element={<Gallery />} />
                     <Route path="/ourteam" element={<OurTeam />} />
                     <Route path="/aboutus" element={<AboutUs />} />
+                    <Route path="/enquiry" element={<Enquiry />} />
                     <Route path="/merchandise" element={<Merchandise />} />
                     {/* <Route path="/workshops" element={<WorkShops />} /> */}
                     <Route path="/arambh" element={<Arambh />} />

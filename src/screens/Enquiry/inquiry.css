@@ -1,0 +1,129 @@
+.inquiry-us{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    
+}
+
+.inquiry-bg{
+    width: 85%;
+    height: 95%;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+    filter: drop-shadow(6px 5px 5px #008DDA);
+}
+
+.inquiry-bg::before{
+    content: "";
+    position: absolute;
+    left: 40%;
+    top: -400px;
+    height:100rem;
+    width: 300px;
+    background: linear-gradient(#00ccff,#d500f9);
+    animation: rotate-border 4s linear infinite;
+    z-index: -20;
+}
+
+.inquiry-bg::after{
+    content: "";
+    position: absolute;
+    background: black;
+    inset: 4px;
+    border-radius: 20px;
+    z-index: -10;
+    
+}
+
+@keyframes rotate-border {
+    from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}
+}
+
+.inquiry-bg-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(4px);
+    border-radius: 20px;
+}
+
+.inquiry-bg-container{
+position: absolute;
+top: 0;
+padding: 10px;
+}
+
+.inquiry-bg-container h1{
+    text-align: center;
+    font-size: 3rem;
+    text-shadow: 3px 2px 5px black;
+}
+
+.inquiry-logo-text-container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 50px;
+}
+
+.inquiry-logo-text-container img{
+    width: 45%;
+    height: 50%;
+    filter: drop-shadow(2px 2px 3px black);
+}
+
+.inquiry-logo-text-container h5{
+   padding: 10px;
+   text-shadow: 3px 2px 3px black;
+   font-weight: 500;
+   font-size: 1rem;
+}
+
+.inquiry-logo-text-container h2{
+    padding: 0 10px;
+    text-shadow: 3px 2px 3px black;
+    color: silver;
+ }
+
+@media(max-width:450px){
+    .inquiry-logo-text-container{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .inquiry-logo-text-container img{
+        width: 90%;
+    }
+
+    .inquiry-us{
+        height: 100%;
+        padding-top: 4rem;
+    }
+
+    .inquiry-bg{
+        height: 160vh;
+        margin-bottom: 2rem;
+    }
+    .inquiry-bg-container h1{
+        padding-bottom: 2rem;
+    }
+}
+
+@media(min-width:900px) and (max-width:1200px){
+    .inquiry-logo-text-container{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .inquiry-bg{
+        height: 45%;
+    }
+}

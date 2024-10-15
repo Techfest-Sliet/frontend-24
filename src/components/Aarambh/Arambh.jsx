@@ -64,7 +64,7 @@ const Card = ({ name, description, start_date, end_date, route, isCompleted, id,
                         <p>End Date : {endDate}</p>
                     </>
                 ) : (<p>Date : {endDate}</p>)}
-                {!isCompleted && <button className="arambh__button" value="next" type="button">
+                {!isCompleted && <button className="arambh__button text-white" value="next" type="button">
                     <Link onClick={() => {
                         fetch(`${baseUrl}/workshop/join`, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams({ "id": id }) }).then(throwError)
                             .then((r) => {
@@ -101,7 +101,7 @@ const Arambh = () => {
             <Box style={{ position: "relative", zIndex: "25" }}>
                 <div className="arambh_container">
                     <h1 style={{ fontSize: "4rem", color: "#90E0EF" }}>AARAMBH</h1>
-                    <p style={{ padding: "5px 10rem", fontSize: "1.5rem" }}>
+                    <p style={{ padding: "1px 5rem", fontSize: "1.5rem" }}>
                         Great things aren't just there, there's a sweet beginning that will
                         finally leads to the grand scheme of events. And so we bring you
                         sweet starting events - Arambh. Here you'll find the prefest events
